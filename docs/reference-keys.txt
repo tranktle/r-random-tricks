@@ -1,6 +1,12 @@
 introduction
-problems-when-using-dplyrfull_join
+github-cheatsheet
 introduction-1
+connecting-an-existing-rstudio-project-to-github.
+integrate-rstudio-with-an-existing-project-on-github
+how-to-post-your-bookdown-file-to-github
+references
+problems-when-using-dplyrfull_join
+introduction-2
 using-dplyrfull_join
 using-powerjoinpower_full_join
 what-if-we-have-conflict-data-sets

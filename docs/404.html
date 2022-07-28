@@ -136,13 +136,21 @@ code span.wa { color: #60a0b0; font-weight: bold; font-style: italic; } /* Warni
 
 <li class="divider"></li>
 <li class="chapter" data-level="1" data-path="index.html"><a href="index.html"><i class="fa fa-check"></i><b>1</b> Introduction</a></li>
-<li class="chapter" data-level="2" data-path="problems-when-using-dplyrfull_join.html"><a href="problems-when-using-dplyrfull_join.html"><i class="fa fa-check"></i><b>2</b> Problems when using dplyr::full_join</a>
+<li class="chapter" data-level="2" data-path="github-cheatsheet.html"><a href="github-cheatsheet.html"><i class="fa fa-check"></i><b>2</b> Github-Cheatsheet</a>
 <ul>
-<li class="chapter" data-level="2.1" data-path="problems-when-using-dplyrfull_join.html"><a href="problems-when-using-dplyrfull_join.html#introduction-1"><i class="fa fa-check"></i><b>2.1</b> Introduction</a></li>
-<li class="chapter" data-level="2.2" data-path="problems-when-using-dplyrfull_join.html"><a href="problems-when-using-dplyrfull_join.html#using-dplyrfull_join"><i class="fa fa-check"></i><b>2.2</b> Using dplyr::full_join</a></li>
-<li class="chapter" data-level="2.3" data-path="problems-when-using-dplyrfull_join.html"><a href="problems-when-using-dplyrfull_join.html#using-powerjoinpower_full_join"><i class="fa fa-check"></i><b>2.3</b> Using powerjoin::power_full_join</a></li>
-<li class="chapter" data-level="2.4" data-path="problems-when-using-dplyrfull_join.html"><a href="problems-when-using-dplyrfull_join.html#what-if-we-have-conflict-data-sets"><i class="fa fa-check"></i><b>2.4</b> What if we have conflict data sets</a></li>
-<li class="chapter" data-level="2.5" data-path="problems-when-using-dplyrfull_join.html"><a href="problems-when-using-dplyrfull_join.html#reference"><i class="fa fa-check"></i><b>2.5</b> Reference</a></li>
+<li class="chapter" data-level="2.1" data-path="github-cheatsheet.html"><a href="github-cheatsheet.html#introduction-1"><i class="fa fa-check"></i><b>2.1</b> Introduction</a></li>
+<li class="chapter" data-level="2.2" data-path="github-cheatsheet.html"><a href="github-cheatsheet.html#connecting-an-existing-rstudio-project-to-github."><i class="fa fa-check"></i><b>2.2</b> Connecting an existing Rstudio project to Github.</a></li>
+<li class="chapter" data-level="2.3" data-path="github-cheatsheet.html"><a href="github-cheatsheet.html#integrate-rstudio-with-an-existing-project-on-github"><i class="fa fa-check"></i><b>2.3</b> Integrate Rstudio with an existing project on Github</a></li>
+<li class="chapter" data-level="2.4" data-path="github-cheatsheet.html"><a href="github-cheatsheet.html#how-to-post-your-bookdown-file-to-github"><i class="fa fa-check"></i><b>2.4</b> How to post your Bookdown file to Github</a></li>
+<li class="chapter" data-level="2.5" data-path="github-cheatsheet.html"><a href="github-cheatsheet.html#references"><i class="fa fa-check"></i><b>2.5</b> References</a></li>
+</ul></li>
+<li class="chapter" data-level="3" data-path="problems-when-using-dplyrfull_join.html"><a href="problems-when-using-dplyrfull_join.html"><i class="fa fa-check"></i><b>3</b> Problems when using dplyr::full_join</a>
+<ul>
+<li class="chapter" data-level="3.1" data-path="problems-when-using-dplyrfull_join.html"><a href="problems-when-using-dplyrfull_join.html#introduction-2"><i class="fa fa-check"></i><b>3.1</b> Introduction</a></li>
+<li class="chapter" data-level="3.2" data-path="problems-when-using-dplyrfull_join.html"><a href="problems-when-using-dplyrfull_join.html#using-dplyrfull_join"><i class="fa fa-check"></i><b>3.2</b> Using dplyr::full_join</a></li>
+<li class="chapter" data-level="3.3" data-path="problems-when-using-dplyrfull_join.html"><a href="problems-when-using-dplyrfull_join.html#using-powerjoinpower_full_join"><i class="fa fa-check"></i><b>3.3</b> Using powerjoin::power_full_join</a></li>
+<li class="chapter" data-level="3.4" data-path="problems-when-using-dplyrfull_join.html"><a href="problems-when-using-dplyrfull_join.html#what-if-we-have-conflict-data-sets"><i class="fa fa-check"></i><b>3.4</b> What if we have conflict data sets</a></li>
+<li class="chapter" data-level="3.5" data-path="problems-when-using-dplyrfull_join.html"><a href="problems-when-using-dplyrfull_join.html#reference"><i class="fa fa-check"></i><b>3.5</b> Reference</a></li>
 </ul></li>
 <li class="divider"></li>
 <li><a href="https://github.com/rstudio/bookdown" target="blank">Published with bookdown</a></li>
@@ -230,6 +238,20 @@ gitbook.start({
 });
 </script>
 
+<!-- dynamically load mathjax for compatibility with self-contained -->
+<script>
+  (function () {
+    var script = document.createElement("script");
+    script.type = "text/javascript";
+    var src = "true";
+    if (src === "" || src === "true") src = "https://mathjax.rstudio.com/latest/MathJax.js?config=TeX-MML-AM_CHTML";
+    if (location.protocol !== "file:")
+      if (/^https?:/.test(src))
+        src = src.replace(/^https?:/, '');
+    script.src = src;
+    document.getElementsByTagName("head")[0].appendChild(script);
+  })();
+</script>
 </body>
 
 </html>
