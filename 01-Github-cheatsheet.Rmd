@@ -1,0 +1,101 @@
+# Github-Cheatsheet
+
+## Introduction 
+
+This is a cheat sheet for using Github with R, including: 
+
+- Connecting an existing Rstudio project to Github.
+- Integrate Rstudio with an existing project on Github.
+- How to post your Bookdown file to Github.
+- Side note: Some most common git commands.
+
+I have learned about Git and Github from  [here](https://www.youtube.com/watch?v=RGOj5yH7evk&t=32s&ab_channel=freeCodeCamp.org) and from [GitHub Docs](https://docs.github.com/en). The content of this cheat sheet mainly gotten from [here](https://www.youtube.com/c/RiffomonasProject).
+
+## Connecting an existing Rstudio project to Github.
+
+When you have an R project on your computer and want to post it on your GitHub page one day, this part can help you do that. 
+
+1. ***Step 1***:  Creating our local git repository
+
+In Rstudio , go to **Tools** $\rightarrow$ **Version Control** $\rightarrow$ **Project Setup** $\rightarrow$ This will bring you to **Project Options** panel. 
+
+In this panel, in **Version control system**, choose **Git** , click **OK**. 
+
+Then you can choose to use **Git** tab or Git commands to process steps after creating repository on GitHub.
+
+2. ***Step 2***: Creating repository on GitHub. 
+
+In this step, skip all of the check boxes for *Add a README file, Add. gitignore, Choose a license*. Click ***Create repository***. 
+
+After this step, you will have a **Quick Setup** screen that have some Git commands that you could use, such as: 
+
+a. To create a new repository on the command line
+
+git init \
+git add README.md \
+git commit -m "first commit" \
+git branch -M main \
+git remote add origin git@github.com:your_GitHub_account_name/your_repository_name.git \
+git push -u origin main \
+
+b. To push an existing repository from the command line
+
+git remote add origin git@github.com:your_GitHub_account_name/your_repository_name.git \
+git branch -M main \
+git push -u origin main \
+
+3. ***Step3***: Connect local repository to GitHub
+
+Go to **Terminal** tab, paste the commandS in (2b) to connect and push your R project to your GitHub repository. 
+
+## Integrate Rstudio with an existing project on Github
+
+1. ***Step 1:*** Clone your repository to create a Rstudio project
+
+- From your GitHub repository -> click on **Code** -> copy the content clone from SSH, 
+- In Rstudio -> New Project -> Version Control -> Git ->
+    - In the **repository URL**, paste the link you got above (the copied SSH link).
+    - In the **Project directory name**, type the name of the project that you want to use (recommend to use the same name with your GitHub repository)
+    - In the **Create project as a subdirectory of**: browse the place you want to keep the project on your computer.
+    - Then click “Create Project”.
+After this step, you have a Rproject that is cloned from your Github repository.
+
+2. ***Step 2:***  modify your Rproject and push it back to your GitHub repository. 
+- (Optional) Modify the Rproject/Rbook-down …, build your book-down file,...
+- (Optional) Update the **gitignore** file if you have some files/folders that you don’t want to push into your GitHub page.
+- Click on Git, check the changes (check boxes) that you want to commit, input the **Commit message**, then click **Commit**. 
+- Click on **Push** to push your project to the Github page.
+
+## How to post your Bookdown file to Github
+
+- Create a book-down project with the format **gitbook**. \
+- After that, init the git init in the terminal, commit all of the files, \
+- Go to output.yml to comment the bookdown:pdf_book and bookdown::epub_book: default so that we only create the gitbook file when we init. \
+- Go to the **bookdown.yml** file; we change where the output will be placed. \
+
+Change from this:| To this:
+-------------|-------------
+delete_merged_file: true <br>language: <br> &nbsp; &nbsp; ui: <br> &emsp;&nbsp;&nbsp;chapter_name: “Chapter “| delete_merged_file: true <br>output_dir: “docs” <br>language: <br>&nbsp;&nbsp; ui: <br>&emsp;&nbsp;&nbsp;&nbsp;&nbsp;chapter_name: “Chapter “
+
+- Go to the **.gitignor** file, and add **$\_$bookdown_files** in the file. \
+- Git add **docs/**, commit, push all things on github. \
+- In GitHub, on **Settings**, go to **Pages** => **GitHub Pages** => change it to **main, /docs** . Then the link to your book is found in **Your site is published at:**
+
+## Some most common git commands.
+
+To use these commands on RStudio, you will need to come to **Terminal** and type the commands.
+- git config –global user.name “[name]”: sets author name. \
+- git config –global user.email “[email address]”: sets author email id. \
+- git init [repository_name]: start new repository. \
+- git clone [url]: obtains a repository from an existing URL. \
+- git status: lists all the files that have to be committed. \
+- git commit -am [your_commit_message]: commits any files you’ve changed or added. \
+- git push -u origin main: sends the committed changes of origin branch to your remote repository. \
+
+## References
+
+- [Git and GitHub for Beginners - Crash Course - Youtube](Git and GitHub for Beginners - Crash Course)
+- [Git Commands (taken from the above tutorial)](https://gist.github.com/gwenf/19e5748a5391929e8e938a22c8a4b3f2)
+- [How to intall git](https://www.atlassian.com/git/tutorials/install-git)
+- [Generating a new SSH key and adding it to the ssh-agent](https://docs.github.com/en/authentication/connecting-to-github-with-ssh/generating-a-new-ssh-key-and-adding-it-to-the-ssh-agent)
+- [Youtube Integrating RStudio with a new or existing project on GitHub (CC120)]( https://www.youtube.com/watch?v=sxErFMF7BJY&ab_channel=RiffomonasProject)
