@@ -4,6 +4,7 @@ introduction-1
 connecting-an-existing-rstudio-project-to-github.
 integrate-rstudio-with-an-existing-project-on-github
 how-to-post-your-bookdown-file-to-github
+section
 references
 problems-when-using-dplyrfull_join
 introduction-2
