@@ -1,0 +1,647 @@
+<!DOCTYPE html>
+<html lang="" xml:lang="">
+<head>
+
+  <meta charset="utf-8" />
+  <meta http-equiv="X-UA-Compatible" content="IE=edge" />
+  <title>Section 5 Graphs with with styling properties (e.g., color, shape, …), grouping labels (e.g., type and rel) | Random R tricks</title>
+  <meta name="description" content="Some R observations/tricks ." />
+  <meta name="generator" content="bookdown 0.26 and GitBook 2.6.7" />
+
+  <meta property="og:title" content="Section 5 Graphs with with styling properties (e.g., color, shape, …), grouping labels (e.g., type and rel) | Random R tricks" />
+  <meta property="og:type" content="book" />
+  
+  <meta property="og:description" content="Some R observations/tricks ." />
+  <meta name="github-repo" content="rstudio/bookdown-demo" />
+
+  <meta name="twitter:card" content="summary" />
+  <meta name="twitter:title" content="Section 5 Graphs with with styling properties (e.g., color, shape, …), grouping labels (e.g., type and rel) | Random R tricks" />
+  
+  <meta name="twitter:description" content="Some R observations/tricks ." />
+  
+
+<meta name="author" content="Tran Le" />
+
+
+
+  <meta name="viewport" content="width=device-width, initial-scale=1" />
+  <meta name="apple-mobile-web-app-capable" content="yes" />
+  <meta name="apple-mobile-web-app-status-bar-style" content="black" />
+  
+  
+<link rel="prev" href="diagrammer_graphviz-and-memaid.html"/>
+
+<script src="libs/jquery-3.6.0/jquery-3.6.0.min.js"></script>
+<script src="https://cdn.jsdelivr.net/npm/fuse.js@6.4.6/dist/fuse.min.js"></script>
+<link href="libs/gitbook-2.6.7/css/style.css" rel="stylesheet" />
+<link href="libs/gitbook-2.6.7/css/plugin-table.css" rel="stylesheet" />
+<link href="libs/gitbook-2.6.7/css/plugin-bookdown.css" rel="stylesheet" />
+<link href="libs/gitbook-2.6.7/css/plugin-highlight.css" rel="stylesheet" />
+<link href="libs/gitbook-2.6.7/css/plugin-search.css" rel="stylesheet" />
+<link href="libs/gitbook-2.6.7/css/plugin-fontsettings.css" rel="stylesheet" />
+<link href="libs/gitbook-2.6.7/css/plugin-clipboard.css" rel="stylesheet" />
+
+
+
+
+
+
+
+
+<link href="libs/anchor-sections-1.1.0/anchor-sections.css" rel="stylesheet" />
+<link href="libs/anchor-sections-1.1.0/anchor-sections-hash.css" rel="stylesheet" />
+<script src="libs/anchor-sections-1.1.0/anchor-sections.js"></script>
+<script src="libs/htmlwidgets-1.5.4/htmlwidgets.js"></script>
+<script src="libs/viz-1.8.2/viz.js"></script>
+<link href="libs/DiagrammeR-styles-0.2/styles.css" rel="stylesheet" />
+<script src="libs/grViz-binding-1.0.9.9000/grViz.js"></script>
+<link href="libs/datatables-css-0.0.0/datatables-crosstalk.css" rel="stylesheet" />
+<script src="libs/datatables-binding-0.23/datatables.js"></script>
+<link href="libs/dt-core-1.11.3/css/jquery.dataTables.min.css" rel="stylesheet" />
+<link href="libs/dt-core-1.11.3/css/jquery.dataTables.extra.css" rel="stylesheet" />
+<script src="libs/dt-core-1.11.3/js/jquery.dataTables.min.js"></script>
+<link href="libs/crosstalk-1.2.0/css/crosstalk.min.css" rel="stylesheet" />
+<script src="libs/crosstalk-1.2.0/js/crosstalk.min.js"></script>
+
+
+<style type="text/css">
+pre > code.sourceCode { white-space: pre; position: relative; }
+pre > code.sourceCode > span { display: inline-block; line-height: 1.25; }
+pre > code.sourceCode > span:empty { height: 1.2em; }
+.sourceCode { overflow: visible; }
+code.sourceCode > span { color: inherit; text-decoration: inherit; }
+pre.sourceCode { margin: 0; }
+@media screen {
+div.sourceCode { overflow: auto; }
+}
+@media print {
+pre > code.sourceCode { white-space: pre-wrap; }
+pre > code.sourceCode > span { text-indent: -5em; padding-left: 5em; }
+}
+pre.numberSource code
+  { counter-reset: source-line 0; }
+pre.numberSource code > span
+  { position: relative; left: -4em; counter-increment: source-line; }
+pre.numberSource code > span > a:first-child::before
+  { content: counter(source-line);
+    position: relative; left: -1em; text-align: right; vertical-align: baseline;
+    border: none; display: inline-block;
+    -webkit-touch-callout: none; -webkit-user-select: none;
+    -khtml-user-select: none; -moz-user-select: none;
+    -ms-user-select: none; user-select: none;
+    padding: 0 4px; width: 4em;
+    color: #aaaaaa;
+  }
+pre.numberSource { margin-left: 3em; border-left: 1px solid #aaaaaa;  padding-left: 4px; }
+div.sourceCode
+  {   }
+@media screen {
+pre > code.sourceCode > span > a:first-child::before { text-decoration: underline; }
+}
+code span.al { color: #ff0000; font-weight: bold; } /* Alert */
+code span.an { color: #60a0b0; font-weight: bold; font-style: italic; } /* Annotation */
+code span.at { color: #7d9029; } /* Attribute */
+code span.bn { color: #40a070; } /* BaseN */
+code span.bu { } /* BuiltIn */
+code span.cf { color: #007020; font-weight: bold; } /* ControlFlow */
+code span.ch { color: #4070a0; } /* Char */
+code span.cn { color: #880000; } /* Constant */
+code span.co { color: #60a0b0; font-style: italic; } /* Comment */
+code span.cv { color: #60a0b0; font-weight: bold; font-style: italic; } /* CommentVar */
+code span.do { color: #ba2121; font-style: italic; } /* Documentation */
+code span.dt { color: #902000; } /* DataType */
+code span.dv { color: #40a070; } /* DecVal */
+code span.er { color: #ff0000; font-weight: bold; } /* Error */
+code span.ex { } /* Extension */
+code span.fl { color: #40a070; } /* Float */
+code span.fu { color: #06287e; } /* Function */
+code span.im { } /* Import */
+code span.in { color: #60a0b0; font-weight: bold; font-style: italic; } /* Information */
+code span.kw { color: #007020; font-weight: bold; } /* Keyword */
+code span.op { color: #666666; } /* Operator */
+code span.ot { color: #007020; } /* Other */
+code span.pp { color: #bc7a00; } /* Preprocessor */
+code span.sc { color: #4070a0; } /* SpecialChar */
+code span.ss { color: #bb6688; } /* SpecialString */
+code span.st { color: #4070a0; } /* String */
+code span.va { color: #19177c; } /* Variable */
+code span.vs { color: #4070a0; } /* VerbatimString */
+code span.wa { color: #60a0b0; font-weight: bold; font-style: italic; } /* Warning */
+</style>
+
+
+<link rel="stylesheet" href="style.css" type="text/css" />
+</head>
+
+<body>
+
+
+
+  <div class="book without-animation with-summary font-size-2 font-family-1" data-basepath=".">
+
+    <div class="book-summary">
+      <nav role="navigation">
+
+<ul class="summary">
+<li><a href="./"> Tran Le - Some random R tricks</a></li>
+
+<li class="divider"></li>
+<li class="chapter" data-level="1" data-path="index.html"><a href="index.html"><i class="fa fa-check"></i><b>1</b> Introduction</a></li>
+<li class="chapter" data-level="2" data-path="github-cheatsheet.html"><a href="github-cheatsheet.html"><i class="fa fa-check"></i><b>2</b> Github-Cheatsheet</a>
+<ul>
+<li class="chapter" data-level="2.1" data-path="github-cheatsheet.html"><a href="github-cheatsheet.html#introduction-1"><i class="fa fa-check"></i><b>2.1</b> Introduction</a></li>
+<li class="chapter" data-level="2.2" data-path="github-cheatsheet.html"><a href="github-cheatsheet.html#connecting-an-existing-rstudio-project-to-github."><i class="fa fa-check"></i><b>2.2</b> Connecting an existing Rstudio project to Github.</a></li>
+<li class="chapter" data-level="2.3" data-path="github-cheatsheet.html"><a href="github-cheatsheet.html#integrate-rstudio-with-an-existing-project-on-github"><i class="fa fa-check"></i><b>2.3</b> Integrate Rstudio with an existing project on Github</a></li>
+<li class="chapter" data-level="2.4" data-path="github-cheatsheet.html"><a href="github-cheatsheet.html#how-to-post-your-bookdown-file-to-github"><i class="fa fa-check"></i><b>2.4</b> How to post your Bookdown file to Github</a></li>
+<li class="chapter" data-level="2.5" data-path="github-cheatsheet.html"><a href="github-cheatsheet.html#some-most-common-git-commands."><i class="fa fa-check"></i><b>2.5</b> Some most common git commands.</a></li>
+<li class="chapter" data-level="2.6" data-path="github-cheatsheet.html"><a href="github-cheatsheet.html#references"><i class="fa fa-check"></i><b>2.6</b> References</a></li>
+</ul></li>
+<li class="chapter" data-level="3" data-path="problems-when-using-dplyrfull_join.html"><a href="problems-when-using-dplyrfull_join.html"><i class="fa fa-check"></i><b>3</b> Problems when using dplyr::full_join</a>
+<ul>
+<li class="chapter" data-level="3.1" data-path="problems-when-using-dplyrfull_join.html"><a href="problems-when-using-dplyrfull_join.html#introduction-2"><i class="fa fa-check"></i><b>3.1</b> Introduction</a></li>
+<li class="chapter" data-level="3.2" data-path="problems-when-using-dplyrfull_join.html"><a href="problems-when-using-dplyrfull_join.html#using-dplyrfull_join"><i class="fa fa-check"></i><b>3.2</b> Using dplyr::full_join</a></li>
+<li class="chapter" data-level="3.3" data-path="problems-when-using-dplyrfull_join.html"><a href="problems-when-using-dplyrfull_join.html#using-powerjoinpower_full_join"><i class="fa fa-check"></i><b>3.3</b> Using powerjoin::power_full_join</a></li>
+<li class="chapter" data-level="3.4" data-path="problems-when-using-dplyrfull_join.html"><a href="problems-when-using-dplyrfull_join.html#what-if-we-have-conflict-data-sets"><i class="fa fa-check"></i><b>3.4</b> What if we have conflict data sets</a></li>
+<li class="chapter" data-level="3.5" data-path="problems-when-using-dplyrfull_join.html"><a href="problems-when-using-dplyrfull_join.html#reference"><i class="fa fa-check"></i><b>3.5</b> Reference</a></li>
+</ul></li>
+<li class="chapter" data-level="4" data-path="diagrammer_graphviz-and-memaid.html"><a href="diagrammer_graphviz-and-memaid.html"><i class="fa fa-check"></i><b>4</b> DiagrammeR_graphviz and memaid</a>
+<ul>
+<li class="chapter" data-level="4.1" data-path="diagrammer_graphviz-and-memaid.html"><a href="diagrammer_graphviz-and-memaid.html#keywords"><i class="fa fa-check"></i><b>4.1</b> Keywords:</a></li>
+<li class="chapter" data-level="4.2" data-path="diagrammer_graphviz-and-memaid.html"><a href="diagrammer_graphviz-and-memaid.html#graph-basics"><i class="fa fa-check"></i><b>4.2</b> Graph Basics</a></li>
+</ul></li>
+<li class="chapter" data-level="5" data-path="graphs-with-with-styling-properties-e.g.-color-shape-grouping-labels-e.g.-type-and-rel.html"><a href="graphs-with-with-styling-properties-e.g.-color-shape-grouping-labels-e.g.-type-and-rel.html"><i class="fa fa-check"></i><b>5</b> Graphs with with styling properties (e.g., color, shape, …), grouping labels (e.g., type and rel)</a>
+<ul>
+<li class="chapter" data-level="5.1" data-path="graphs-with-with-styling-properties-e.g.-color-shape-grouping-labels-e.g.-type-and-rel.html"><a href="graphs-with-with-styling-properties-e.g.-color-shape-grouping-labels-e.g.-type-and-rel.html#using-data-from-tables-to-generate-a-graph"><i class="fa fa-check"></i><b>5.1</b> Using Data from Tables to Generate a Graph</a></li>
+<li class="chapter" data-level="5.2" data-path="graphs-with-with-styling-properties-e.g.-color-shape-grouping-labels-e.g.-type-and-rel.html"><a href="graphs-with-with-styling-properties-e.g.-color-shape-grouping-labels-e.g.-type-and-rel.html#keyword---key-structure"><i class="fa fa-check"></i><b>5.2</b> Keyword - Key structure</a></li>
+<li class="chapter" data-level="5.3" data-path="graphs-with-with-styling-properties-e.g.-color-shape-grouping-labels-e.g.-type-and-rel.html"><a href="graphs-with-with-styling-properties-e.g.-color-shape-grouping-labels-e.g.-type-and-rel.html#a-minimal-plot"><i class="fa fa-check"></i><b>5.3</b> A minimal plot</a></li>
+<li class="chapter" data-level="5.4" data-path="graphs-with-with-styling-properties-e.g.-color-shape-grouping-labels-e.g.-type-and-rel.html"><a href="graphs-with-with-styling-properties-e.g.-color-shape-grouping-labels-e.g.-type-and-rel.html#diagrammer-implementation"><i class="fa fa-check"></i><b>5.4</b> DiagrammeR Implementation</a></li>
+<li class="chapter" data-level="5.5" data-path="graphs-with-with-styling-properties-e.g.-color-shape-grouping-labels-e.g.-type-and-rel.html"><a href="graphs-with-with-styling-properties-e.g.-color-shape-grouping-labels-e.g.-type-and-rel.html#simple-table"><i class="fa fa-check"></i><b>5.5</b> Simple table</a>
+<ul>
+<li class="chapter" data-level="5.5.1" data-path="graphs-with-with-styling-properties-e.g.-color-shape-grouping-labels-e.g.-type-and-rel.html"><a href="graphs-with-with-styling-properties-e.g.-color-shape-grouping-labels-e.g.-type-and-rel.html#horizontal-flowchart"><i class="fa fa-check"></i><b>5.5.1</b> Horizontal flowchart</a></li>
+<li class="chapter" data-level="5.5.2" data-path="graphs-with-with-styling-properties-e.g.-color-shape-grouping-labels-e.g.-type-and-rel.html"><a href="graphs-with-with-styling-properties-e.g.-color-shape-grouping-labels-e.g.-type-and-rel.html#vertical-flowchart"><i class="fa fa-check"></i><b>5.5.2</b> Vertical flowchart</a></li>
+</ul></li>
+<li class="chapter" data-level="5.6" data-path="graphs-with-with-styling-properties-e.g.-color-shape-grouping-labels-e.g.-type-and-rel.html"><a href="graphs-with-with-styling-properties-e.g.-color-shape-grouping-labels-e.g.-type-and-rel.html#parameterized-figures---graphviz-substitution"><i class="fa fa-check"></i><b>5.6</b> Parameterized figures - Graphviz Substitution</a></li>
+<li class="chapter" data-level="5.7" data-path="graphs-with-with-styling-properties-e.g.-color-shape-grouping-labels-e.g.-type-and-rel.html"><a href="graphs-with-with-styling-properties-e.g.-color-shape-grouping-labels-e.g.-type-and-rel.html#subgraphs-and-clusters"><i class="fa fa-check"></i><b>5.7</b> Subgraphs and clusters</a>
+<ul>
+<li class="chapter" data-level="5.7.1" data-path="graphs-with-with-styling-properties-e.g.-color-shape-grouping-labels-e.g.-type-and-rel.html"><a href="graphs-with-with-styling-properties-e.g.-color-shape-grouping-labels-e.g.-type-and-rel.html#using-label"><i class="fa fa-check"></i><b>5.7.1</b> Using label</a></li>
+<li class="chapter" data-level="5.7.2" data-path="graphs-with-with-styling-properties-e.g.-color-shape-grouping-labels-e.g.-type-and-rel.html"><a href="graphs-with-with-styling-properties-e.g.-color-shape-grouping-labels-e.g.-type-and-rel.html#not-using-label"><i class="fa fa-check"></i><b>5.7.2</b> Not using label</a></li>
+</ul></li>
+<li class="chapter" data-level="5.8" data-path="graphs-with-with-styling-properties-e.g.-color-shape-grouping-labels-e.g.-type-and-rel.html"><a href="graphs-with-with-styling-properties-e.g.-color-shape-grouping-labels-e.g.-type-and-rel.html#node-data-frames-ndfs-and-edge-data-frames-edfs"><i class="fa fa-check"></i><b>5.8</b> Node data frames (NDFs) and Edge data frames (EDFs)</a></li>
+<li class="chapter" data-level="5.9" data-path="graphs-with-with-styling-properties-e.g.-color-shape-grouping-labels-e.g.-type-and-rel.html"><a href="graphs-with-with-styling-properties-e.g.-color-shape-grouping-labels-e.g.-type-and-rel.html#references-1"><i class="fa fa-check"></i><b>5.9</b> References</a></li>
+</ul></li>
+<li class="divider"></li>
+<li><a href="https://github.com/rstudio/bookdown" target="blank">Published with bookdown</a></li>
+
+</ul>
+
+      </nav>
+    </div>
+
+    <div class="book-body">
+      <div class="body-inner">
+        <div class="book-header" role="navigation">
+          <h1>
+            <i class="fa fa-circle-o-notch fa-spin"></i><a href="./">Random R tricks</a>
+          </h1>
+        </div>
+
+        <div class="page-wrapper" tabindex="-1" role="main">
+          <div class="page-inner">
+
+            <section class="normal" id="section-">
+<div id="graphs-with-with-styling-properties-e.g.-color-shape-grouping-labels-e.g.-type-and-rel" class="section level1 hasAnchor" number="5">
+<h1><span class="header-section-number">Section 5</span> Graphs with with styling properties (e.g., color, shape, …), grouping labels (e.g., type and rel)<a href="graphs-with-with-styling-properties-e.g.-color-shape-grouping-labels-e.g.-type-and-rel.html#graphs-with-with-styling-properties-e.g.-color-shape-grouping-labels-e.g.-type-and-rel" class="anchor-section" aria-label="Anchor link to header"></a></h1>
+<p>Any time we add a node or edge to the graph, we can add node or edge aesthetic or data attributes. These can be styling properties (e.g., color, shape), grouping labels (e.g., type and rel), or data values that are useful for calculations and for display purposes. Most node or edge creation functions (depending on whether they create either edges, nodes, or both) have the arguments <code>node_aes</code>, <code>edge_aes</code>, <code>node_data</code>, and <code>edge_data</code>. Using these, we can call the namesake helper functions (node_aes(), edge_aes(), node_data(), and edge_data()) to specifically target the created nodes or edges and bind attribute data. An additional benefit in using the helper functions (for the node/edge aesthetic attributes especially) is that RStudio can provide inline help on attribute names and definitions when typing node_aes( or edge_aes( and pressing the TAB key.</p>
+<p>Here is an example of adding a node while setting its color, fillcolor, and fontcolor node aesthetic attributes, and, adding an edge with color, arrowhead, and tooltip edge aesthetic attributes. In both the add_node() and the add_edge() calls, the new node and edge were set with a value node/edge data attribute.</p>
+<div class="sourceCode" id="cb12"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb12-1"><a href="graphs-with-with-styling-properties-e.g.-color-shape-grouping-labels-e.g.-type-and-rel.html#cb12-1" aria-hidden="true" tabindex="-1"></a>d_graph <span class="ot">&lt;-</span></span>
+<span id="cb12-2"><a href="graphs-with-with-styling-properties-e.g.-color-shape-grouping-labels-e.g.-type-and-rel.html#cb12-2" aria-hidden="true" tabindex="-1"></a>  c_graph <span class="sc">%&gt;%</span></span>
+<span id="cb12-3"><a href="graphs-with-with-styling-properties-e.g.-color-shape-grouping-labels-e.g.-type-and-rel.html#cb12-3" aria-hidden="true" tabindex="-1"></a>  <span class="fu">add_node</span>(</span>
+<span id="cb12-4"><a href="graphs-with-with-styling-properties-e.g.-color-shape-grouping-labels-e.g.-type-and-rel.html#cb12-4" aria-hidden="true" tabindex="-1"></a>    <span class="at">type =</span> <span class="st">&quot;type_a&quot;</span>,</span>
+<span id="cb12-5"><a href="graphs-with-with-styling-properties-e.g.-color-shape-grouping-labels-e.g.-type-and-rel.html#cb12-5" aria-hidden="true" tabindex="-1"></a>    <span class="at">node_aes =</span> <span class="fu">node_aes</span>(</span>
+<span id="cb12-6"><a href="graphs-with-with-styling-properties-e.g.-color-shape-grouping-labels-e.g.-type-and-rel.html#cb12-6" aria-hidden="true" tabindex="-1"></a>      <span class="at">color =</span> <span class="st">&quot;steelblue&quot;</span>,</span>
+<span id="cb12-7"><a href="graphs-with-with-styling-properties-e.g.-color-shape-grouping-labels-e.g.-type-and-rel.html#cb12-7" aria-hidden="true" tabindex="-1"></a>      <span class="at">fillcolor =</span> <span class="st">&quot;lightblue&quot;</span>,</span>
+<span id="cb12-8"><a href="graphs-with-with-styling-properties-e.g.-color-shape-grouping-labels-e.g.-type-and-rel.html#cb12-8" aria-hidden="true" tabindex="-1"></a>      <span class="at">fontcolor =</span> <span class="st">&quot;gray35&quot;</span>),</span>
+<span id="cb12-9"><a href="graphs-with-with-styling-properties-e.g.-color-shape-grouping-labels-e.g.-type-and-rel.html#cb12-9" aria-hidden="true" tabindex="-1"></a>    <span class="at">node_data =</span> <span class="fu">node_data</span>(</span>
+<span id="cb12-10"><a href="graphs-with-with-styling-properties-e.g.-color-shape-grouping-labels-e.g.-type-and-rel.html#cb12-10" aria-hidden="true" tabindex="-1"></a>      <span class="at">value =</span> <span class="fl">2.5</span>)) <span class="sc">%&gt;%</span></span>
+<span id="cb12-11"><a href="graphs-with-with-styling-properties-e.g.-color-shape-grouping-labels-e.g.-type-and-rel.html#cb12-11" aria-hidden="true" tabindex="-1"></a>  <span class="fu">add_edge</span>(</span>
+<span id="cb12-12"><a href="graphs-with-with-styling-properties-e.g.-color-shape-grouping-labels-e.g.-type-and-rel.html#cb12-12" aria-hidden="true" tabindex="-1"></a>    <span class="at">from =</span> <span class="dv">1</span>, <span class="at">to =</span> <span class="dv">3</span>,</span>
+<span id="cb12-13"><a href="graphs-with-with-styling-properties-e.g.-color-shape-grouping-labels-e.g.-type-and-rel.html#cb12-13" aria-hidden="true" tabindex="-1"></a>    <span class="at">rel =</span> <span class="st">&quot;interacted_with&quot;</span>,</span>
+<span id="cb12-14"><a href="graphs-with-with-styling-properties-e.g.-color-shape-grouping-labels-e.g.-type-and-rel.html#cb12-14" aria-hidden="true" tabindex="-1"></a>    <span class="at">edge_aes =</span> <span class="fu">edge_aes</span>(</span>
+<span id="cb12-15"><a href="graphs-with-with-styling-properties-e.g.-color-shape-grouping-labels-e.g.-type-and-rel.html#cb12-15" aria-hidden="true" tabindex="-1"></a>      <span class="at">color =</span> <span class="st">&quot;red&quot;</span>,</span>
+<span id="cb12-16"><a href="graphs-with-with-styling-properties-e.g.-color-shape-grouping-labels-e.g.-type-and-rel.html#cb12-16" aria-hidden="true" tabindex="-1"></a>      <span class="at">arrowhead =</span> <span class="st">&quot;vee&quot;</span>,</span>
+<span id="cb12-17"><a href="graphs-with-with-styling-properties-e.g.-color-shape-grouping-labels-e.g.-type-and-rel.html#cb12-17" aria-hidden="true" tabindex="-1"></a>      <span class="at">tooltip =</span> <span class="st">&quot;Red Arrow&quot;</span>),</span>
+<span id="cb12-18"><a href="graphs-with-with-styling-properties-e.g.-color-shape-grouping-labels-e.g.-type-and-rel.html#cb12-18" aria-hidden="true" tabindex="-1"></a>    <span class="at">edge_data =</span> <span class="fu">edge_data</span>(</span>
+<span id="cb12-19"><a href="graphs-with-with-styling-properties-e.g.-color-shape-grouping-labels-e.g.-type-and-rel.html#cb12-19" aria-hidden="true" tabindex="-1"></a>      <span class="at">value =</span> <span class="fl">5.2</span>))</span>
+<span id="cb12-20"><a href="graphs-with-with-styling-properties-e.g.-color-shape-grouping-labels-e.g.-type-and-rel.html#cb12-20" aria-hidden="true" tabindex="-1"></a><span class="fu">render_graph</span>(d_graph, <span class="at">layout =</span> <span class="st">&quot;nicely&quot;</span>)</span></code></pre></div>
+<div id="htmlwidget-b11190a1b63e9d151ff9" style="width:672px;height:480px;" class="grViz html-widget"></div>
+<script type="application/json" data-for="htmlwidget-b11190a1b63e9d151ff9">{"x":{"diagram":"digraph {\n\ngraph [layout = \"neato\",\n       outputorder = \"edgesfirst\",\n       bgcolor = \"white\"]\n\nnode [fontname = \"Helvetica\",\n      fontsize = \"10\",\n      shape = \"circle\",\n      fixedsize = \"true\",\n      width = \"0.5\",\n      style = \"filled\",\n      fillcolor = \"aliceblue\",\n      color = \"gray70\",\n      fontcolor = \"gray50\"]\n\nedge [fontname = \"Helvetica\",\n     fontsize = \"8\",\n     len = \"1.5\",\n     color = \"gray80\",\n     arrowsize = \"0.5\"]\n\n  \"1\" [color = \"gray70\", fontcolor = \"gray50\", fillcolor = \"#F0F8FF\", pos = \"-2.87182714763409,-0.427742013627372!\"] \n  \"2\" [color = \"gray70\", fontcolor = \"gray50\", fillcolor = \"#F0F8FF\", pos = \"-1.44607223896023,-1.51745284619089!\"] \n  \"3\" [color = \"gray70\", fontcolor = \"gray50\", fillcolor = \"#F0F8FF\", pos = \"-2.15919393428452,-0.814237971410101!\"] \n  \"4\" [color = \"steelblue\", fontcolor = \"gray35\", fillcolor = \"#ADD8E6\", pos = \"-3.25700097742861,-2.42302111252776!\"] \n\"1\"->\"1\" [color = \"gray80\", color = \"gray80\", color = \"gray80\"] \n\"3\"->\"2\" [color = \"gray80\", color = \"gray80\", color = \"gray80\"] \n\"1\"->\"3\" [color = \"gray80\", color = \"gray80\", color = \"gray80\"] \n\"1\"->\"3\" [color = \"red\", arrowhead = \"vee\", tooltip = \"Red Arrow\"] \n}","config":{"engine":"dot","options":null}},"evals":[],"jsHooks":[]}</script>
+<ul>
+<li><p><strong>select node/edge</strong> ==&gt; <strong>set/mutate the nodes/edges</strong> ==&gt; <strong>close the mutation</strong></p>
+<ul>
+<li>select nodes: <code>select_nodes</code>, <code>select_nodes_by_id()</code>, <code>select_last_nodes_created</code><br />
+</li>
+<li>select edge: <code>select_edges()</code>, <code>select_edges_by_edge_id()</code>, <code>select_last_edges_created()</code><br />
+</li>
+<li>muttate nodes/edges: <code>set_node_attrs_ws()</code>, <code>mutate_node_attrs_ws()</code>, <code>delete_nodes_ws()</code>, <code>create_subgraph_ws()</code>.<br />
+</li>
+<li>close the mutation: <code>invert_selection</code>, <code>deselect_nodes()</code>/<code>deselect_edges()</code>, <code>clear_selection</code>.</li>
+</ul></li>
+</ul>
+<p>Creating attributes and setting their values is often useful because we can further work with the attributes (e.g., mutate values or even use them during traversals). Furthermore, we can create aesthetic properties based on numerical or categorical data. This is important for when you want to display your graph diagram using the render_graph() function.</p>
+<p>Don’t worry if attribute values weren’t set right during the creation of the associated nodes or edges. They are ways to set attribute values for existing nodes and edges. Functions are available for targeting the specific nodes/edges (i.e., making a selection) and other functions are used to set attribute values for the selected nodes or edges. Often, this can be the more efficient strategy as we can target nodes/edges based on their properties (e.g., degree, relationships to neighbors, etc.). Here is an example where we select a node based on its value attribute and modify its color node aesthetic attribute:</p>
+<div class="sourceCode" id="cb13"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb13-1"><a href="graphs-with-with-styling-properties-e.g.-color-shape-grouping-labels-e.g.-type-and-rel.html#cb13-1" aria-hidden="true" tabindex="-1"></a>e_graph <span class="ot">&lt;-</span></span>
+<span id="cb13-2"><a href="graphs-with-with-styling-properties-e.g.-color-shape-grouping-labels-e.g.-type-and-rel.html#cb13-2" aria-hidden="true" tabindex="-1"></a>  d_graph <span class="sc">%&gt;%</span></span>
+<span id="cb13-3"><a href="graphs-with-with-styling-properties-e.g.-color-shape-grouping-labels-e.g.-type-and-rel.html#cb13-3" aria-hidden="true" tabindex="-1"></a>  <span class="fu">select_nodes</span>(<span class="at">conditions =</span> value <span class="sc">==</span> <span class="fl">2.5</span>) <span class="sc">%&gt;%</span></span>
+<span id="cb13-4"><a href="graphs-with-with-styling-properties-e.g.-color-shape-grouping-labels-e.g.-type-and-rel.html#cb13-4" aria-hidden="true" tabindex="-1"></a>  <span class="fu">set_node_attrs_ws</span>(<span class="at">node_attr =</span> fillcolor, <span class="at">value =</span> <span class="st">&quot;orange&quot;</span>) <span class="sc">%&gt;%</span></span>
+<span id="cb13-5"><a href="graphs-with-with-styling-properties-e.g.-color-shape-grouping-labels-e.g.-type-and-rel.html#cb13-5" aria-hidden="true" tabindex="-1"></a>  <span class="fu">clear_selection</span>()</span>
+<span id="cb13-6"><a href="graphs-with-with-styling-properties-e.g.-color-shape-grouping-labels-e.g.-type-and-rel.html#cb13-6" aria-hidden="true" tabindex="-1"></a><span class="fu">render_graph</span>(e_graph)</span></code></pre></div>
+<div id="htmlwidget-1cc46991e2af66f0f768" style="width:672px;height:480px;" class="grViz html-widget"></div>
+<script type="application/json" data-for="htmlwidget-1cc46991e2af66f0f768">{"x":{"diagram":"digraph {\n\ngraph [layout = \"neato\",\n       outputorder = \"edgesfirst\",\n       bgcolor = \"white\"]\n\nnode [fontname = \"Helvetica\",\n      fontsize = \"10\",\n      shape = \"circle\",\n      fixedsize = \"true\",\n      width = \"0.5\",\n      style = \"filled\",\n      fillcolor = \"aliceblue\",\n      color = \"gray70\",\n      fontcolor = \"gray50\"]\n\nedge [fontname = \"Helvetica\",\n     fontsize = \"8\",\n     len = \"1.5\",\n     color = \"gray80\",\n     arrowsize = \"0.5\"]\n\n  \"1\" [color = \"gray70\", fontcolor = \"gray50\", fillcolor = \"#F0F8FF\"] \n  \"2\" [color = \"gray70\", fontcolor = \"gray50\", fillcolor = \"#F0F8FF\"] \n  \"3\" [color = \"gray70\", fontcolor = \"gray50\", fillcolor = \"#F0F8FF\"] \n  \"4\" [color = \"steelblue\", fontcolor = \"gray35\", fillcolor = \"#FFA500\"] \n\"1\"->\"1\" [color = \"gray80\", color = \"gray80\", color = \"gray80\"] \n\"3\"->\"2\" [color = \"gray80\", color = \"gray80\", color = \"gray80\"] \n\"1\"->\"3\" [color = \"gray80\", color = \"gray80\", color = \"gray80\"] \n\"1\"->\"3\" [color = \"red\", arrowhead = \"vee\", tooltip = \"Red Arrow\"] \n}","config":{"engine":"dot","options":null}},"evals":[],"jsHooks":[]}</script>
+<div class="sourceCode" id="cb14"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb14-1"><a href="graphs-with-with-styling-properties-e.g.-color-shape-grouping-labels-e.g.-type-and-rel.html#cb14-1" aria-hidden="true" tabindex="-1"></a>f_graph <span class="ot">&lt;-</span></span>
+<span id="cb14-2"><a href="graphs-with-with-styling-properties-e.g.-color-shape-grouping-labels-e.g.-type-and-rel.html#cb14-2" aria-hidden="true" tabindex="-1"></a>  <span class="fu">create_graph</span>() <span class="sc">%&gt;%</span></span>
+<span id="cb14-3"><a href="graphs-with-with-styling-properties-e.g.-color-shape-grouping-labels-e.g.-type-and-rel.html#cb14-3" aria-hidden="true" tabindex="-1"></a>  <span class="fu">add_path</span>(<span class="at">n =</span> <span class="dv">3</span>) <span class="sc">%&gt;%</span> <span class="co"># add a path that connect 1, 2, 3</span></span>
+<span id="cb14-4"><a href="graphs-with-with-styling-properties-e.g.-color-shape-grouping-labels-e.g.-type-and-rel.html#cb14-4" aria-hidden="true" tabindex="-1"></a>  <span class="fu">add_cycle</span>(<span class="at">n =</span> <span class="dv">4</span>) <span class="sc">%&gt;%</span>  <span class="co"># add cycle that connect 4-&gt;5-&gt;6-&gt;7-&gt;4</span></span>
+<span id="cb14-5"><a href="graphs-with-with-styling-properties-e.g.-color-shape-grouping-labels-e.g.-type-and-rel.html#cb14-5" aria-hidden="true" tabindex="-1"></a>  <span class="fu">add_balanced_tree</span>(<span class="at">k =</span> <span class="dv">2</span>, <span class="at">h =</span> <span class="dv">2</span>)</span>
+<span id="cb14-6"><a href="graphs-with-with-styling-properties-e.g.-color-shape-grouping-labels-e.g.-type-and-rel.html#cb14-6" aria-hidden="true" tabindex="-1"></a><span class="fu">render_graph</span>(f_graph)</span></code></pre></div>
+<div id="htmlwidget-dfac6113887633ec768f" style="width:672px;height:480px;" class="grViz html-widget"></div>
+<script type="application/json" data-for="htmlwidget-dfac6113887633ec768f">{"x":{"diagram":"digraph {\n\ngraph [layout = \"neato\",\n       outputorder = \"edgesfirst\",\n       bgcolor = \"white\"]\n\nnode [fontname = \"Helvetica\",\n      fontsize = \"10\",\n      shape = \"circle\",\n      fixedsize = \"true\",\n      width = \"0.5\",\n      style = \"filled\",\n      fillcolor = \"aliceblue\",\n      color = \"gray70\",\n      fontcolor = \"gray50\"]\n\nedge [fontname = \"Helvetica\",\n     fontsize = \"8\",\n     len = \"1.5\",\n     color = \"gray80\",\n     arrowsize = \"0.5\"]\n\n  \"1\" [label = \"1\", fillcolor = \"#F0F8FF\", fontcolor = \"#000000\"] \n  \"2\" [label = \"2\", fillcolor = \"#F0F8FF\", fontcolor = \"#000000\"] \n  \"3\" [label = \"3\", fillcolor = \"#F0F8FF\", fontcolor = \"#000000\"] \n  \"4\" [label = \"4\", fillcolor = \"#F0F8FF\", fontcolor = \"#000000\"] \n  \"5\" [label = \"5\", fillcolor = \"#F0F8FF\", fontcolor = \"#000000\"] \n  \"6\" [label = \"6\", fillcolor = \"#F0F8FF\", fontcolor = \"#000000\"] \n  \"7\" [label = \"7\", fillcolor = \"#F0F8FF\", fontcolor = \"#000000\"] \n  \"8\" [label = \"8\", fillcolor = \"#F0F8FF\", fontcolor = \"#000000\"] \n  \"9\" [label = \"9\", fillcolor = \"#F0F8FF\", fontcolor = \"#000000\"] \n  \"10\" [label = \"10\", fillcolor = \"#F0F8FF\", fontcolor = \"#000000\"] \n  \"11\" [label = \"11\", fillcolor = \"#F0F8FF\", fontcolor = \"#000000\"] \n  \"12\" [label = \"12\", fillcolor = \"#F0F8FF\", fontcolor = \"#000000\"] \n  \"13\" [label = \"13\", fillcolor = \"#F0F8FF\", fontcolor = \"#000000\"] \n  \"14\" [label = \"14\", fillcolor = \"#F0F8FF\", fontcolor = \"#000000\"] \n  \"1\"->\"2\" \n  \"2\"->\"3\" \n  \"4\"->\"5\" \n  \"5\"->\"6\" \n  \"6\"->\"7\" \n  \"7\"->\"4\" \n  \"8\"->\"9\" \n  \"8\"->\"10\" \n  \"9\"->\"11\" \n  \"9\"->\"12\" \n  \"10\"->\"13\" \n  \"10\"->\"14\" \n}","config":{"engine":"dot","options":null}},"evals":[],"jsHooks":[]}</script>
+<div id="using-data-from-tables-to-generate-a-graph" class="section level2 hasAnchor" number="5.1">
+<h2><span class="header-section-number">5.1</span> Using Data from Tables to Generate a Graph<a href="graphs-with-with-styling-properties-e.g.-color-shape-grouping-labels-e.g.-type-and-rel.html#using-data-from-tables-to-generate-a-graph" class="anchor-section" aria-label="Anchor link to header"></a></h2>
+<p>The DiagrammeR package contains a few simple datasets that help illustrate how to create a graph with table data. The <code>node_list_1</code> and <code>edge_list_1</code> datasets are super simple node and edge data frames that can be assembled into a graph. Let’s print them side by side to see what we’re working with.</p>
+<div class="sourceCode" id="cb15"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb15-1"><a href="graphs-with-with-styling-properties-e.g.-color-shape-grouping-labels-e.g.-type-and-rel.html#cb15-1" aria-hidden="true" tabindex="-1"></a><span class="fu">datatable</span>(node_list_1)     </span></code></pre></div>
+<div id="htmlwidget-785d2c482131b428a53f" style="width:100%;height:auto;" class="datatables html-widget"></div>
+<script type="application/json" data-for="htmlwidget-785d2c482131b428a53f">{"x":{"filter":"none","vertical":false,"data":[["1","2","3","4","5","6","7","8","9","10"],[1,2,3,4,5,6,7,8,9,10],["A","B","C","D","E","F","G","H","I","J"]],"container":"<table class=\"display\">\n  <thead>\n    <tr>\n      <th> <\/th>\n      <th>id<\/th>\n      <th>label<\/th>\n    <\/tr>\n  <\/thead>\n<\/table>","options":{"columnDefs":[{"className":"dt-right","targets":1},{"orderable":false,"targets":0}],"order":[],"autoWidth":false,"orderClasses":false}},"evals":[],"jsHooks":[]}</script>
+<div class="sourceCode" id="cb16"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb16-1"><a href="graphs-with-with-styling-properties-e.g.-color-shape-grouping-labels-e.g.-type-and-rel.html#cb16-1" aria-hidden="true" tabindex="-1"></a><span class="fu">datatable</span>(edge_list_1)</span></code></pre></div>
+<div id="htmlwidget-d8e6052751dfe12ceb07" style="width:100%;height:auto;" class="datatables html-widget"></div>
+<script type="application/json" data-for="htmlwidget-d8e6052751dfe12ceb07">{"x":{"filter":"none","vertical":false,"data":[["1","2","3","4","5","6","7","8","9","10","11","12","13","14","15","16","17","18","19"],[1,1,1,1,2,2,2,2,3,3,3,4,5,6,6,8,9,9,10],[2,3,4,9,8,7,1,10,1,6,8,1,7,2,9,1,3,10,1]],"container":"<table class=\"display\">\n  <thead>\n    <tr>\n      <th> <\/th>\n      <th>from<\/th>\n      <th>to<\/th>\n    <\/tr>\n  <\/thead>\n<\/table>","options":{"columnDefs":[{"className":"dt-right","targets":[1,2]},{"orderable":false,"targets":0}],"order":[],"autoWidth":false,"orderClasses":false}},"evals":[],"jsHooks":[]}</script>
+<p>To fashion this into a graph, we need to ensure that both the nodes and their attributes (in this case, just a label) are added, and, that the edges are added. Furthermore, we must map the from and the to definitions to the node id (in other cases, we may need to map relationships between text labels to the same text attribute stored in the node data frame). We can use three functions to generate a graph containing this data:</p>
+<p><code>create_graph()</code><br />
+<code>add_nodes_from_table()</code><br />
+<code>add_edges_from_table()</code><br />
+</p>
+<div class="sourceCode" id="cb17"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb17-1"><a href="graphs-with-with-styling-properties-e.g.-color-shape-grouping-labels-e.g.-type-and-rel.html#cb17-1" aria-hidden="true" tabindex="-1"></a><span class="co"># Create the graph object</span></span>
+<span id="cb17-2"><a href="graphs-with-with-styling-properties-e.g.-color-shape-grouping-labels-e.g.-type-and-rel.html#cb17-2" aria-hidden="true" tabindex="-1"></a>i_graph_1 <span class="ot">&lt;-</span> <span class="fu">create_graph</span>() <span class="sc">%&gt;%</span></span>
+<span id="cb17-3"><a href="graphs-with-with-styling-properties-e.g.-color-shape-grouping-labels-e.g.-type-and-rel.html#cb17-3" aria-hidden="true" tabindex="-1"></a>  <span class="fu">add_nodes_from_table</span>(</span>
+<span id="cb17-4"><a href="graphs-with-with-styling-properties-e.g.-color-shape-grouping-labels-e.g.-type-and-rel.html#cb17-4" aria-hidden="true" tabindex="-1"></a>    <span class="at">table =</span> node_list_1,</span>
+<span id="cb17-5"><a href="graphs-with-with-styling-properties-e.g.-color-shape-grouping-labels-e.g.-type-and-rel.html#cb17-5" aria-hidden="true" tabindex="-1"></a>    <span class="at">label_col =</span> label) <span class="sc">%&gt;%</span> </span>
+<span id="cb17-6"><a href="graphs-with-with-styling-properties-e.g.-color-shape-grouping-labels-e.g.-type-and-rel.html#cb17-6" aria-hidden="true" tabindex="-1"></a> <span class="fu">add_edges_from_table</span>(</span>
+<span id="cb17-7"><a href="graphs-with-with-styling-properties-e.g.-color-shape-grouping-labels-e.g.-type-and-rel.html#cb17-7" aria-hidden="true" tabindex="-1"></a>    <span class="at">table =</span> edge_list_1,</span>
+<span id="cb17-8"><a href="graphs-with-with-styling-properties-e.g.-color-shape-grouping-labels-e.g.-type-and-rel.html#cb17-8" aria-hidden="true" tabindex="-1"></a>    <span class="at">from_col =</span> from,</span>
+<span id="cb17-9"><a href="graphs-with-with-styling-properties-e.g.-color-shape-grouping-labels-e.g.-type-and-rel.html#cb17-9" aria-hidden="true" tabindex="-1"></a>    <span class="at">to_col =</span> to,</span>
+<span id="cb17-10"><a href="graphs-with-with-styling-properties-e.g.-color-shape-grouping-labels-e.g.-type-and-rel.html#cb17-10" aria-hidden="true" tabindex="-1"></a>    <span class="at">from_to_map =</span> id_external)</span>
+<span id="cb17-11"><a href="graphs-with-with-styling-properties-e.g.-color-shape-grouping-labels-e.g.-type-and-rel.html#cb17-11" aria-hidden="true" tabindex="-1"></a><span class="fu">render_graph</span>(i_graph_1)</span></code></pre></div>
+<div id="htmlwidget-dcb98dadb6aa6c66ed03" style="width:672px;height:480px;" class="grViz html-widget"></div>
+<script type="application/json" data-for="htmlwidget-dcb98dadb6aa6c66ed03">{"x":{"diagram":"digraph {\n\ngraph [layout = \"neato\",\n       outputorder = \"edgesfirst\",\n       bgcolor = \"white\"]\n\nnode [fontname = \"Helvetica\",\n      fontsize = \"10\",\n      shape = \"circle\",\n      fixedsize = \"true\",\n      width = \"0.5\",\n      style = \"filled\",\n      fillcolor = \"aliceblue\",\n      color = \"gray70\",\n      fontcolor = \"gray50\"]\n\nedge [fontname = \"Helvetica\",\n     fontsize = \"8\",\n     len = \"1.5\",\n     color = \"gray80\",\n     arrowsize = \"0.5\"]\n\n  \"1\" [label = \"A\", fillcolor = \"#F0F8FF\", fontcolor = \"#000000\"] \n  \"2\" [label = \"B\", fillcolor = \"#F0F8FF\", fontcolor = \"#000000\"] \n  \"3\" [label = \"C\", fillcolor = \"#F0F8FF\", fontcolor = \"#000000\"] \n  \"4\" [label = \"D\", fillcolor = \"#F0F8FF\", fontcolor = \"#000000\"] \n  \"5\" [label = \"E\", fillcolor = \"#F0F8FF\", fontcolor = \"#000000\"] \n  \"6\" [label = \"F\", fillcolor = \"#F0F8FF\", fontcolor = \"#000000\"] \n  \"7\" [label = \"G\", fillcolor = \"#F0F8FF\", fontcolor = \"#000000\"] \n  \"8\" [label = \"H\", fillcolor = \"#F0F8FF\", fontcolor = \"#000000\"] \n  \"9\" [label = \"I\", fillcolor = \"#F0F8FF\", fontcolor = \"#000000\"] \n  \"10\" [label = \"J\", fillcolor = \"#F0F8FF\", fontcolor = \"#000000\"] \n  \"1\"->\"2\" \n  \"1\"->\"3\" \n  \"1\"->\"4\" \n  \"1\"->\"9\" \n  \"2\"->\"8\" \n  \"2\"->\"7\" \n  \"2\"->\"1\" \n  \"2\"->\"10\" \n  \"3\"->\"1\" \n  \"3\"->\"6\" \n  \"3\"->\"8\" \n  \"4\"->\"1\" \n  \"5\"->\"7\" \n  \"6\"->\"2\" \n  \"6\"->\"9\" \n  \"8\"->\"1\" \n  \"9\"->\"3\" \n  \"9\"->\"10\" \n  \"10\"->\"1\" \n}","config":{"engine":"dot","options":null}},"evals":[],"jsHooks":[]}</script>
+</div>
+<div id="keyword---key-structure" class="section level2 hasAnchor" number="5.2">
+<h2><span class="header-section-number">5.2</span> Keyword - Key structure<a href="graphs-with-with-styling-properties-e.g.-color-shape-grouping-labels-e.g.-type-and-rel.html#keyword---key-structure" class="anchor-section" aria-label="Anchor link to header"></a></h2>
+<div class="sourceCode" id="cb18"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb18-1"><a href="graphs-with-with-styling-properties-e.g.-color-shape-grouping-labels-e.g.-type-and-rel.html#cb18-1" aria-hidden="true" tabindex="-1"></a>DiagrammeR<span class="sc">::</span><span class="fu">grViz</span>(<span class="st">&quot;(digraph|graph) graph_name{</span></span>
+<span id="cb18-2"><a href="graphs-with-with-styling-properties-e.g.-color-shape-grouping-labels-e.g.-type-and-rel.html#cb18-2" aria-hidden="true" tabindex="-1"></a><span class="st">graph[...graph_stmt...]</span></span>
+<span id="cb18-3"><a href="graphs-with-with-styling-properties-e.g.-color-shape-grouping-labels-e.g.-type-and-rel.html#cb18-3" aria-hidden="true" tabindex="-1"></a><span class="st">#</span></span>
+<span id="cb18-4"><a href="graphs-with-with-styling-properties-e.g.-color-shape-grouping-labels-e.g.-type-and-rel.html#cb18-4" aria-hidden="true" tabindex="-1"></a><span class="st">node[...node_stmt...]</span></span>
+<span id="cb18-5"><a href="graphs-with-with-styling-properties-e.g.-color-shape-grouping-labels-e.g.-type-and-rel.html#cb18-5" aria-hidden="true" tabindex="-1"></a><span class="st">a[...]</span></span>
+<span id="cb18-6"><a href="graphs-with-with-styling-properties-e.g.-color-shape-grouping-labels-e.g.-type-and-rel.html#cb18-6" aria-hidden="true" tabindex="-1"></a><span class="st">b[...]</span></span>
+<span id="cb18-7"><a href="graphs-with-with-styling-properties-e.g.-color-shape-grouping-labels-e.g.-type-and-rel.html#cb18-7" aria-hidden="true" tabindex="-1"></a><span class="st"># /*Comment: here are for */</span></span>
+<span id="cb18-8"><a href="graphs-with-with-styling-properties-e.g.-color-shape-grouping-labels-e.g.-type-and-rel.html#cb18-8" aria-hidden="true" tabindex="-1"></a><span class="st">a -&gt; b # must use -&gt; for direct graph digraph</span></span>
+<span id="cb18-9"><a href="graphs-with-with-styling-properties-e.g.-color-shape-grouping-labels-e.g.-type-and-rel.html#cb18-9" aria-hidden="true" tabindex="-1"></a><span class="st">a -- b # must use -- for undirected graph</span></span>
+<span id="cb18-10"><a href="graphs-with-with-styling-properties-e.g.-color-shape-grouping-labels-e.g.-type-and-rel.html#cb18-10" aria-hidden="true" tabindex="-1"></a><span class="st">}&quot;</span>)</span></code></pre></div>
+</div>
+<div id="a-minimal-plot" class="section level2 hasAnchor" number="5.3">
+<h2><span class="header-section-number">5.3</span> A minimal plot<a href="graphs-with-with-styling-properties-e.g.-color-shape-grouping-labels-e.g.-type-and-rel.html#a-minimal-plot" class="anchor-section" aria-label="Anchor link to header"></a></h2>
+<div class="sourceCode" id="cb19"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb19-1"><a href="graphs-with-with-styling-properties-e.g.-color-shape-grouping-labels-e.g.-type-and-rel.html#cb19-1" aria-hidden="true" tabindex="-1"></a>DiagrammeR<span class="sc">::</span><span class="fu">grViz</span>(<span class="st">&quot;digraph {</span></span>
+<span id="cb19-2"><a href="graphs-with-with-styling-properties-e.g.-color-shape-grouping-labels-e.g.-type-and-rel.html#cb19-2" aria-hidden="true" tabindex="-1"></a><span class="st">graph[layout = dot, rankdir = LR]</span></span>
+<span id="cb19-3"><a href="graphs-with-with-styling-properties-e.g.-color-shape-grouping-labels-e.g.-type-and-rel.html#cb19-3" aria-hidden="true" tabindex="-1"></a><span class="st">a; b; c</span></span>
+<span id="cb19-4"><a href="graphs-with-with-styling-properties-e.g.-color-shape-grouping-labels-e.g.-type-and-rel.html#cb19-4" aria-hidden="true" tabindex="-1"></a><span class="st">a -&gt; b -&gt; c c-&gt;b</span></span>
+<span id="cb19-5"><a href="graphs-with-with-styling-properties-e.g.-color-shape-grouping-labels-e.g.-type-and-rel.html#cb19-5" aria-hidden="true" tabindex="-1"></a><span class="st">}&quot;</span>)</span></code></pre></div>
+<div id="htmlwidget-96c4128eb6edc6b6c286" style="width:672px;height:480px;" class="grViz html-widget"></div>
+<script type="application/json" data-for="htmlwidget-96c4128eb6edc6b6c286">{"x":{"diagram":"digraph {\ngraph[layout = dot, rankdir = LR]\na; b; c\na -> b -> c c->b\n}","config":{"engine":"dot","options":null}},"evals":[],"jsHooks":[]}</script>
+</div>
+<div id="diagrammer-implementation" class="section level2 hasAnchor" number="5.4">
+<h2><span class="header-section-number">5.4</span> DiagrammeR Implementation<a href="graphs-with-with-styling-properties-e.g.-color-shape-grouping-labels-e.g.-type-and-rel.html#diagrammer-implementation" class="anchor-section" aria-label="Anchor link to header"></a></h2>
+<p>For Graphviz graphs, DiagrammeR uses the processing function called grViz(). What you pass into grViz() is a valid graph specification in the DOT language. The DOT graph description can either be delivered to grViz() in the form of a string, a reference .gv file or as a text connection.</p>
+<p>The Graphviz graph specification must begin with a directive stating whether a directed graph (<code>digraph</code>) or an undirected graph (<code>graph</code>) is desired. Semantically, this indicates whether or not there is a natural direction from one of the edge’s nodes to the other. An optional graph ID follows this and paired curly braces denotes the body of the statement list (stmt_list).</p>
+<p>Optionally, a graph may also be described as strict. This forbids the creation of multi-edges (i.e., there can be at most one edge with a given tail node and head node in the directed case). For undirected graphs, there can be at most one edge connected to the same two nodes. Subsequent edge statements using the same two nodes will identify the edge with the previously defined one and apply any attributes given in the edge statement.</p>
+</div>
+<div id="simple-table" class="section level2 tabset hasAnchor" number="5.5">
+<h2><span class="header-section-number">5.5</span> Simple table<a href="graphs-with-with-styling-properties-e.g.-color-shape-grouping-labels-e.g.-type-and-rel.html#simple-table" class="anchor-section" aria-label="Anchor link to header"></a></h2>
+<div id="horizontal-flowchart" class="section level3 hasAnchor" number="5.5.1">
+<h3><span class="header-section-number">5.5.1</span> Horizontal flowchart<a href="graphs-with-with-styling-properties-e.g.-color-shape-grouping-labels-e.g.-type-and-rel.html#horizontal-flowchart" class="anchor-section" aria-label="Anchor link to header"></a></h3>
+<p>Adding <code>rankdir</code> = LR in the graph statement will give us a horizontal flowchart</p>
+<div class="sourceCode" id="cb20"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb20-1"><a href="graphs-with-with-styling-properties-e.g.-color-shape-grouping-labels-e.g.-type-and-rel.html#cb20-1" aria-hidden="true" tabindex="-1"></a>DiagrammeR<span class="sc">::</span><span class="fu">grViz</span>(<span class="st">&quot;digraph {</span></span>
+<span id="cb20-2"><a href="graphs-with-with-styling-properties-e.g.-color-shape-grouping-labels-e.g.-type-and-rel.html#cb20-2" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb20-3"><a href="graphs-with-with-styling-properties-e.g.-color-shape-grouping-labels-e.g.-type-and-rel.html#cb20-3" aria-hidden="true" tabindex="-1"></a><span class="st">graph [layout = dot, rankdir = LR]</span></span>
+<span id="cb20-4"><a href="graphs-with-with-styling-properties-e.g.-color-shape-grouping-labels-e.g.-type-and-rel.html#cb20-4" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb20-5"><a href="graphs-with-with-styling-properties-e.g.-color-shape-grouping-labels-e.g.-type-and-rel.html#cb20-5" aria-hidden="true" tabindex="-1"></a><span class="st"># define the global styles of the nodes. We can override these in box if we wish</span></span>
+<span id="cb20-6"><a href="graphs-with-with-styling-properties-e.g.-color-shape-grouping-labels-e.g.-type-and-rel.html#cb20-6" aria-hidden="true" tabindex="-1"></a><span class="st">node [shape = rectangle, style = filled, fillcolor = Linen]</span></span>
+<span id="cb20-7"><a href="graphs-with-with-styling-properties-e.g.-color-shape-grouping-labels-e.g.-type-and-rel.html#cb20-7" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb20-8"><a href="graphs-with-with-styling-properties-e.g.-color-shape-grouping-labels-e.g.-type-and-rel.html#cb20-8" aria-hidden="true" tabindex="-1"></a><span class="st">data1 [label = &#39;Dataset 1&#39;, shape = folder, fillcolor = Beige]</span></span>
+<span id="cb20-9"><a href="graphs-with-with-styling-properties-e.g.-color-shape-grouping-labels-e.g.-type-and-rel.html#cb20-9" aria-hidden="true" tabindex="-1"></a><span class="st">data2 [label = &#39;Dataset 2&#39;, shape = folder, fillcolor = Beige]</span></span>
+<span id="cb20-10"><a href="graphs-with-with-styling-properties-e.g.-color-shape-grouping-labels-e.g.-type-and-rel.html#cb20-10" aria-hidden="true" tabindex="-1"></a><span class="st">process [label =  &#39;Process </span><span class="sc">\n</span><span class="st"> Data&#39;]</span></span>
+<span id="cb20-11"><a href="graphs-with-with-styling-properties-e.g.-color-shape-grouping-labels-e.g.-type-and-rel.html#cb20-11" aria-hidden="true" tabindex="-1"></a><span class="st">statistical [label = &#39;Statistical </span><span class="sc">\n</span><span class="st"> Analysis&#39;]</span></span>
+<span id="cb20-12"><a href="graphs-with-with-styling-properties-e.g.-color-shape-grouping-labels-e.g.-type-and-rel.html#cb20-12" aria-hidden="true" tabindex="-1"></a><span class="st">results [label= &#39;Results&#39;]</span></span>
+<span id="cb20-13"><a href="graphs-with-with-styling-properties-e.g.-color-shape-grouping-labels-e.g.-type-and-rel.html#cb20-13" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb20-14"><a href="graphs-with-with-styling-properties-e.g.-color-shape-grouping-labels-e.g.-type-and-rel.html#cb20-14" aria-hidden="true" tabindex="-1"></a><span class="st"># edge definitions with the node IDs</span></span>
+<span id="cb20-15"><a href="graphs-with-with-styling-properties-e.g.-color-shape-grouping-labels-e.g.-type-and-rel.html#cb20-15" aria-hidden="true" tabindex="-1"></a><span class="st">{data1 data2}  -&gt; process -&gt; statistical -&gt; results</span></span>
+<span id="cb20-16"><a href="graphs-with-with-styling-properties-e.g.-color-shape-grouping-labels-e.g.-type-and-rel.html#cb20-16" aria-hidden="true" tabindex="-1"></a><span class="st">}&quot;</span>)</span></code></pre></div>
+<div id="htmlwidget-6aad8dd55f47cd9a6794" style="width:672px;height:480px;" class="grViz html-widget"></div>
+<script type="application/json" data-for="htmlwidget-6aad8dd55f47cd9a6794">{"x":{"diagram":"digraph {\n\ngraph [layout = dot, rankdir = LR]\n\n# define the global styles of the nodes. We can override these in box if we wish\nnode [shape = rectangle, style = filled, fillcolor = Linen]\n\ndata1 [label = \"Dataset 1\", shape = folder, fillcolor = Beige]\ndata2 [label = \"Dataset 2\", shape = folder, fillcolor = Beige]\nprocess [label =  \"Process \n Data\"]\nstatistical [label = \"Statistical \n Analysis\"]\nresults [label= \"Results\"]\n\n# edge definitions with the node IDs\n{data1 data2}  -> process -> statistical -> results\n}","config":{"engine":"dot","options":null}},"evals":[],"jsHooks":[]}</script>
+</div>
+<div id="vertical-flowchart" class="section level3 hasAnchor" number="5.5.2">
+<h3><span class="header-section-number">5.5.2</span> Vertical flowchart<a href="graphs-with-with-styling-properties-e.g.-color-shape-grouping-labels-e.g.-type-and-rel.html#vertical-flowchart" class="anchor-section" aria-label="Anchor link to header"></a></h3>
+<p>Not adding rankdir = LR in the graph statement will give us a vertical flowchart.</p>
+<div class="sourceCode" id="cb21"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb21-1"><a href="graphs-with-with-styling-properties-e.g.-color-shape-grouping-labels-e.g.-type-and-rel.html#cb21-1" aria-hidden="true" tabindex="-1"></a><span class="fu">grViz</span>(<span class="st">&quot;digraph {</span></span>
+<span id="cb21-2"><a href="graphs-with-with-styling-properties-e.g.-color-shape-grouping-labels-e.g.-type-and-rel.html#cb21-2" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb21-3"><a href="graphs-with-with-styling-properties-e.g.-color-shape-grouping-labels-e.g.-type-and-rel.html#cb21-3" aria-hidden="true" tabindex="-1"></a><span class="st">graph [layout = dot]</span></span>
+<span id="cb21-4"><a href="graphs-with-with-styling-properties-e.g.-color-shape-grouping-labels-e.g.-type-and-rel.html#cb21-4" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb21-5"><a href="graphs-with-with-styling-properties-e.g.-color-shape-grouping-labels-e.g.-type-and-rel.html#cb21-5" aria-hidden="true" tabindex="-1"></a><span class="st"># define the global styles of the nodes. We can override these in box if we wish</span></span>
+<span id="cb21-6"><a href="graphs-with-with-styling-properties-e.g.-color-shape-grouping-labels-e.g.-type-and-rel.html#cb21-6" aria-hidden="true" tabindex="-1"></a><span class="st">node [shape = rectangle, style = filled, fillcolor = Linen]</span></span>
+<span id="cb21-7"><a href="graphs-with-with-styling-properties-e.g.-color-shape-grouping-labels-e.g.-type-and-rel.html#cb21-7" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb21-8"><a href="graphs-with-with-styling-properties-e.g.-color-shape-grouping-labels-e.g.-type-and-rel.html#cb21-8" aria-hidden="true" tabindex="-1"></a><span class="st">data1 [label = &#39;Dataset 1&#39;, shape = folder, fillcolor = Beige]</span></span>
+<span id="cb21-9"><a href="graphs-with-with-styling-properties-e.g.-color-shape-grouping-labels-e.g.-type-and-rel.html#cb21-9" aria-hidden="true" tabindex="-1"></a><span class="st">data2 [label = &#39;Dataset 2&#39;, shape = folder, fillcolor = Beige]</span></span>
+<span id="cb21-10"><a href="graphs-with-with-styling-properties-e.g.-color-shape-grouping-labels-e.g.-type-and-rel.html#cb21-10" aria-hidden="true" tabindex="-1"></a><span class="st">process [label =  &#39;Process </span><span class="sc">\n</span><span class="st"> Data&#39;]</span></span>
+<span id="cb21-11"><a href="graphs-with-with-styling-properties-e.g.-color-shape-grouping-labels-e.g.-type-and-rel.html#cb21-11" aria-hidden="true" tabindex="-1"></a><span class="st">statistical [label = &#39;Statistical </span><span class="sc">\n</span><span class="st"> Analysis&#39;]</span></span>
+<span id="cb21-12"><a href="graphs-with-with-styling-properties-e.g.-color-shape-grouping-labels-e.g.-type-and-rel.html#cb21-12" aria-hidden="true" tabindex="-1"></a><span class="st">results [label= &#39;Results&#39;]</span></span>
+<span id="cb21-13"><a href="graphs-with-with-styling-properties-e.g.-color-shape-grouping-labels-e.g.-type-and-rel.html#cb21-13" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb21-14"><a href="graphs-with-with-styling-properties-e.g.-color-shape-grouping-labels-e.g.-type-and-rel.html#cb21-14" aria-hidden="true" tabindex="-1"></a><span class="st"># edge definitions with the node IDs</span></span>
+<span id="cb21-15"><a href="graphs-with-with-styling-properties-e.g.-color-shape-grouping-labels-e.g.-type-and-rel.html#cb21-15" aria-hidden="true" tabindex="-1"></a><span class="st">{data1 data2}  -&gt; process -&gt; statistical -&gt; results</span></span>
+<span id="cb21-16"><a href="graphs-with-with-styling-properties-e.g.-color-shape-grouping-labels-e.g.-type-and-rel.html#cb21-16" aria-hidden="true" tabindex="-1"></a><span class="st">}&quot;</span>)</span></code></pre></div>
+<div id="htmlwidget-3eb403c1631941d50ea0" style="width:672px;height:480px;" class="grViz html-widget"></div>
+<script type="application/json" data-for="htmlwidget-3eb403c1631941d50ea0">{"x":{"diagram":"digraph {\n\ngraph [layout = dot]\n\n# define the global styles of the nodes. We can override these in box if we wish\nnode [shape = rectangle, style = filled, fillcolor = Linen]\n\ndata1 [label = \"Dataset 1\", shape = folder, fillcolor = Beige]\ndata2 [label = \"Dataset 2\", shape = folder, fillcolor = Beige]\nprocess [label =  \"Process \n Data\"]\nstatistical [label = \"Statistical \n Analysis\"]\nresults [label= \"Results\"]\n\n# edge definitions with the node IDs\n{data1 data2}  -> process -> statistical -> results\n}","config":{"engine":"dot","options":null}},"evals":[],"jsHooks":[]}</script>
+</div>
+</div>
+<div id="parameterized-figures---graphviz-substitution" class="section level2 hasAnchor" number="5.6">
+<h2><span class="header-section-number">5.6</span> Parameterized figures - Graphviz Substitution<a href="graphs-with-with-styling-properties-e.g.-color-shape-grouping-labels-e.g.-type-and-rel.html#parameterized-figures---graphviz-substitution" class="anchor-section" aria-label="Anchor link to header"></a></h2>
+<p>A great benefit of designing figures within R is that we are able to connect the figures directly with our analysis by reading R values directly into our flowcharts.</p>
+<p>To do this we, you can use the @<span class="citation">(<a href="#ref-X" role="doc-biblioref"><strong>X?</strong></a>)</span> symbol directly within the figure, then refer to this in the footer of the plot using [X]:, where X is the a unique <strong>numeric</strong> index.</p>
+<div class="sourceCode" id="cb22"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb22-1"><a href="graphs-with-with-styling-properties-e.g.-color-shape-grouping-labels-e.g.-type-and-rel.html#cb22-1" aria-hidden="true" tabindex="-1"></a><span class="co"># Define some sample data contains your R values</span></span>
+<span id="cb22-2"><a href="graphs-with-with-styling-properties-e.g.-color-shape-grouping-labels-e.g.-type-and-rel.html#cb22-2" aria-hidden="true" tabindex="-1"></a>data <span class="ot">&lt;-</span> <span class="fu">list</span>(<span class="at">a=</span><span class="dv">1000</span>, <span class="at">b=</span><span class="dv">800</span>, <span class="at">c=</span><span class="dv">600</span>, <span class="at">d=</span><span class="dv">400</span>)</span>
+<span id="cb22-3"><a href="graphs-with-with-styling-properties-e.g.-color-shape-grouping-labels-e.g.-type-and-rel.html#cb22-3" aria-hidden="true" tabindex="-1"></a><span class="co"># Create the graph using values gotten from the data</span></span>
+<span id="cb22-4"><a href="graphs-with-with-styling-properties-e.g.-color-shape-grouping-labels-e.g.-type-and-rel.html#cb22-4" aria-hidden="true" tabindex="-1"></a><span class="fu">grViz</span>(<span class="st">&quot;</span></span>
+<span id="cb22-5"><a href="graphs-with-with-styling-properties-e.g.-color-shape-grouping-labels-e.g.-type-and-rel.html#cb22-5" aria-hidden="true" tabindex="-1"></a><span class="st">digraph graph2 {</span></span>
+<span id="cb22-6"><a href="graphs-with-with-styling-properties-e.g.-color-shape-grouping-labels-e.g.-type-and-rel.html#cb22-6" aria-hidden="true" tabindex="-1"></a><span class="st">  graph [layout = dot]</span></span>
+<span id="cb22-7"><a href="graphs-with-with-styling-properties-e.g.-color-shape-grouping-labels-e.g.-type-and-rel.html#cb22-7" aria-hidden="true" tabindex="-1"></a><span class="st">  # node definitions with substituted label text</span></span>
+<span id="cb22-8"><a href="graphs-with-with-styling-properties-e.g.-color-shape-grouping-labels-e.g.-type-and-rel.html#cb22-8" aria-hidden="true" tabindex="-1"></a><span class="st">  node [shape = rectangle, width = 4, fillcolor = Biege]</span></span>
+<span id="cb22-9"><a href="graphs-with-with-styling-properties-e.g.-color-shape-grouping-labels-e.g.-type-and-rel.html#cb22-9" aria-hidden="true" tabindex="-1"></a><span class="st">  o [label = &#39;@@1&#39;]</span></span>
+<span id="cb22-10"><a href="graphs-with-with-styling-properties-e.g.-color-shape-grouping-labels-e.g.-type-and-rel.html#cb22-10" aria-hidden="true" tabindex="-1"></a><span class="st">  a [label = &#39;@@2&#39;]</span></span>
+<span id="cb22-11"><a href="graphs-with-with-styling-properties-e.g.-color-shape-grouping-labels-e.g.-type-and-rel.html#cb22-11" aria-hidden="true" tabindex="-1"></a><span class="st">  b [label = &#39;@@3&#39;]</span></span>
+<span id="cb22-12"><a href="graphs-with-with-styling-properties-e.g.-color-shape-grouping-labels-e.g.-type-and-rel.html#cb22-12" aria-hidden="true" tabindex="-1"></a><span class="st">  c [label = &#39;@@4&#39;]</span></span>
+<span id="cb22-13"><a href="graphs-with-with-styling-properties-e.g.-color-shape-grouping-labels-e.g.-type-and-rel.html#cb22-13" aria-hidden="true" tabindex="-1"></a><span class="st">  d [label = &#39;@@5&#39;]</span></span>
+<span id="cb22-14"><a href="graphs-with-with-styling-properties-e.g.-color-shape-grouping-labels-e.g.-type-and-rel.html#cb22-14" aria-hidden="true" tabindex="-1"></a><span class="st">  </span></span>
+<span id="cb22-15"><a href="graphs-with-with-styling-properties-e.g.-color-shape-grouping-labels-e.g.-type-and-rel.html#cb22-15" aria-hidden="true" tabindex="-1"></a><span class="st">  o -&gt;a -&gt; b -&gt; c -&gt; d</span></span>
+<span id="cb22-16"><a href="graphs-with-with-styling-properties-e.g.-color-shape-grouping-labels-e.g.-type-and-rel.html#cb22-16" aria-hidden="true" tabindex="-1"></a><span class="st">  }</span></span>
+<span id="cb22-17"><a href="graphs-with-with-styling-properties-e.g.-color-shape-grouping-labels-e.g.-type-and-rel.html#cb22-17" aria-hidden="true" tabindex="-1"></a><span class="st">  </span></span>
+<span id="cb22-18"><a href="graphs-with-with-styling-properties-e.g.-color-shape-grouping-labels-e.g.-type-and-rel.html#cb22-18" aria-hidden="true" tabindex="-1"></a><span class="st">  [1]: &#39;start your diagram&#39;</span></span>
+<span id="cb22-19"><a href="graphs-with-with-styling-properties-e.g.-color-shape-grouping-labels-e.g.-type-and-rel.html#cb22-19" aria-hidden="true" tabindex="-1"></a><span class="st">  [2]: paste0(&#39;Raw Data (n = &#39;, data$a, &#39;)&#39;)</span></span>
+<span id="cb22-20"><a href="graphs-with-with-styling-properties-e.g.-color-shape-grouping-labels-e.g.-type-and-rel.html#cb22-20" aria-hidden="true" tabindex="-1"></a><span class="st">  [3]: paste0(&#39;Remove Errors (n = &#39;, data$b, &#39;)&#39;)</span></span>
+<span id="cb22-21"><a href="graphs-with-with-styling-properties-e.g.-color-shape-grouping-labels-e.g.-type-and-rel.html#cb22-21" aria-hidden="true" tabindex="-1"></a><span class="st">  [4]: paste0(&#39;Identify Potential Customers (n = &#39;, data$c, &#39;)&#39;)</span></span>
+<span id="cb22-22"><a href="graphs-with-with-styling-properties-e.g.-color-shape-grouping-labels-e.g.-type-and-rel.html#cb22-22" aria-hidden="true" tabindex="-1"></a><span class="st">  [5]: paste0(&#39;Select Top Priorities (n = &#39;, data$d, &#39;)&#39;)</span></span>
+<span id="cb22-23"><a href="graphs-with-with-styling-properties-e.g.-color-shape-grouping-labels-e.g.-type-and-rel.html#cb22-23" aria-hidden="true" tabindex="-1"></a><span class="st">&quot;</span>)</span></code></pre></div>
+<div id="htmlwidget-6ec873f50ae55139d5b9" style="width:672px;height:480px;" class="grViz html-widget"></div>
+<script type="application/json" data-for="htmlwidget-6ec873f50ae55139d5b9">{"x":{"diagram":"\ndigraph graph2 {\n  graph [layout = dot]\n  # node definitions with substituted label text\n  node [shape = rectangle, width = 4, fillcolor = Biege]\n  o [label = \"start your diagram\"]\n  a [label = \"Raw Data (n = 1000)\"]\n  b [label = \"Remove Errors (n = 800)\"]\n  c [label = \"Identify Potential Customers (n = 600)\"]\n  d [label = \"Select Top Priorities (n = 400)\"]\n  \n  o ->a -> b -> c -> d\n  }","config":{"engine":"dot","options":null}},"evals":[],"jsHooks":[]}</script>
+</div>
+<div id="subgraphs-and-clusters" class="section level2 tabset hasAnchor" number="5.7">
+<h2><span class="header-section-number">5.7</span> Subgraphs and clusters<a href="graphs-with-with-styling-properties-e.g.-color-shape-grouping-labels-e.g.-type-and-rel.html#subgraphs-and-clusters" class="anchor-section" aria-label="Anchor link to header"></a></h2>
+<div id="using-label" class="section level3 hasAnchor" number="5.7.1">
+<h3><span class="header-section-number">5.7.1</span> Using label<a href="graphs-with-with-styling-properties-e.g.-color-shape-grouping-labels-e.g.-type-and-rel.html#using-label" class="anchor-section" aria-label="Anchor link to header"></a></h3>
+<div class="sourceCode" id="cb23"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb23-1"><a href="graphs-with-with-styling-properties-e.g.-color-shape-grouping-labels-e.g.-type-and-rel.html#cb23-1" aria-hidden="true" tabindex="-1"></a><span class="fu">grViz</span>(<span class="st">&quot;</span></span>
+<span id="cb23-2"><a href="graphs-with-with-styling-properties-e.g.-color-shape-grouping-labels-e.g.-type-and-rel.html#cb23-2" aria-hidden="true" tabindex="-1"></a><span class="st">digraph a_nice_graph {</span></span>
+<span id="cb23-3"><a href="graphs-with-with-styling-properties-e.g.-color-shape-grouping-labels-e.g.-type-and-rel.html#cb23-3" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb23-4"><a href="graphs-with-with-styling-properties-e.g.-color-shape-grouping-labels-e.g.-type-and-rel.html#cb23-4" aria-hidden="true" tabindex="-1"></a><span class="st">  # node definitions with substituted label text</span></span>
+<span id="cb23-5"><a href="graphs-with-with-styling-properties-e.g.-color-shape-grouping-labels-e.g.-type-and-rel.html#cb23-5" aria-hidden="true" tabindex="-1"></a><span class="st">  node [fontname = Helvetica]</span></span>
+<span id="cb23-6"><a href="graphs-with-with-styling-properties-e.g.-color-shape-grouping-labels-e.g.-type-and-rel.html#cb23-6" aria-hidden="true" tabindex="-1"></a><span class="st">  a [label = &#39;@@1&#39;]</span></span>
+<span id="cb23-7"><a href="graphs-with-with-styling-properties-e.g.-color-shape-grouping-labels-e.g.-type-and-rel.html#cb23-7" aria-hidden="true" tabindex="-1"></a><span class="st">  b [label = &#39;@@2-1&#39;]</span></span>
+<span id="cb23-8"><a href="graphs-with-with-styling-properties-e.g.-color-shape-grouping-labels-e.g.-type-and-rel.html#cb23-8" aria-hidden="true" tabindex="-1"></a><span class="st">  c [label = &#39;@@2-2&#39;]</span></span>
+<span id="cb23-9"><a href="graphs-with-with-styling-properties-e.g.-color-shape-grouping-labels-e.g.-type-and-rel.html#cb23-9" aria-hidden="true" tabindex="-1"></a><span class="st">  d [label = &#39;@@2-3&#39;]</span></span>
+<span id="cb23-10"><a href="graphs-with-with-styling-properties-e.g.-color-shape-grouping-labels-e.g.-type-and-rel.html#cb23-10" aria-hidden="true" tabindex="-1"></a><span class="st">  e [label = &#39;@@2-4&#39;]</span></span>
+<span id="cb23-11"><a href="graphs-with-with-styling-properties-e.g.-color-shape-grouping-labels-e.g.-type-and-rel.html#cb23-11" aria-hidden="true" tabindex="-1"></a><span class="st">  f [label = &#39;@@2-5&#39;]</span></span>
+<span id="cb23-12"><a href="graphs-with-with-styling-properties-e.g.-color-shape-grouping-labels-e.g.-type-and-rel.html#cb23-12" aria-hidden="true" tabindex="-1"></a><span class="st">  g [label = &#39;@@2-6&#39;]</span></span>
+<span id="cb23-13"><a href="graphs-with-with-styling-properties-e.g.-color-shape-grouping-labels-e.g.-type-and-rel.html#cb23-13" aria-hidden="true" tabindex="-1"></a><span class="st">  h [label = &#39;@@2-7&#39;]</span></span>
+<span id="cb23-14"><a href="graphs-with-with-styling-properties-e.g.-color-shape-grouping-labels-e.g.-type-and-rel.html#cb23-14" aria-hidden="true" tabindex="-1"></a><span class="st">  i [label = &#39;@@2-8&#39;]</span></span>
+<span id="cb23-15"><a href="graphs-with-with-styling-properties-e.g.-color-shape-grouping-labels-e.g.-type-and-rel.html#cb23-15" aria-hidden="true" tabindex="-1"></a><span class="st">  j [label = &#39;@@2-9&#39;]</span></span>
+<span id="cb23-16"><a href="graphs-with-with-styling-properties-e.g.-color-shape-grouping-labels-e.g.-type-and-rel.html#cb23-16" aria-hidden="true" tabindex="-1"></a><span class="st">  </span></span>
+<span id="cb23-17"><a href="graphs-with-with-styling-properties-e.g.-color-shape-grouping-labels-e.g.-type-and-rel.html#cb23-17" aria-hidden="true" tabindex="-1"></a><span class="st">  # edge definitions with the node IDs</span></span>
+<span id="cb23-18"><a href="graphs-with-with-styling-properties-e.g.-color-shape-grouping-labels-e.g.-type-and-rel.html#cb23-18" aria-hidden="true" tabindex="-1"></a><span class="st">  a -&gt; {b c d e f g h i j}</span></span>
+<span id="cb23-19"><a href="graphs-with-with-styling-properties-e.g.-color-shape-grouping-labels-e.g.-type-and-rel.html#cb23-19" aria-hidden="true" tabindex="-1"></a><span class="st">  }</span></span>
+<span id="cb23-20"><a href="graphs-with-with-styling-properties-e.g.-color-shape-grouping-labels-e.g.-type-and-rel.html#cb23-20" aria-hidden="true" tabindex="-1"></a><span class="st">  </span></span>
+<span id="cb23-21"><a href="graphs-with-with-styling-properties-e.g.-color-shape-grouping-labels-e.g.-type-and-rel.html#cb23-21" aria-hidden="true" tabindex="-1"></a><span class="st">  [1]: &#39;top&#39;</span></span>
+<span id="cb23-22"><a href="graphs-with-with-styling-properties-e.g.-color-shape-grouping-labels-e.g.-type-and-rel.html#cb23-22" aria-hidden="true" tabindex="-1"></a><span class="st">  [2]: 10:20</span></span>
+<span id="cb23-23"><a href="graphs-with-with-styling-properties-e.g.-color-shape-grouping-labels-e.g.-type-and-rel.html#cb23-23" aria-hidden="true" tabindex="-1"></a><span class="st">&quot;</span>)</span></code></pre></div>
+<div id="htmlwidget-9eacc4b4cbf777af97d1" style="width:672px;height:480px;" class="grViz html-widget"></div>
+<script type="application/json" data-for="htmlwidget-9eacc4b4cbf777af97d1">{"x":{"diagram":"\ndigraph a_nice_graph {\n\n  # node definitions with substituted label text\n  node [fontname = Helvetica]\n  a [label = \"top\"]\n  b [label = \"10\"]\n  c [label = \"11\"]\n  d [label = \"12\"]\n  e [label = \"13\"]\n  f [label = \"14\"]\n  g [label = \"15\"]\n  h [label = \"16\"]\n  i [label = \"17\"]\n  j [label = \"18\"]\n  \n  # edge definitions with the node IDs\n  a -> {b c d e f g h i j}\n  }","config":{"engine":"dot","options":null}},"evals":[],"jsHooks":[]}</script>
+</div>
+<div id="not-using-label" class="section level3 hasAnchor" number="5.7.2">
+<h3><span class="header-section-number">5.7.2</span> Not using label<a href="graphs-with-with-styling-properties-e.g.-color-shape-grouping-labels-e.g.-type-and-rel.html#not-using-label" class="anchor-section" aria-label="Anchor link to header"></a></h3>
+<div class="sourceCode" id="cb24"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb24-1"><a href="graphs-with-with-styling-properties-e.g.-color-shape-grouping-labels-e.g.-type-and-rel.html#cb24-1" aria-hidden="true" tabindex="-1"></a><span class="fu">grViz</span>(<span class="st">&quot;</span></span>
+<span id="cb24-2"><a href="graphs-with-with-styling-properties-e.g.-color-shape-grouping-labels-e.g.-type-and-rel.html#cb24-2" aria-hidden="true" tabindex="-1"></a><span class="st">digraph a_nice_graph {</span></span>
+<span id="cb24-3"><a href="graphs-with-with-styling-properties-e.g.-color-shape-grouping-labels-e.g.-type-and-rel.html#cb24-3" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb24-4"><a href="graphs-with-with-styling-properties-e.g.-color-shape-grouping-labels-e.g.-type-and-rel.html#cb24-4" aria-hidden="true" tabindex="-1"></a><span class="st">  # node definitions with substituted label text</span></span>
+<span id="cb24-5"><a href="graphs-with-with-styling-properties-e.g.-color-shape-grouping-labels-e.g.-type-and-rel.html#cb24-5" aria-hidden="true" tabindex="-1"></a><span class="st">  node [fontname = Helvetica]</span></span>
+<span id="cb24-6"><a href="graphs-with-with-styling-properties-e.g.-color-shape-grouping-labels-e.g.-type-and-rel.html#cb24-6" aria-hidden="true" tabindex="-1"></a><span class="st">  </span></span>
+<span id="cb24-7"><a href="graphs-with-with-styling-properties-e.g.-color-shape-grouping-labels-e.g.-type-and-rel.html#cb24-7" aria-hidden="true" tabindex="-1"></a><span class="st">  # edge definitions with the node IDs</span></span>
+<span id="cb24-8"><a href="graphs-with-with-styling-properties-e.g.-color-shape-grouping-labels-e.g.-type-and-rel.html#cb24-8" aria-hidden="true" tabindex="-1"></a><span class="st">  &#39;@@1&#39; -&gt; {&#39;@@2-1&#39; &#39;@@2-2&#39; &#39;@@2-3&#39; &#39;@@2-4&#39; &#39;@@2-5&#39; &#39;@@2-6&#39; &#39;@@2-7&#39;&#39;@@2-8&#39;&#39;@@2-9&#39;}</span></span>
+<span id="cb24-9"><a href="graphs-with-with-styling-properties-e.g.-color-shape-grouping-labels-e.g.-type-and-rel.html#cb24-9" aria-hidden="true" tabindex="-1"></a><span class="st">  }</span></span>
+<span id="cb24-10"><a href="graphs-with-with-styling-properties-e.g.-color-shape-grouping-labels-e.g.-type-and-rel.html#cb24-10" aria-hidden="true" tabindex="-1"></a><span class="st">  </span></span>
+<span id="cb24-11"><a href="graphs-with-with-styling-properties-e.g.-color-shape-grouping-labels-e.g.-type-and-rel.html#cb24-11" aria-hidden="true" tabindex="-1"></a><span class="st">  [1]: &#39;top&#39;</span></span>
+<span id="cb24-12"><a href="graphs-with-with-styling-properties-e.g.-color-shape-grouping-labels-e.g.-type-and-rel.html#cb24-12" aria-hidden="true" tabindex="-1"></a><span class="st">  [2]: 10:20</span></span>
+<span id="cb24-13"><a href="graphs-with-with-styling-properties-e.g.-color-shape-grouping-labels-e.g.-type-and-rel.html#cb24-13" aria-hidden="true" tabindex="-1"></a><span class="st">&quot;</span>)</span></code></pre></div>
+<div id="htmlwidget-f4991c42af0f69225fcb" style="width:672px;height:480px;" class="grViz html-widget"></div>
+<script type="application/json" data-for="htmlwidget-f4991c42af0f69225fcb">{"x":{"diagram":"\ndigraph a_nice_graph {\n\n  # node definitions with substituted label text\n  node [fontname = Helvetica]\n  \n  # edge definitions with the node IDs\n  \"top\" -> {\"10\" \"11\" \"12\" \"13\" \"14\" \"15\" \"16\"\"17\"\"18\"}\n  }","config":{"engine":"dot","options":null}},"evals":[],"jsHooks":[]}</script>
+</div>
+</div>
+<div id="node-data-frames-ndfs-and-edge-data-frames-edfs" class="section level2 hasAnchor" number="5.8">
+<h2><span class="header-section-number">5.8</span> Node data frames (NDFs) and Edge data frames (EDFs)<a href="graphs-with-with-styling-properties-e.g.-color-shape-grouping-labels-e.g.-type-and-rel.html#node-data-frames-ndfs-and-edge-data-frames-edfs" class="anchor-section" aria-label="Anchor link to header"></a></h2>
+<ul>
+<li><h2 id="create_nodes-function-creates-ndf-with-nodes-and-their-attributes-including" class="hasAnchor"><code>create_nodes()</code> function creates NDF with nodes and their attributes, including:<a href="graphs-with-with-styling-properties-e.g.-color-shape-grouping-labels-e.g.-type-and-rel.html#create_nodes-function-creates-ndf-with-nodes-and-their-attributes-including" class="anchor-section" aria-label="Anchor link to header"></a></h2>
+single values are repeated for n number of nodes supplied
+selective setting of attributes (e.g., giving attr values for 3 of 10 nodes, allowing non-set nodes to use defaults or globally set attr values)
+supplying overlong vectors for attributes will result in trimming down to the number of nodes
+setting <code>label = FALSE</code> will conveniently result in a non-labeled node
+The function only has one argument that requires values to be supplied: the nodes argument. Just supplying a set of unique ID values for nodes will create an NDF with nodes that have no additional attributes.</li>
+</ul>
+<div class="sourceCode" id="cb25"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb25-1"><a href="graphs-with-with-styling-properties-e.g.-color-shape-grouping-labels-e.g.-type-and-rel.html#cb25-1" aria-hidden="true" tabindex="-1"></a><span class="co"># Create a node data frame</span></span>
+<span id="cb25-2"><a href="graphs-with-with-styling-properties-e.g.-color-shape-grouping-labels-e.g.-type-and-rel.html#cb25-2" aria-hidden="true" tabindex="-1"></a>nodes_1 <span class="ot">&lt;-</span></span>
+<span id="cb25-3"><a href="graphs-with-with-styling-properties-e.g.-color-shape-grouping-labels-e.g.-type-and-rel.html#cb25-3" aria-hidden="true" tabindex="-1"></a>  <span class="fu">create_node_df</span>(</span>
+<span id="cb25-4"><a href="graphs-with-with-styling-properties-e.g.-color-shape-grouping-labels-e.g.-type-and-rel.html#cb25-4" aria-hidden="true" tabindex="-1"></a>    <span class="at">n=</span><span class="dv">4</span>,</span>
+<span id="cb25-5"><a href="graphs-with-with-styling-properties-e.g.-color-shape-grouping-labels-e.g.-type-and-rel.html#cb25-5" aria-hidden="true" tabindex="-1"></a>    <span class="at">nodes =</span> <span class="fu">c</span>(<span class="st">&quot;a&quot;</span>, <span class="st">&quot;b&quot;</span>, <span class="st">&quot;c&quot;</span>, <span class="st">&quot;d&quot;</span>),</span>
+<span id="cb25-6"><a href="graphs-with-with-styling-properties-e.g.-color-shape-grouping-labels-e.g.-type-and-rel.html#cb25-6" aria-hidden="true" tabindex="-1"></a>    <span class="at">label =</span> <span class="cn">FALSE</span>,</span>
+<span id="cb25-7"><a href="graphs-with-with-styling-properties-e.g.-color-shape-grouping-labels-e.g.-type-and-rel.html#cb25-7" aria-hidden="true" tabindex="-1"></a>    <span class="at">type =</span> <span class="st">&quot;lower&quot;</span>,</span>
+<span id="cb25-8"><a href="graphs-with-with-styling-properties-e.g.-color-shape-grouping-labels-e.g.-type-and-rel.html#cb25-8" aria-hidden="true" tabindex="-1"></a>    <span class="at">style =</span> <span class="st">&quot;filled&quot;</span>,</span>
+<span id="cb25-9"><a href="graphs-with-with-styling-properties-e.g.-color-shape-grouping-labels-e.g.-type-and-rel.html#cb25-9" aria-hidden="true" tabindex="-1"></a>    <span class="at">color =</span> <span class="st">&quot;aqua&quot;</span>,</span>
+<span id="cb25-10"><a href="graphs-with-with-styling-properties-e.g.-color-shape-grouping-labels-e.g.-type-and-rel.html#cb25-10" aria-hidden="true" tabindex="-1"></a>    <span class="at">shape =</span> <span class="fu">c</span>(<span class="st">&quot;circle&quot;</span>, <span class="st">&quot;circle&quot;</span>,</span>
+<span id="cb25-11"><a href="graphs-with-with-styling-properties-e.g.-color-shape-grouping-labels-e.g.-type-and-rel.html#cb25-11" aria-hidden="true" tabindex="-1"></a>              <span class="st">&quot;rectangle&quot;</span>, <span class="st">&quot;rectangle&quot;</span>),</span>
+<span id="cb25-12"><a href="graphs-with-with-styling-properties-e.g.-color-shape-grouping-labels-e.g.-type-and-rel.html#cb25-12" aria-hidden="true" tabindex="-1"></a>    <span class="at">data =</span> <span class="fu">c</span>(<span class="fl">3.5</span>, <span class="fl">2.6</span>, <span class="fl">9.4</span>, <span class="fl">2.7</span>))</span>
+<span id="cb25-13"><a href="graphs-with-with-styling-properties-e.g.-color-shape-grouping-labels-e.g.-type-and-rel.html#cb25-13" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb25-14"><a href="graphs-with-with-styling-properties-e.g.-color-shape-grouping-labels-e.g.-type-and-rel.html#cb25-14" aria-hidden="true" tabindex="-1"></a>nodes_1</span></code></pre></div>
+<pre><code>##   id  type label nodes  style color     shape data
+## 1  1 lower  &lt;NA&gt;     a filled  aqua    circle  3.5
+## 2  2 lower  &lt;NA&gt;     b filled  aqua    circle  2.6
+## 3  3 lower  &lt;NA&gt;     c filled  aqua rectangle  9.4
+## 4  4 lower  &lt;NA&gt;     d filled  aqua rectangle  2.7</code></pre>
+<div class="sourceCode" id="cb27"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb27-1"><a href="graphs-with-with-styling-properties-e.g.-color-shape-grouping-labels-e.g.-type-and-rel.html#cb27-1" aria-hidden="true" tabindex="-1"></a><span class="co"># Create another node data frame</span></span>
+<span id="cb27-2"><a href="graphs-with-with-styling-properties-e.g.-color-shape-grouping-labels-e.g.-type-and-rel.html#cb27-2" aria-hidden="true" tabindex="-1"></a>nodes_2 <span class="ot">&lt;-</span></span>
+<span id="cb27-3"><a href="graphs-with-with-styling-properties-e.g.-color-shape-grouping-labels-e.g.-type-and-rel.html#cb27-3" aria-hidden="true" tabindex="-1"></a>  <span class="fu">create_node_df</span>(</span>
+<span id="cb27-4"><a href="graphs-with-with-styling-properties-e.g.-color-shape-grouping-labels-e.g.-type-and-rel.html#cb27-4" aria-hidden="true" tabindex="-1"></a>    <span class="at">n=</span><span class="dv">4</span>,</span>
+<span id="cb27-5"><a href="graphs-with-with-styling-properties-e.g.-color-shape-grouping-labels-e.g.-type-and-rel.html#cb27-5" aria-hidden="true" tabindex="-1"></a>    <span class="at">nodes =</span> <span class="dv">1</span><span class="sc">:</span><span class="dv">4</span>,</span>
+<span id="cb27-6"><a href="graphs-with-with-styling-properties-e.g.-color-shape-grouping-labels-e.g.-type-and-rel.html#cb27-6" aria-hidden="true" tabindex="-1"></a>    <span class="at">label =</span> <span class="cn">TRUE</span>,</span>
+<span id="cb27-7"><a href="graphs-with-with-styling-properties-e.g.-color-shape-grouping-labels-e.g.-type-and-rel.html#cb27-7" aria-hidden="true" tabindex="-1"></a>    <span class="at">type =</span> <span class="st">&quot;upper&quot;</span>,</span>
+<span id="cb27-8"><a href="graphs-with-with-styling-properties-e.g.-color-shape-grouping-labels-e.g.-type-and-rel.html#cb27-8" aria-hidden="true" tabindex="-1"></a>    <span class="at">style =</span> <span class="st">&quot;filled&quot;</span>,</span>
+<span id="cb27-9"><a href="graphs-with-with-styling-properties-e.g.-color-shape-grouping-labels-e.g.-type-and-rel.html#cb27-9" aria-hidden="true" tabindex="-1"></a>    <span class="at">color =</span> <span class="st">&quot;red&quot;</span>,</span>
+<span id="cb27-10"><a href="graphs-with-with-styling-properties-e.g.-color-shape-grouping-labels-e.g.-type-and-rel.html#cb27-10" aria-hidden="true" tabindex="-1"></a>    <span class="at">shape =</span> <span class="st">&quot;triangle&quot;</span>,</span>
+<span id="cb27-11"><a href="graphs-with-with-styling-properties-e.g.-color-shape-grouping-labels-e.g.-type-and-rel.html#cb27-11" aria-hidden="true" tabindex="-1"></a>    <span class="at">data =</span> <span class="fu">c</span>(<span class="fl">0.5</span>, <span class="fl">3.9</span>, <span class="fl">3.7</span>, <span class="fl">8.2</span>))</span>
+<span id="cb27-12"><a href="graphs-with-with-styling-properties-e.g.-color-shape-grouping-labels-e.g.-type-and-rel.html#cb27-12" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb27-13"><a href="graphs-with-with-styling-properties-e.g.-color-shape-grouping-labels-e.g.-type-and-rel.html#cb27-13" aria-hidden="true" tabindex="-1"></a><span class="co"># Inspect the `nodes_2` NDF</span></span>
+<span id="cb27-14"><a href="graphs-with-with-styling-properties-e.g.-color-shape-grouping-labels-e.g.-type-and-rel.html#cb27-14" aria-hidden="true" tabindex="-1"></a>nodes_2</span></code></pre></div>
+<pre><code>##   id  type label nodes  style color    shape data
+## 1  1 upper     1     1 filled   red triangle  0.5
+## 2  2 upper     2     2 filled   red triangle  3.9
+## 3  3 upper     3     3 filled   red triangle  3.7
+## 4  4 upper     4     4 filled   red triangle  8.2</code></pre>
+<div class="sourceCode" id="cb29"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb29-1"><a href="graphs-with-with-styling-properties-e.g.-color-shape-grouping-labels-e.g.-type-and-rel.html#cb29-1" aria-hidden="true" tabindex="-1"></a><span class="co">#&gt;   nodes  type label  style color    shape data</span></span>
+<span id="cb29-2"><a href="graphs-with-with-styling-properties-e.g.-color-shape-grouping-labels-e.g.-type-and-rel.html#cb29-2" aria-hidden="true" tabindex="-1"></a><span class="co">#&gt; 1     1 upper     1 filled   red triangle  0.5</span></span>
+<span id="cb29-3"><a href="graphs-with-with-styling-properties-e.g.-color-shape-grouping-labels-e.g.-type-and-rel.html#cb29-3" aria-hidden="true" tabindex="-1"></a><span class="co">#&gt; 2     2 upper     2 filled   red triangle  3.9</span></span>
+<span id="cb29-4"><a href="graphs-with-with-styling-properties-e.g.-color-shape-grouping-labels-e.g.-type-and-rel.html#cb29-4" aria-hidden="true" tabindex="-1"></a><span class="co">#&gt; 3     3 upper     3 filled   red triangle  3.7</span></span>
+<span id="cb29-5"><a href="graphs-with-with-styling-properties-e.g.-color-shape-grouping-labels-e.g.-type-and-rel.html#cb29-5" aria-hidden="true" tabindex="-1"></a><span class="co">#&gt; 4     4 upper     4 filled   red triangle  8.1</span></span></code></pre></div>
+<div class="sourceCode" id="cb30"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb30-1"><a href="graphs-with-with-styling-properties-e.g.-color-shape-grouping-labels-e.g.-type-and-rel.html#cb30-1" aria-hidden="true" tabindex="-1"></a><span class="co"># Create a simple NDF</span></span>
+<span id="cb30-2"><a href="graphs-with-with-styling-properties-e.g.-color-shape-grouping-labels-e.g.-type-and-rel.html#cb30-2" aria-hidden="true" tabindex="-1"></a>nodes <span class="ot">&lt;-</span></span>
+<span id="cb30-3"><a href="graphs-with-with-styling-properties-e.g.-color-shape-grouping-labels-e.g.-type-and-rel.html#cb30-3" aria-hidden="true" tabindex="-1"></a>  <span class="fu">create_node_df</span>(</span>
+<span id="cb30-4"><a href="graphs-with-with-styling-properties-e.g.-color-shape-grouping-labels-e.g.-type-and-rel.html#cb30-4" aria-hidden="true" tabindex="-1"></a>    <span class="at">n=</span><span class="dv">4</span>, </span>
+<span id="cb30-5"><a href="graphs-with-with-styling-properties-e.g.-color-shape-grouping-labels-e.g.-type-and-rel.html#cb30-5" aria-hidden="true" tabindex="-1"></a>    <span class="at">nodes =</span> <span class="dv">1</span><span class="sc">:</span><span class="dv">4</span>,</span>
+<span id="cb30-6"><a href="graphs-with-with-styling-properties-e.g.-color-shape-grouping-labels-e.g.-type-and-rel.html#cb30-6" aria-hidden="true" tabindex="-1"></a>    <span class="at">shape =</span> <span class="fu">c</span>(<span class="st">&quot;circle&quot;</span>, <span class="st">&quot;circle&quot;</span>, <span class="st">&quot;rectangle&quot;</span>, <span class="st">&quot;rectangle&quot;</span>),</span>
+<span id="cb30-7"><a href="graphs-with-with-styling-properties-e.g.-color-shape-grouping-labels-e.g.-type-and-rel.html#cb30-7" aria-hidden="true" tabindex="-1"></a>    <span class="at">type =</span> <span class="st">&quot;number&quot;</span>)</span>
+<span id="cb30-8"><a href="graphs-with-with-styling-properties-e.g.-color-shape-grouping-labels-e.g.-type-and-rel.html#cb30-8" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb30-9"><a href="graphs-with-with-styling-properties-e.g.-color-shape-grouping-labels-e.g.-type-and-rel.html#cb30-9" aria-hidden="true" tabindex="-1"></a><span class="co"># Create a simple EDF</span></span>
+<span id="cb30-10"><a href="graphs-with-with-styling-properties-e.g.-color-shape-grouping-labels-e.g.-type-and-rel.html#cb30-10" aria-hidden="true" tabindex="-1"></a>edges <span class="ot">&lt;-</span></span>
+<span id="cb30-11"><a href="graphs-with-with-styling-properties-e.g.-color-shape-grouping-labels-e.g.-type-and-rel.html#cb30-11" aria-hidden="true" tabindex="-1"></a>  <span class="fu">create_edge_df</span>(</span>
+<span id="cb30-12"><a href="graphs-with-with-styling-properties-e.g.-color-shape-grouping-labels-e.g.-type-and-rel.html#cb30-12" aria-hidden="true" tabindex="-1"></a>    <span class="at">n=</span><span class="dv">4</span>, </span>
+<span id="cb30-13"><a href="graphs-with-with-styling-properties-e.g.-color-shape-grouping-labels-e.g.-type-and-rel.html#cb30-13" aria-hidden="true" tabindex="-1"></a>    <span class="at">from =</span> <span class="fu">c</span>(<span class="dv">1</span>, <span class="dv">1</span>, <span class="dv">3</span>, <span class="dv">1</span>),</span>
+<span id="cb30-14"><a href="graphs-with-with-styling-properties-e.g.-color-shape-grouping-labels-e.g.-type-and-rel.html#cb30-14" aria-hidden="true" tabindex="-1"></a>    <span class="at">to =</span> <span class="fu">c</span>(<span class="dv">2</span>, <span class="dv">3</span>, <span class="dv">4</span>, <span class="dv">4</span>),</span>
+<span id="cb30-15"><a href="graphs-with-with-styling-properties-e.g.-color-shape-grouping-labels-e.g.-type-and-rel.html#cb30-15" aria-hidden="true" tabindex="-1"></a>    <span class="at">rel =</span> <span class="st">&quot;leading_to&quot;</span></span>
+<span id="cb30-16"><a href="graphs-with-with-styling-properties-e.g.-color-shape-grouping-labels-e.g.-type-and-rel.html#cb30-16" aria-hidden="true" tabindex="-1"></a>    )</span>
+<span id="cb30-17"><a href="graphs-with-with-styling-properties-e.g.-color-shape-grouping-labels-e.g.-type-and-rel.html#cb30-17" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb30-18"><a href="graphs-with-with-styling-properties-e.g.-color-shape-grouping-labels-e.g.-type-and-rel.html#cb30-18" aria-hidden="true" tabindex="-1"></a>g <span class="ot">&lt;-</span> <span class="fu">create_graph</span>(<span class="at">nodes_df=</span>nodes, </span>
+<span id="cb30-19"><a href="graphs-with-with-styling-properties-e.g.-color-shape-grouping-labels-e.g.-type-and-rel.html#cb30-19" aria-hidden="true" tabindex="-1"></a>                  <span class="at">edges_df=</span>edges)</span>
+<span id="cb30-20"><a href="graphs-with-with-styling-properties-e.g.-color-shape-grouping-labels-e.g.-type-and-rel.html#cb30-20" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb30-21"><a href="graphs-with-with-styling-properties-e.g.-color-shape-grouping-labels-e.g.-type-and-rel.html#cb30-21" aria-hidden="true" tabindex="-1"></a><span class="fu">render_graph</span>(g)</span></code></pre></div>
+<div id="htmlwidget-e6fd3aec1e28793c6f88" style="width:672px;height:480px;" class="grViz html-widget"></div>
+<script type="application/json" data-for="htmlwidget-e6fd3aec1e28793c6f88">{"x":{"diagram":"digraph {\n\ngraph [layout = \"neato\",\n       outputorder = \"edgesfirst\",\n       bgcolor = \"white\"]\n\nnode [fontname = \"Helvetica\",\n      fontsize = \"10\",\n      shape = \"circle\",\n      fixedsize = \"true\",\n      width = \"0.5\",\n      style = \"filled\",\n      fillcolor = \"aliceblue\",\n      color = \"gray70\",\n      fontcolor = \"gray50\"]\n\nedge [fontname = \"Helvetica\",\n     fontsize = \"8\",\n     len = \"1.5\",\n     color = \"gray80\",\n     arrowsize = \"0.5\"]\n\n  \"1\" [shape = \"circle\", fillcolor = \"#F0F8FF\", fontcolor = \"#000000\"] \n  \"2\" [shape = \"circle\", fillcolor = \"#F0F8FF\", fontcolor = \"#000000\"] \n  \"3\" [shape = \"rectangle\", fillcolor = \"#F0F8FF\", fontcolor = \"#000000\"] \n  \"4\" [shape = \"rectangle\", fillcolor = \"#F0F8FF\", fontcolor = \"#000000\"] \n  \"1\"->\"2\" \n  \"1\"->\"3\" \n  \"3\"->\"4\" \n  \"1\"->\"4\" \n}","config":{"engine":"dot","options":null}},"evals":[],"jsHooks":[]}</script>
+<div class="sourceCode" id="cb31"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb31-1"><a href="graphs-with-with-styling-properties-e.g.-color-shape-grouping-labels-e.g.-type-and-rel.html#cb31-1" aria-hidden="true" tabindex="-1"></a><span class="fu">grViz</span>(<span class="st">&quot;</span></span>
+<span id="cb31-2"><a href="graphs-with-with-styling-properties-e.g.-color-shape-grouping-labels-e.g.-type-and-rel.html#cb31-2" aria-hidden="true" tabindex="-1"></a><span class="st">digraph boxes_and_circles {</span></span>
+<span id="cb31-3"><a href="graphs-with-with-styling-properties-e.g.-color-shape-grouping-labels-e.g.-type-and-rel.html#cb31-3" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb31-4"><a href="graphs-with-with-styling-properties-e.g.-color-shape-grouping-labels-e.g.-type-and-rel.html#cb31-4" aria-hidden="true" tabindex="-1"></a><span class="st">  # a &#39;graph&#39; statement</span></span>
+<span id="cb31-5"><a href="graphs-with-with-styling-properties-e.g.-color-shape-grouping-labels-e.g.-type-and-rel.html#cb31-5" aria-hidden="true" tabindex="-1"></a><span class="st">  graph [overlap = true, fontsize = 10]</span></span>
+<span id="cb31-6"><a href="graphs-with-with-styling-properties-e.g.-color-shape-grouping-labels-e.g.-type-and-rel.html#cb31-6" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb31-7"><a href="graphs-with-with-styling-properties-e.g.-color-shape-grouping-labels-e.g.-type-and-rel.html#cb31-7" aria-hidden="true" tabindex="-1"></a><span class="st">  # several &#39;node&#39; statements</span></span>
+<span id="cb31-8"><a href="graphs-with-with-styling-properties-e.g.-color-shape-grouping-labels-e.g.-type-and-rel.html#cb31-8" aria-hidden="true" tabindex="-1"></a><span class="st">  node [shape = box,</span></span>
+<span id="cb31-9"><a href="graphs-with-with-styling-properties-e.g.-color-shape-grouping-labels-e.g.-type-and-rel.html#cb31-9" aria-hidden="true" tabindex="-1"></a><span class="st">        fontname = Helvetica]</span></span>
+<span id="cb31-10"><a href="graphs-with-with-styling-properties-e.g.-color-shape-grouping-labels-e.g.-type-and-rel.html#cb31-10" aria-hidden="true" tabindex="-1"></a><span class="st">  A; B; C; D; E; F</span></span>
+<span id="cb31-11"><a href="graphs-with-with-styling-properties-e.g.-color-shape-grouping-labels-e.g.-type-and-rel.html#cb31-11" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb31-12"><a href="graphs-with-with-styling-properties-e.g.-color-shape-grouping-labels-e.g.-type-and-rel.html#cb31-12" aria-hidden="true" tabindex="-1"></a><span class="st">  node [shape = circle,</span></span>
+<span id="cb31-13"><a href="graphs-with-with-styling-properties-e.g.-color-shape-grouping-labels-e.g.-type-and-rel.html#cb31-13" aria-hidden="true" tabindex="-1"></a><span class="st">        fixedsize = true,</span></span>
+<span id="cb31-14"><a href="graphs-with-with-styling-properties-e.g.-color-shape-grouping-labels-e.g.-type-and-rel.html#cb31-14" aria-hidden="true" tabindex="-1"></a><span class="st">        width = 0.9] // sets as circles</span></span>
+<span id="cb31-15"><a href="graphs-with-with-styling-properties-e.g.-color-shape-grouping-labels-e.g.-type-and-rel.html#cb31-15" aria-hidden="true" tabindex="-1"></a><span class="st">  1; 2; 3; 4; 5; 6; 7; 8</span></span>
+<span id="cb31-16"><a href="graphs-with-with-styling-properties-e.g.-color-shape-grouping-labels-e.g.-type-and-rel.html#cb31-16" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb31-17"><a href="graphs-with-with-styling-properties-e.g.-color-shape-grouping-labels-e.g.-type-and-rel.html#cb31-17" aria-hidden="true" tabindex="-1"></a><span class="st">  # several &#39;edge&#39; statements</span></span>
+<span id="cb31-18"><a href="graphs-with-with-styling-properties-e.g.-color-shape-grouping-labels-e.g.-type-and-rel.html#cb31-18" aria-hidden="true" tabindex="-1"></a><span class="st">  A-&gt;1 B-&gt;2 B-&gt;3 B-&gt;4 C-&gt;A</span></span>
+<span id="cb31-19"><a href="graphs-with-with-styling-properties-e.g.-color-shape-grouping-labels-e.g.-type-and-rel.html#cb31-19" aria-hidden="true" tabindex="-1"></a><span class="st">  1-&gt;D E-&gt;A 2-&gt;4 1-&gt;5 1-&gt;F</span></span>
+<span id="cb31-20"><a href="graphs-with-with-styling-properties-e.g.-color-shape-grouping-labels-e.g.-type-and-rel.html#cb31-20" aria-hidden="true" tabindex="-1"></a><span class="st">  E-&gt;6 4-&gt;6 5-&gt;7 6-&gt;7 3-&gt;8</span></span>
+<span id="cb31-21"><a href="graphs-with-with-styling-properties-e.g.-color-shape-grouping-labels-e.g.-type-and-rel.html#cb31-21" aria-hidden="true" tabindex="-1"></a><span class="st">}</span></span>
+<span id="cb31-22"><a href="graphs-with-with-styling-properties-e.g.-color-shape-grouping-labels-e.g.-type-and-rel.html#cb31-22" aria-hidden="true" tabindex="-1"></a><span class="st">&quot;</span>)</span></code></pre></div>
+<div id="htmlwidget-3390943322b6231a8eb8" style="width:672px;height:480px;" class="grViz html-widget"></div>
+<script type="application/json" data-for="htmlwidget-3390943322b6231a8eb8">{"x":{"diagram":"\ndigraph boxes_and_circles {\n\n  # a \"graph\" statement\n  graph [overlap = true, fontsize = 10]\n\n  # several \"node\" statements\n  node [shape = box,\n        fontname = Helvetica]\n  A; B; C; D; E; F\n\n  node [shape = circle,\n        fixedsize = true,\n        width = 0.9] // sets as circles\n  1; 2; 3; 4; 5; 6; 7; 8\n\n  # several \"edge\" statements\n  A->1 B->2 B->3 B->4 C->A\n  1->D E->A 2->4 1->5 1->F\n  E->6 4->6 5->7 6->7 3->8\n}\n","config":{"engine":"dot","options":null}},"evals":[],"jsHooks":[]}</script>
+<div class="sourceCode" id="cb32"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb32-1"><a href="graphs-with-with-styling-properties-e.g.-color-shape-grouping-labels-e.g.-type-and-rel.html#cb32-1" aria-hidden="true" tabindex="-1"></a><span class="co"># Create a simple NDF</span></span>
+<span id="cb32-2"><a href="graphs-with-with-styling-properties-e.g.-color-shape-grouping-labels-e.g.-type-and-rel.html#cb32-2" aria-hidden="true" tabindex="-1"></a><span class="co"># nodes &lt;-</span></span>
+<span id="cb32-3"><a href="graphs-with-with-styling-properties-e.g.-color-shape-grouping-labels-e.g.-type-and-rel.html#cb32-3" aria-hidden="true" tabindex="-1"></a><span class="co">#   create_nodes(</span></span>
+<span id="cb32-4"><a href="graphs-with-with-styling-properties-e.g.-color-shape-grouping-labels-e.g.-type-and-rel.html#cb32-4" aria-hidden="true" tabindex="-1"></a><span class="co">#     nodes = 1:4,</span></span>
+<span id="cb32-5"><a href="graphs-with-with-styling-properties-e.g.-color-shape-grouping-labels-e.g.-type-and-rel.html#cb32-5" aria-hidden="true" tabindex="-1"></a><span class="co">#     type = &quot;number&quot;)</span></span>
+<span id="cb32-6"><a href="graphs-with-with-styling-properties-e.g.-color-shape-grouping-labels-e.g.-type-and-rel.html#cb32-6" aria-hidden="true" tabindex="-1"></a><span class="co"># </span></span>
+<span id="cb32-7"><a href="graphs-with-with-styling-properties-e.g.-color-shape-grouping-labels-e.g.-type-and-rel.html#cb32-7" aria-hidden="true" tabindex="-1"></a><span class="co"># # Create a simple EDF</span></span>
+<span id="cb32-8"><a href="graphs-with-with-styling-properties-e.g.-color-shape-grouping-labels-e.g.-type-and-rel.html#cb32-8" aria-hidden="true" tabindex="-1"></a><span class="co"># edges &lt;-</span></span>
+<span id="cb32-9"><a href="graphs-with-with-styling-properties-e.g.-color-shape-grouping-labels-e.g.-type-and-rel.html#cb32-9" aria-hidden="true" tabindex="-1"></a><span class="co">#   create_edges(</span></span>
+<span id="cb32-10"><a href="graphs-with-with-styling-properties-e.g.-color-shape-grouping-labels-e.g.-type-and-rel.html#cb32-10" aria-hidden="true" tabindex="-1"></a><span class="co">#     from = c(1, 1, 3, 1),</span></span>
+<span id="cb32-11"><a href="graphs-with-with-styling-properties-e.g.-color-shape-grouping-labels-e.g.-type-and-rel.html#cb32-11" aria-hidden="true" tabindex="-1"></a><span class="co">#     to = c(2, 3, 4, 4),</span></span>
+<span id="cb32-12"><a href="graphs-with-with-styling-properties-e.g.-color-shape-grouping-labels-e.g.-type-and-rel.html#cb32-12" aria-hidden="true" tabindex="-1"></a><span class="co">#     rel = &quot;related&quot;)</span></span>
+<span id="cb32-13"><a href="graphs-with-with-styling-properties-e.g.-color-shape-grouping-labels-e.g.-type-and-rel.html#cb32-13" aria-hidden="true" tabindex="-1"></a><span class="co"># </span></span>
+<span id="cb32-14"><a href="graphs-with-with-styling-properties-e.g.-color-shape-grouping-labels-e.g.-type-and-rel.html#cb32-14" aria-hidden="true" tabindex="-1"></a><span class="co"># # Create the graph object, incorporating the NDF and the EDF, and, </span></span>
+<span id="cb32-15"><a href="graphs-with-with-styling-properties-e.g.-color-shape-grouping-labels-e.g.-type-and-rel.html#cb32-15" aria-hidden="true" tabindex="-1"></a><span class="co"># # providing some global attributes</span></span>
+<span id="cb32-16"><a href="graphs-with-with-styling-properties-e.g.-color-shape-grouping-labels-e.g.-type-and-rel.html#cb32-16" aria-hidden="true" tabindex="-1"></a><span class="co"># graph &lt;-</span></span>
+<span id="cb32-17"><a href="graphs-with-with-styling-properties-e.g.-color-shape-grouping-labels-e.g.-type-and-rel.html#cb32-17" aria-hidden="true" tabindex="-1"></a><span class="co">#   create_graph(</span></span>
+<span id="cb32-18"><a href="graphs-with-with-styling-properties-e.g.-color-shape-grouping-labels-e.g.-type-and-rel.html#cb32-18" aria-hidden="true" tabindex="-1"></a><span class="co">#     nodes_df = nodes,</span></span>
+<span id="cb32-19"><a href="graphs-with-with-styling-properties-e.g.-color-shape-grouping-labels-e.g.-type-and-rel.html#cb32-19" aria-hidden="true" tabindex="-1"></a><span class="co">#     edges_df = edges,</span></span>
+<span id="cb32-20"><a href="graphs-with-with-styling-properties-e.g.-color-shape-grouping-labels-e.g.-type-and-rel.html#cb32-20" aria-hidden="true" tabindex="-1"></a><span class="co">#     graph_attrs = &quot;layout = neato&quot;,</span></span>
+<span id="cb32-21"><a href="graphs-with-with-styling-properties-e.g.-color-shape-grouping-labels-e.g.-type-and-rel.html#cb32-21" aria-hidden="true" tabindex="-1"></a><span class="co">#     node_attrs = &quot;fontname = Helvetica&quot;,</span></span>
+<span id="cb32-22"><a href="graphs-with-with-styling-properties-e.g.-color-shape-grouping-labels-e.g.-type-and-rel.html#cb32-22" aria-hidden="true" tabindex="-1"></a><span class="co">#     edge_attrs = &quot;color = gray20&quot;)</span></span>
+<span id="cb32-23"><a href="graphs-with-with-styling-properties-e.g.-color-shape-grouping-labels-e.g.-type-and-rel.html#cb32-23" aria-hidden="true" tabindex="-1"></a><span class="co"># </span></span>
+<span id="cb32-24"><a href="graphs-with-with-styling-properties-e.g.-color-shape-grouping-labels-e.g.-type-and-rel.html#cb32-24" aria-hidden="true" tabindex="-1"></a><span class="co"># # View the graph</span></span>
+<span id="cb32-25"><a href="graphs-with-with-styling-properties-e.g.-color-shape-grouping-labels-e.g.-type-and-rel.html#cb32-25" aria-hidden="true" tabindex="-1"></a><span class="co"># render_graph(graph)</span></span></code></pre></div>
+</div>
+<div id="references-1" class="section level2 hasAnchor" number="5.9">
+<h2><span class="header-section-number">5.9</span> References<a href="graphs-with-with-styling-properties-e.g.-color-shape-grouping-labels-e.g.-type-and-rel.html#references-1" class="anchor-section" aria-label="Anchor link to header"></a></h2>
+<p><a href="http://visualizers.co/diagrammer/">DiagrammeR main page</a><br />
+<a href="https://mikeyharper.uk/flowcharts-in-r-using-diagrammer/">https://mikeyharper.uk/flowcharts-in-r-using-diagrammer/</a><br />
+<a href="http://rich-iannone.github.io/DiagrammeR/graph_creation.html">http://rich-iannone.github.io/DiagrammeR/graph_creation.html</a></p>
+
+</div>
+</div>
+            </section>
+
+          </div>
+        </div>
+      </div>
+<a href="diagrammer_graphviz-and-memaid.html" class="navigation navigation-prev navigation-unique" aria-label="Previous page"><i class="fa fa-angle-left"></i></a>
+
+    </div>
+  </div>
+<script src="libs/gitbook-2.6.7/js/app.min.js"></script>
+<script src="libs/gitbook-2.6.7/js/clipboard.min.js"></script>
+<script src="libs/gitbook-2.6.7/js/plugin-search.js"></script>
+<script src="libs/gitbook-2.6.7/js/plugin-sharing.js"></script>
+<script src="libs/gitbook-2.6.7/js/plugin-fontsettings.js"></script>
+<script src="libs/gitbook-2.6.7/js/plugin-bookdown.js"></script>
+<script src="libs/gitbook-2.6.7/js/jquery.highlight.js"></script>
+<script src="libs/gitbook-2.6.7/js/plugin-clipboard.js"></script>
+<script>
+gitbook.require(["gitbook"], function(gitbook) {
+gitbook.start({
+"sharing": {
+"github": false,
+"facebook": true,
+"twitter": true,
+"linkedin": false,
+"weibo": false,
+"instapaper": false,
+"vk": false,
+"whatsapp": false,
+"all": ["facebook", "twitter", "linkedin", "weibo", "instapaper"]
+},
+"fontsettings": {
+"theme": "white",
+"family": "sans",
+"size": 2
+},
+"edit": {
+"link": "https://github.com/USERNAME/REPO/edit/BRANCH/04-DiagrammeR.Rmd",
+"text": "Edit"
+},
+"history": {
+"link": null,
+"text": null
+},
+"view": {
+"link": null,
+"text": null
+},
+"download": ["_main.pdf", "_main.epub"],
+"search": {
+"engine": "fuse",
+"options": null
+},
+"toc": {
+"collapse": "subsection"
+}
+});
+});
+</script>
+
+</body>
+
+</html>
