@@ -17,8 +17,8 @@ keywords
 graph-basics
 graphs-with-with-styling-properties-e.g.-color-shape-grouping-labels-e.g.-type-and-rel
 using-data-from-tables-to-generate-a-graph
-keyword---key-structure
-a-minimal-plot
+grviz---keyword---key-structure
+a-minimal-grviz-plot
 diagrammer-implementation
 simple-table
 horizontal-flowchart
@@ -29,5 +29,3 @@ using-label
 not-using-label
 node-data-frames-ndfs-and-edge-data-frames-edfs
 references-1
-grviz---keyword---key-structure
-a-minimal-grviz-plot
