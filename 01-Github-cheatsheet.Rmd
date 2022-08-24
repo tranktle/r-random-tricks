@@ -85,7 +85,11 @@ delete_merged_file: true <br>language: <br> &nbsp; &nbsp; ui: <br> &emsp;&nbsp;&
 
 To use these commands on RStudio, you will need to come to **Terminal** and type the commands.
 - git config –global user.name “[name]”: sets author name. \
+<<<<<<< HEAD
 - git config –global user.email “your_email@example.com”: sets author email id. \
+=======
+- git config –global user.email “[email address]”: sets author email id. \
+>>>>>>> a0f7d01cfa45f6a4da7bbf9814f0db459eaf7a20
 - git init [repository_name]: start new repository. \
 - git clone [url]: obtains a repository from an existing URL. \
 - git status: lists all the files that have to be committed. \
