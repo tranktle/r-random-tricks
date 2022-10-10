@@ -1,0 +1,46 @@
+# R resources from absolute beginners to more advance
+
+## Introduction
+
+It may not be a good idea to put this section here. But today, I went to the [Mississippi Public Health Association](https://www.mspha.org/) 's World Field Epidemiology Day Workshop. I meet some new friends there who study Epidemiology that want to learn R. I think I need to share these really good and free `r emo::ji("smile")` resources. 
+
+The resources will be listed from the absolute beginner to more advanced levels. If you have any suggestions or want to add more resources about the topic that you want to learn, please let me know (here is my [LinkedIn](https://www.linkedin.com/in/tran-le-767470229/) account). I will update and correct this according to that. 
+
+## For absolute beginners. 
+
+- [MarinStatsLectures-R Programming & Statistics](https://www.youtube.com/c/marinstatlectures) was the first teacher that taught me the first steps in R. This Chanel contains many topics that you can learn. [This is the first series](https://www.youtube.com/watch?v=riONFzJdXcs&list=PLqzoL9-eJTNARFXxgwbqGo56NtbJnB37A) that you need to watch if you know nothing about R. This will teach you how to install R, R studio, install R packages, import your data... Then you can explore other [playlists](https://www.youtube.com/c/marinstatlectures/playlists) from him if you are interested. 
+
+## R graphs galleries
+
+I have seen you people discuss a lot about how to use graphs. This link, 
+[https://r-graph-gallery.com/](https://r-graph-gallery.com/) will give you a quick tutorial on creating those plots. Please click on the plot you want, for example, Barplot, then it will take you to the page with many bar plots and instructions. This is the link I got after choosing the most basic bar plot from the main page: [https://r-graph-gallery.com/218-basic-barplots-with-ggplot2.html].
+
+Another library we can use to create plots is Plotly. Here is the link to the Plotly gallery: [https://plotly.com/r/](https://plotly.com/r/). Similarly, click the plot you want to make and have the code on your hands. (I personally use ggplot2 more frequently than Plotly). 
+
+## Some R excellent books
+
+[R for Data Science](https://r4ds.had.co.nz/index.html) is the book everyone who studies R needs to read. It teaches you how to do Data Visualization, Data Wrangling, and many more. We also have cheat sheets that are associated with this book. You can download them from [here](https://rstudio.cloud/learn/cheat-sheets).
+
+[Advanced R](https://adv-r.hadley.nz/), as its name says about itself, is an advanced R book. 
+
+I have not read these two books, but I think they may be helpful for you. [R for Epidemiology](https://www.r4epi.com/) and [R for applied epidemiology and public health](https://epirhandbook.com/en/index.html)
+
+```{r, echo=FALSE, warning=FALSE}
+library(ggplot2)
+library(emojifont)
+x = seq(0, 2*pi, length=30)
+y = sin(x)
+ggplot() + geom_emoji('heartbeat', x=x, y=y, size=10)
+```
+
+```{r, echo=FALSE}
+# https://cran.r-project.org/web/packages/emojifont/vignettes/emojifont.html
+# x<- mpg_df$displ
+# y <- mpg_df$cty
+# ggplot() + geom_emoji('heartbeat', x=x, y=y, size=10)
+```
+```{r, echo=FALSE}
+# library(tidyverse)
+# mpg_df %>% ggplot(aes(x = displ, y = cty)) + geom_emoji('heartbeat', x=x, y=y, size=10)
+```
+

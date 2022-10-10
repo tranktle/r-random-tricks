@@ -1,0 +1,732 @@
+<!DOCTYPE html>
+<html lang="" xml:lang="">
+<head>
+
+  <meta charset="utf-8" />
+  <meta http-equiv="X-UA-Compatible" content="IE=edge" />
+  <title>Section 5 A Grid base flowchart using ggplot2 | Random R tricks</title>
+  <meta name="description" content="Some R observations/tricks ." />
+  <meta name="generator" content="bookdown 0.26 and GitBook 2.6.7" />
+
+  <meta property="og:title" content="Section 5 A Grid base flowchart using ggplot2 | Random R tricks" />
+  <meta property="og:type" content="book" />
+  
+  <meta property="og:description" content="Some R observations/tricks ." />
+  <meta name="github-repo" content="rstudio/bookdown-demo" />
+
+  <meta name="twitter:card" content="summary" />
+  <meta name="twitter:title" content="Section 5 A Grid base flowchart using ggplot2 | Random R tricks" />
+  
+  <meta name="twitter:description" content="Some R observations/tricks ." />
+  
+
+<meta name="author" content="Tran Le" />
+
+
+
+  <meta name="viewport" content="width=device-width, initial-scale=1" />
+  <meta name="apple-mobile-web-app-capable" content="yes" />
+  <meta name="apple-mobile-web-app-status-bar-style" content="black" />
+  
+  
+<link rel="prev" href="diagrammer_graphviz-and-memaid.html"/>
+
+<script src="libs/jquery-3.6.0/jquery-3.6.0.min.js"></script>
+<script src="https://cdn.jsdelivr.net/npm/fuse.js@6.4.6/dist/fuse.min.js"></script>
+<link href="libs/gitbook-2.6.7/css/style.css" rel="stylesheet" />
+<link href="libs/gitbook-2.6.7/css/plugin-table.css" rel="stylesheet" />
+<link href="libs/gitbook-2.6.7/css/plugin-bookdown.css" rel="stylesheet" />
+<link href="libs/gitbook-2.6.7/css/plugin-highlight.css" rel="stylesheet" />
+<link href="libs/gitbook-2.6.7/css/plugin-search.css" rel="stylesheet" />
+<link href="libs/gitbook-2.6.7/css/plugin-fontsettings.css" rel="stylesheet" />
+<link href="libs/gitbook-2.6.7/css/plugin-clipboard.css" rel="stylesheet" />
+
+
+
+
+
+
+
+
+<link href="libs/anchor-sections-1.1.0/anchor-sections.css" rel="stylesheet" />
+<link href="libs/anchor-sections-1.1.0/anchor-sections-hash.css" rel="stylesheet" />
+<script src="libs/anchor-sections-1.1.0/anchor-sections.js"></script>
+
+
+<style type="text/css">
+pre > code.sourceCode { white-space: pre; position: relative; }
+pre > code.sourceCode > span { display: inline-block; line-height: 1.25; }
+pre > code.sourceCode > span:empty { height: 1.2em; }
+.sourceCode { overflow: visible; }
+code.sourceCode > span { color: inherit; text-decoration: inherit; }
+pre.sourceCode { margin: 0; }
+@media screen {
+div.sourceCode { overflow: auto; }
+}
+@media print {
+pre > code.sourceCode { white-space: pre-wrap; }
+pre > code.sourceCode > span { text-indent: -5em; padding-left: 5em; }
+}
+pre.numberSource code
+  { counter-reset: source-line 0; }
+pre.numberSource code > span
+  { position: relative; left: -4em; counter-increment: source-line; }
+pre.numberSource code > span > a:first-child::before
+  { content: counter(source-line);
+    position: relative; left: -1em; text-align: right; vertical-align: baseline;
+    border: none; display: inline-block;
+    -webkit-touch-callout: none; -webkit-user-select: none;
+    -khtml-user-select: none; -moz-user-select: none;
+    -ms-user-select: none; user-select: none;
+    padding: 0 4px; width: 4em;
+    color: #aaaaaa;
+  }
+pre.numberSource { margin-left: 3em; border-left: 1px solid #aaaaaa;  padding-left: 4px; }
+div.sourceCode
+  {   }
+@media screen {
+pre > code.sourceCode > span > a:first-child::before { text-decoration: underline; }
+}
+code span.al { color: #ff0000; font-weight: bold; } /* Alert */
+code span.an { color: #60a0b0; font-weight: bold; font-style: italic; } /* Annotation */
+code span.at { color: #7d9029; } /* Attribute */
+code span.bn { color: #40a070; } /* BaseN */
+code span.bu { } /* BuiltIn */
+code span.cf { color: #007020; font-weight: bold; } /* ControlFlow */
+code span.ch { color: #4070a0; } /* Char */
+code span.cn { color: #880000; } /* Constant */
+code span.co { color: #60a0b0; font-style: italic; } /* Comment */
+code span.cv { color: #60a0b0; font-weight: bold; font-style: italic; } /* CommentVar */
+code span.do { color: #ba2121; font-style: italic; } /* Documentation */
+code span.dt { color: #902000; } /* DataType */
+code span.dv { color: #40a070; } /* DecVal */
+code span.er { color: #ff0000; font-weight: bold; } /* Error */
+code span.ex { } /* Extension */
+code span.fl { color: #40a070; } /* Float */
+code span.fu { color: #06287e; } /* Function */
+code span.im { } /* Import */
+code span.in { color: #60a0b0; font-weight: bold; font-style: italic; } /* Information */
+code span.kw { color: #007020; font-weight: bold; } /* Keyword */
+code span.op { color: #666666; } /* Operator */
+code span.ot { color: #007020; } /* Other */
+code span.pp { color: #bc7a00; } /* Preprocessor */
+code span.sc { color: #4070a0; } /* SpecialChar */
+code span.ss { color: #bb6688; } /* SpecialString */
+code span.st { color: #4070a0; } /* String */
+code span.va { color: #19177c; } /* Variable */
+code span.vs { color: #4070a0; } /* VerbatimString */
+code span.wa { color: #60a0b0; font-weight: bold; font-style: italic; } /* Warning */
+</style>
+
+
+<link rel="stylesheet" href="style.css" type="text/css" />
+</head>
+
+<body>
+
+
+
+  <div class="book without-animation with-summary font-size-2 font-family-1" data-basepath=".">
+
+    <div class="book-summary">
+      <nav role="navigation">
+
+<ul class="summary">
+<li><a href="./"> Tran Le - Some random R tricks</a></li>
+
+<li class="divider"></li>
+<li class="chapter" data-level="1" data-path="index.html"><a href="index.html"><i class="fa fa-check"></i><b>1</b> Introduction</a></li>
+<li class="chapter" data-level="2" data-path="github-cheatsheet.html"><a href="github-cheatsheet.html"><i class="fa fa-check"></i><b>2</b> Github-Cheatsheet</a>
+<ul>
+<li class="chapter" data-level="2.1" data-path="github-cheatsheet.html"><a href="github-cheatsheet.html#introduction-1"><i class="fa fa-check"></i><b>2.1</b> Introduction</a></li>
+<li class="chapter" data-level="2.2" data-path="github-cheatsheet.html"><a href="github-cheatsheet.html#connecting-an-existing-rstudio-project-to-github."><i class="fa fa-check"></i><b>2.2</b> Connecting an existing Rstudio project to Github.</a></li>
+<li class="chapter" data-level="2.3" data-path="github-cheatsheet.html"><a href="github-cheatsheet.html#integrate-rstudio-with-an-existing-project-on-github"><i class="fa fa-check"></i><b>2.3</b> Integrate Rstudio with an existing project on Github</a></li>
+<li class="chapter" data-level="2.4" data-path="github-cheatsheet.html"><a href="github-cheatsheet.html#how-to-post-your-bookdown-file-to-github"><i class="fa fa-check"></i><b>2.4</b> How to post your Bookdown file to Github</a></li>
+<li class="chapter" data-level="2.5" data-path="github-cheatsheet.html"><a href="github-cheatsheet.html#some-most-common-git-commands."><i class="fa fa-check"></i><b>2.5</b> Some most common git commands.</a></li>
+<li class="chapter" data-level="2.6" data-path="github-cheatsheet.html"><a href="github-cheatsheet.html#references"><i class="fa fa-check"></i><b>2.6</b> References</a></li>
+</ul></li>
+<li class="chapter" data-level="3" data-path="problems-when-using-dplyrfull_join.html"><a href="problems-when-using-dplyrfull_join.html"><i class="fa fa-check"></i><b>3</b> Problems when using dplyr::full_join</a>
+<ul>
+<li class="chapter" data-level="3.1" data-path="problems-when-using-dplyrfull_join.html"><a href="problems-when-using-dplyrfull_join.html#introduction-2"><i class="fa fa-check"></i><b>3.1</b> Introduction</a></li>
+<li class="chapter" data-level="3.2" data-path="problems-when-using-dplyrfull_join.html"><a href="problems-when-using-dplyrfull_join.html#using-dplyrfull_join"><i class="fa fa-check"></i><b>3.2</b> Using dplyr::full_join</a></li>
+<li class="chapter" data-level="3.3" data-path="problems-when-using-dplyrfull_join.html"><a href="problems-when-using-dplyrfull_join.html#using-powerjoinpower_full_join"><i class="fa fa-check"></i><b>3.3</b> Using powerjoin::power_full_join</a></li>
+<li class="chapter" data-level="3.4" data-path="problems-when-using-dplyrfull_join.html"><a href="problems-when-using-dplyrfull_join.html#what-if-we-have-conflict-data-sets"><i class="fa fa-check"></i><b>3.4</b> What if we have conflict data sets</a></li>
+<li class="chapter" data-level="3.5" data-path="problems-when-using-dplyrfull_join.html"><a href="problems-when-using-dplyrfull_join.html#reference"><i class="fa fa-check"></i><b>3.5</b> Reference</a></li>
+</ul></li>
+<li class="chapter" data-level="4" data-path="diagrammer_graphviz-and-memaid.html"><a href="diagrammer_graphviz-and-memaid.html"><i class="fa fa-check"></i><b>4</b> DiagrammeR_graphviz and memaid</a>
+<ul>
+<li class="chapter" data-level="4.1" data-path="diagrammer_graphviz-and-memaid.html"><a href="diagrammer_graphviz-and-memaid.html#keywords"><i class="fa fa-check"></i><b>4.1</b> Keywords:</a></li>
+<li class="chapter" data-level="4.2" data-path="diagrammer_graphviz-and-memaid.html"><a href="diagrammer_graphviz-and-memaid.html#graph-basics"><i class="fa fa-check"></i><b>4.2</b> Graph Basics</a></li>
+<li class="chapter" data-level="4.3" data-path="diagrammer_graphviz-and-memaid.html"><a href="diagrammer_graphviz-and-memaid.html#graphs-with-with-styling-properties-e.g.-color-shape-grouping-labels-e.g.-type-and-rel"><i class="fa fa-check"></i><b>4.3</b> Graphs with with styling properties (e.g., color, shape, …), grouping labels (e.g., type and rel)</a></li>
+<li class="chapter" data-level="4.4" data-path="diagrammer_graphviz-and-memaid.html"><a href="diagrammer_graphviz-and-memaid.html#using-data-from-tables-to-generate-a-graph"><i class="fa fa-check"></i><b>4.4</b> Using Data from Tables to Generate a Graph</a></li>
+<li class="chapter" data-level="4.5" data-path="diagrammer_graphviz-and-memaid.html"><a href="diagrammer_graphviz-and-memaid.html#grviz---keyword---key-structure"><i class="fa fa-check"></i><b>4.5</b> grViz - Keyword - Key structure</a>
+<ul>
+<li class="chapter" data-level="4.5.1" data-path="diagrammer_graphviz-and-memaid.html"><a href="diagrammer_graphviz-and-memaid.html#a-minimal-grviz-plot"><i class="fa fa-check"></i><b>4.5.1</b> A minimal grViz plot</a></li>
+<li class="chapter" data-level="4.5.2" data-path="diagrammer_graphviz-and-memaid.html"><a href="diagrammer_graphviz-and-memaid.html#diagrammer-implementation"><i class="fa fa-check"></i><b>4.5.2</b> DiagrammeR Implementation</a></li>
+<li class="chapter" data-level="4.5.3" data-path="diagrammer_graphviz-and-memaid.html"><a href="diagrammer_graphviz-and-memaid.html#simple-table"><i class="fa fa-check"></i><b>4.5.3</b> Simple table</a></li>
+<li class="chapter" data-level="4.5.4" data-path="diagrammer_graphviz-and-memaid.html"><a href="diagrammer_graphviz-and-memaid.html#parameterized-figures---graphviz-substitution"><i class="fa fa-check"></i><b>4.5.4</b> Parameterized figures - Graphviz Substitution</a></li>
+<li class="chapter" data-level="4.5.5" data-path="diagrammer_graphviz-and-memaid.html"><a href="diagrammer_graphviz-and-memaid.html#subgraphs-and-clusters"><i class="fa fa-check"></i><b>4.5.5</b> Subgraphs and clusters</a></li>
+<li class="chapter" data-level="4.5.6" data-path="diagrammer_graphviz-and-memaid.html"><a href="diagrammer_graphviz-and-memaid.html#node-data-frames-ndfs-and-edge-data-frames-edfs"><i class="fa fa-check"></i><b>4.5.6</b> Node data frames (NDFs) and Edge data frames (EDFs)</a></li>
+</ul></li>
+<li class="chapter" data-level="4.6" data-path="diagrammer_graphviz-and-memaid.html"><a href="diagrammer_graphviz-and-memaid.html#with-mermaid"><i class="fa fa-check"></i><b>4.6</b> With mermaid</a></li>
+<li class="chapter" data-level="4.7" data-path="diagrammer_graphviz-and-memaid.html"><a href="diagrammer_graphviz-and-memaid.html#references-1"><i class="fa fa-check"></i><b>4.7</b> References</a>
+<ul>
+<li class="chapter" data-level="4.7.1" data-path="diagrammer_graphviz-and-memaid.html"><a href="diagrammer_graphviz-and-memaid.html#grviz-links"><i class="fa fa-check"></i><b>4.7.1</b> grViz links</a></li>
+<li class="chapter" data-level="4.7.2" data-path="diagrammer_graphviz-and-memaid.html"><a href="diagrammer_graphviz-and-memaid.html#mermaid-links"><i class="fa fa-check"></i><b>4.7.2</b> Mermaid links</a></li>
+</ul></li>
+</ul></li>
+<li class="chapter" data-level="5" data-path="a-grid-base-flowchart-using-ggplot2.html"><a href="a-grid-base-flowchart-using-ggplot2.html"><i class="fa fa-check"></i><b>5</b> A Grid base flowchart using ggplot2</a>
+<ul>
+<li class="chapter" data-level="5.1" data-path="a-grid-base-flowchart-using-ggplot2.html"><a href="a-grid-base-flowchart-using-ggplot2.html#using-ggplot-2"><i class="fa fa-check"></i><b>5.1</b> Using ggplot 2</a>
+<ul>
+<li class="chapter" data-level="5.1.1" data-path="a-grid-base-flowchart-using-ggplot2.html"><a href="a-grid-base-flowchart-using-ggplot2.html#summary-and-keywords"><i class="fa fa-check"></i><b>5.1.1</b> Summary and Keywords</a></li>
+<li class="chapter" data-level="5.1.2" data-path="a-grid-base-flowchart-using-ggplot2.html"><a href="a-grid-base-flowchart-using-ggplot2.html#step-1-create-grid"><i class="fa fa-check"></i><b>5.1.2</b> Step 1: Create grid</a></li>
+<li class="chapter" data-level="5.1.3" data-path="a-grid-base-flowchart-using-ggplot2.html"><a href="a-grid-base-flowchart-using-ggplot2.html#step-2-draw-box-and-segments."><i class="fa fa-check"></i><b>5.1.3</b> Step 2: draw box and segments.</a></li>
+<li class="chapter" data-level="5.1.4" data-path="a-grid-base-flowchart-using-ggplot2.html"><a href="a-grid-base-flowchart-using-ggplot2.html#step-3-reveal-the-flowchart"><i class="fa fa-check"></i><b>5.1.4</b> Step 3: Reveal the flowchart</a></li>
+</ul></li>
+<li class="chapter" data-level="5.2" data-path="a-grid-base-flowchart-using-ggplot2.html"><a href="a-grid-base-flowchart-using-ggplot2.html#use-gmisc-package"><i class="fa fa-check"></i><b>5.2</b> Use Gmisc package</a>
+<ul>
+<li class="chapter" data-level="5.2.1" data-path="a-grid-base-flowchart-using-ggplot2.html"><a href="a-grid-base-flowchart-using-ggplot2.html#introduction---structure---keywords"><i class="fa fa-check"></i><b>5.2.1</b> Introduction - Structure - Keywords</a></li>
+<li class="chapter" data-level="5.2.2" data-path="a-grid-base-flowchart-using-ggplot2.html"><a href="a-grid-base-flowchart-using-ggplot2.html#a-basic-box"><i class="fa fa-check"></i><b>5.2.2</b> A basic box</a></li>
+<li class="chapter" data-level="5.2.3" data-path="a-grid-base-flowchart-using-ggplot2.html"><a href="a-grid-base-flowchart-using-ggplot2.html#aligment"><i class="fa fa-check"></i><b>5.2.3</b> Aligment</a></li>
+</ul></li>
+<li class="chapter" data-level="5.3" data-path="a-grid-base-flowchart-using-ggplot2.html"><a href="a-grid-base-flowchart-using-ggplot2.html#reference-1"><i class="fa fa-check"></i><b>5.3</b> Reference</a></li>
+<li class="chapter" data-level="5.4" data-path="a-grid-base-flowchart-using-ggplot2.html"><a href="a-grid-base-flowchart-using-ggplot2.html#r-markdown"><i class="fa fa-check"></i><b>5.4</b> R Markdown</a></li>
+<li class="chapter" data-level="5.5" data-path="a-grid-base-flowchart-using-ggplot2.html"><a href="a-grid-base-flowchart-using-ggplot2.html#including-plots"><i class="fa fa-check"></i><b>5.5</b> Including Plots</a></li>
+</ul></li>
+<li class="divider"></li>
+<li><a href="https://github.com/rstudio/bookdown" target="blank">Published with bookdown</a></li>
+
+</ul>
+
+      </nav>
+    </div>
+
+    <div class="book-body">
+      <div class="body-inner">
+        <div class="book-header" role="navigation">
+          <h1>
+            <i class="fa fa-circle-o-notch fa-spin"></i><a href="./">Random R tricks</a>
+          </h1>
+        </div>
+
+        <div class="page-wrapper" tabindex="-1" role="main">
+          <div class="page-inner">
+
+            <section class="normal" id="section-">
+<div id="a-grid-base-flowchart-using-ggplot2" class="section level1 hasAnchor" number="5">
+<h1><span class="header-section-number">Section 5</span> A Grid base flowchart using ggplot2<a href="a-grid-base-flowchart-using-ggplot2.html#a-grid-base-flowchart-using-ggplot2" class="anchor-section" aria-label="Anchor link to header"></a></h1>
+<div id="using-ggplot-2" class="section level2 hasAnchor" number="5.1">
+<h2><span class="header-section-number">5.1</span> Using ggplot 2<a href="a-grid-base-flowchart-using-ggplot2.html#using-ggplot-2" class="anchor-section" aria-label="Anchor link to header"></a></h2>
+<div id="summary-and-keywords" class="section level3 hasAnchor" number="5.1.1">
+<h3><span class="header-section-number">5.1.1</span> Summary and Keywords<a href="a-grid-base-flowchart-using-ggplot2.html#summary-and-keywords" class="anchor-section" aria-label="Anchor link to header"></a></h3>
+<ul>
+<li>Step 1: Create grid: Create a data tibble of <span class="math inline">\(x\)</span> and <span class="math inline">\(y\)</span> to create grid</li>
+</ul>
+<div class="sourceCode" id="cb1"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb1-1"><a href="a-grid-base-flowchart-using-ggplot2.html#cb1-1" aria-hidden="true" tabindex="-1"></a>data <span class="ot">&lt;-</span> <span class="fu">tibble</span>(<span class="at">x=</span> <span class="dv">1</span><span class="sc">:</span><span class="dv">100</span>, <span class="at">y=</span> <span class="dv">1</span><span class="sc">:</span><span class="dv">100</span>)</span>
+<span id="cb1-2"><a href="a-grid-base-flowchart-using-ggplot2.html#cb1-2" aria-hidden="true" tabindex="-1"></a><span class="co">#</span></span>
+<span id="cb1-3"><a href="a-grid-base-flowchart-using-ggplot2.html#cb1-3" aria-hidden="true" tabindex="-1"></a>p <span class="ot">&lt;-</span> data <span class="sc">%&gt;%</span> </span>
+<span id="cb1-4"><a href="a-grid-base-flowchart-using-ggplot2.html#cb1-4" aria-hidden="true" tabindex="-1"></a>  <span class="fu">ggplot</span>(<span class="fu">aes</span>(x, y)) <span class="sc">+</span></span>
+<span id="cb1-5"><a href="a-grid-base-flowchart-using-ggplot2.html#cb1-5" aria-hidden="true" tabindex="-1"></a>  <span class="fu">scale_x_continuous</span>(<span class="at">minor_breaks =</span> <span class="fu">seq</span>(<span class="dv">10</span>, <span class="dv">100</span>, <span class="dv">10</span>)) <span class="sc">+</span></span>
+<span id="cb1-6"><a href="a-grid-base-flowchart-using-ggplot2.html#cb1-6" aria-hidden="true" tabindex="-1"></a>  <span class="fu">scale_y_continuous</span>(<span class="at">minor_breaks =</span> <span class="fu">seq</span>(<span class="dv">10</span>, <span class="dv">100</span>, <span class="dv">10</span>)) <span class="sc">+</span></span>
+<span id="cb1-7"><a href="a-grid-base-flowchart-using-ggplot2.html#cb1-7" aria-hidden="true" tabindex="-1"></a>  <span class="fu">theme_linedraw</span>()</span>
+<span id="cb1-8"><a href="a-grid-base-flowchart-using-ggplot2.html#cb1-8" aria-hidden="true" tabindex="-1"></a>p</span></code></pre></div>
+<ul>
+<li>Step 2: draw box and segments. Here are some commands that will be used:<br />
+
+<ul>
+<li>geom_rect: to draw rectangle<br />
+</li>
+<li>annotate: adds geoms to a plot, geoms can be : text, rect, segment, pointstrane<br />
+</li>
+<li>geom_segment: draws a straight line between points (x, y) and (xend, yend)</li>
+</ul></li>
+<li>Step 3: Remove the grid background for chart revealing.
+<ul>
+<li>p + theme_void()</li>
+</ul></li>
+</ul>
+</div>
+<div id="step-1-create-grid" class="section level3 hasAnchor" number="5.1.2">
+<h3><span class="header-section-number">5.1.2</span> Step 1: Create grid<a href="a-grid-base-flowchart-using-ggplot2.html#step-1-create-grid" class="anchor-section" aria-label="Anchor link to header"></a></h3>
+<p>Getting started Let’s first draw a 100 x 100 grid that will be our working space. The grid lines will help us align and place boxes exactly where we want them. Later on we will change the graph theme to theme_void() to remove the background when we don’t need it anymore.</p>
+<div class="sourceCode" id="cb2"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb2-1"><a href="a-grid-base-flowchart-using-ggplot2.html#cb2-1" aria-hidden="true" tabindex="-1"></a><span class="fu">suppressPackageStartupMessages</span>(<span class="fu">library</span>(tidyverse))  </span>
+<span id="cb2-2"><a href="a-grid-base-flowchart-using-ggplot2.html#cb2-2" aria-hidden="true" tabindex="-1"></a>data <span class="ot">&lt;-</span> <span class="fu">tibble</span>(<span class="at">x=</span> <span class="dv">1</span><span class="sc">:</span><span class="dv">100</span>, <span class="at">y=</span> <span class="dv">1</span><span class="sc">:</span><span class="dv">100</span>)</span>
+<span id="cb2-3"><a href="a-grid-base-flowchart-using-ggplot2.html#cb2-3" aria-hidden="true" tabindex="-1"></a><span class="co">#</span></span>
+<span id="cb2-4"><a href="a-grid-base-flowchart-using-ggplot2.html#cb2-4" aria-hidden="true" tabindex="-1"></a>p <span class="ot">&lt;-</span> data <span class="sc">%&gt;%</span> </span>
+<span id="cb2-5"><a href="a-grid-base-flowchart-using-ggplot2.html#cb2-5" aria-hidden="true" tabindex="-1"></a>  <span class="fu">ggplot</span>(<span class="fu">aes</span>(x, y)) <span class="sc">+</span></span>
+<span id="cb2-6"><a href="a-grid-base-flowchart-using-ggplot2.html#cb2-6" aria-hidden="true" tabindex="-1"></a>  <span class="fu">scale_x_continuous</span>(<span class="at">minor_breaks =</span> <span class="fu">seq</span>(<span class="dv">10</span>, <span class="dv">100</span>, <span class="dv">10</span>)) <span class="sc">+</span></span>
+<span id="cb2-7"><a href="a-grid-base-flowchart-using-ggplot2.html#cb2-7" aria-hidden="true" tabindex="-1"></a>  <span class="fu">scale_y_continuous</span>(<span class="at">minor_breaks =</span> <span class="fu">seq</span>(<span class="dv">10</span>, <span class="dv">100</span>, <span class="dv">10</span>)) <span class="sc">+</span></span>
+<span id="cb2-8"><a href="a-grid-base-flowchart-using-ggplot2.html#cb2-8" aria-hidden="true" tabindex="-1"></a>  <span class="fu">theme_linedraw</span>() </span></code></pre></div>
+</div>
+<div id="step-2-draw-box-and-segments." class="section level3 hasAnchor" number="5.1.3">
+<h3><span class="header-section-number">5.1.3</span> Step 2: draw box and segments.<a href="a-grid-base-flowchart-using-ggplot2.html#step-2-draw-box-and-segments." class="anchor-section" aria-label="Anchor link to header"></a></h3>
+<div id="add-5-boxes" class="section level4 hasAnchor" number="5.1.3.1">
+<h4><span class="header-section-number">5.1.3.1</span> Add 5 boxes<a href="a-grid-base-flowchart-using-ggplot2.html#add-5-boxes" class="anchor-section" aria-label="Anchor link to header"></a></h4>
+<div class="sourceCode" id="cb3"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb3-1"><a href="a-grid-base-flowchart-using-ggplot2.html#cb3-1" aria-hidden="true" tabindex="-1"></a>p <span class="ot">&lt;-</span> p <span class="sc">+</span></span>
+<span id="cb3-2"><a href="a-grid-base-flowchart-using-ggplot2.html#cb3-2" aria-hidden="true" tabindex="-1"></a>  <span class="co">#first box on left</span></span>
+<span id="cb3-3"><a href="a-grid-base-flowchart-using-ggplot2.html#cb3-3" aria-hidden="true" tabindex="-1"></a>  <span class="fu">geom_rect</span>(<span class="at">xmin =</span> <span class="dv">1</span>, <span class="at">xmax=</span><span class="dv">19</span>, <span class="at">ymin=</span><span class="dv">94</span>, <span class="at">ymax=</span><span class="dv">100</span>, </span>
+<span id="cb3-4"><a href="a-grid-base-flowchart-using-ggplot2.html#cb3-4" aria-hidden="true" tabindex="-1"></a>              <span class="at">color=</span><span class="st">&#39;black&#39;</span>, <span class="at">fill=</span><span class="st">&#39;white&#39;</span>, <span class="at">size=</span><span class="fl">0.25</span>) <span class="sc">+</span></span>
+<span id="cb3-5"><a href="a-grid-base-flowchart-using-ggplot2.html#cb3-5" aria-hidden="true" tabindex="-1"></a>  <span class="fu">annotate</span>(<span class="st">&#39;text&#39;</span>, <span class="at">x=</span> <span class="dv">10</span>, <span class="at">y=</span><span class="dv">97</span>, <span class="at">size=</span><span class="fl">2.5</span>, <span class="at">label=</span> <span class="st">&#39;Step 1 </span><span class="sc">\n</span><span class="st"> Name Step 1&#39;</span>) <span class="sc">+</span></span>
+<span id="cb3-6"><a href="a-grid-base-flowchart-using-ggplot2.html#cb3-6" aria-hidden="true" tabindex="-1"></a>  <span class="co">#2nd box on left</span></span>
+<span id="cb3-7"><a href="a-grid-base-flowchart-using-ggplot2.html#cb3-7" aria-hidden="true" tabindex="-1"></a>  <span class="fu">geom_rect</span>(<span class="at">xmin =</span> <span class="dv">21</span>, <span class="at">xmax=</span><span class="dv">39</span>, <span class="at">ymin=</span><span class="dv">94</span>, <span class="at">ymax=</span><span class="dv">100</span>, </span>
+<span id="cb3-8"><a href="a-grid-base-flowchart-using-ggplot2.html#cb3-8" aria-hidden="true" tabindex="-1"></a>              <span class="at">color=</span><span class="st">&#39;black&#39;</span>, <span class="at">fill=</span><span class="st">&#39;white&#39;</span>, <span class="at">size=</span><span class="fl">0.25</span>) <span class="sc">+</span></span>
+<span id="cb3-9"><a href="a-grid-base-flowchart-using-ggplot2.html#cb3-9" aria-hidden="true" tabindex="-1"></a>  <span class="fu">annotate</span>(<span class="st">&#39;text&#39;</span>, <span class="at">x=</span> <span class="dv">30</span>, <span class="at">y=</span><span class="dv">97</span>, <span class="at">size=</span><span class="fl">2.5</span>,<span class="at">label=</span> <span class="st">&#39;Step 2 </span><span class="sc">\n</span><span class="st"> Name Step 2&#39;</span>) <span class="sc">+</span></span>
+<span id="cb3-10"><a href="a-grid-base-flowchart-using-ggplot2.html#cb3-10" aria-hidden="true" tabindex="-1"></a><span class="co">#3rd box on left</span></span>
+<span id="cb3-11"><a href="a-grid-base-flowchart-using-ggplot2.html#cb3-11" aria-hidden="true" tabindex="-1"></a>  <span class="fu">geom_rect</span>(<span class="at">xmin =</span> <span class="dv">41</span>, <span class="at">xmax=</span><span class="dv">59</span>, <span class="at">ymin=</span><span class="dv">94</span>, <span class="at">ymax=</span><span class="dv">100</span>, </span>
+<span id="cb3-12"><a href="a-grid-base-flowchart-using-ggplot2.html#cb3-12" aria-hidden="true" tabindex="-1"></a>              <span class="at">color=</span><span class="st">&#39;black&#39;</span>, <span class="at">fill=</span><span class="st">&#39;white&#39;</span>, <span class="at">size=</span><span class="fl">0.25</span>) <span class="sc">+</span></span>
+<span id="cb3-13"><a href="a-grid-base-flowchart-using-ggplot2.html#cb3-13" aria-hidden="true" tabindex="-1"></a>  <span class="fu">annotate</span>(<span class="st">&#39;text&#39;</span>, <span class="at">x=</span> <span class="dv">50</span>, <span class="at">y=</span><span class="dv">97</span>, <span class="at">size=</span><span class="fl">2.5</span>, <span class="at">label=</span> <span class="st">&#39;Step 3 </span><span class="sc">\n</span><span class="st"> Name Step 3&#39;</span>) <span class="sc">+</span></span>
+<span id="cb3-14"><a href="a-grid-base-flowchart-using-ggplot2.html#cb3-14" aria-hidden="true" tabindex="-1"></a><span class="co">#4th box on left</span></span>
+<span id="cb3-15"><a href="a-grid-base-flowchart-using-ggplot2.html#cb3-15" aria-hidden="true" tabindex="-1"></a>  <span class="fu">geom_rect</span>(<span class="at">xmin =</span> <span class="dv">61</span>, <span class="at">xmax=</span><span class="dv">79</span>, <span class="at">ymin=</span><span class="dv">94</span>, <span class="at">ymax=</span><span class="dv">100</span>, </span>
+<span id="cb3-16"><a href="a-grid-base-flowchart-using-ggplot2.html#cb3-16" aria-hidden="true" tabindex="-1"></a>              <span class="at">color=</span><span class="st">&#39;black&#39;</span>, <span class="at">fill=</span><span class="st">&#39;white&#39;</span>, <span class="at">size=</span><span class="fl">0.25</span>) <span class="sc">+</span></span>
+<span id="cb3-17"><a href="a-grid-base-flowchart-using-ggplot2.html#cb3-17" aria-hidden="true" tabindex="-1"></a>  <span class="fu">annotate</span>(<span class="st">&#39;text&#39;</span>, <span class="at">x=</span> <span class="dv">70</span>, <span class="at">y=</span><span class="dv">97</span>, <span class="at">size=</span><span class="fl">2.5</span>, <span class="at">label=</span> <span class="st">&#39;Step 4 </span><span class="sc">\n</span><span class="st"> Name Step 4&#39;</span>) <span class="sc">+</span></span>
+<span id="cb3-18"><a href="a-grid-base-flowchart-using-ggplot2.html#cb3-18" aria-hidden="true" tabindex="-1"></a><span class="co">#5th box on left</span></span>
+<span id="cb3-19"><a href="a-grid-base-flowchart-using-ggplot2.html#cb3-19" aria-hidden="true" tabindex="-1"></a>  <span class="fu">geom_rect</span>(<span class="at">xmin =</span> <span class="dv">81</span>, <span class="at">xmax=</span><span class="dv">99</span>, <span class="at">ymin=</span><span class="dv">94</span>, <span class="at">ymax=</span><span class="dv">100</span>, </span>
+<span id="cb3-20"><a href="a-grid-base-flowchart-using-ggplot2.html#cb3-20" aria-hidden="true" tabindex="-1"></a>              <span class="at">color=</span><span class="st">&#39;black&#39;</span>, <span class="at">fill=</span><span class="st">&#39;white&#39;</span>, <span class="at">size=</span><span class="fl">0.25</span>) <span class="sc">+</span></span>
+<span id="cb3-21"><a href="a-grid-base-flowchart-using-ggplot2.html#cb3-21" aria-hidden="true" tabindex="-1"></a>  <span class="fu">annotate</span>(<span class="st">&#39;text&#39;</span>, <span class="at">x=</span> <span class="dv">90</span>, <span class="at">y=</span><span class="dv">97</span>, <span class="at">size=</span><span class="fl">2.5</span>, <span class="at">label=</span> <span class="st">&#39;Step 5 </span><span class="sc">\n</span><span class="st"> Name Step 5&#39;</span>)</span>
+<span id="cb3-22"><a href="a-grid-base-flowchart-using-ggplot2.html#cb3-22" aria-hidden="true" tabindex="-1"></a>p</span></code></pre></div>
+<p><img src="_main_files/figure-html/unnamed-chunk-3-1.png" width="672" /></p>
+</div>
+<div id="add-5-long-arrows" class="section level4 hasAnchor" number="5.1.3.2">
+<h4><span class="header-section-number">5.1.3.2</span> Add 5 long arrows<a href="a-grid-base-flowchart-using-ggplot2.html#add-5-long-arrows" class="anchor-section" aria-label="Anchor link to header"></a></h4>
+<div class="sourceCode" id="cb4"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb4-1"><a href="a-grid-base-flowchart-using-ggplot2.html#cb4-1" aria-hidden="true" tabindex="-1"></a>p <span class="ot">&lt;-</span> p <span class="sc">+</span></span>
+<span id="cb4-2"><a href="a-grid-base-flowchart-using-ggplot2.html#cb4-2" aria-hidden="true" tabindex="-1"></a>  <span class="co">#first arrow on left</span></span>
+<span id="cb4-3"><a href="a-grid-base-flowchart-using-ggplot2.html#cb4-3" aria-hidden="true" tabindex="-1"></a>  <span class="fu">geom_segment</span>(</span>
+<span id="cb4-4"><a href="a-grid-base-flowchart-using-ggplot2.html#cb4-4" aria-hidden="true" tabindex="-1"></a>    <span class="at">x=</span><span class="dv">2</span>, <span class="at">xend=</span><span class="dv">2</span>, <span class="at">y=</span><span class="dv">94</span>, <span class="at">yend=</span><span class="dv">50</span>, </span>
+<span id="cb4-5"><a href="a-grid-base-flowchart-using-ggplot2.html#cb4-5" aria-hidden="true" tabindex="-1"></a>    <span class="at">size=</span><span class="fl">0.15</span>, <span class="at">linejoin =</span> <span class="st">&quot;mitre&quot;</span>, <span class="at">lineend =</span> <span class="st">&quot;butt&quot;</span>,</span>
+<span id="cb4-6"><a href="a-grid-base-flowchart-using-ggplot2.html#cb4-6" aria-hidden="true" tabindex="-1"></a>    <span class="at">arrow =</span> <span class="fu">arrow</span>(<span class="at">length =</span> <span class="fu">unit</span>(<span class="dv">1</span>, <span class="st">&quot;mm&quot;</span>), <span class="at">type=</span> <span class="st">&quot;closed&quot;</span>)) <span class="sc">+</span></span>
+<span id="cb4-7"><a href="a-grid-base-flowchart-using-ggplot2.html#cb4-7" aria-hidden="true" tabindex="-1"></a>  <span class="co">#2nd arrow on left</span></span>
+<span id="cb4-8"><a href="a-grid-base-flowchart-using-ggplot2.html#cb4-8" aria-hidden="true" tabindex="-1"></a>  <span class="fu">geom_segment</span>(</span>
+<span id="cb4-9"><a href="a-grid-base-flowchart-using-ggplot2.html#cb4-9" aria-hidden="true" tabindex="-1"></a>    <span class="at">x=</span><span class="dv">22</span>, <span class="at">xend=</span><span class="dv">22</span>, <span class="at">y=</span><span class="dv">94</span>, <span class="at">yend=</span><span class="dv">50</span>, </span>
+<span id="cb4-10"><a href="a-grid-base-flowchart-using-ggplot2.html#cb4-10" aria-hidden="true" tabindex="-1"></a>    <span class="at">size=</span><span class="fl">0.15</span>, <span class="at">linejoin =</span> <span class="st">&quot;mitre&quot;</span>, <span class="at">lineend =</span> <span class="st">&quot;butt&quot;</span>,</span>
+<span id="cb4-11"><a href="a-grid-base-flowchart-using-ggplot2.html#cb4-11" aria-hidden="true" tabindex="-1"></a>    <span class="at">arrow =</span> <span class="fu">arrow</span>(<span class="at">length =</span> <span class="fu">unit</span>(<span class="dv">1</span>, <span class="st">&quot;mm&quot;</span>), <span class="at">type=</span> <span class="st">&quot;closed&quot;</span>)) <span class="sc">+</span></span>
+<span id="cb4-12"><a href="a-grid-base-flowchart-using-ggplot2.html#cb4-12" aria-hidden="true" tabindex="-1"></a><span class="co">#3rd arrow on left</span></span>
+<span id="cb4-13"><a href="a-grid-base-flowchart-using-ggplot2.html#cb4-13" aria-hidden="true" tabindex="-1"></a>  <span class="fu">geom_segment</span>(</span>
+<span id="cb4-14"><a href="a-grid-base-flowchart-using-ggplot2.html#cb4-14" aria-hidden="true" tabindex="-1"></a>    <span class="at">x=</span><span class="dv">42</span>, <span class="at">xend=</span><span class="dv">42</span>, <span class="at">y=</span><span class="dv">94</span>, <span class="at">yend=</span><span class="dv">50</span>, </span>
+<span id="cb4-15"><a href="a-grid-base-flowchart-using-ggplot2.html#cb4-15" aria-hidden="true" tabindex="-1"></a>    <span class="at">size=</span><span class="fl">0.15</span>, <span class="at">linejoin =</span> <span class="st">&quot;mitre&quot;</span>, <span class="at">lineend =</span> <span class="st">&quot;butt&quot;</span>,</span>
+<span id="cb4-16"><a href="a-grid-base-flowchart-using-ggplot2.html#cb4-16" aria-hidden="true" tabindex="-1"></a>    <span class="at">arrow =</span> <span class="fu">arrow</span>(<span class="at">length =</span> <span class="fu">unit</span>(<span class="dv">1</span>, <span class="st">&quot;mm&quot;</span>), <span class="at">type=</span> <span class="st">&quot;closed&quot;</span>)) <span class="sc">+</span></span>
+<span id="cb4-17"><a href="a-grid-base-flowchart-using-ggplot2.html#cb4-17" aria-hidden="true" tabindex="-1"></a><span class="co">#4th arrow on left</span></span>
+<span id="cb4-18"><a href="a-grid-base-flowchart-using-ggplot2.html#cb4-18" aria-hidden="true" tabindex="-1"></a>  <span class="fu">geom_segment</span>(</span>
+<span id="cb4-19"><a href="a-grid-base-flowchart-using-ggplot2.html#cb4-19" aria-hidden="true" tabindex="-1"></a>    <span class="at">x=</span><span class="dv">62</span>, <span class="at">xend=</span><span class="dv">62</span>, <span class="at">y=</span><span class="dv">94</span>, <span class="at">yend=</span><span class="dv">50</span>, </span>
+<span id="cb4-20"><a href="a-grid-base-flowchart-using-ggplot2.html#cb4-20" aria-hidden="true" tabindex="-1"></a>    <span class="at">size=</span><span class="fl">0.15</span>, <span class="at">linejoin =</span> <span class="st">&quot;mitre&quot;</span>, <span class="at">lineend =</span> <span class="st">&quot;butt&quot;</span>,</span>
+<span id="cb4-21"><a href="a-grid-base-flowchart-using-ggplot2.html#cb4-21" aria-hidden="true" tabindex="-1"></a>    <span class="at">arrow =</span> <span class="fu">arrow</span>(<span class="at">length =</span> <span class="fu">unit</span>(<span class="dv">1</span>, <span class="st">&quot;mm&quot;</span>), <span class="at">type=</span> <span class="st">&quot;closed&quot;</span>)) <span class="sc">+</span></span>
+<span id="cb4-22"><a href="a-grid-base-flowchart-using-ggplot2.html#cb4-22" aria-hidden="true" tabindex="-1"></a><span class="co">#5th arrow on left</span></span>
+<span id="cb4-23"><a href="a-grid-base-flowchart-using-ggplot2.html#cb4-23" aria-hidden="true" tabindex="-1"></a>  <span class="fu">geom_segment</span>(</span>
+<span id="cb4-24"><a href="a-grid-base-flowchart-using-ggplot2.html#cb4-24" aria-hidden="true" tabindex="-1"></a>    <span class="at">x=</span><span class="dv">82</span>, <span class="at">xend=</span><span class="dv">82</span>, <span class="at">y=</span><span class="dv">94</span>, <span class="at">yend=</span><span class="dv">50</span>, </span>
+<span id="cb4-25"><a href="a-grid-base-flowchart-using-ggplot2.html#cb4-25" aria-hidden="true" tabindex="-1"></a>    <span class="at">size=</span><span class="fl">0.15</span>, <span class="at">linejoin =</span> <span class="st">&quot;mitre&quot;</span>, <span class="at">lineend =</span> <span class="st">&quot;butt&quot;</span>,</span>
+<span id="cb4-26"><a href="a-grid-base-flowchart-using-ggplot2.html#cb4-26" aria-hidden="true" tabindex="-1"></a>    <span class="at">arrow =</span> <span class="fu">arrow</span>(<span class="at">length =</span> <span class="fu">unit</span>(<span class="dv">1</span>, <span class="st">&quot;mm&quot;</span>), <span class="at">type=</span> <span class="st">&quot;closed&quot;</span>)) </span>
+<span id="cb4-27"><a href="a-grid-base-flowchart-using-ggplot2.html#cb4-27" aria-hidden="true" tabindex="-1"></a>p</span></code></pre></div>
+<p><img src="_main_files/figure-html/unnamed-chunk-4-1.png" width="672" /></p>
+</div>
+<div id="add-completion-boxes" class="section level4 hasAnchor" number="5.1.3.3">
+<h4><span class="header-section-number">5.1.3.3</span> Add completion boxes<a href="a-grid-base-flowchart-using-ggplot2.html#add-completion-boxes" class="anchor-section" aria-label="Anchor link to header"></a></h4>
+<div class="sourceCode" id="cb5"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb5-1"><a href="a-grid-base-flowchart-using-ggplot2.html#cb5-1" aria-hidden="true" tabindex="-1"></a>p <span class="sc">+</span></span>
+<span id="cb5-2"><a href="a-grid-base-flowchart-using-ggplot2.html#cb5-2" aria-hidden="true" tabindex="-1"></a>  <span class="co">#first box on left</span></span>
+<span id="cb5-3"><a href="a-grid-base-flowchart-using-ggplot2.html#cb5-3" aria-hidden="true" tabindex="-1"></a>  <span class="fu">geom_rect</span>(<span class="at">xmin =</span> <span class="dv">5</span>, <span class="at">xmax=</span><span class="dv">19</span>, <span class="at">ymin=</span><span class="dv">30</span>, <span class="at">ymax=</span><span class="dv">80</span>, </span>
+<span id="cb5-4"><a href="a-grid-base-flowchart-using-ggplot2.html#cb5-4" aria-hidden="true" tabindex="-1"></a>              <span class="at">color=</span><span class="st">&#39;black&#39;</span>, <span class="at">fill=</span><span class="st">&#39;white&#39;</span>, <span class="at">size=</span><span class="fl">0.25</span>) <span class="sc">+</span></span>
+<span id="cb5-5"><a href="a-grid-base-flowchart-using-ggplot2.html#cb5-5" aria-hidden="true" tabindex="-1"></a>  <span class="fu">annotate</span>(<span class="st">&#39;text&#39;</span>, <span class="at">x=</span> <span class="dv">12</span>, <span class="at">y=</span><span class="dv">50</span>, <span class="at">size=</span><span class="fl">2.5</span>,</span>
+<span id="cb5-6"><a href="a-grid-base-flowchart-using-ggplot2.html#cb5-6" aria-hidden="true" tabindex="-1"></a>      <span class="at">label=</span> <span class="st">&#39;5 Discontinued    </span><span class="sc">\n</span><span class="st">3 Adverse event</span><span class="sc">\n</span><span class="st">2 Lack of efficacy&#39;</span>) <span class="sc">+</span></span>
+<span id="cb5-7"><a href="a-grid-base-flowchart-using-ggplot2.html#cb5-7" aria-hidden="true" tabindex="-1"></a>  <span class="co">#2nd box from left</span></span>
+<span id="cb5-8"><a href="a-grid-base-flowchart-using-ggplot2.html#cb5-8" aria-hidden="true" tabindex="-1"></a>  <span class="fu">geom_rect</span>(<span class="at">xmin =</span> <span class="dv">25</span>, <span class="at">xmax=</span><span class="dv">39</span>, <span class="at">ymin=</span><span class="dv">30</span>, <span class="at">ymax=</span><span class="dv">80</span>, </span>
+<span id="cb5-9"><a href="a-grid-base-flowchart-using-ggplot2.html#cb5-9" aria-hidden="true" tabindex="-1"></a>              <span class="at">color=</span><span class="st">&#39;black&#39;</span>, <span class="at">fill=</span><span class="st">&#39;white&#39;</span>, <span class="at">size=</span><span class="fl">0.25</span>) <span class="sc">+</span></span>
+<span id="cb5-10"><a href="a-grid-base-flowchart-using-ggplot2.html#cb5-10" aria-hidden="true" tabindex="-1"></a>  <span class="fu">annotate</span>(<span class="st">&#39;text&#39;</span>, <span class="at">x=</span> <span class="dv">32</span>, <span class="at">y=</span><span class="dv">50</span>, <span class="at">size=</span><span class="fl">2.5</span>,</span>
+<span id="cb5-11"><a href="a-grid-base-flowchart-using-ggplot2.html#cb5-11" aria-hidden="true" tabindex="-1"></a>      <span class="at">label=</span> <span class="st">&#39;1 Discontinued    </span><span class="sc">\n</span><span class="st">1 Adverse event</span><span class="sc">\n</span><span class="st">1 Lack of efficacy&#39;</span>) <span class="sc">+</span></span>
+<span id="cb5-12"><a href="a-grid-base-flowchart-using-ggplot2.html#cb5-12" aria-hidden="true" tabindex="-1"></a>  <span class="co">#3rd box from left</span></span>
+<span id="cb5-13"><a href="a-grid-base-flowchart-using-ggplot2.html#cb5-13" aria-hidden="true" tabindex="-1"></a>  <span class="fu">geom_rect</span>(<span class="at">xmin =</span> <span class="dv">45</span>, <span class="at">xmax=</span><span class="dv">59</span>, <span class="at">ymin=</span><span class="dv">30</span>, <span class="at">ymax=</span><span class="dv">80</span>, </span>
+<span id="cb5-14"><a href="a-grid-base-flowchart-using-ggplot2.html#cb5-14" aria-hidden="true" tabindex="-1"></a>              <span class="at">color=</span><span class="st">&#39;black&#39;</span>, <span class="at">fill=</span><span class="st">&#39;white&#39;</span>, <span class="at">size=</span><span class="fl">0.25</span>) <span class="sc">+</span></span>
+<span id="cb5-15"><a href="a-grid-base-flowchart-using-ggplot2.html#cb5-15" aria-hidden="true" tabindex="-1"></a>  <span class="fu">annotate</span>(<span class="st">&#39;text&#39;</span>, <span class="at">x=</span> <span class="dv">52</span>, <span class="at">y=</span><span class="dv">50</span>, <span class="at">size=</span><span class="fl">2.5</span>,</span>
+<span id="cb5-16"><a href="a-grid-base-flowchart-using-ggplot2.html#cb5-16" aria-hidden="true" tabindex="-1"></a>      <span class="at">label=</span> <span class="st">&#39;4 Discontinued    </span><span class="sc">\n</span><span class="st">2 Adverse event</span><span class="sc">\n</span><span class="st">1 Lack of efficacy</span><span class="sc">\n</span><span class="st">1 Other&#39;</span>) <span class="sc">+</span></span>
+<span id="cb5-17"><a href="a-grid-base-flowchart-using-ggplot2.html#cb5-17" aria-hidden="true" tabindex="-1"></a>  <span class="co">#4th box from left</span></span>
+<span id="cb5-18"><a href="a-grid-base-flowchart-using-ggplot2.html#cb5-18" aria-hidden="true" tabindex="-1"></a>  <span class="fu">geom_rect</span>(<span class="at">xmin =</span> <span class="dv">65</span>, <span class="at">xmax=</span><span class="dv">79</span>, <span class="at">ymin=</span><span class="dv">30</span>, <span class="at">ymax=</span><span class="dv">80</span>, </span>
+<span id="cb5-19"><a href="a-grid-base-flowchart-using-ggplot2.html#cb5-19" aria-hidden="true" tabindex="-1"></a>              <span class="at">color=</span><span class="st">&#39;black&#39;</span>, <span class="at">fill=</span><span class="st">&#39;white&#39;</span>, <span class="at">size=</span><span class="fl">0.25</span>) <span class="sc">+</span></span>
+<span id="cb5-20"><a href="a-grid-base-flowchart-using-ggplot2.html#cb5-20" aria-hidden="true" tabindex="-1"></a>  <span class="fu">annotate</span>(<span class="st">&#39;text&#39;</span>, <span class="at">x=</span> <span class="dv">72</span>, <span class="at">y=</span><span class="dv">50</span>, <span class="at">size=</span><span class="fl">2.5</span>,</span>
+<span id="cb5-21"><a href="a-grid-base-flowchart-using-ggplot2.html#cb5-21" aria-hidden="true" tabindex="-1"></a>      <span class="at">label=</span> <span class="st">&#39;6 Discontinued    </span><span class="sc">\n</span><span class="st">4 Adverse event</span><span class="sc">\n</span><span class="st">1 Lack of efficacy</span><span class="sc">\n</span><span class="st">1 Other&#39;</span>) <span class="sc">+</span></span>
+<span id="cb5-22"><a href="a-grid-base-flowchart-using-ggplot2.html#cb5-22" aria-hidden="true" tabindex="-1"></a><span class="co">#4th box from left</span></span>
+<span id="cb5-23"><a href="a-grid-base-flowchart-using-ggplot2.html#cb5-23" aria-hidden="true" tabindex="-1"></a>  <span class="fu">geom_rect</span>(<span class="at">xmin =</span> <span class="dv">85</span>, <span class="at">xmax=</span><span class="dv">99</span>, <span class="at">ymin=</span><span class="dv">30</span>, <span class="at">ymax=</span><span class="dv">80</span>, </span>
+<span id="cb5-24"><a href="a-grid-base-flowchart-using-ggplot2.html#cb5-24" aria-hidden="true" tabindex="-1"></a>              <span class="at">color=</span><span class="st">&#39;black&#39;</span>, <span class="at">fill=</span><span class="st">&#39;white&#39;</span>, <span class="at">size=</span><span class="fl">0.25</span>) <span class="sc">+</span></span>
+<span id="cb5-25"><a href="a-grid-base-flowchart-using-ggplot2.html#cb5-25" aria-hidden="true" tabindex="-1"></a>  <span class="fu">annotate</span>(<span class="st">&#39;text&#39;</span>, <span class="at">x=</span> <span class="dv">92</span>, <span class="at">y=</span><span class="dv">50</span>, <span class="at">size=</span><span class="fl">2.5</span>,</span>
+<span id="cb5-26"><a href="a-grid-base-flowchart-using-ggplot2.html#cb5-26" aria-hidden="true" tabindex="-1"></a>      <span class="at">label=</span> <span class="st">&#39;6 Discontinued    </span><span class="sc">\n</span><span class="st">4 Adverse event</span><span class="sc">\n</span><span class="st">2 Lack of efficacy&#39;</span>) <span class="ot">-&gt;</span>p</span>
+<span id="cb5-27"><a href="a-grid-base-flowchart-using-ggplot2.html#cb5-27" aria-hidden="true" tabindex="-1"></a>p</span></code></pre></div>
+<p><img src="_main_files/figure-html/unnamed-chunk-5-1.png" width="672" /></p>
+</div>
+<div id="add-the-short-arrows" class="section level4 hasAnchor" number="5.1.3.4">
+<h4><span class="header-section-number">5.1.3.4</span> Add the short arrows<a href="a-grid-base-flowchart-using-ggplot2.html#add-the-short-arrows" class="anchor-section" aria-label="Anchor link to header"></a></h4>
+<div class="sourceCode" id="cb6"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb6-1"><a href="a-grid-base-flowchart-using-ggplot2.html#cb6-1" aria-hidden="true" tabindex="-1"></a>p <span class="sc">+</span></span>
+<span id="cb6-2"><a href="a-grid-base-flowchart-using-ggplot2.html#cb6-2" aria-hidden="true" tabindex="-1"></a><span class="co">#first arrow on left</span></span>
+<span id="cb6-3"><a href="a-grid-base-flowchart-using-ggplot2.html#cb6-3" aria-hidden="true" tabindex="-1"></a>  <span class="fu">geom_segment</span>(</span>
+<span id="cb6-4"><a href="a-grid-base-flowchart-using-ggplot2.html#cb6-4" aria-hidden="true" tabindex="-1"></a>    <span class="at">x=</span><span class="dv">2</span>, <span class="at">xend=</span><span class="fl">4.7</span>, <span class="at">y=</span><span class="dv">50</span>, <span class="at">yend=</span><span class="dv">50</span>, </span>
+<span id="cb6-5"><a href="a-grid-base-flowchart-using-ggplot2.html#cb6-5" aria-hidden="true" tabindex="-1"></a>    <span class="at">size=</span><span class="fl">0.15</span>, <span class="at">linejoin =</span> <span class="st">&quot;mitre&quot;</span>, <span class="at">lineend =</span> <span class="st">&quot;butt&quot;</span>,</span>
+<span id="cb6-6"><a href="a-grid-base-flowchart-using-ggplot2.html#cb6-6" aria-hidden="true" tabindex="-1"></a>    <span class="at">arrow =</span> <span class="fu">arrow</span>(<span class="at">length =</span> <span class="fu">unit</span>(<span class="dv">1</span>, <span class="st">&quot;mm&quot;</span>), <span class="at">type=</span> <span class="st">&quot;closed&quot;</span>)) <span class="sc">+</span></span>
+<span id="cb6-7"><a href="a-grid-base-flowchart-using-ggplot2.html#cb6-7" aria-hidden="true" tabindex="-1"></a>  <span class="co">#2nd arrow on left</span></span>
+<span id="cb6-8"><a href="a-grid-base-flowchart-using-ggplot2.html#cb6-8" aria-hidden="true" tabindex="-1"></a>  <span class="fu">geom_segment</span>(</span>
+<span id="cb6-9"><a href="a-grid-base-flowchart-using-ggplot2.html#cb6-9" aria-hidden="true" tabindex="-1"></a>    <span class="at">x=</span><span class="dv">22</span>, <span class="at">xend=</span><span class="fl">24.7</span>, <span class="at">y=</span><span class="dv">50</span>, <span class="at">yend=</span><span class="dv">50</span>, </span>
+<span id="cb6-10"><a href="a-grid-base-flowchart-using-ggplot2.html#cb6-10" aria-hidden="true" tabindex="-1"></a>    <span class="at">size=</span><span class="fl">0.15</span>, <span class="at">linejoin =</span> <span class="st">&quot;mitre&quot;</span>, <span class="at">lineend =</span> <span class="st">&quot;butt&quot;</span>,</span>
+<span id="cb6-11"><a href="a-grid-base-flowchart-using-ggplot2.html#cb6-11" aria-hidden="true" tabindex="-1"></a>    <span class="at">arrow =</span> <span class="fu">arrow</span>(<span class="at">length =</span> <span class="fu">unit</span>(<span class="dv">1</span>, <span class="st">&quot;mm&quot;</span>), <span class="at">type=</span> <span class="st">&quot;closed&quot;</span>)) <span class="sc">+</span></span>
+<span id="cb6-12"><a href="a-grid-base-flowchart-using-ggplot2.html#cb6-12" aria-hidden="true" tabindex="-1"></a><span class="co">#3rd arrow on left</span></span>
+<span id="cb6-13"><a href="a-grid-base-flowchart-using-ggplot2.html#cb6-13" aria-hidden="true" tabindex="-1"></a>  <span class="fu">geom_segment</span>(</span>
+<span id="cb6-14"><a href="a-grid-base-flowchart-using-ggplot2.html#cb6-14" aria-hidden="true" tabindex="-1"></a>    <span class="at">x=</span><span class="dv">42</span>, <span class="at">xend=</span><span class="fl">44.7</span>, <span class="at">y=</span><span class="dv">50</span>, <span class="at">yend=</span><span class="dv">50</span>,  </span>
+<span id="cb6-15"><a href="a-grid-base-flowchart-using-ggplot2.html#cb6-15" aria-hidden="true" tabindex="-1"></a>    <span class="at">size=</span><span class="fl">0.15</span>, <span class="at">linejoin =</span> <span class="st">&quot;mitre&quot;</span>, <span class="at">lineend =</span> <span class="st">&quot;butt&quot;</span>,</span>
+<span id="cb6-16"><a href="a-grid-base-flowchart-using-ggplot2.html#cb6-16" aria-hidden="true" tabindex="-1"></a>    <span class="at">arrow =</span> <span class="fu">arrow</span>(<span class="at">length =</span> <span class="fu">unit</span>(<span class="dv">1</span>, <span class="st">&quot;mm&quot;</span>), <span class="at">type=</span> <span class="st">&quot;closed&quot;</span>)) <span class="sc">+</span></span>
+<span id="cb6-17"><a href="a-grid-base-flowchart-using-ggplot2.html#cb6-17" aria-hidden="true" tabindex="-1"></a><span class="co">#4th arrow on left</span></span>
+<span id="cb6-18"><a href="a-grid-base-flowchart-using-ggplot2.html#cb6-18" aria-hidden="true" tabindex="-1"></a>  <span class="fu">geom_segment</span>(</span>
+<span id="cb6-19"><a href="a-grid-base-flowchart-using-ggplot2.html#cb6-19" aria-hidden="true" tabindex="-1"></a>    <span class="at">x=</span><span class="dv">62</span>, <span class="at">xend=</span><span class="fl">64.7</span>, <span class="at">y=</span><span class="dv">50</span>, <span class="at">yend=</span><span class="dv">50</span>,  </span>
+<span id="cb6-20"><a href="a-grid-base-flowchart-using-ggplot2.html#cb6-20" aria-hidden="true" tabindex="-1"></a>    <span class="at">size=</span><span class="fl">0.15</span>, <span class="at">linejoin =</span> <span class="st">&quot;mitre&quot;</span>, <span class="at">lineend =</span> <span class="st">&quot;butt&quot;</span>,</span>
+<span id="cb6-21"><a href="a-grid-base-flowchart-using-ggplot2.html#cb6-21" aria-hidden="true" tabindex="-1"></a>    <span class="at">arrow =</span> <span class="fu">arrow</span>(<span class="at">length =</span> <span class="fu">unit</span>(<span class="dv">1</span>, <span class="st">&quot;mm&quot;</span>), <span class="at">type=</span> <span class="st">&quot;closed&quot;</span>)) <span class="sc">+</span></span>
+<span id="cb6-22"><a href="a-grid-base-flowchart-using-ggplot2.html#cb6-22" aria-hidden="true" tabindex="-1"></a><span class="co">#5th arrow on left</span></span>
+<span id="cb6-23"><a href="a-grid-base-flowchart-using-ggplot2.html#cb6-23" aria-hidden="true" tabindex="-1"></a>  <span class="fu">geom_segment</span>(</span>
+<span id="cb6-24"><a href="a-grid-base-flowchart-using-ggplot2.html#cb6-24" aria-hidden="true" tabindex="-1"></a>    <span class="at">x=</span><span class="dv">82</span>, <span class="at">xend=</span><span class="fl">84.7</span>, <span class="at">y=</span><span class="dv">50</span>, <span class="at">yend=</span><span class="dv">50</span>, </span>
+<span id="cb6-25"><a href="a-grid-base-flowchart-using-ggplot2.html#cb6-25" aria-hidden="true" tabindex="-1"></a>    <span class="at">size=</span><span class="fl">0.15</span>, <span class="at">linejoin =</span> <span class="st">&quot;mitre&quot;</span>, <span class="at">lineend =</span> <span class="st">&quot;butt&quot;</span>,</span>
+<span id="cb6-26"><a href="a-grid-base-flowchart-using-ggplot2.html#cb6-26" aria-hidden="true" tabindex="-1"></a>    <span class="at">arrow =</span> <span class="fu">arrow</span>(<span class="at">length =</span> <span class="fu">unit</span>(<span class="dv">1</span>, <span class="st">&quot;mm&quot;</span>), <span class="at">type=</span> <span class="st">&quot;closed&quot;</span>)) <span class="ot">-&gt;</span></span>
+<span id="cb6-27"><a href="a-grid-base-flowchart-using-ggplot2.html#cb6-27" aria-hidden="true" tabindex="-1"></a>  p</span>
+<span id="cb6-28"><a href="a-grid-base-flowchart-using-ggplot2.html#cb6-28" aria-hidden="true" tabindex="-1"></a>p</span></code></pre></div>
+<p><img src="_main_files/figure-html/unnamed-chunk-6-1.png" width="672" /></p>
+</div>
+</div>
+<div id="step-3-reveal-the-flowchart" class="section level3 hasAnchor" number="5.1.4">
+<h3><span class="header-section-number">5.1.4</span> Step 3: Reveal the flowchart<a href="a-grid-base-flowchart-using-ggplot2.html#step-3-reveal-the-flowchart" class="anchor-section" aria-label="Anchor link to header"></a></h3>
+<div class="sourceCode" id="cb7"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb7-1"><a href="a-grid-base-flowchart-using-ggplot2.html#cb7-1" aria-hidden="true" tabindex="-1"></a>p <span class="sc">+</span> <span class="fu">theme_void</span>()</span></code></pre></div>
+<p><img src="_main_files/figure-html/unnamed-chunk-7-1.png" width="672" /></p>
+</div>
+</div>
+<div id="use-gmisc-package" class="section level2 hasAnchor" number="5.2">
+<h2><span class="header-section-number">5.2</span> Use Gmisc package<a href="a-grid-base-flowchart-using-ggplot2.html#use-gmisc-package" class="anchor-section" aria-label="Anchor link to header"></a></h2>
+<div id="introduction---structure---keywords" class="section level3 hasAnchor" number="5.2.1">
+<h3><span class="header-section-number">5.2.1</span> Introduction - Structure - Keywords<a href="a-grid-base-flowchart-using-ggplot2.html#introduction---structure---keywords" class="anchor-section" aria-label="Anchor link to header"></a></h3>
+<ul>
+<li><code>grid.newpage()</code>: to create a new page with box/chart</li>
+<li><code>boxGrob</code>, <code>boxPropGrob</code>: generates boxes</li>
+<li><code>connectGrob</code>: generate arrows between boxes</li>
+<li><code>spreadHorizontal</code>, <code>spreadVertical</code>: Spread - we want to use the full plot and either we position each element or we automatically spread them in a vertical or horizontal direction</li>
+<li><code>alignHorizontal</code>, <code>alignVertical</code>: Alignment of boxes - before or after spreading we may want to align boxes</li>
+</ul>
+</div>
+<div id="a-basic-box" class="section level3 hasAnchor" number="5.2.2">
+<h3><span class="header-section-number">5.2.2</span> A basic box<a href="a-grid-base-flowchart-using-ggplot2.html#a-basic-box" class="anchor-section" aria-label="Anchor link to header"></a></h3>
+<div class="sourceCode" id="cb8"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb8-1"><a href="a-grid-base-flowchart-using-ggplot2.html#cb8-1" aria-hidden="true" tabindex="-1"></a><span class="fu">library</span>(Gmisc, <span class="at">quietly =</span> <span class="cn">TRUE</span>)</span></code></pre></div>
+<pre><code>## Warning: package &#39;Gmisc&#39; was built under R version 4.2.1</code></pre>
+<pre><code>## Warning: package &#39;htmlTable&#39; was built under R version 4.2.1</code></pre>
+<div class="sourceCode" id="cb11"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb11-1"><a href="a-grid-base-flowchart-using-ggplot2.html#cb11-1" aria-hidden="true" tabindex="-1"></a><span class="fu">library</span>(glue)</span>
+<span id="cb11-2"><a href="a-grid-base-flowchart-using-ggplot2.html#cb11-2" aria-hidden="true" tabindex="-1"></a><span class="fu">library</span>(htmlTable)</span>
+<span id="cb11-3"><a href="a-grid-base-flowchart-using-ggplot2.html#cb11-3" aria-hidden="true" tabindex="-1"></a><span class="fu">library</span>(grid)</span>
+<span id="cb11-4"><a href="a-grid-base-flowchart-using-ggplot2.html#cb11-4" aria-hidden="true" tabindex="-1"></a><span class="fu">library</span>(magrittr, <span class="at">quietly =</span> <span class="cn">TRUE</span> )</span></code></pre></div>
+<pre><code>## 
+## Attaching package: &#39;magrittr&#39;</code></pre>
+<pre><code>## The following object is masked from &#39;package:purrr&#39;:
+## 
+##     set_names</code></pre>
+<pre><code>## The following object is masked from &#39;package:tidyr&#39;:
+## 
+##     extract</code></pre>
+<div class="sourceCode" id="cb15"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb15-1"><a href="a-grid-base-flowchart-using-ggplot2.html#cb15-1" aria-hidden="true" tabindex="-1"></a><span class="fu">grid.newpage</span>()</span>
+<span id="cb15-2"><a href="a-grid-base-flowchart-using-ggplot2.html#cb15-2" aria-hidden="true" tabindex="-1"></a>txt <span class="ot">&lt;-</span></span>
+<span id="cb15-3"><a href="a-grid-base-flowchart-using-ggplot2.html#cb15-3" aria-hidden="true" tabindex="-1"></a><span class="st">&quot;Just a plain box</span></span>
+<span id="cb15-4"><a href="a-grid-base-flowchart-using-ggplot2.html#cb15-4" aria-hidden="true" tabindex="-1"></a><span class="st">with some text</span></span>
+<span id="cb15-5"><a href="a-grid-base-flowchart-using-ggplot2.html#cb15-5" aria-hidden="true" tabindex="-1"></a><span class="st">- Note that newline is OK&quot;</span></span>
+<span id="cb15-6"><a href="a-grid-base-flowchart-using-ggplot2.html#cb15-6" aria-hidden="true" tabindex="-1"></a><span class="fu">boxGrob</span>(txt)</span></code></pre></div>
+<p><img src="_main_files/figure-html/unnamed-chunk-9-1.png" width="672" />
+We can position and style this box as any element:</p>
+<div class="sourceCode" id="cb16"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb16-1"><a href="a-grid-base-flowchart-using-ggplot2.html#cb16-1" aria-hidden="true" tabindex="-1"></a><span class="fu">grid.newpage</span>()</span>
+<span id="cb16-2"><a href="a-grid-base-flowchart-using-ggplot2.html#cb16-2" aria-hidden="true" tabindex="-1"></a><span class="fu">boxGrob</span>(<span class="st">&quot;A large</span><span class="sc">\n</span><span class="st">offset</span><span class="sc">\n</span><span class="st">yellow</span><span class="sc">\n</span><span class="st">box&quot;</span>,</span>
+<span id="cb16-3"><a href="a-grid-base-flowchart-using-ggplot2.html#cb16-3" aria-hidden="true" tabindex="-1"></a>        <span class="at">width =</span> .<span class="dv">8</span>, <span class="at">height =</span> .<span class="dv">8</span>,</span>
+<span id="cb16-4"><a href="a-grid-base-flowchart-using-ggplot2.html#cb16-4" aria-hidden="true" tabindex="-1"></a>        <span class="at">x =</span> <span class="dv">0</span>, <span class="at">y =</span> <span class="dv">0</span>,</span>
+<span id="cb16-5"><a href="a-grid-base-flowchart-using-ggplot2.html#cb16-5" aria-hidden="true" tabindex="-1"></a>        <span class="at">bjust =</span> <span class="fu">c</span>(<span class="st">&quot;left&quot;</span>, <span class="st">&quot;bottom&quot;</span>),</span>
+<span id="cb16-6"><a href="a-grid-base-flowchart-using-ggplot2.html#cb16-6" aria-hidden="true" tabindex="-1"></a>        <span class="at">txt_gp =</span> <span class="fu">gpar</span>(<span class="at">col =</span> <span class="st">&quot;darkblue&quot;</span>, <span class="at">cex =</span> <span class="dv">2</span>),</span>
+<span id="cb16-7"><a href="a-grid-base-flowchart-using-ggplot2.html#cb16-7" aria-hidden="true" tabindex="-1"></a>        <span class="at">box_gp =</span> <span class="fu">gpar</span>(<span class="at">fill =</span> <span class="st">&quot;lightyellow&quot;</span>, <span class="at">col =</span> <span class="st">&quot;darkblue&quot;</span>))</span></code></pre></div>
+<p><img src="_main_files/figure-html/unnamed-chunk-10-1.png" width="672" /></p>
+<p>The boxPropGrob is for displaying proportions as the name indicates.</p>
+<div class="sourceCode" id="cb17"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb17-1"><a href="a-grid-base-flowchart-using-ggplot2.html#cb17-1" aria-hidden="true" tabindex="-1"></a><span class="fu">grid.newpage</span>()</span>
+<span id="cb17-2"><a href="a-grid-base-flowchart-using-ggplot2.html#cb17-2" aria-hidden="true" tabindex="-1"></a><span class="fu">boxPropGrob</span>(<span class="st">&quot;A box with proportions&quot;</span>,</span>
+<span id="cb17-3"><a href="a-grid-base-flowchart-using-ggplot2.html#cb17-3" aria-hidden="true" tabindex="-1"></a>            <span class="st">&quot;Left side&quot;</span>, <span class="st">&quot;Right side&quot;</span>,</span>
+<span id="cb17-4"><a href="a-grid-base-flowchart-using-ggplot2.html#cb17-4" aria-hidden="true" tabindex="-1"></a>            <span class="at">prop =</span> .<span class="dv">6</span>)</span></code></pre></div>
+<p><img src="_main_files/figure-html/unnamed-chunk-11-1.png" width="672" />
+###</p>
+<div class="sourceCode" id="cb18"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb18-1"><a href="a-grid-base-flowchart-using-ggplot2.html#cb18-1" aria-hidden="true" tabindex="-1"></a><span class="fu">grid.newpage</span>()</span>
+<span id="cb18-2"><a href="a-grid-base-flowchart-using-ggplot2.html#cb18-2" aria-hidden="true" tabindex="-1"></a>smpl_bx <span class="ot">&lt;-</span> <span class="fu">boxGrob</span>(</span>
+<span id="cb18-3"><a href="a-grid-base-flowchart-using-ggplot2.html#cb18-3" aria-hidden="true" tabindex="-1"></a>  <span class="at">label =</span> <span class="st">&quot;A simple box&quot;</span>,</span>
+<span id="cb18-4"><a href="a-grid-base-flowchart-using-ggplot2.html#cb18-4" aria-hidden="true" tabindex="-1"></a>  <span class="at">x =</span> .<span class="dv">3</span>,</span>
+<span id="cb18-5"><a href="a-grid-base-flowchart-using-ggplot2.html#cb18-5" aria-hidden="true" tabindex="-1"></a>  <span class="at">y =</span> .<span class="dv">9</span>,</span>
+<span id="cb18-6"><a href="a-grid-base-flowchart-using-ggplot2.html#cb18-6" aria-hidden="true" tabindex="-1"></a>  <span class="at">just =</span> <span class="st">&quot;left&quot;</span>)</span>
+<span id="cb18-7"><a href="a-grid-base-flowchart-using-ggplot2.html#cb18-7" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb18-8"><a href="a-grid-base-flowchart-using-ggplot2.html#cb18-8" aria-hidden="true" tabindex="-1"></a>prop_bx <span class="ot">&lt;-</span> <span class="fu">boxPropGrob</span>(</span>
+<span id="cb18-9"><a href="a-grid-base-flowchart-using-ggplot2.html#cb18-9" aria-hidden="true" tabindex="-1"></a>  <span class="at">label =</span> <span class="st">&quot;A split box&quot;</span>,</span>
+<span id="cb18-10"><a href="a-grid-base-flowchart-using-ggplot2.html#cb18-10" aria-hidden="true" tabindex="-1"></a>  <span class="at">label_left =</span> <span class="st">&quot;Left side&quot;</span>,</span>
+<span id="cb18-11"><a href="a-grid-base-flowchart-using-ggplot2.html#cb18-11" aria-hidden="true" tabindex="-1"></a>  <span class="at">label_right =</span> <span class="st">&quot;Right side&quot;</span>,</span>
+<span id="cb18-12"><a href="a-grid-base-flowchart-using-ggplot2.html#cb18-12" aria-hidden="true" tabindex="-1"></a>  <span class="at">x =</span> .<span class="dv">5</span>,</span>
+<span id="cb18-13"><a href="a-grid-base-flowchart-using-ggplot2.html#cb18-13" aria-hidden="true" tabindex="-1"></a>  <span class="at">y =</span> .<span class="dv">3</span>,</span>
+<span id="cb18-14"><a href="a-grid-base-flowchart-using-ggplot2.html#cb18-14" aria-hidden="true" tabindex="-1"></a>  <span class="at">prop =</span> .<span class="dv">3</span>,</span>
+<span id="cb18-15"><a href="a-grid-base-flowchart-using-ggplot2.html#cb18-15" aria-hidden="true" tabindex="-1"></a>  <span class="at">just =</span> <span class="st">&quot;center&quot;</span>)</span>
+<span id="cb18-16"><a href="a-grid-base-flowchart-using-ggplot2.html#cb18-16" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb18-17"><a href="a-grid-base-flowchart-using-ggplot2.html#cb18-17" aria-hidden="true" tabindex="-1"></a><span class="fu">plot</span>(smpl_bx)</span>
+<span id="cb18-18"><a href="a-grid-base-flowchart-using-ggplot2.html#cb18-18" aria-hidden="true" tabindex="-1"></a><span class="fu">plot</span>(prop_bx)</span></code></pre></div>
+<p><img src="_main_files/figure-html/unnamed-chunk-12-1.png" width="672" />
+### Connect the boxes</p>
+<div class="sourceCode" id="cb19"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb19-1"><a href="a-grid-base-flowchart-using-ggplot2.html#cb19-1" aria-hidden="true" tabindex="-1"></a><span class="fu">grid.newpage</span>()</span>
+<span id="cb19-2"><a href="a-grid-base-flowchart-using-ggplot2.html#cb19-2" aria-hidden="true" tabindex="-1"></a><span class="co"># Initiate the boxes that we want to connect</span></span>
+<span id="cb19-3"><a href="a-grid-base-flowchart-using-ggplot2.html#cb19-3" aria-hidden="true" tabindex="-1"></a>side <span class="ot">&lt;-</span> <span class="fu">boxPropGrob</span>(<span class="st">&quot;Side&quot;</span>, <span class="st">&quot;Left&quot;</span>, <span class="st">&quot;Right&quot;</span>,</span>
+<span id="cb19-4"><a href="a-grid-base-flowchart-using-ggplot2.html#cb19-4" aria-hidden="true" tabindex="-1"></a>                    <span class="at">prop =</span> .<span class="dv">3</span>,</span>
+<span id="cb19-5"><a href="a-grid-base-flowchart-using-ggplot2.html#cb19-5" aria-hidden="true" tabindex="-1"></a>                    <span class="at">x =</span> <span class="dv">0</span>, <span class="at">y =</span> .<span class="dv">9</span>,</span>
+<span id="cb19-6"><a href="a-grid-base-flowchart-using-ggplot2.html#cb19-6" aria-hidden="true" tabindex="-1"></a>                    <span class="at">bjust =</span> <span class="fu">c</span>(<span class="dv">0</span>,<span class="dv">1</span>))</span>
+<span id="cb19-7"><a href="a-grid-base-flowchart-using-ggplot2.html#cb19-7" aria-hidden="true" tabindex="-1"></a>start <span class="ot">&lt;-</span> <span class="fu">boxGrob</span>(<span class="st">&quot;Top&quot;</span>,</span>
+<span id="cb19-8"><a href="a-grid-base-flowchart-using-ggplot2.html#cb19-8" aria-hidden="true" tabindex="-1"></a>                 <span class="at">x =</span> .<span class="dv">6</span>, <span class="at">y =</span> <span class="fu">coords</span>(side)<span class="sc">$</span>y,</span>
+<span id="cb19-9"><a href="a-grid-base-flowchart-using-ggplot2.html#cb19-9" aria-hidden="true" tabindex="-1"></a>                 <span class="at">box_gp =</span> <span class="fu">gpar</span>(<span class="at">fill =</span> <span class="st">&quot;yellow&quot;</span>))</span>
+<span id="cb19-10"><a href="a-grid-base-flowchart-using-ggplot2.html#cb19-10" aria-hidden="true" tabindex="-1"></a>bottom <span class="ot">&lt;-</span> <span class="fu">boxGrob</span>(<span class="st">&quot;Bottom&quot;</span>,</span>
+<span id="cb19-11"><a href="a-grid-base-flowchart-using-ggplot2.html#cb19-11" aria-hidden="true" tabindex="-1"></a>                  <span class="at">x =</span> .<span class="dv">6</span>, <span class="at">y =</span> <span class="dv">0</span>,</span>
+<span id="cb19-12"><a href="a-grid-base-flowchart-using-ggplot2.html#cb19-12" aria-hidden="true" tabindex="-1"></a>                  <span class="at">bjust =</span> <span class="st">&quot;bottom&quot;</span>)</span>
+<span id="cb19-13"><a href="a-grid-base-flowchart-using-ggplot2.html#cb19-13" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb19-14"><a href="a-grid-base-flowchart-using-ggplot2.html#cb19-14" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb19-15"><a href="a-grid-base-flowchart-using-ggplot2.html#cb19-15" aria-hidden="true" tabindex="-1"></a>sub_side_left <span class="ot">&lt;-</span> <span class="fu">boxGrob</span>(<span class="st">&quot;Left&quot;</span>,</span>
+<span id="cb19-16"><a href="a-grid-base-flowchart-using-ggplot2.html#cb19-16" aria-hidden="true" tabindex="-1"></a>                         <span class="at">x =</span> <span class="fu">coords</span>(side)<span class="sc">$</span>left_x,</span>
+<span id="cb19-17"><a href="a-grid-base-flowchart-using-ggplot2.html#cb19-17" aria-hidden="true" tabindex="-1"></a>                         <span class="at">y =</span> <span class="dv">0</span>,</span>
+<span id="cb19-18"><a href="a-grid-base-flowchart-using-ggplot2.html#cb19-18" aria-hidden="true" tabindex="-1"></a>                         <span class="at">bjust =</span> <span class="st">&quot;bottom&quot;</span>)</span>
+<span id="cb19-19"><a href="a-grid-base-flowchart-using-ggplot2.html#cb19-19" aria-hidden="true" tabindex="-1"></a>sub_side_right <span class="ot">&lt;-</span> <span class="fu">boxGrob</span>(<span class="st">&quot;Right&quot;</span>,</span>
+<span id="cb19-20"><a href="a-grid-base-flowchart-using-ggplot2.html#cb19-20" aria-hidden="true" tabindex="-1"></a>                          <span class="at">x =</span> <span class="fu">coords</span>(side)<span class="sc">$</span>right_x,</span>
+<span id="cb19-21"><a href="a-grid-base-flowchart-using-ggplot2.html#cb19-21" aria-hidden="true" tabindex="-1"></a>                          <span class="at">y =</span> <span class="dv">0</span>,</span>
+<span id="cb19-22"><a href="a-grid-base-flowchart-using-ggplot2.html#cb19-22" aria-hidden="true" tabindex="-1"></a>                          <span class="at">bjust =</span> <span class="st">&quot;bottom&quot;</span>)</span>
+<span id="cb19-23"><a href="a-grid-base-flowchart-using-ggplot2.html#cb19-23" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb19-24"><a href="a-grid-base-flowchart-using-ggplot2.html#cb19-24" aria-hidden="true" tabindex="-1"></a>odd <span class="ot">&lt;-</span> <span class="fu">boxGrob</span>(<span class="st">&quot;Odd</span><span class="sc">\n</span><span class="st">box&quot;</span>,</span>
+<span id="cb19-25"><a href="a-grid-base-flowchart-using-ggplot2.html#cb19-25" aria-hidden="true" tabindex="-1"></a>               <span class="at">x =</span> <span class="fu">coords</span>(side)<span class="sc">$</span>right,</span>
+<span id="cb19-26"><a href="a-grid-base-flowchart-using-ggplot2.html#cb19-26" aria-hidden="true" tabindex="-1"></a>               <span class="at">y =</span> .<span class="dv">5</span>)</span>
+<span id="cb19-27"><a href="a-grid-base-flowchart-using-ggplot2.html#cb19-27" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb19-28"><a href="a-grid-base-flowchart-using-ggplot2.html#cb19-28" aria-hidden="true" tabindex="-1"></a>odd2 <span class="ot">&lt;-</span> <span class="fu">boxGrob</span>(<span class="st">&quot;Also odd&quot;</span>,</span>
+<span id="cb19-29"><a href="a-grid-base-flowchart-using-ggplot2.html#cb19-29" aria-hidden="true" tabindex="-1"></a>               <span class="at">x =</span> <span class="fu">coords</span>(odd)<span class="sc">$</span>right <span class="sc">+</span></span>
+<span id="cb19-30"><a href="a-grid-base-flowchart-using-ggplot2.html#cb19-30" aria-hidden="true" tabindex="-1"></a>                 <span class="fu">distance</span>(bottom, odd, <span class="at">type =</span> <span class="st">&quot;h&quot;</span>, <span class="at">half =</span> <span class="cn">TRUE</span>) <span class="sc">-</span></span>
+<span id="cb19-31"><a href="a-grid-base-flowchart-using-ggplot2.html#cb19-31" aria-hidden="true" tabindex="-1"></a>                 <span class="fu">unit</span>(<span class="dv">2</span>, <span class="st">&quot;mm&quot;</span>),</span>
+<span id="cb19-32"><a href="a-grid-base-flowchart-using-ggplot2.html#cb19-32" aria-hidden="true" tabindex="-1"></a>               <span class="at">y =</span> <span class="dv">0</span>,</span>
+<span id="cb19-33"><a href="a-grid-base-flowchart-using-ggplot2.html#cb19-33" aria-hidden="true" tabindex="-1"></a>               <span class="at">bjust =</span> <span class="fu">c</span>(<span class="dv">1</span>,<span class="dv">0</span>))</span>
+<span id="cb19-34"><a href="a-grid-base-flowchart-using-ggplot2.html#cb19-34" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb19-35"><a href="a-grid-base-flowchart-using-ggplot2.html#cb19-35" aria-hidden="true" tabindex="-1"></a>exclude <span class="ot">&lt;-</span> <span class="fu">boxGrob</span>(<span class="st">&quot;Exclude:</span><span class="sc">\n</span><span class="st"> - Too sick</span><span class="sc">\n</span><span class="st"> - Prev. surgery&quot;</span>,</span>
+<span id="cb19-36"><a href="a-grid-base-flowchart-using-ggplot2.html#cb19-36" aria-hidden="true" tabindex="-1"></a>                   <span class="at">x =</span> <span class="dv">1</span>,</span>
+<span id="cb19-37"><a href="a-grid-base-flowchart-using-ggplot2.html#cb19-37" aria-hidden="true" tabindex="-1"></a>                   <span class="at">y =</span> <span class="fu">coords</span>(bottom)<span class="sc">$</span>top <span class="sc">+</span></span>
+<span id="cb19-38"><a href="a-grid-base-flowchart-using-ggplot2.html#cb19-38" aria-hidden="true" tabindex="-1"></a>                     <span class="fu">distance</span>(start, bottom, <span class="at">type =</span> <span class="st">&quot;v&quot;</span>, <span class="at">half =</span> <span class="cn">TRUE</span>),</span>
+<span id="cb19-39"><a href="a-grid-base-flowchart-using-ggplot2.html#cb19-39" aria-hidden="true" tabindex="-1"></a>                   <span class="at">just =</span> <span class="st">&quot;left&quot;</span>, <span class="at">bjust =</span> <span class="st">&quot;right&quot;</span>)</span>
+<span id="cb19-40"><a href="a-grid-base-flowchart-using-ggplot2.html#cb19-40" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb19-41"><a href="a-grid-base-flowchart-using-ggplot2.html#cb19-41" aria-hidden="true" tabindex="-1"></a><span class="co"># Connect the boxes and print/plot them</span></span>
+<span id="cb19-42"><a href="a-grid-base-flowchart-using-ggplot2.html#cb19-42" aria-hidden="true" tabindex="-1"></a><span class="fu">connectGrob</span>(start, bottom, <span class="st">&quot;vertical&quot;</span>)</span>
+<span id="cb19-43"><a href="a-grid-base-flowchart-using-ggplot2.html#cb19-43" aria-hidden="true" tabindex="-1"></a><span class="fu">connectGrob</span>(start, side, <span class="st">&quot;horizontal&quot;</span>)</span>
+<span id="cb19-44"><a href="a-grid-base-flowchart-using-ggplot2.html#cb19-44" aria-hidden="true" tabindex="-1"></a><span class="fu">connectGrob</span>(bottom, odd, <span class="st">&quot;Z&quot;</span>, <span class="st">&quot;l&quot;</span>)</span>
+<span id="cb19-45"><a href="a-grid-base-flowchart-using-ggplot2.html#cb19-45" aria-hidden="true" tabindex="-1"></a><span class="fu">connectGrob</span>(odd, odd2, <span class="st">&quot;N&quot;</span>, <span class="st">&quot;l&quot;</span>)</span>
+<span id="cb19-46"><a href="a-grid-base-flowchart-using-ggplot2.html#cb19-46" aria-hidden="true" tabindex="-1"></a><span class="fu">connectGrob</span>(side, sub_side_left, <span class="st">&quot;v&quot;</span>, <span class="st">&quot;l&quot;</span>)</span>
+<span id="cb19-47"><a href="a-grid-base-flowchart-using-ggplot2.html#cb19-47" aria-hidden="true" tabindex="-1"></a><span class="fu">connectGrob</span>(side, sub_side_right, <span class="st">&quot;v&quot;</span>, <span class="st">&quot;r&quot;</span>)</span>
+<span id="cb19-48"><a href="a-grid-base-flowchart-using-ggplot2.html#cb19-48" aria-hidden="true" tabindex="-1"></a><span class="fu">connectGrob</span>(start, exclude, <span class="st">&quot;-&quot;</span>,</span>
+<span id="cb19-49"><a href="a-grid-base-flowchart-using-ggplot2.html#cb19-49" aria-hidden="true" tabindex="-1"></a>            <span class="at">lty_gp =</span> <span class="fu">gpar</span>(<span class="at">lwd =</span> <span class="dv">2</span>, <span class="at">col =</span> <span class="st">&quot;darkred&quot;</span>, <span class="at">fill =</span> <span class="st">&quot;darkred&quot;</span>))</span>
+<span id="cb19-50"><a href="a-grid-base-flowchart-using-ggplot2.html#cb19-50" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb19-51"><a href="a-grid-base-flowchart-using-ggplot2.html#cb19-51" aria-hidden="true" tabindex="-1"></a><span class="co"># Print the grobs</span></span>
+<span id="cb19-52"><a href="a-grid-base-flowchart-using-ggplot2.html#cb19-52" aria-hidden="true" tabindex="-1"></a>start</span>
+<span id="cb19-53"><a href="a-grid-base-flowchart-using-ggplot2.html#cb19-53" aria-hidden="true" tabindex="-1"></a>bottom</span>
+<span id="cb19-54"><a href="a-grid-base-flowchart-using-ggplot2.html#cb19-54" aria-hidden="true" tabindex="-1"></a>side</span>
+<span id="cb19-55"><a href="a-grid-base-flowchart-using-ggplot2.html#cb19-55" aria-hidden="true" tabindex="-1"></a>exclude</span>
+<span id="cb19-56"><a href="a-grid-base-flowchart-using-ggplot2.html#cb19-56" aria-hidden="true" tabindex="-1"></a>sub_side_left</span>
+<span id="cb19-57"><a href="a-grid-base-flowchart-using-ggplot2.html#cb19-57" aria-hidden="true" tabindex="-1"></a>sub_side_right</span>
+<span id="cb19-58"><a href="a-grid-base-flowchart-using-ggplot2.html#cb19-58" aria-hidden="true" tabindex="-1"></a>odd</span>
+<span id="cb19-59"><a href="a-grid-base-flowchart-using-ggplot2.html#cb19-59" aria-hidden="true" tabindex="-1"></a>odd2</span></code></pre></div>
+<p><img src="_main_files/figure-html/unnamed-chunk-13-1.png" width="672" /></p>
+</div>
+<div id="aligment" class="section level3 hasAnchor" number="5.2.3">
+<h3><span class="header-section-number">5.2.3</span> Aligment<a href="a-grid-base-flowchart-using-ggplot2.html#aligment" class="anchor-section" aria-label="Anchor link to header"></a></h3>
+<div class="sourceCode" id="cb20"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb20-1"><a href="a-grid-base-flowchart-using-ggplot2.html#cb20-1" aria-hidden="true" tabindex="-1"></a>align_1 <span class="ot">&lt;-</span> <span class="fu">boxGrob</span>(<span class="st">&quot;Align 1&quot;</span>,</span>
+<span id="cb20-2"><a href="a-grid-base-flowchart-using-ggplot2.html#cb20-2" aria-hidden="true" tabindex="-1"></a>                   <span class="at">y =</span> .<span class="dv">9</span>,</span>
+<span id="cb20-3"><a href="a-grid-base-flowchart-using-ggplot2.html#cb20-3" aria-hidden="true" tabindex="-1"></a>                   <span class="at">x =</span> <span class="dv">0</span>,</span>
+<span id="cb20-4"><a href="a-grid-base-flowchart-using-ggplot2.html#cb20-4" aria-hidden="true" tabindex="-1"></a>                   <span class="at">bjust =</span> <span class="fu">c</span>(<span class="dv">0</span>),</span>
+<span id="cb20-5"><a href="a-grid-base-flowchart-using-ggplot2.html#cb20-5" aria-hidden="true" tabindex="-1"></a>                   <span class="at">box_gp =</span> <span class="fu">gpar</span>(<span class="at">fill =</span> <span class="st">&quot;#E6E8EF&quot;</span>))</span>
+<span id="cb20-6"><a href="a-grid-base-flowchart-using-ggplot2.html#cb20-6" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb20-7"><a href="a-grid-base-flowchart-using-ggplot2.html#cb20-7" aria-hidden="true" tabindex="-1"></a>align_2 <span class="ot">&lt;-</span> <span class="fu">boxPropGrob</span>(<span class="st">&quot;Align 2&quot;</span>,</span>
+<span id="cb20-8"><a href="a-grid-base-flowchart-using-ggplot2.html#cb20-8" aria-hidden="true" tabindex="-1"></a>                       <span class="st">&quot;Placebo&quot;</span>,</span>
+<span id="cb20-9"><a href="a-grid-base-flowchart-using-ggplot2.html#cb20-9" aria-hidden="true" tabindex="-1"></a>                       <span class="st">&quot;Treatment&quot;</span>,</span>
+<span id="cb20-10"><a href="a-grid-base-flowchart-using-ggplot2.html#cb20-10" aria-hidden="true" tabindex="-1"></a>                       <span class="at">prop =</span> .<span class="dv">7</span>,</span>
+<span id="cb20-11"><a href="a-grid-base-flowchart-using-ggplot2.html#cb20-11" aria-hidden="true" tabindex="-1"></a>                       <span class="at">y =</span> .<span class="dv">8</span>,</span>
+<span id="cb20-12"><a href="a-grid-base-flowchart-using-ggplot2.html#cb20-12" aria-hidden="true" tabindex="-1"></a>                       <span class="at">x =</span> .<span class="dv">5</span>)</span>
+<span id="cb20-13"><a href="a-grid-base-flowchart-using-ggplot2.html#cb20-13" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb20-14"><a href="a-grid-base-flowchart-using-ggplot2.html#cb20-14" aria-hidden="true" tabindex="-1"></a>align_3 <span class="ot">&lt;-</span> <span class="fu">boxGrob</span>(<span class="st">&quot;Align 3</span><span class="sc">\n</span><span class="st">vertical</span><span class="sc">\n</span><span class="st">text&quot;</span>,</span>
+<span id="cb20-15"><a href="a-grid-base-flowchart-using-ggplot2.html#cb20-15" aria-hidden="true" tabindex="-1"></a>                   <span class="at">y =</span> <span class="dv">1</span>,</span>
+<span id="cb20-16"><a href="a-grid-base-flowchart-using-ggplot2.html#cb20-16" aria-hidden="true" tabindex="-1"></a>                   <span class="at">x =</span> <span class="dv">1</span>,</span>
+<span id="cb20-17"><a href="a-grid-base-flowchart-using-ggplot2.html#cb20-17" aria-hidden="true" tabindex="-1"></a>                   <span class="at">bjust =</span> <span class="fu">c</span>(<span class="dv">1</span>, <span class="dv">1</span>),</span>
+<span id="cb20-18"><a href="a-grid-base-flowchart-using-ggplot2.html#cb20-18" aria-hidden="true" tabindex="-1"></a>                   <span class="at">box_gp =</span> <span class="fu">gpar</span>(<span class="at">fill =</span> <span class="st">&quot;#E6E8EF&quot;</span>))</span>
+<span id="cb20-19"><a href="a-grid-base-flowchart-using-ggplot2.html#cb20-19" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb20-20"><a href="a-grid-base-flowchart-using-ggplot2.html#cb20-20" aria-hidden="true" tabindex="-1"></a>b1 <span class="ot">&lt;-</span> <span class="fu">boxGrob</span>(<span class="st">&quot;B1&quot;</span>,</span>
+<span id="cb20-21"><a href="a-grid-base-flowchart-using-ggplot2.html#cb20-21" aria-hidden="true" tabindex="-1"></a>              <span class="at">y =</span> .<span class="dv">3</span>,</span>
+<span id="cb20-22"><a href="a-grid-base-flowchart-using-ggplot2.html#cb20-22" aria-hidden="true" tabindex="-1"></a>              <span class="at">x =</span> .<span class="dv">1</span>,</span>
+<span id="cb20-23"><a href="a-grid-base-flowchart-using-ggplot2.html#cb20-23" aria-hidden="true" tabindex="-1"></a>              <span class="at">bjust =</span> <span class="fu">c</span>(<span class="dv">0</span>))</span>
+<span id="cb20-24"><a href="a-grid-base-flowchart-using-ggplot2.html#cb20-24" aria-hidden="true" tabindex="-1"></a>b2 <span class="ot">&lt;-</span> <span class="fu">boxGrob</span>(<span class="st">&quot;B2 with long</span><span class="sc">\n</span><span class="st">description&quot;</span>,</span>
+<span id="cb20-25"><a href="a-grid-base-flowchart-using-ggplot2.html#cb20-25" aria-hidden="true" tabindex="-1"></a>              <span class="at">y =</span> .<span class="dv">6</span>,</span>
+<span id="cb20-26"><a href="a-grid-base-flowchart-using-ggplot2.html#cb20-26" aria-hidden="true" tabindex="-1"></a>              <span class="at">x =</span> .<span class="dv">5</span>)</span>
+<span id="cb20-27"><a href="a-grid-base-flowchart-using-ggplot2.html#cb20-27" aria-hidden="true" tabindex="-1"></a>b3 <span class="ot">&lt;-</span> <span class="fu">boxGrob</span>(<span class="st">&quot;B3&quot;</span>,</span>
+<span id="cb20-28"><a href="a-grid-base-flowchart-using-ggplot2.html#cb20-28" aria-hidden="true" tabindex="-1"></a>              <span class="at">y =</span> .<span class="dv">2</span>,</span>
+<span id="cb20-29"><a href="a-grid-base-flowchart-using-ggplot2.html#cb20-29" aria-hidden="true" tabindex="-1"></a>              <span class="at">x =</span> .<span class="dv">8</span>,</span>
+<span id="cb20-30"><a href="a-grid-base-flowchart-using-ggplot2.html#cb20-30" aria-hidden="true" tabindex="-1"></a>              <span class="at">bjust =</span> <span class="fu">c</span>(<span class="dv">0</span>, <span class="dv">1</span>))</span>
+<span id="cb20-31"><a href="a-grid-base-flowchart-using-ggplot2.html#cb20-31" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb20-32"><a href="a-grid-base-flowchart-using-ggplot2.html#cb20-32" aria-hidden="true" tabindex="-1"></a><span class="fu">grid.newpage</span>()</span>
+<span id="cb20-33"><a href="a-grid-base-flowchart-using-ggplot2.html#cb20-33" aria-hidden="true" tabindex="-1"></a>align_1</span>
+<span id="cb20-34"><a href="a-grid-base-flowchart-using-ggplot2.html#cb20-34" aria-hidden="true" tabindex="-1"></a><span class="fu">alignHorizontal</span>(<span class="at">reference =</span> align_1,</span>
+<span id="cb20-35"><a href="a-grid-base-flowchart-using-ggplot2.html#cb20-35" aria-hidden="true" tabindex="-1"></a>                b1, b2, b3,</span>
+<span id="cb20-36"><a href="a-grid-base-flowchart-using-ggplot2.html#cb20-36" aria-hidden="true" tabindex="-1"></a>                <span class="at">.position =</span> <span class="st">&quot;left&quot;</span>)</span>
+<span id="cb20-37"><a href="a-grid-base-flowchart-using-ggplot2.html#cb20-37" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb20-38"><a href="a-grid-base-flowchart-using-ggplot2.html#cb20-38" aria-hidden="true" tabindex="-1"></a>align_2</span>
+<span id="cb20-39"><a href="a-grid-base-flowchart-using-ggplot2.html#cb20-39" aria-hidden="true" tabindex="-1"></a><span class="fu">alignHorizontal</span>(<span class="at">reference =</span> align_2,</span>
+<span id="cb20-40"><a href="a-grid-base-flowchart-using-ggplot2.html#cb20-40" aria-hidden="true" tabindex="-1"></a>                b1, b2, b3,</span>
+<span id="cb20-41"><a href="a-grid-base-flowchart-using-ggplot2.html#cb20-41" aria-hidden="true" tabindex="-1"></a>                <span class="at">.position =</span> <span class="st">&quot;center&quot;</span>,</span>
+<span id="cb20-42"><a href="a-grid-base-flowchart-using-ggplot2.html#cb20-42" aria-hidden="true" tabindex="-1"></a>                <span class="at">.sub_position =</span> <span class="st">&quot;left&quot;</span>)</span>
+<span id="cb20-43"><a href="a-grid-base-flowchart-using-ggplot2.html#cb20-43" aria-hidden="true" tabindex="-1"></a><span class="fu">alignHorizontal</span>(<span class="at">reference =</span> align_2,</span>
+<span id="cb20-44"><a href="a-grid-base-flowchart-using-ggplot2.html#cb20-44" aria-hidden="true" tabindex="-1"></a>                b1, b2, b3,</span>
+<span id="cb20-45"><a href="a-grid-base-flowchart-using-ggplot2.html#cb20-45" aria-hidden="true" tabindex="-1"></a>                <span class="at">.position =</span> <span class="st">&quot;left&quot;</span>,</span>
+<span id="cb20-46"><a href="a-grid-base-flowchart-using-ggplot2.html#cb20-46" aria-hidden="true" tabindex="-1"></a>                <span class="at">.sub_position =</span> <span class="st">&quot;right&quot;</span>)</span>
+<span id="cb20-47"><a href="a-grid-base-flowchart-using-ggplot2.html#cb20-47" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb20-48"><a href="a-grid-base-flowchart-using-ggplot2.html#cb20-48" aria-hidden="true" tabindex="-1"></a>align_3</span>
+<span id="cb20-49"><a href="a-grid-base-flowchart-using-ggplot2.html#cb20-49" aria-hidden="true" tabindex="-1"></a><span class="fu">alignHorizontal</span>(<span class="at">reference =</span> align_3,</span>
+<span id="cb20-50"><a href="a-grid-base-flowchart-using-ggplot2.html#cb20-50" aria-hidden="true" tabindex="-1"></a>                b1, b2, b3,</span>
+<span id="cb20-51"><a href="a-grid-base-flowchart-using-ggplot2.html#cb20-51" aria-hidden="true" tabindex="-1"></a>                <span class="at">.position =</span> <span class="st">&quot;right&quot;</span>)</span></code></pre></div>
+<p><img src="_main_files/figure-html/unnamed-chunk-14-1.png" width="672" /></p>
+<div class="sourceCode" id="cb21"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb21-1"><a href="a-grid-base-flowchart-using-ggplot2.html#cb21-1" aria-hidden="true" tabindex="-1"></a>org_cohort <span class="ot">&lt;-</span> <span class="fu">boxGrob</span>(<span class="fu">glue</span>(<span class="st">&quot;Stockholm population&quot;</span>,</span>
+<span id="cb21-2"><a href="a-grid-base-flowchart-using-ggplot2.html#cb21-2" aria-hidden="true" tabindex="-1"></a>                           <span class="st">&quot;n = {pop}&quot;</span>,</span>
+<span id="cb21-3"><a href="a-grid-base-flowchart-using-ggplot2.html#cb21-3" aria-hidden="true" tabindex="-1"></a>                           <span class="at">pop =</span> <span class="fu">txtInt</span>(<span class="dv">1632798</span>),</span>
+<span id="cb21-4"><a href="a-grid-base-flowchart-using-ggplot2.html#cb21-4" aria-hidden="true" tabindex="-1"></a>                           <span class="at">.sep =</span> <span class="st">&quot;</span><span class="sc">\n</span><span class="st">&quot;</span>))</span>
+<span id="cb21-5"><a href="a-grid-base-flowchart-using-ggplot2.html#cb21-5" aria-hidden="true" tabindex="-1"></a>eligible <span class="ot">&lt;-</span> <span class="fu">boxGrob</span>(<span class="fu">glue</span>(<span class="st">&quot;Eligible&quot;</span>,</span>
+<span id="cb21-6"><a href="a-grid-base-flowchart-using-ggplot2.html#cb21-6" aria-hidden="true" tabindex="-1"></a>                          <span class="st">&quot;n = {pop}&quot;</span>,</span>
+<span id="cb21-7"><a href="a-grid-base-flowchart-using-ggplot2.html#cb21-7" aria-hidden="true" tabindex="-1"></a>                           <span class="at">pop =</span> <span class="fu">txtInt</span>(<span class="dv">10032</span>),</span>
+<span id="cb21-8"><a href="a-grid-base-flowchart-using-ggplot2.html#cb21-8" aria-hidden="true" tabindex="-1"></a>                           <span class="at">.sep =</span> <span class="st">&quot;</span><span class="sc">\n</span><span class="st">&quot;</span>))</span>
+<span id="cb21-9"><a href="a-grid-base-flowchart-using-ggplot2.html#cb21-9" aria-hidden="true" tabindex="-1"></a>included <span class="ot">&lt;-</span> <span class="fu">boxGrob</span>(<span class="fu">glue</span>(<span class="st">&quot;Randomized&quot;</span>,</span>
+<span id="cb21-10"><a href="a-grid-base-flowchart-using-ggplot2.html#cb21-10" aria-hidden="true" tabindex="-1"></a>                         <span class="st">&quot;n = {incl}&quot;</span>,</span>
+<span id="cb21-11"><a href="a-grid-base-flowchart-using-ggplot2.html#cb21-11" aria-hidden="true" tabindex="-1"></a>                         <span class="at">incl =</span> <span class="fu">txtInt</span>(<span class="dv">122</span>),</span>
+<span id="cb21-12"><a href="a-grid-base-flowchart-using-ggplot2.html#cb21-12" aria-hidden="true" tabindex="-1"></a>                         <span class="at">.sep =</span> <span class="st">&quot;</span><span class="sc">\n</span><span class="st">&quot;</span>))</span>
+<span id="cb21-13"><a href="a-grid-base-flowchart-using-ggplot2.html#cb21-13" aria-hidden="true" tabindex="-1"></a>grp_a <span class="ot">&lt;-</span> <span class="fu">boxGrob</span>(<span class="fu">glue</span>(<span class="st">&quot;Treatment A&quot;</span>,</span>
+<span id="cb21-14"><a href="a-grid-base-flowchart-using-ggplot2.html#cb21-14" aria-hidden="true" tabindex="-1"></a>                      <span class="st">&quot;n = {recr}&quot;</span>,</span>
+<span id="cb21-15"><a href="a-grid-base-flowchart-using-ggplot2.html#cb21-15" aria-hidden="true" tabindex="-1"></a>                      <span class="at">recr =</span> <span class="fu">txtInt</span>(<span class="dv">43</span>),</span>
+<span id="cb21-16"><a href="a-grid-base-flowchart-using-ggplot2.html#cb21-16" aria-hidden="true" tabindex="-1"></a>                      <span class="at">.sep =</span> <span class="st">&quot;</span><span class="sc">\n</span><span class="st">&quot;</span>))</span>
+<span id="cb21-17"><a href="a-grid-base-flowchart-using-ggplot2.html#cb21-17" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb21-18"><a href="a-grid-base-flowchart-using-ggplot2.html#cb21-18" aria-hidden="true" tabindex="-1"></a>grp_b <span class="ot">&lt;-</span> <span class="fu">boxGrob</span>(<span class="fu">glue</span>(<span class="st">&quot;Treatment B&quot;</span>,</span>
+<span id="cb21-19"><a href="a-grid-base-flowchart-using-ggplot2.html#cb21-19" aria-hidden="true" tabindex="-1"></a>                      <span class="st">&quot;n = {recr}&quot;</span>,</span>
+<span id="cb21-20"><a href="a-grid-base-flowchart-using-ggplot2.html#cb21-20" aria-hidden="true" tabindex="-1"></a>                      <span class="at">recr =</span> <span class="fu">txtInt</span>(<span class="dv">122</span> <span class="sc">-</span> <span class="dv">43</span> <span class="sc">-</span> <span class="dv">30</span>),</span>
+<span id="cb21-21"><a href="a-grid-base-flowchart-using-ggplot2.html#cb21-21" aria-hidden="true" tabindex="-1"></a>                      <span class="at">.sep =</span> <span class="st">&quot;</span><span class="sc">\n</span><span class="st">&quot;</span>))</span>
+<span id="cb21-22"><a href="a-grid-base-flowchart-using-ggplot2.html#cb21-22" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb21-23"><a href="a-grid-base-flowchart-using-ggplot2.html#cb21-23" aria-hidden="true" tabindex="-1"></a>excluded <span class="ot">&lt;-</span> <span class="fu">boxGrob</span>(<span class="fu">glue</span>(<span class="st">&quot;Excluded (n = {tot}):&quot;</span>,</span>
+<span id="cb21-24"><a href="a-grid-base-flowchart-using-ggplot2.html#cb21-24" aria-hidden="true" tabindex="-1"></a>                         <span class="st">&quot; - not interested: {uninterested}&quot;</span>,</span>
+<span id="cb21-25"><a href="a-grid-base-flowchart-using-ggplot2.html#cb21-25" aria-hidden="true" tabindex="-1"></a>                         <span class="st">&quot; - contra-indicated: {contra}&quot;</span>,</span>
+<span id="cb21-26"><a href="a-grid-base-flowchart-using-ggplot2.html#cb21-26" aria-hidden="true" tabindex="-1"></a>                         <span class="at">tot =</span> <span class="dv">30</span>,</span>
+<span id="cb21-27"><a href="a-grid-base-flowchart-using-ggplot2.html#cb21-27" aria-hidden="true" tabindex="-1"></a>                         <span class="at">uninterested =</span> <span class="dv">12</span>,</span>
+<span id="cb21-28"><a href="a-grid-base-flowchart-using-ggplot2.html#cb21-28" aria-hidden="true" tabindex="-1"></a>                         <span class="at">contra =</span> <span class="dv">30</span> <span class="sc">-</span> <span class="dv">12</span>,</span>
+<span id="cb21-29"><a href="a-grid-base-flowchart-using-ggplot2.html#cb21-29" aria-hidden="true" tabindex="-1"></a>                         <span class="at">.sep =</span> <span class="st">&quot;</span><span class="sc">\n</span><span class="st">&quot;</span>),</span>
+<span id="cb21-30"><a href="a-grid-base-flowchart-using-ggplot2.html#cb21-30" aria-hidden="true" tabindex="-1"></a>                    <span class="at">just =</span> <span class="st">&quot;left&quot;</span>)</span>
+<span id="cb21-31"><a href="a-grid-base-flowchart-using-ggplot2.html#cb21-31" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb21-32"><a href="a-grid-base-flowchart-using-ggplot2.html#cb21-32" aria-hidden="true" tabindex="-1"></a><span class="fu">grid.newpage</span>()</span>
+<span id="cb21-33"><a href="a-grid-base-flowchart-using-ggplot2.html#cb21-33" aria-hidden="true" tabindex="-1"></a>vert <span class="ot">&lt;-</span> <span class="fu">spreadVertical</span>(org_cohort,</span>
+<span id="cb21-34"><a href="a-grid-base-flowchart-using-ggplot2.html#cb21-34" aria-hidden="true" tabindex="-1"></a>                       <span class="at">eligible =</span> eligible,</span>
+<span id="cb21-35"><a href="a-grid-base-flowchart-using-ggplot2.html#cb21-35" aria-hidden="true" tabindex="-1"></a>                       <span class="at">included =</span> included,</span>
+<span id="cb21-36"><a href="a-grid-base-flowchart-using-ggplot2.html#cb21-36" aria-hidden="true" tabindex="-1"></a>                       <span class="at">grps =</span> grp_a)</span>
+<span id="cb21-37"><a href="a-grid-base-flowchart-using-ggplot2.html#cb21-37" aria-hidden="true" tabindex="-1"></a>grps <span class="ot">&lt;-</span> <span class="fu">alignVertical</span>(<span class="at">reference =</span> vert<span class="sc">$</span>grps,</span>
+<span id="cb21-38"><a href="a-grid-base-flowchart-using-ggplot2.html#cb21-38" aria-hidden="true" tabindex="-1"></a>                      grp_a, grp_b) <span class="sc">%&gt;%</span></span>
+<span id="cb21-39"><a href="a-grid-base-flowchart-using-ggplot2.html#cb21-39" aria-hidden="true" tabindex="-1"></a>  <span class="fu">spreadHorizontal</span>()</span>
+<span id="cb21-40"><a href="a-grid-base-flowchart-using-ggplot2.html#cb21-40" aria-hidden="true" tabindex="-1"></a>vert<span class="sc">$</span>grps <span class="ot">&lt;-</span> <span class="cn">NULL</span></span>
+<span id="cb21-41"><a href="a-grid-base-flowchart-using-ggplot2.html#cb21-41" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb21-42"><a href="a-grid-base-flowchart-using-ggplot2.html#cb21-42" aria-hidden="true" tabindex="-1"></a>excluded <span class="ot">&lt;-</span> <span class="fu">moveBox</span>(excluded,</span>
+<span id="cb21-43"><a href="a-grid-base-flowchart-using-ggplot2.html#cb21-43" aria-hidden="true" tabindex="-1"></a>                    <span class="at">x =</span> .<span class="dv">8</span>,</span>
+<span id="cb21-44"><a href="a-grid-base-flowchart-using-ggplot2.html#cb21-44" aria-hidden="true" tabindex="-1"></a>                    <span class="at">y =</span> <span class="fu">coords</span>(vert<span class="sc">$</span>included)<span class="sc">$</span>top <span class="sc">+</span> <span class="fu">distance</span>(vert<span class="sc">$</span>eligible, vert<span class="sc">$</span>included, <span class="at">half =</span> <span class="cn">TRUE</span>, <span class="at">center =</span> <span class="cn">FALSE</span>))</span>
+<span id="cb21-45"><a href="a-grid-base-flowchart-using-ggplot2.html#cb21-45" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb21-46"><a href="a-grid-base-flowchart-using-ggplot2.html#cb21-46" aria-hidden="true" tabindex="-1"></a><span class="cf">for</span> (i <span class="cf">in</span> <span class="dv">1</span><span class="sc">:</span>(<span class="fu">length</span>(vert) <span class="sc">-</span> <span class="dv">1</span>)) {</span>
+<span id="cb21-47"><a href="a-grid-base-flowchart-using-ggplot2.html#cb21-47" aria-hidden="true" tabindex="-1"></a>  <span class="fu">connectGrob</span>(vert[[i]], vert[[i <span class="sc">+</span> <span class="dv">1</span>]], <span class="at">type =</span> <span class="st">&quot;vert&quot;</span>) <span class="sc">%&gt;%</span></span>
+<span id="cb21-48"><a href="a-grid-base-flowchart-using-ggplot2.html#cb21-48" aria-hidden="true" tabindex="-1"></a>    print</span>
+<span id="cb21-49"><a href="a-grid-base-flowchart-using-ggplot2.html#cb21-49" aria-hidden="true" tabindex="-1"></a>}</span>
+<span id="cb21-50"><a href="a-grid-base-flowchart-using-ggplot2.html#cb21-50" aria-hidden="true" tabindex="-1"></a><span class="fu">connectGrob</span>(vert<span class="sc">$</span>included, grps[[<span class="dv">1</span>]], <span class="at">type =</span> <span class="st">&quot;N&quot;</span>)</span>
+<span id="cb21-51"><a href="a-grid-base-flowchart-using-ggplot2.html#cb21-51" aria-hidden="true" tabindex="-1"></a><span class="fu">connectGrob</span>(vert<span class="sc">$</span>included, grps[[<span class="dv">2</span>]], <span class="at">type =</span> <span class="st">&quot;N&quot;</span>)</span>
+<span id="cb21-52"><a href="a-grid-base-flowchart-using-ggplot2.html#cb21-52" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb21-53"><a href="a-grid-base-flowchart-using-ggplot2.html#cb21-53" aria-hidden="true" tabindex="-1"></a><span class="fu">connectGrob</span>(vert<span class="sc">$</span>eligible, excluded, <span class="at">type =</span> <span class="st">&quot;L&quot;</span>)</span>
+<span id="cb21-54"><a href="a-grid-base-flowchart-using-ggplot2.html#cb21-54" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb21-55"><a href="a-grid-base-flowchart-using-ggplot2.html#cb21-55" aria-hidden="true" tabindex="-1"></a><span class="co"># Print boxes</span></span>
+<span id="cb21-56"><a href="a-grid-base-flowchart-using-ggplot2.html#cb21-56" aria-hidden="true" tabindex="-1"></a>vert</span>
+<span id="cb21-57"><a href="a-grid-base-flowchart-using-ggplot2.html#cb21-57" aria-hidden="true" tabindex="-1"></a>grps</span>
+<span id="cb21-58"><a href="a-grid-base-flowchart-using-ggplot2.html#cb21-58" aria-hidden="true" tabindex="-1"></a>excluded</span></code></pre></div>
+<p><img src="_main_files/figure-html/unnamed-chunk-15-1.png" width="672" /></p>
+</div>
+</div>
+<div id="reference-1" class="section level2 hasAnchor" number="5.3">
+<h2><span class="header-section-number">5.3</span> Reference<a href="a-grid-base-flowchart-using-ggplot2.html#reference-1" class="anchor-section" aria-label="Anchor link to header"></a></h2>
+<p><a href="https://rpubs.com/phiggins/461686">Firts page</a></p>
+<p><a href="https://cran.r-project.org/web/packages/Gmisc/vignettes/Grid-based_flowcharts.html">Second page Where I learn - Building a flowchart Gmisc package</a></p>
+<p><a href="https://www.andreashandel.com/posts/flowdiagramr-r-package/">flowdiagramr-r-package</a></p>
+<p><a href="https://andreashandel.github.io/flowdiagramr/">flowdiagramr main page</a></p>
+<p><a href="https://nrennie.rbind.io/blog/2022-06-06-creating-flowcharts-with-ggplot2/">2022-06-06-creating-flowcharts-with-ggplot2</a></p>
+
+</div>
+<div id="r-markdown" class="section level2 hasAnchor" number="5.4">
+<h2><span class="header-section-number">5.4</span> R Markdown<a href="a-grid-base-flowchart-using-ggplot2.html#r-markdown" class="anchor-section" aria-label="Anchor link to header"></a></h2>
+</div>
+<div id="including-plots" class="section level2 hasAnchor" number="5.5">
+<h2><span class="header-section-number">5.5</span> Including Plots<a href="a-grid-base-flowchart-using-ggplot2.html#including-plots" class="anchor-section" aria-label="Anchor link to header"></a></h2>
+
+</div>
+</div>
+            </section>
+
+          </div>
+        </div>
+      </div>
+<a href="diagrammer_graphviz-and-memaid.html" class="navigation navigation-prev navigation-unique" aria-label="Previous page"><i class="fa fa-angle-left"></i></a>
+
+    </div>
+  </div>
+<script src="libs/gitbook-2.6.7/js/app.min.js"></script>
+<script src="libs/gitbook-2.6.7/js/clipboard.min.js"></script>
+<script src="libs/gitbook-2.6.7/js/plugin-search.js"></script>
+<script src="libs/gitbook-2.6.7/js/plugin-sharing.js"></script>
+<script src="libs/gitbook-2.6.7/js/plugin-fontsettings.js"></script>
+<script src="libs/gitbook-2.6.7/js/plugin-bookdown.js"></script>
+<script src="libs/gitbook-2.6.7/js/jquery.highlight.js"></script>
+<script src="libs/gitbook-2.6.7/js/plugin-clipboard.js"></script>
+<script>
+gitbook.require(["gitbook"], function(gitbook) {
+gitbook.start({
+"sharing": {
+"github": false,
+"facebook": true,
+"twitter": true,
+"linkedin": false,
+"weibo": false,
+"instapaper": false,
+"vk": false,
+"whatsapp": false,
+"all": ["facebook", "twitter", "linkedin", "weibo", "instapaper"]
+},
+"fontsettings": {
+"theme": "white",
+"family": "sans",
+"size": 2
+},
+"edit": {
+"link": "https://github.com/USERNAME/REPO/edit/BRANCH/05_flowchart_ggplot2r.Rmd",
+"text": "Edit"
+},
+"history": {
+"link": null,
+"text": null
+},
+"view": {
+"link": null,
+"text": null
+},
+"download": ["_main.pdf", "_main.epub"],
+"search": {
+"engine": "fuse",
+"options": null
+},
+"toc": {
+"collapse": "subsection"
+}
+});
+});
+</script>
+
+<!-- dynamically load mathjax for compatibility with self-contained -->
+<script>
+  (function () {
+    var script = document.createElement("script");
+    script.type = "text/javascript";
+    var src = "true";
+    if (src === "" || src === "true") src = "https://mathjax.rstudio.com/latest/MathJax.js?config=TeX-MML-AM_CHTML";
+    if (location.protocol !== "file:")
+      if (/^https?:/.test(src))
+        src = src.replace(/^https?:/, '');
+    script.src = src;
+    document.getElementsByTagName("head")[0].appendChild(script);
+  })();
+</script>
+</body>
+
+</html>

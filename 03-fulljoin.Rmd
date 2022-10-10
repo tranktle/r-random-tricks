@@ -1,0 +1,116 @@
+# Problems when using  dplyr::full_join
+
+```{r}
+library(powerjoin)
+library(tidyverse)
+```
+
+***
+## Introduction
+
+> This part will explore some problems that we may cope with when using `dplyr::full_join`, and it is why `powerchoice::power_full_join` may come in handy. 
+
+- Assume that we have two people:
+   - name = John, age = 30, sex = "M", treatment = NA (we don't know John's treatment)
+   - name = Marry, age = 45, sex = "F", treatment = "A"
+   
+However, we have multiple data sets that contain **incomplete** information about these two people. 
+
+Let us consider the data that we have and the problems that we might have to cope with while trying to get data that contains as much information as possible from these two people by joining our available data sets.
+   
+## Using dplyr::full_join
+   
+- First, let us consider the below data set. With this data set, we will get the same result while using `dfs %>% reduce(full_join)` and `dfs %>% reduce(full_join, by= name)`. We do not see any problem here, and we collect all the information from our available data sets. 
+
+```{r}
+dfs <- list(
+   first = tibble(name = "John", age = 30),
+   second = tibble(name = c("John", "Mary"), sex = c("M", "F")),
+   third = tibble(name = "Mary", treatment = "A")
+)
+
+dfs %>% reduce(full_join)
+dfs %>% reduce(full_join, by="name")
+```
+- However, let us consider when our dfs list has one more row (the fourth row) with the name and age of Mary. 
+
+```{r}
+dfs <- list(
+   first = tibble(name = "John", age = 30),
+   second = tibble(name = c("John", "Mary"), sex = c("M", "F")),
+   third = tibble(name = "Mary", treatment = "A"),
+   fourth = tibble(name = "Mary", age = 45)
+)
+```
+
+The `full_join` without identifying the key `by="name"` may think that there are two people with the same name, "Mary". 
+```{r}
+dfs %>% reduce(full_join)
+```
+The `full_join` with identifying the key `by="name"`creates extra columns when we have duplicated column names
+
+```{r}
+dfs %>% reduce(full_join, by = "name")
+```
+We may think about how to delete these extra columns by doing like below code chunk. However, by doing this, we lost the information about Mary's age (which was available in the age.y column above).
+
+```{r}
+dfs %>% reduce(full_join, by = "name", suffix = c("", ".y")) %>% select(-ends_with(".y"))
+```
+## Using powerjoin::power_full_join
+
+Solve the problem using [powerjoin](https://github.com/moodymudskipper/powerjoin).
+
+Let's consider the dfs list with one more row. The problems we have when using `dplyr::full_join` and how `powerjoin::power_full_join` can be helpful.
+
+```{r}
+dfs <- list(
+   first = tibble(name = "John", age = 30),
+   second = tibble(name = c("John", "Mary"), sex = c("M", "F")),
+   third = tibble(name = "Mary", treatment = "A"),
+   fourth = tibble(name = "Mary", age = 45), 
+   fifth = tibble(name = "Mary", sex = "F")
+)
+```
+
+```{r}
+dfs %>% reduce(full_join)
+```
+
+```{r}
+dfs %>% reduce(full_join, by = "name")
+```
+The [powerjoin](https://github.com/moodymudskipper/powerjoin) package helps us collect all available information.
+
+```{r}
+dfs %>% power_full_join(by= "name", conflict = coalesce_xy)
+```
+
+## What if we have conflict data sets
+
+Now, consider that we have two data sets for Mary that have different values for "age" (the fourth and fifth), with ages equal to 45 and 65, respectively.  
+
+```{r}
+dfs <- list(
+   first = tibble(name = "John", age = 30),
+   second = tibble(name = c("John", "Mary"), sex = c("M", "F")),
+   third = tibble(name = "Mary", treatment = "A"),
+   fourth = tibble(name = "Mary", age = 45), 
+   fifth = tibble(name = "Mary", age = 65)
+)
+```
+
+Then the argument `conflict = coalesce_xy` will take the first available value (age = 45), while `conflict = coalesce_yx` will take the second available value (age = 65).
+
+```{r}
+dfs %>% power_full_join(by= "name", conflict = coalesce_xy)
+```
+```{r}
+dfs %>% power_full_join(by= "name", conflict = coalesce_yx)
+```
+
+## References
+
+[https://github.com/moodymudskipper/powerjoin](https://github.com/moodymudskipper/powerjoin)
+
+

@@ -1,0 +1,204 @@
+<!DOCTYPE html>
+<html lang="" xml:lang="">
+<head>
+
+  <meta charset="utf-8" />
+  <meta http-equiv="X-UA-Compatible" content="IE=edge" />
+  <title>Section 4 R resources from absolute beginning to more advance | Random R tricks</title>
+  <meta name="description" content="Some R observations/tricks ." />
+  <meta name="generator" content="bookdown 0.26 and GitBook 2.6.7" />
+
+  <meta property="og:title" content="Section 4 R resources from absolute beginning to more advance | Random R tricks" />
+  <meta property="og:type" content="book" />
+  
+  <meta property="og:description" content="Some R observations/tricks ." />
+  <meta name="github-repo" content="rstudio/bookdown-demo" />
+
+  <meta name="twitter:card" content="summary" />
+  <meta name="twitter:title" content="Section 4 R resources from absolute beginning to more advance | Random R tricks" />
+  
+  <meta name="twitter:description" content="Some R observations/tricks ." />
+  
+
+<meta name="author" content="Tran Le" />
+
+
+
+  <meta name="viewport" content="width=device-width, initial-scale=1" />
+  <meta name="apple-mobile-web-app-capable" content="yes" />
+  <meta name="apple-mobile-web-app-status-bar-style" content="black" />
+  
+  
+<link rel="prev" href="problems-when-using-dplyrfull_join.html"/>
+
+<script src="libs/jquery-3.6.0/jquery-3.6.0.min.js"></script>
+<script src="https://cdn.jsdelivr.net/npm/fuse.js@6.4.6/dist/fuse.min.js"></script>
+<link href="libs/gitbook-2.6.7/css/style.css" rel="stylesheet" />
+<link href="libs/gitbook-2.6.7/css/plugin-table.css" rel="stylesheet" />
+<link href="libs/gitbook-2.6.7/css/plugin-bookdown.css" rel="stylesheet" />
+<link href="libs/gitbook-2.6.7/css/plugin-highlight.css" rel="stylesheet" />
+<link href="libs/gitbook-2.6.7/css/plugin-search.css" rel="stylesheet" />
+<link href="libs/gitbook-2.6.7/css/plugin-fontsettings.css" rel="stylesheet" />
+<link href="libs/gitbook-2.6.7/css/plugin-clipboard.css" rel="stylesheet" />
+
+
+
+
+
+
+
+
+<link href="libs/anchor-sections-1.1.0/anchor-sections.css" rel="stylesheet" />
+<link href="libs/anchor-sections-1.1.0/anchor-sections-hash.css" rel="stylesheet" />
+<script src="libs/anchor-sections-1.1.0/anchor-sections.js"></script>
+
+
+
+
+<link rel="stylesheet" href="style.css" type="text/css" />
+</head>
+
+<body>
+
+
+
+  <div class="book without-animation with-summary font-size-2 font-family-1" data-basepath=".">
+
+    <div class="book-summary">
+      <nav role="navigation">
+
+<ul class="summary">
+<li><a href="./"> Tran Le - Some random R tricks</a></li>
+
+<li class="divider"></li>
+<li class="chapter" data-level="1" data-path="index.html"><a href="index.html"><i class="fa fa-check"></i><b>1</b> Introduction</a></li>
+<li class="chapter" data-level="2" data-path="github-cheatsheet.html"><a href="github-cheatsheet.html"><i class="fa fa-check"></i><b>2</b> Github-Cheatsheet</a>
+<ul>
+<li class="chapter" data-level="2.1" data-path="github-cheatsheet.html"><a href="github-cheatsheet.html#introduction-1"><i class="fa fa-check"></i><b>2.1</b> Introduction</a></li>
+<li class="chapter" data-level="2.2" data-path="github-cheatsheet.html"><a href="github-cheatsheet.html#connecting-an-existing-rstudio-project-to-github."><i class="fa fa-check"></i><b>2.2</b> Connecting an existing Rstudio project to Github.</a></li>
+<li class="chapter" data-level="2.3" data-path="github-cheatsheet.html"><a href="github-cheatsheet.html#integrate-rstudio-with-an-existing-project-on-github"><i class="fa fa-check"></i><b>2.3</b> Integrate Rstudio with an existing project on Github</a></li>
+<li class="chapter" data-level="2.4" data-path="github-cheatsheet.html"><a href="github-cheatsheet.html#how-to-post-your-bookdown-file-to-github"><i class="fa fa-check"></i><b>2.4</b> How to post your Bookdown file to Github</a></li>
+<li class="chapter" data-level="2.5" data-path="github-cheatsheet.html"><a href="github-cheatsheet.html#some-most-common-git-commands."><i class="fa fa-check"></i><b>2.5</b> Some most common git commands.</a></li>
+<li class="chapter" data-level="2.6" data-path="github-cheatsheet.html"><a href="github-cheatsheet.html#references"><i class="fa fa-check"></i><b>2.6</b> References</a></li>
+</ul></li>
+<li class="chapter" data-level="3" data-path="problems-when-using-dplyrfull_join.html"><a href="problems-when-using-dplyrfull_join.html"><i class="fa fa-check"></i><b>3</b> Problems when using dplyr::full_join</a>
+<ul>
+<li class="chapter" data-level="3.1" data-path="problems-when-using-dplyrfull_join.html"><a href="problems-when-using-dplyrfull_join.html#introduction-2"><i class="fa fa-check"></i><b>3.1</b> Introduction</a></li>
+<li class="chapter" data-level="3.2" data-path="problems-when-using-dplyrfull_join.html"><a href="problems-when-using-dplyrfull_join.html#using-dplyrfull_join"><i class="fa fa-check"></i><b>3.2</b> Using dplyr::full_join</a></li>
+<li class="chapter" data-level="3.3" data-path="problems-when-using-dplyrfull_join.html"><a href="problems-when-using-dplyrfull_join.html#using-powerjoinpower_full_join"><i class="fa fa-check"></i><b>3.3</b> Using powerjoin::power_full_join</a></li>
+<li class="chapter" data-level="3.4" data-path="problems-when-using-dplyrfull_join.html"><a href="problems-when-using-dplyrfull_join.html#what-if-we-have-conflict-data-sets"><i class="fa fa-check"></i><b>3.4</b> What if we have conflict data sets</a></li>
+<li class="chapter" data-level="3.5" data-path="problems-when-using-dplyrfull_join.html"><a href="problems-when-using-dplyrfull_join.html#reference"><i class="fa fa-check"></i><b>3.5</b> Reference</a></li>
+</ul></li>
+<li class="chapter" data-level="4" data-path="r-resources-from-absolute-beginning-to-more-advance.html"><a href="r-resources-from-absolute-beginning-to-more-advance.html"><i class="fa fa-check"></i><b>4</b> R resources from absolute beginning to more advance</a>
+<ul>
+<li class="chapter" data-level="4.1" data-path="r-resources-from-absolute-beginning-to-more-advance.html"><a href="r-resources-from-absolute-beginning-to-more-advance.html#for-absolute-beginner."><i class="fa fa-check"></i><b>4.1</b> For absolute beginner.</a></li>
+<li class="chapter" data-level="4.2" data-path="r-resources-from-absolute-beginning-to-more-advance.html"><a href="r-resources-from-absolute-beginning-to-more-advance.html#r-graphs-galleries"><i class="fa fa-check"></i><b>4.2</b> R graphs galleries</a></li>
+<li class="chapter" data-level="4.3" data-path="r-resources-from-absolute-beginning-to-more-advance.html"><a href="r-resources-from-absolute-beginning-to-more-advance.html#some-r-excellent-books"><i class="fa fa-check"></i><b>4.3</b> Some R excellent books</a></li>
+</ul></li>
+<li class="divider"></li>
+<li><a href="https://github.com/rstudio/bookdown" target="blank">Published with bookdown</a></li>
+
+</ul>
+
+      </nav>
+    </div>
+
+    <div class="book-body">
+      <div class="body-inner">
+        <div class="book-header" role="navigation">
+          <h1>
+            <i class="fa fa-circle-o-notch fa-spin"></i><a href="./">Random R tricks</a>
+          </h1>
+        </div>
+
+        <div class="page-wrapper" tabindex="-1" role="main">
+          <div class="page-inner">
+
+            <section class="normal" id="section-">
+<div id="r-resources-from-absolute-beginning-to-more-advance" class="section level1 hasAnchor" number="4">
+<h1><span class="header-section-number">Section 4</span> R resources from absolute beginning to more advance<a href="r-resources-from-absolute-beginning-to-more-advance.html#r-resources-from-absolute-beginning-to-more-advance" class="anchor-section" aria-label="Anchor link to header"></a></h1>
+<p>It may be not a good idea to put this section here. But today I went to the The <a href="https://www.mspha.org/">Mississippi Public Health Association</a>’s World Field Epidemiology Day Workshop. I meet some new friends there who study Epidemiology that want to study R. I think I need to share these really good and free 😄 resources.</p>
+<p>The resources will be listed from absolute beginning to more advance levels. If you have a any suggestion or want to add more resources, please let’s me know. I will update and correct this according to that.</p>
+<div id="for-absolute-beginner." class="section level2 hasAnchor" number="4.1">
+<h2><span class="header-section-number">4.1</span> For absolute beginner.<a href="r-resources-from-absolute-beginning-to-more-advance.html#for-absolute-beginner." class="anchor-section" aria-label="Anchor link to header"></a></h2>
+<ul>
+<li><a href="https://www.youtube.com/c/marinstatlectures">MarinStatsLectures-R Programming &amp; Statistics</a> was my first teacher that taught me the first steps in R. This Chanel contains many tocpics that you can learn from. <a href="https://www.youtube.com/watch?v=riONFzJdXcs&amp;list=PLqzoL9-eJTNARFXxgwbqGo56NtbJnB37A">This is the first series</a> that you need to watch if you know nothing about R. This will teach you how to install R, R studio, install R packages, import your data…. Then you can explore other <a href="https://www.youtube.com/c/marinstatlectures/playlists">playlists</a> from him if you are interested in.</li>
+</ul>
+</div>
+<div id="r-graphs-galleries" class="section level2 hasAnchor" number="4.2">
+<h2><span class="header-section-number">4.2</span> R graphs galleries<a href="r-resources-from-absolute-beginning-to-more-advance.html#r-graphs-galleries" class="anchor-section" aria-label="Anchor link to header"></a></h2>
+<p>I have seen you people discussed a lot about how to use graphs. This link,
+<a href="https://r-graph-gallery.com/">https://r-graph-gallery.com/</a> will give you quick tutorial how to create those plots. Please click on the plot that you want, for example, Barplot, then it will take you to the page with many bar plots and instruction. This is the link that I got after I chose the most basic barplot from the main page: [<a href="https://r-graph-gallery.com/218-basic-barplots-with-ggplot2.html" class="uri">https://r-graph-gallery.com/218-basic-barplots-with-ggplot2.html</a>]</p>
+<p>Another library that we can use to create plot is Plotly, here is the link to the Plotly gallery: <a href="https://plotly.com/r/">https://plotly.com/r/</a>. Similarly, click the plot that you want to create and you have the code on your hands. I personally use ggplot2 more frequenly then PLotly.</p>
+</div>
+<div id="some-r-excellent-books" class="section level2 hasAnchor" number="4.3">
+<h2><span class="header-section-number">4.3</span> Some R excellent books<a href="r-resources-from-absolute-beginning-to-more-advance.html#some-r-excellent-books" class="anchor-section" aria-label="Anchor link to header"></a></h2>
+<p><a href="https://r4ds.had.co.nz/index.html">R for Data Science</a> is the book that every one who study R need to read. It teachs you how to do Data Visualization, Data Wranling, … We also have cheet sheets that come with this book, you can download them from <a href="https://rstudio.cloud/learn/cheat-sheets">here</a>.</p>
+<p><a href="https://adv-r.hadley.nz/">Advanced R</a>, as it name says about itself is an advanced R book.</p>
+<p>I have not read this two books, but I think they may be helpful for you. <a href="https://www.r4epi.com/">R for Epidemiology</a> and <a href="https://epirhandbook.com/en/index.html">R for applied epidemiology and public health</a></p>
+
+</div>
+</div>
+            </section>
+
+          </div>
+        </div>
+      </div>
+<a href="problems-when-using-dplyrfull_join.html" class="navigation navigation-prev navigation-unique" aria-label="Previous page"><i class="fa fa-angle-left"></i></a>
+
+    </div>
+  </div>
+<script src="libs/gitbook-2.6.7/js/app.min.js"></script>
+<script src="libs/gitbook-2.6.7/js/clipboard.min.js"></script>
+<script src="libs/gitbook-2.6.7/js/plugin-search.js"></script>
+<script src="libs/gitbook-2.6.7/js/plugin-sharing.js"></script>
+<script src="libs/gitbook-2.6.7/js/plugin-fontsettings.js"></script>
+<script src="libs/gitbook-2.6.7/js/plugin-bookdown.js"></script>
+<script src="libs/gitbook-2.6.7/js/jquery.highlight.js"></script>
+<script src="libs/gitbook-2.6.7/js/plugin-clipboard.js"></script>
+<script>
+gitbook.require(["gitbook"], function(gitbook) {
+gitbook.start({
+"sharing": {
+"github": false,
+"facebook": true,
+"twitter": true,
+"linkedin": false,
+"weibo": false,
+"instapaper": false,
+"vk": false,
+"whatsapp": false,
+"all": ["facebook", "twitter", "linkedin", "weibo", "instapaper"]
+},
+"fontsettings": {
+"theme": "white",
+"family": "sans",
+"size": 2
+},
+"edit": {
+"link": "https://github.com/USERNAME/REPO/edit/BRANCH/03_R_Resources.Rmd",
+"text": "Edit"
+},
+"history": {
+"link": null,
+"text": null
+},
+"view": {
+"link": null,
+"text": null
+},
+"download": ["_main.pdf", "_main.epub"],
+"search": {
+"engine": "fuse",
+"options": null
+},
+"toc": {
+"collapse": "subsection"
+}
+});
+});
+</script>
+
+</body>
+
+</html>
