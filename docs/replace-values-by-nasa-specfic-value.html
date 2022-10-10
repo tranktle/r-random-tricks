@@ -4,18 +4,18 @@
 
   <meta charset="utf-8" />
   <meta http-equiv="X-UA-Compatible" content="IE=edge" />
-  <title>Untitled</title>
+  <title>Section 6 Replace Values by Nas/A specfic value | Untitled</title>
   <meta name="description" content="Some R observations/tricks ." />
   <meta name="generator" content="bookdown 0.26 and GitBook 2.6.7" />
 
-  <meta property="og:title" content="Untitled" />
+  <meta property="og:title" content="Section 6 Replace Values by Nas/A specfic value | Untitled" />
   <meta property="og:type" content="book" />
   
   <meta property="og:description" content="Some R observations/tricks ." />
   <meta name="github-repo" content="rstudio/bookdown-demo" />
 
   <meta name="twitter:card" content="summary" />
-  <meta name="twitter:title" content="Untitled" />
+  <meta name="twitter:title" content="Section 6 Replace Values by Nas/A specfic value | Untitled" />
   
   <meta name="twitter:description" content="Some R observations/tricks ." />
   
@@ -30,8 +30,8 @@
   <meta name="apple-mobile-web-app-status-bar-style" content="black" />
   
   
-
-<link rel="next" href="github-cheatsheet.html"/>
+<link rel="prev" href="load-and-write-to-an-excel-sheet.html"/>
+<link rel="next" href="find-group-of-highly-correlated-columns.html"/>
 <script src="libs/jquery-3.6.0/jquery-3.6.0.min.js"></script>
 <script src="https://cdn.jsdelivr.net/npm/fuse.js@6.4.6/dist/fuse.min.js"></script>
 <link href="libs/gitbook-2.6.7/css/style.css" rel="stylesheet" />
@@ -235,32 +235,131 @@ code span.wa { color: #60a0b0; font-weight: bold; font-style: italic; } /* Warni
           <div class="page-inner">
 
             <section class="normal" id="section-">
-<div id="header">
-<h1 class="title">Untitled</h1>
-<p class="author"><em>Tran Le</em></p>
-<p class="date"><em>2022-10-10</em></p>
+<div id="replace-values-by-nasa-specfic-value" class="section level1 hasAnchor" number="6">
+<h1><span class="header-section-number">Section 6</span> Replace Values by Nas/A specfic value<a href="replace-values-by-nasa-specfic-value.html#replace-values-by-nasa-specfic-value" class="anchor-section" aria-label="Anchor link to header"></a></h1>
+<div id="introduction-5" class="section level2 hasAnchor" number="6.1">
+<h2><span class="header-section-number">6.1</span> Introduction<a href="replace-values-by-nasa-specfic-value.html#introduction-5" class="anchor-section" aria-label="Anchor link to header"></a></h2>
+<ul>
+<li><p>We will explore some cases in which we can quickly change some values to NAs.</p></li>
+<li><p>Some useful commands (from the library naniar) include:</p>
+<ul>
+<li>replace_with_na(): replace specific value(s) at in specific columns by NAs.<br />
+</li>
+<li>replace_with_na_all(): Replaces some values by NAs for all columns.<br />
+</li>
+<li>replace_with_na_at(): Replaces some chosen values in a chosen set of columns by NAs.</li>
+<li>replace_with_na_if(): Replaces some values on some columns with conditions (is.numeric, is.character) by NAs.</li>
+</ul></li>
+</ul>
+<div class="sourceCode" id="cb34"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb34-1"><a href="replace-values-by-nasa-specfic-value.html#cb34-1" aria-hidden="true" tabindex="-1"></a><span class="fu">suppressPackageStartupMessages</span>(<span class="fu">library</span>(tidyverse)) </span>
+<span id="cb34-2"><a href="replace-values-by-nasa-specfic-value.html#cb34-2" aria-hidden="true" tabindex="-1"></a><span class="fu">library</span>(naniar)</span></code></pre></div>
+<p>Let’s first create a data example.</p>
+<blockquote>
+<p>You can see that the data_example that we create here represents what we would expect if we have a character value in a numerical column if we read data from a CSV file. For example, column y is a column with numerical values, but since there is NR (NR means not reported) in the column, R will think it is a character column when we read the data.</p>
+</blockquote>
+<div class="sourceCode" id="cb35"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb35-1"><a href="replace-values-by-nasa-specfic-value.html#cb35-1" aria-hidden="true" tabindex="-1"></a>data_example<span class="ot">&lt;-</span> <span class="fu">tribble</span>(</span>
+<span id="cb35-2"><a href="replace-values-by-nasa-specfic-value.html#cb35-2" aria-hidden="true" tabindex="-1"></a>   <span class="sc">~</span>name,    <span class="sc">~</span>x,     <span class="sc">~</span>y,   <span class="sc">~</span>z,   <span class="sc">~</span>t,</span>
+<span id="cb35-3"><a href="replace-values-by-nasa-specfic-value.html#cb35-3" aria-hidden="true" tabindex="-1"></a>  <span class="st">&quot;Mr.A&quot;</span>,   <span class="st">&quot;a&quot;</span>,     <span class="st">&quot;2&quot;</span>, <span class="st">&quot;3.6&quot;</span>,  <span class="st">&quot;na&quot;</span>,    </span>
+<span id="cb35-4"><a href="replace-values-by-nasa-specfic-value.html#cb35-4" aria-hidden="true" tabindex="-1"></a>  <span class="st">&quot;Mr.B&quot;</span>,   <span class="st">&quot;b&quot;</span>,     <span class="st">&quot;1&quot;</span>,   <span class="st">&quot;.&quot;</span>,  <span class="st">&quot;2.1&quot;</span>,</span>
+<span id="cb35-5"><a href="replace-values-by-nasa-specfic-value.html#cb35-5" aria-hidden="true" tabindex="-1"></a> <span class="st">&quot;Ms. C&quot;</span>,  <span class="st">&quot;NR&quot;</span>,    <span class="st">&quot;NR&quot;</span>,  <span class="st">&quot;10&quot;</span>,   <span class="st">&quot;3.4&quot;</span>,</span>
+<span id="cb35-6"><a href="replace-values-by-nasa-specfic-value.html#cb35-6" aria-hidden="true" tabindex="-1"></a>  <span class="st">&quot;Ms. D&quot;</span>,  <span class="st">&quot;NR&quot;</span>,    <span class="st">&quot;NR&quot;</span>,  <span class="st">&quot;NR&quot;</span>,   <span class="st">&quot;1&quot;</span>)</span></code></pre></div>
+<div class="sourceCode" id="cb36"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb36-1"><a href="replace-values-by-nasa-specfic-value.html#cb36-1" aria-hidden="true" tabindex="-1"></a>data_example</span></code></pre></div>
+<pre><code>## # A tibble: 4 × 5
+##   name  x     y     z     t    
+##   &lt;chr&gt; &lt;chr&gt; &lt;chr&gt; &lt;chr&gt; &lt;chr&gt;
+## 1 Mr.A  a     2     3.6   na   
+## 2 Mr.B  b     1     .     2.1  
+## 3 Ms. C NR    NR    10    3.4  
+## 4 Ms. D NR    NR    NR    1</code></pre>
 </div>
-<div id="introduction" class="section level1 hasAnchor" number="1">
-<h1><span class="header-section-number">Section 1</span> Introduction<a href="index.html#introduction" class="anchor-section" aria-label="Anchor link to header"></a></h1>
-<p>This book-down file is where I keep the observations/tricks I got while using R. I also use this file to write some cheat sheets for later quick reference. Sometimes, I write something when my friends ask me a question. I believe explaining to someone is an excellent way to help me understand and learn better.</p>
-<p>These are my <a href="https://www.linkedin.com/in/tran-le-767470229/">LinkedIn</a> and <a href="https://github.com/tranktle">GitHub</a> pages. Please connect so that we can learn from each other. Happy studying 😄!</p>
+<div id="replace_with_na-replace-specific-values-at-in-specific-columns-by-nas." class="section level2 hasAnchor" number="6.2">
+<h2><span class="header-section-number">6.2</span> replace_with_na(): replace specific value(s) at in specific columns by NAs.<a href="replace-values-by-nasa-specfic-value.html#replace_with_na-replace-specific-values-at-in-specific-columns-by-nas." class="anchor-section" aria-label="Anchor link to header"></a></h2>
+<p>replace_with_na replaces a list of values in a list of columns by Na, where each column has different values that we want to replace.</p>
+<p>We may need to use this in case a value should be converted to NA in a column but not in another column. For example, we want to convert NR to NA in column x, but do not want to do so with column z (with column z, we only want to convert “.” to NAs but keep NR as it is).</p>
+<div class="sourceCode" id="cb38"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb38-1"><a href="replace-values-by-nasa-specfic-value.html#cb38-1" aria-hidden="true" tabindex="-1"></a>data_example <span class="sc">%&gt;%</span> </span>
+<span id="cb38-2"><a href="replace-values-by-nasa-specfic-value.html#cb38-2" aria-hidden="true" tabindex="-1"></a>  naniar<span class="sc">::</span><span class="fu">replace_with_na</span>(<span class="at">replace =</span> <span class="fu">list</span>(<span class="at">x =</span> <span class="fu">c</span>(<span class="st">&quot;NR&quot;</span>), </span>
+<span id="cb38-3"><a href="replace-values-by-nasa-specfic-value.html#cb38-3" aria-hidden="true" tabindex="-1"></a>                                 <span class="at">y =</span> <span class="fu">c</span>(<span class="st">&quot;NR&quot;</span>), </span>
+<span id="cb38-4"><a href="replace-values-by-nasa-specfic-value.html#cb38-4" aria-hidden="true" tabindex="-1"></a>                                 <span class="at">z =</span> <span class="fu">c</span>(<span class="st">&quot;.&quot;</span>)))</span></code></pre></div>
+<pre><code>## # A tibble: 4 × 5
+##   name  x     y     z     t    
+##   &lt;chr&gt; &lt;chr&gt; &lt;chr&gt; &lt;chr&gt; &lt;chr&gt;
+## 1 Mr.A  a     2     3.6   na   
+## 2 Mr.B  b     1     &lt;NA&gt;  2.1  
+## 3 Ms. C &lt;NA&gt;  &lt;NA&gt;  10    3.4  
+## 4 Ms. D &lt;NA&gt;  &lt;NA&gt;  NR    1</code></pre>
+</div>
+<div id="replace_with_na_all-replaces-some-values-by-na-for-all-columns." class="section level2 hasAnchor" number="6.3">
+<h2><span class="header-section-number">6.3</span> replace_with_na_all() Replaces some values by NA for all columns.<a href="replace-values-by-nasa-specfic-value.html#replace_with_na_all-replaces-some-values-by-na-for-all-columns." class="anchor-section" aria-label="Anchor link to header"></a></h2>
+<p>Here, we want to replace a value “NR” by NAs.</p>
+<div class="sourceCode" id="cb40"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb40-1"><a href="replace-values-by-nasa-specfic-value.html#cb40-1" aria-hidden="true" tabindex="-1"></a>data_example <span class="sc">%&gt;%</span> <span class="fu">replace_with_na_all</span>(., <span class="at">condition =</span> <span class="sc">~</span>.x <span class="sc">==</span> <span class="st">&quot;NR&quot;</span>)</span></code></pre></div>
+<pre><code>## # A tibble: 4 × 5
+##   name  x     y     z     t    
+##   &lt;chr&gt; &lt;chr&gt; &lt;chr&gt; &lt;chr&gt; &lt;chr&gt;
+## 1 Mr.A  a     2     3.6   na   
+## 2 Mr.B  b     1     .     2.1  
+## 3 Ms. C &lt;NA&gt;  &lt;NA&gt;  10    3.4  
+## 4 Ms. D &lt;NA&gt;  &lt;NA&gt;  &lt;NA&gt;  1</code></pre>
+<p>In case we want to replace many more values by NA, we can use <span class="math inline">\(%in%\)</span> as below</p>
+<div class="sourceCode" id="cb42"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb42-1"><a href="replace-values-by-nasa-specfic-value.html#cb42-1" aria-hidden="true" tabindex="-1"></a>data_example <span class="sc">%&gt;%</span> <span class="fu">replace_with_na_all</span>(., <span class="at">condition =</span> <span class="sc">~</span>.x <span class="sc">%in%</span> <span class="fu">c</span>(<span class="st">&quot;NR&quot;</span>, <span class="st">&quot;.&quot;</span>))</span></code></pre></div>
+<pre><code>## # A tibble: 4 × 5
+##   name  x     y     z     t    
+##   &lt;chr&gt; &lt;chr&gt; &lt;chr&gt; &lt;chr&gt; &lt;chr&gt;
+## 1 Mr.A  a     2     3.6   na   
+## 2 Mr.B  b     1     &lt;NA&gt;  2.1  
+## 3 Ms. C &lt;NA&gt;  &lt;NA&gt;  10    3.4  
+## 4 Ms. D &lt;NA&gt;  &lt;NA&gt;  &lt;NA&gt;  1</code></pre>
+</div>
+<div id="replace_with_na_at-replaces-some-chosen-values-in-a-chosen-set-of-columns-by-nas." class="section level2 hasAnchor" number="6.4">
+<h2><span class="header-section-number">6.4</span> replace_with_na_at(): replaces some chosen values in a chosen set of columns by NAs.<a href="replace-values-by-nasa-specfic-value.html#replace_with_na_at-replaces-some-chosen-values-in-a-chosen-set-of-columns-by-nas." class="anchor-section" aria-label="Anchor link to header"></a></h2>
+<p>Replace “NR” and “.” at columns x and y with NAs:</p>
+<div class="sourceCode" id="cb44"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb44-1"><a href="replace-values-by-nasa-specfic-value.html#cb44-1" aria-hidden="true" tabindex="-1"></a>data_example <span class="sc">%&gt;%</span> <span class="fu">replace_with_na_at</span>(<span class="at">.var=</span><span class="fu">c</span>(<span class="st">&quot;x&quot;</span>, <span class="st">&quot;y&quot;</span>), </span>
+<span id="cb44-2"><a href="replace-values-by-nasa-specfic-value.html#cb44-2" aria-hidden="true" tabindex="-1"></a>                                    <span class="at">condition =</span> <span class="sc">~</span>.x <span class="sc">%in%</span> <span class="fu">c</span>(<span class="st">&quot;NR&quot;</span>, <span class="st">&quot;.&quot;</span>))</span></code></pre></div>
+<pre><code>## # A tibble: 4 × 5
+##   name  x     y     z     t    
+##   &lt;chr&gt; &lt;chr&gt; &lt;chr&gt; &lt;chr&gt; &lt;chr&gt;
+## 1 Mr.A  a     2     3.6   na   
+## 2 Mr.B  b     1     .     2.1  
+## 3 Ms. C &lt;NA&gt;  &lt;NA&gt;  10    3.4  
+## 4 Ms. D &lt;NA&gt;  &lt;NA&gt;  NR    1</code></pre>
+</div>
+<div id="replace_with_na_if-replaces-some-values-on-some-columns-with-conditions-is.numeric-is.character-by-na." class="section level2 hasAnchor" number="6.5">
+<h2><span class="header-section-number">6.5</span> replace_with_na_if(): Replaces some values on some columns with conditions (is.numeric, is.character) by NA.<a href="replace-values-by-nasa-specfic-value.html#replace_with_na_if-replaces-some-values-on-some-columns-with-conditions-is.numeric-is.character-by-na." class="anchor-section" aria-label="Anchor link to header"></a></h2>
+<div class="sourceCode" id="cb46"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb46-1"><a href="replace-values-by-nasa-specfic-value.html#cb46-1" aria-hidden="true" tabindex="-1"></a>data_example <span class="sc">%&gt;%</span> <span class="fu">replace_with_na_if</span>(is_character, </span>
+<span id="cb46-2"><a href="replace-values-by-nasa-specfic-value.html#cb46-2" aria-hidden="true" tabindex="-1"></a>                                    <span class="at">condition =</span> <span class="sc">~</span>.x <span class="sc">%in%</span> <span class="fu">c</span>(<span class="st">&quot;NR&quot;</span>, <span class="st">&quot;.&quot;</span>))</span></code></pre></div>
+<pre><code>## # A tibble: 4 × 5
+##   name  x     y     z     t    
+##   &lt;chr&gt; &lt;chr&gt; &lt;chr&gt; &lt;chr&gt; &lt;chr&gt;
+## 1 Mr.A  a     2     3.6   na   
+## 2 Mr.B  b     1     &lt;NA&gt;  2.1  
+## 3 Ms. C &lt;NA&gt;  &lt;NA&gt;  10    3.4  
+## 4 Ms. D &lt;NA&gt;  &lt;NA&gt;  &lt;NA&gt;  1</code></pre>
+</div>
+<div id="a-helpfull-observation-using-mutate_at-and-replace" class="section level2 hasAnchor" number="6.6">
+<h2><span class="header-section-number">6.6</span> A helpfull observation using mutate_at and replace<a href="replace-values-by-nasa-specfic-value.html#a-helpfull-observation-using-mutate_at-and-replace" class="anchor-section" aria-label="Anchor link to header"></a></h2>
+<p>Besides of replace values by Na. We also can replace specific values by a value in some selected columns. One example can be</p>
+<div class="sourceCode" id="cb48"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb48-1"><a href="replace-values-by-nasa-specfic-value.html#cb48-1" aria-hidden="true" tabindex="-1"></a>data_example <span class="sc">%&gt;%</span>  <span class="fu">mutate_at</span>(<span class="fu">c</span>(<span class="st">&quot;name&quot;</span>),</span>
+<span id="cb48-2"><a href="replace-values-by-nasa-specfic-value.html#cb48-2" aria-hidden="true" tabindex="-1"></a>            <span class="sc">~</span><span class="fu">replace</span>(., .<span class="sc">%in%</span> <span class="fu">c</span>(<span class="st">&quot;Mr.A&quot;</span>, <span class="st">&quot;Mr.B&quot;</span>), <span class="st">&quot;The AB&quot;</span>))</span></code></pre></div>
+<pre><code>## # A tibble: 4 × 5
+##   name   x     y     z     t    
+##   &lt;chr&gt;  &lt;chr&gt; &lt;chr&gt; &lt;chr&gt; &lt;chr&gt;
+## 1 The AB a     2     3.6   na   
+## 2 The AB b     1     .     2.1  
+## 3 Ms. C  NR    NR    10    3.4  
+## 4 Ms. D  NR    NR    NR    1</code></pre>
+</div>
+<div id="references-2" class="section level2 hasAnchor" number="6.7">
+<h2><span class="header-section-number">6.7</span> References<a href="replace-values-by-nasa-specfic-value.html#references-2" class="anchor-section" aria-label="Anchor link to header"></a></h2>
+<p><a href="https://www.rdocumentation.org/packages/naniar/versions/0.6.1/topics/replace_with_na">https://www.rdocumentation.org/packages/naniar/versions/0.6.1/topics/replace_with_na</a></p>
 
-<div class="sourceCode" id="cb1"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb1-1"><a href="index.html#cb1-1" aria-hidden="true" tabindex="-1"></a>data_disp <span class="ot">&lt;-</span> <span class="cf">function</span>(x){</span>
-<span id="cb1-2"><a href="index.html#cb1-2" aria-hidden="true" tabindex="-1"></a>   <span class="co"># x: a datafarme gotton from xcov_results(xcov, data_use)</span></span>
-<span id="cb1-3"><a href="index.html#cb1-3" aria-hidden="true" tabindex="-1"></a>  x <span class="sc">%&gt;%</span> <span class="fu">datatable</span>(<span class="at">rownames =</span> F,</span>
-<span id="cb1-4"><a href="index.html#cb1-4" aria-hidden="true" tabindex="-1"></a>  <span class="at">extensions =</span> <span class="st">&#39;Buttons&#39;</span>, <span class="at">options =</span> <span class="fu">list</span>(</span>
-<span id="cb1-5"><a href="index.html#cb1-5" aria-hidden="true" tabindex="-1"></a>    <span class="at">pageLength =</span> <span class="dv">200</span>,</span>
-<span id="cb1-6"><a href="index.html#cb1-6" aria-hidden="true" tabindex="-1"></a>    <span class="at">dom =</span> <span class="st">&#39;Brt&#39;</span>,</span>
-<span id="cb1-7"><a href="index.html#cb1-7" aria-hidden="true" tabindex="-1"></a>    <span class="at">buttons =</span> <span class="fu">c</span>(<span class="st">&#39;copy&#39;</span>, <span class="st">&#39;csv&#39;</span>, <span class="st">&#39;excel&#39;</span>, <span class="st">&#39;pdf&#39;</span>, <span class="st">&#39;print&#39;</span>)))}</span></code></pre></div>
-
+</div>
 </div>
             </section>
 
           </div>
         </div>
       </div>
-
-<a href="github-cheatsheet.html" class="navigation navigation-next navigation-unique" aria-label="Next page"><i class="fa fa-angle-right"></i></a>
+<a href="load-and-write-to-an-excel-sheet.html" class="navigation navigation-prev " aria-label="Previous page"><i class="fa fa-angle-left"></i></a>
+<a href="find-group-of-highly-correlated-columns.html" class="navigation navigation-next " aria-label="Next page"><i class="fa fa-angle-right"></i></a>
     </div>
   </div>
 <script src="libs/gitbook-2.6.7/js/app.min.js"></script>
@@ -291,7 +390,7 @@ gitbook.start({
 "size": 2
 },
 "edit": {
-"link": "https://github.com/USERNAME/REPO/edit/BRANCH/index.Rmd",
+"link": "https://github.com/USERNAME/REPO/edit/BRANCH/05_Replace_Values_by_NAs.Rmd",
 "text": "Edit"
 },
 "history": {

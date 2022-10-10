@@ -4,18 +4,18 @@
 
   <meta charset="utf-8" />
   <meta http-equiv="X-UA-Compatible" content="IE=edge" />
-  <title>Section 4 Problems when using dplyr::full_join | Random R tricks</title>
+  <title>Section 4 Problems when using dplyr::full_join | Untitled</title>
   <meta name="description" content="Some R observations/tricks ." />
   <meta name="generator" content="bookdown 0.26 and GitBook 2.6.7" />
 
-  <meta property="og:title" content="Section 4 Problems when using dplyr::full_join | Random R tricks" />
+  <meta property="og:title" content="Section 4 Problems when using dplyr::full_join | Untitled" />
   <meta property="og:type" content="book" />
   
   <meta property="og:description" content="Some R observations/tricks ." />
   <meta name="github-repo" content="rstudio/bookdown-demo" />
 
   <meta name="twitter:card" content="summary" />
-  <meta name="twitter:title" content="Section 4 Problems when using dplyr::full_join | Random R tricks" />
+  <meta name="twitter:title" content="Section 4 Problems when using dplyr::full_join | Untitled" />
   
   <meta name="twitter:description" content="Some R observations/tricks ." />
   
@@ -23,6 +23,7 @@
 <meta name="author" content="Tran Le" />
 
 
+<meta name="date" content="2022-10-10" />
 
   <meta name="viewport" content="width=device-width, initial-scale=1" />
   <meta name="apple-mobile-web-app-capable" content="yes" />
@@ -51,6 +52,14 @@
 <link href="libs/anchor-sections-1.1.0/anchor-sections.css" rel="stylesheet" />
 <link href="libs/anchor-sections-1.1.0/anchor-sections-hash.css" rel="stylesheet" />
 <script src="libs/anchor-sections-1.1.0/anchor-sections.js"></script>
+<script src="libs/htmlwidgets-1.5.4/htmlwidgets.js"></script>
+<link href="libs/datatables-css-0.0.0/datatables-crosstalk.css" rel="stylesheet" />
+<script src="libs/datatables-binding-0.23/datatables.js"></script>
+<link href="libs/dt-core-1.11.3/css/jquery.dataTables.min.css" rel="stylesheet" />
+<link href="libs/dt-core-1.11.3/css/jquery.dataTables.extra.css" rel="stylesheet" />
+<script src="libs/dt-core-1.11.3/js/jquery.dataTables.min.js"></script>
+<link href="libs/crosstalk-1.2.0/css/crosstalk.min.css" rel="stylesheet" />
+<script src="libs/crosstalk-1.2.0/js/crosstalk.min.js"></script>
 
 
 <style type="text/css">
@@ -165,14 +174,15 @@ code span.wa { color: #60a0b0; font-weight: bold; font-style: italic; } /* Warni
 <li class="chapter" data-level="5.1" data-path="load-and-write-to-an-excel-sheet.html"><a href="load-and-write-to-an-excel-sheet.html#introduction-4"><i class="fa fa-check"></i><b>5.1</b> Introduction</a></li>
 <li class="chapter" data-level="5.2" data-path="load-and-write-to-an-excel-sheet.html"><a href="load-and-write-to-an-excel-sheet.html#code"><i class="fa fa-check"></i><b>5.2</b> Code</a></li>
 </ul></li>
-<li class="chapter" data-level="6" data-path="replace-values-by-nas.html"><a href="replace-values-by-nas.html"><i class="fa fa-check"></i><b>6</b> Replace Values by Nas</a>
+<li class="chapter" data-level="6" data-path="replace-values-by-nasa-specfic-value.html"><a href="replace-values-by-nasa-specfic-value.html"><i class="fa fa-check"></i><b>6</b> Replace Values by Nas/A specfic value</a>
 <ul>
-<li class="chapter" data-level="6.1" data-path="replace-values-by-nas.html"><a href="replace-values-by-nas.html#introduction-5"><i class="fa fa-check"></i><b>6.1</b> Introduction</a></li>
-<li class="chapter" data-level="6.2" data-path="replace-values-by-nas.html"><a href="replace-values-by-nas.html#replace_with_na-replace-specific-values-at-in-specific-columns-by-nas."><i class="fa fa-check"></i><b>6.2</b> replace_with_na(): replace specific value(s) at in specific columns by NAs.</a></li>
-<li class="chapter" data-level="6.3" data-path="replace-values-by-nas.html"><a href="replace-values-by-nas.html#replace_with_na_all-replaces-some-values-by-na-for-all-columns."><i class="fa fa-check"></i><b>6.3</b> replace_with_na_all() Replaces some values by NA for all columns.</a></li>
-<li class="chapter" data-level="6.4" data-path="replace-values-by-nas.html"><a href="replace-values-by-nas.html#replace_with_na_at-replaces-some-chosen-values-in-a-chosen-set-of-columns-by-nas."><i class="fa fa-check"></i><b>6.4</b> replace_with_na_at(): replaces some chosen values in a chosen set of columns by NAs.</a></li>
-<li class="chapter" data-level="6.5" data-path="replace-values-by-nas.html"><a href="replace-values-by-nas.html#replace_with_na_if-replaces-some-values-on-some-columns-with-conditions-is.numeric-is.character-by-na."><i class="fa fa-check"></i><b>6.5</b> replace_with_na_if(): Replaces some values on some columns with conditions (is.numeric, is.character) by NA.</a></li>
-<li class="chapter" data-level="6.6" data-path="replace-values-by-nas.html"><a href="replace-values-by-nas.html#references-2"><i class="fa fa-check"></i><b>6.6</b> References</a></li>
+<li class="chapter" data-level="6.1" data-path="replace-values-by-nasa-specfic-value.html"><a href="replace-values-by-nasa-specfic-value.html#introduction-5"><i class="fa fa-check"></i><b>6.1</b> Introduction</a></li>
+<li class="chapter" data-level="6.2" data-path="replace-values-by-nasa-specfic-value.html"><a href="replace-values-by-nasa-specfic-value.html#replace_with_na-replace-specific-values-at-in-specific-columns-by-nas."><i class="fa fa-check"></i><b>6.2</b> replace_with_na(): replace specific value(s) at in specific columns by NAs.</a></li>
+<li class="chapter" data-level="6.3" data-path="replace-values-by-nasa-specfic-value.html"><a href="replace-values-by-nasa-specfic-value.html#replace_with_na_all-replaces-some-values-by-na-for-all-columns."><i class="fa fa-check"></i><b>6.3</b> replace_with_na_all() Replaces some values by NA for all columns.</a></li>
+<li class="chapter" data-level="6.4" data-path="replace-values-by-nasa-specfic-value.html"><a href="replace-values-by-nasa-specfic-value.html#replace_with_na_at-replaces-some-chosen-values-in-a-chosen-set-of-columns-by-nas."><i class="fa fa-check"></i><b>6.4</b> replace_with_na_at(): replaces some chosen values in a chosen set of columns by NAs.</a></li>
+<li class="chapter" data-level="6.5" data-path="replace-values-by-nasa-specfic-value.html"><a href="replace-values-by-nasa-specfic-value.html#replace_with_na_if-replaces-some-values-on-some-columns-with-conditions-is.numeric-is.character-by-na."><i class="fa fa-check"></i><b>6.5</b> replace_with_na_if(): Replaces some values on some columns with conditions (is.numeric, is.character) by NA.</a></li>
+<li class="chapter" data-level="6.6" data-path="replace-values-by-nasa-specfic-value.html"><a href="replace-values-by-nasa-specfic-value.html#a-helpfull-observation-using-mutate_at-and-replace"><i class="fa fa-check"></i><b>6.6</b> A helpfull observation using mutate_at and replace</a></li>
+<li class="chapter" data-level="6.7" data-path="replace-values-by-nasa-specfic-value.html"><a href="replace-values-by-nasa-specfic-value.html#references-2"><i class="fa fa-check"></i><b>6.7</b> References</a></li>
 </ul></li>
 <li class="chapter" data-level="7" data-path="find-group-of-highly-correlated-columns.html"><a href="find-group-of-highly-correlated-columns.html"><i class="fa fa-check"></i><b>7</b> Find group of highly correlated columns</a>
 <ul>
@@ -182,8 +192,29 @@ code span.wa { color: #60a0b0; font-weight: bold; font-style: italic; } /* Warni
 <li class="chapter" data-level="7.4" data-path="find-group-of-highly-correlated-columns.html"><a href="find-group-of-highly-correlated-columns.html#deal-with-nominal-nominal-variables"><i class="fa fa-check"></i><b>7.4</b> Deal with nominal-nominal variables</a></li>
 <li class="chapter" data-level="7.5" data-path="find-group-of-highly-correlated-columns.html"><a href="find-group-of-highly-correlated-columns.html#here-is-the-code-to-get-group-of-highly-correlated-columns"><i class="fa fa-check"></i><b>7.5</b> Here is the code to get group of highly correlated columns</a></li>
 <li class="chapter" data-level="7.6" data-path="find-group-of-highly-correlated-columns.html"><a href="find-group-of-highly-correlated-columns.html#explain-the-steps-in-details"><i class="fa fa-check"></i><b>7.6</b> Explain the steps in details</a></li>
+<li class="chapter" data-level="7.7" data-path="find-group-of-highly-correlated-columns.html"><a href="find-group-of-highly-correlated-columns.html#references-3"><i class="fa fa-check"></i><b>7.7</b> References</a></li>
 </ul></li>
-<li class="chapter" data-level="8" data-path="references-3.html"><a href="references-3.html"><i class="fa fa-check"></i><b>8</b> References</a></li>
+<li class="chapter" data-level="8" data-path="relabel-study-names-into-a-numeric-sequence.html"><a href="relabel-study-names-into-a-numeric-sequence.html"><i class="fa fa-check"></i><b>8</b> Relabel study names into a numeric sequence</a>
+<ul>
+<li class="chapter" data-level="8.1" data-path="relabel-study-names-into-a-numeric-sequence.html"><a href="relabel-study-names-into-a-numeric-sequence.html#introduction-7"><i class="fa fa-check"></i><b>8.1</b> Introduction</a></li>
+<li class="chapter" data-level="8.2" data-path="relabel-study-names-into-a-numeric-sequence.html"><a href="relabel-study-names-into-a-numeric-sequence.html#create-data"><i class="fa fa-check"></i><b>8.2</b> Create data</a>
+<ul>
+<li class="chapter" data-level="8.2.1" data-path="relabel-study-names-into-a-numeric-sequence.html"><a href="relabel-study-names-into-a-numeric-sequence.html#what-if-we-want-to-keep-the-order-of-study-names-as-they-were"><i class="fa fa-check"></i><b>8.2.1</b> What if we want to keep the order of Study names as they were</a></li>
+</ul></li>
+<li class="chapter" data-level="8.3" data-path="relabel-study-names-into-a-numeric-sequence.html"><a href="relabel-study-names-into-a-numeric-sequence.html#transform-an-arm-based-data-table-to-a-study-based-data-table"><i class="fa fa-check"></i><b>8.3</b> Transform an arm-based data table to a study-based data table</a></li>
+<li class="chapter" data-level="8.4" data-path="relabel-study-names-into-a-numeric-sequence.html"><a href="relabel-study-names-into-a-numeric-sequence.html#frequentist-network-meta-analysis"><i class="fa fa-check"></i><b>8.4</b> Frequentist Network meta analysis</a></li>
+<li class="chapter" data-level="8.5" data-path="relabel-study-names-into-a-numeric-sequence.html"><a href="relabel-study-names-into-a-numeric-sequence.html#arm-base-network-meta-analysis-using-pcnetmeta-package"><i class="fa fa-check"></i><b>8.5</b> Arm base Network Meta Analysis using pcnetmeta package</a></li>
+<li class="chapter" data-level="8.6" data-path="relabel-study-names-into-a-numeric-sequence.html"><a href="relabel-study-names-into-a-numeric-sequence.html#references-4"><i class="fa fa-check"></i><b>8.6</b> References</a></li>
+</ul></li>
+<li class="chapter" data-level="9" data-path="write-many-models-with-shortest-code-using-glue-and-rlang.html"><a href="write-many-models-with-shortest-code-using-glue-and-rlang.html"><i class="fa fa-check"></i><b>9</b> Write many models with shortest code using glue and rlang</a>
+<ul>
+<li class="chapter" data-level="9.1" data-path="write-many-models-with-shortest-code-using-glue-and-rlang.html"><a href="write-many-models-with-shortest-code-using-glue-and-rlang.html#introduction-8"><i class="fa fa-check"></i><b>9.1</b> Introduction</a></li>
+<li class="chapter" data-level="9.2" data-path="write-many-models-with-shortest-code-using-glue-and-rlang.html"><a href="write-many-models-with-shortest-code-using-glue-and-rlang.html#create-a-synthesis-data"><i class="fa fa-check"></i><b>9.2</b> Create a synthesis data</a></li>
+<li class="chapter" data-level="9.3" data-path="write-many-models-with-shortest-code-using-glue-and-rlang.html"><a href="write-many-models-with-shortest-code-using-glue-and-rlang.html#first-way-using-glueglue-parse-and-eval"><i class="fa fa-check"></i><b>9.3</b> First way: using glue::glue, parse and eval</a></li>
+<li class="chapter" data-level="9.4" data-path="write-many-models-with-shortest-code-using-glue-and-rlang.html"><a href="write-many-models-with-shortest-code-using-glue-and-rlang.html#second-way-using-tidy-evaluation-operator"><i class="fa fa-check"></i><b>9.4</b> Second way: using tidy evaluation operator</a></li>
+<li class="chapter" data-level="9.5" data-path="write-many-models-with-shortest-code-using-glue-and-rlang.html"><a href="write-many-models-with-shortest-code-using-glue-and-rlang.html#other-tips"><i class="fa fa-check"></i><b>9.5</b> Other tips</a></li>
+<li class="chapter" data-level="9.6" data-path="write-many-models-with-shortest-code-using-glue-and-rlang.html"><a href="write-many-models-with-shortest-code-using-glue-and-rlang.html#references-5"><i class="fa fa-check"></i><b>9.6</b> References</a></li>
+</ul></li>
 <li class="divider"></li>
 <li><a href="https://github.com/rstudio/bookdown" target="blank">Published with bookdown</a></li>
 
@@ -196,7 +227,7 @@ code span.wa { color: #60a0b0; font-weight: bold; font-style: italic; } /* Warni
       <div class="body-inner">
         <div class="book-header" role="navigation">
           <h1>
-            <i class="fa fa-circle-o-notch fa-spin"></i><a href="./">Random R tricks</a>
+            <i class="fa fa-circle-o-notch fa-spin"></i><a href="./">Untitled</a>
           </h1>
         </div>
 
@@ -206,8 +237,8 @@ code span.wa { color: #60a0b0; font-weight: bold; font-style: italic; } /* Warni
             <section class="normal" id="section-">
 <div id="problems-when-using-dplyrfull_join" class="section level1 hasAnchor" number="4">
 <h1><span class="header-section-number">Section 4</span> Problems when using dplyr::full_join<a href="problems-when-using-dplyrfull_join.html#problems-when-using-dplyrfull_join" class="anchor-section" aria-label="Anchor link to header"></a></h1>
-<div class="sourceCode" id="cb1"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb1-1"><a href="problems-when-using-dplyrfull_join.html#cb1-1" aria-hidden="true" tabindex="-1"></a><span class="fu">library</span>(powerjoin)</span>
-<span id="cb1-2"><a href="problems-when-using-dplyrfull_join.html#cb1-2" aria-hidden="true" tabindex="-1"></a><span class="fu">library</span>(tidyverse)</span></code></pre></div>
+<div class="sourceCode" id="cb2"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb2-1"><a href="problems-when-using-dplyrfull_join.html#cb2-1" aria-hidden="true" tabindex="-1"></a><span class="fu">library</span>(powerjoin)</span>
+<span id="cb2-2"><a href="problems-when-using-dplyrfull_join.html#cb2-2" aria-hidden="true" tabindex="-1"></a><span class="fu">library</span>(tidyverse)</span></code></pre></div>
 <pre><code>## ── Attaching packages ─────────────────────────────────────── tidyverse 1.3.1 ──</code></pre>
 <pre><code>## ✔ tibble  3.1.7     ✔ dplyr   1.0.9
 ## ✔ tidyr   1.2.0     ✔ stringr 1.4.1
@@ -238,13 +269,13 @@ code span.wa { color: #60a0b0; font-weight: bold; font-style: italic; } /* Warni
 <ul>
 <li>First, let us consider the below data set. With this data set, we will get the same result while using <code>dfs %&gt;% reduce(full_join)</code> and <code>dfs %&gt;% reduce(full_join, by= name)</code>. We do not see any problem here, and we collect all the information from our available data sets.</li>
 </ul>
-<div class="sourceCode" id="cb6"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb6-1"><a href="problems-when-using-dplyrfull_join.html#cb6-1" aria-hidden="true" tabindex="-1"></a>dfs <span class="ot">&lt;-</span> <span class="fu">list</span>(</span>
-<span id="cb6-2"><a href="problems-when-using-dplyrfull_join.html#cb6-2" aria-hidden="true" tabindex="-1"></a>   <span class="at">first =</span> <span class="fu">tibble</span>(<span class="at">name =</span> <span class="st">&quot;John&quot;</span>, <span class="at">age =</span> <span class="dv">30</span>),</span>
-<span id="cb6-3"><a href="problems-when-using-dplyrfull_join.html#cb6-3" aria-hidden="true" tabindex="-1"></a>   <span class="at">second =</span> <span class="fu">tibble</span>(<span class="at">name =</span> <span class="fu">c</span>(<span class="st">&quot;John&quot;</span>, <span class="st">&quot;Mary&quot;</span>), <span class="at">sex =</span> <span class="fu">c</span>(<span class="st">&quot;M&quot;</span>, <span class="st">&quot;F&quot;</span>)),</span>
-<span id="cb6-4"><a href="problems-when-using-dplyrfull_join.html#cb6-4" aria-hidden="true" tabindex="-1"></a>   <span class="at">third =</span> <span class="fu">tibble</span>(<span class="at">name =</span> <span class="st">&quot;Mary&quot;</span>, <span class="at">treatment =</span> <span class="st">&quot;A&quot;</span>)</span>
-<span id="cb6-5"><a href="problems-when-using-dplyrfull_join.html#cb6-5" aria-hidden="true" tabindex="-1"></a>)</span>
-<span id="cb6-6"><a href="problems-when-using-dplyrfull_join.html#cb6-6" aria-hidden="true" tabindex="-1"></a></span>
-<span id="cb6-7"><a href="problems-when-using-dplyrfull_join.html#cb6-7" aria-hidden="true" tabindex="-1"></a>dfs <span class="sc">%&gt;%</span> <span class="fu">reduce</span>(full_join)</span></code></pre></div>
+<div class="sourceCode" id="cb7"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb7-1"><a href="problems-when-using-dplyrfull_join.html#cb7-1" aria-hidden="true" tabindex="-1"></a>dfs <span class="ot">&lt;-</span> <span class="fu">list</span>(</span>
+<span id="cb7-2"><a href="problems-when-using-dplyrfull_join.html#cb7-2" aria-hidden="true" tabindex="-1"></a>   <span class="at">first =</span> <span class="fu">tibble</span>(<span class="at">name =</span> <span class="st">&quot;John&quot;</span>, <span class="at">age =</span> <span class="dv">30</span>),</span>
+<span id="cb7-3"><a href="problems-when-using-dplyrfull_join.html#cb7-3" aria-hidden="true" tabindex="-1"></a>   <span class="at">second =</span> <span class="fu">tibble</span>(<span class="at">name =</span> <span class="fu">c</span>(<span class="st">&quot;John&quot;</span>, <span class="st">&quot;Mary&quot;</span>), <span class="at">sex =</span> <span class="fu">c</span>(<span class="st">&quot;M&quot;</span>, <span class="st">&quot;F&quot;</span>)),</span>
+<span id="cb7-4"><a href="problems-when-using-dplyrfull_join.html#cb7-4" aria-hidden="true" tabindex="-1"></a>   <span class="at">third =</span> <span class="fu">tibble</span>(<span class="at">name =</span> <span class="st">&quot;Mary&quot;</span>, <span class="at">treatment =</span> <span class="st">&quot;A&quot;</span>)</span>
+<span id="cb7-5"><a href="problems-when-using-dplyrfull_join.html#cb7-5" aria-hidden="true" tabindex="-1"></a>)</span>
+<span id="cb7-6"><a href="problems-when-using-dplyrfull_join.html#cb7-6" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb7-7"><a href="problems-when-using-dplyrfull_join.html#cb7-7" aria-hidden="true" tabindex="-1"></a>dfs <span class="sc">%&gt;%</span> <span class="fu">reduce</span>(full_join)</span></code></pre></div>
 <pre><code>## Joining, by = &quot;name&quot;
 ## Joining, by = &quot;name&quot;</code></pre>
 <pre><code>## # A tibble: 2 × 4
@@ -252,7 +283,7 @@ code span.wa { color: #60a0b0; font-weight: bold; font-style: italic; } /* Warni
 ##   &lt;chr&gt; &lt;dbl&gt; &lt;chr&gt; &lt;chr&gt;    
 ## 1 John     30 M     &lt;NA&gt;     
 ## 2 Mary     NA F     A</code></pre>
-<div class="sourceCode" id="cb9"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb9-1"><a href="problems-when-using-dplyrfull_join.html#cb9-1" aria-hidden="true" tabindex="-1"></a>dfs <span class="sc">%&gt;%</span> <span class="fu">reduce</span>(full_join, <span class="at">by=</span><span class="st">&quot;name&quot;</span>)</span></code></pre></div>
+<div class="sourceCode" id="cb10"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb10-1"><a href="problems-when-using-dplyrfull_join.html#cb10-1" aria-hidden="true" tabindex="-1"></a>dfs <span class="sc">%&gt;%</span> <span class="fu">reduce</span>(full_join, <span class="at">by=</span><span class="st">&quot;name&quot;</span>)</span></code></pre></div>
 <pre><code>## # A tibble: 2 × 4
 ##   name    age sex   treatment
 ##   &lt;chr&gt; &lt;dbl&gt; &lt;chr&gt; &lt;chr&gt;    
@@ -261,14 +292,14 @@ code span.wa { color: #60a0b0; font-weight: bold; font-style: italic; } /* Warni
 <ul>
 <li>However, let us consider when our dfs list has one more row (the fourth row) with the name and age of Mary.</li>
 </ul>
-<div class="sourceCode" id="cb11"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb11-1"><a href="problems-when-using-dplyrfull_join.html#cb11-1" aria-hidden="true" tabindex="-1"></a>dfs <span class="ot">&lt;-</span> <span class="fu">list</span>(</span>
-<span id="cb11-2"><a href="problems-when-using-dplyrfull_join.html#cb11-2" aria-hidden="true" tabindex="-1"></a>   <span class="at">first =</span> <span class="fu">tibble</span>(<span class="at">name =</span> <span class="st">&quot;John&quot;</span>, <span class="at">age =</span> <span class="dv">30</span>),</span>
-<span id="cb11-3"><a href="problems-when-using-dplyrfull_join.html#cb11-3" aria-hidden="true" tabindex="-1"></a>   <span class="at">second =</span> <span class="fu">tibble</span>(<span class="at">name =</span> <span class="fu">c</span>(<span class="st">&quot;John&quot;</span>, <span class="st">&quot;Mary&quot;</span>), <span class="at">sex =</span> <span class="fu">c</span>(<span class="st">&quot;M&quot;</span>, <span class="st">&quot;F&quot;</span>)),</span>
-<span id="cb11-4"><a href="problems-when-using-dplyrfull_join.html#cb11-4" aria-hidden="true" tabindex="-1"></a>   <span class="at">third =</span> <span class="fu">tibble</span>(<span class="at">name =</span> <span class="st">&quot;Mary&quot;</span>, <span class="at">treatment =</span> <span class="st">&quot;A&quot;</span>),</span>
-<span id="cb11-5"><a href="problems-when-using-dplyrfull_join.html#cb11-5" aria-hidden="true" tabindex="-1"></a>   <span class="at">fourth =</span> <span class="fu">tibble</span>(<span class="at">name =</span> <span class="st">&quot;Mary&quot;</span>, <span class="at">age =</span> <span class="dv">45</span>)</span>
-<span id="cb11-6"><a href="problems-when-using-dplyrfull_join.html#cb11-6" aria-hidden="true" tabindex="-1"></a>)</span></code></pre></div>
+<div class="sourceCode" id="cb12"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb12-1"><a href="problems-when-using-dplyrfull_join.html#cb12-1" aria-hidden="true" tabindex="-1"></a>dfs <span class="ot">&lt;-</span> <span class="fu">list</span>(</span>
+<span id="cb12-2"><a href="problems-when-using-dplyrfull_join.html#cb12-2" aria-hidden="true" tabindex="-1"></a>   <span class="at">first =</span> <span class="fu">tibble</span>(<span class="at">name =</span> <span class="st">&quot;John&quot;</span>, <span class="at">age =</span> <span class="dv">30</span>),</span>
+<span id="cb12-3"><a href="problems-when-using-dplyrfull_join.html#cb12-3" aria-hidden="true" tabindex="-1"></a>   <span class="at">second =</span> <span class="fu">tibble</span>(<span class="at">name =</span> <span class="fu">c</span>(<span class="st">&quot;John&quot;</span>, <span class="st">&quot;Mary&quot;</span>), <span class="at">sex =</span> <span class="fu">c</span>(<span class="st">&quot;M&quot;</span>, <span class="st">&quot;F&quot;</span>)),</span>
+<span id="cb12-4"><a href="problems-when-using-dplyrfull_join.html#cb12-4" aria-hidden="true" tabindex="-1"></a>   <span class="at">third =</span> <span class="fu">tibble</span>(<span class="at">name =</span> <span class="st">&quot;Mary&quot;</span>, <span class="at">treatment =</span> <span class="st">&quot;A&quot;</span>),</span>
+<span id="cb12-5"><a href="problems-when-using-dplyrfull_join.html#cb12-5" aria-hidden="true" tabindex="-1"></a>   <span class="at">fourth =</span> <span class="fu">tibble</span>(<span class="at">name =</span> <span class="st">&quot;Mary&quot;</span>, <span class="at">age =</span> <span class="dv">45</span>)</span>
+<span id="cb12-6"><a href="problems-when-using-dplyrfull_join.html#cb12-6" aria-hidden="true" tabindex="-1"></a>)</span></code></pre></div>
 <p>The <code>full_join</code> without identifying the key <code>by="name"</code> may think that there are two people with the same name, “Mary”.</p>
-<div class="sourceCode" id="cb12"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb12-1"><a href="problems-when-using-dplyrfull_join.html#cb12-1" aria-hidden="true" tabindex="-1"></a>dfs <span class="sc">%&gt;%</span> <span class="fu">reduce</span>(full_join)</span></code></pre></div>
+<div class="sourceCode" id="cb13"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb13-1"><a href="problems-when-using-dplyrfull_join.html#cb13-1" aria-hidden="true" tabindex="-1"></a>dfs <span class="sc">%&gt;%</span> <span class="fu">reduce</span>(full_join)</span></code></pre></div>
 <pre><code>## Joining, by = &quot;name&quot;
 ## Joining, by = &quot;name&quot;
 ## Joining, by = c(&quot;name&quot;, &quot;age&quot;)</code></pre>
@@ -279,14 +310,14 @@ code span.wa { color: #60a0b0; font-weight: bold; font-style: italic; } /* Warni
 ## 2 Mary     NA F     A        
 ## 3 Mary     45 &lt;NA&gt;  &lt;NA&gt;</code></pre>
 <p>The <code>full_join</code> with identifying the key <code>by="name"</code>creates extra columns when we have duplicated column names</p>
-<div class="sourceCode" id="cb15"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb15-1"><a href="problems-when-using-dplyrfull_join.html#cb15-1" aria-hidden="true" tabindex="-1"></a>dfs <span class="sc">%&gt;%</span> <span class="fu">reduce</span>(full_join, <span class="at">by =</span> <span class="st">&quot;name&quot;</span>)</span></code></pre></div>
+<div class="sourceCode" id="cb16"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb16-1"><a href="problems-when-using-dplyrfull_join.html#cb16-1" aria-hidden="true" tabindex="-1"></a>dfs <span class="sc">%&gt;%</span> <span class="fu">reduce</span>(full_join, <span class="at">by =</span> <span class="st">&quot;name&quot;</span>)</span></code></pre></div>
 <pre><code>## # A tibble: 2 × 5
 ##   name  age.x sex   treatment age.y
 ##   &lt;chr&gt; &lt;dbl&gt; &lt;chr&gt; &lt;chr&gt;     &lt;dbl&gt;
 ## 1 John     30 M     &lt;NA&gt;         NA
 ## 2 Mary     NA F     A            45</code></pre>
 <p>We may think about how to delete these extra columns by doing like below code chunk. However, by doing this, we lost the information about Mary’s age (which was available in the age.y column above).</p>
-<div class="sourceCode" id="cb17"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb17-1"><a href="problems-when-using-dplyrfull_join.html#cb17-1" aria-hidden="true" tabindex="-1"></a>dfs <span class="sc">%&gt;%</span> <span class="fu">reduce</span>(full_join, <span class="at">by =</span> <span class="st">&quot;name&quot;</span>, <span class="at">suffix =</span> <span class="fu">c</span>(<span class="st">&quot;&quot;</span>, <span class="st">&quot;.y&quot;</span>)) <span class="sc">%&gt;%</span> <span class="fu">select</span>(<span class="sc">-</span><span class="fu">ends_with</span>(<span class="st">&quot;.y&quot;</span>))</span></code></pre></div>
+<div class="sourceCode" id="cb18"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb18-1"><a href="problems-when-using-dplyrfull_join.html#cb18-1" aria-hidden="true" tabindex="-1"></a>dfs <span class="sc">%&gt;%</span> <span class="fu">reduce</span>(full_join, <span class="at">by =</span> <span class="st">&quot;name&quot;</span>, <span class="at">suffix =</span> <span class="fu">c</span>(<span class="st">&quot;&quot;</span>, <span class="st">&quot;.y&quot;</span>)) <span class="sc">%&gt;%</span> <span class="fu">select</span>(<span class="sc">-</span><span class="fu">ends_with</span>(<span class="st">&quot;.y&quot;</span>))</span></code></pre></div>
 <pre><code>## # A tibble: 2 × 4
 ##   name    age sex   treatment
 ##   &lt;chr&gt; &lt;dbl&gt; &lt;chr&gt; &lt;chr&gt;    
@@ -297,14 +328,14 @@ code span.wa { color: #60a0b0; font-weight: bold; font-style: italic; } /* Warni
 <h2><span class="header-section-number">4.3</span> Using powerjoin::power_full_join<a href="problems-when-using-dplyrfull_join.html#using-powerjoinpower_full_join" class="anchor-section" aria-label="Anchor link to header"></a></h2>
 <p>Solve the problem using <a href="https://github.com/moodymudskipper/powerjoin">powerjoin</a>.</p>
 <p>Let’s consider the dfs list with one more row. The problems we have when using <code>dplyr::full_join</code> and how <code>powerjoin::power_full_join</code> can be helpful.</p>
-<div class="sourceCode" id="cb19"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb19-1"><a href="problems-when-using-dplyrfull_join.html#cb19-1" aria-hidden="true" tabindex="-1"></a>dfs <span class="ot">&lt;-</span> <span class="fu">list</span>(</span>
-<span id="cb19-2"><a href="problems-when-using-dplyrfull_join.html#cb19-2" aria-hidden="true" tabindex="-1"></a>   <span class="at">first =</span> <span class="fu">tibble</span>(<span class="at">name =</span> <span class="st">&quot;John&quot;</span>, <span class="at">age =</span> <span class="dv">30</span>),</span>
-<span id="cb19-3"><a href="problems-when-using-dplyrfull_join.html#cb19-3" aria-hidden="true" tabindex="-1"></a>   <span class="at">second =</span> <span class="fu">tibble</span>(<span class="at">name =</span> <span class="fu">c</span>(<span class="st">&quot;John&quot;</span>, <span class="st">&quot;Mary&quot;</span>), <span class="at">sex =</span> <span class="fu">c</span>(<span class="st">&quot;M&quot;</span>, <span class="st">&quot;F&quot;</span>)),</span>
-<span id="cb19-4"><a href="problems-when-using-dplyrfull_join.html#cb19-4" aria-hidden="true" tabindex="-1"></a>   <span class="at">third =</span> <span class="fu">tibble</span>(<span class="at">name =</span> <span class="st">&quot;Mary&quot;</span>, <span class="at">treatment =</span> <span class="st">&quot;A&quot;</span>),</span>
-<span id="cb19-5"><a href="problems-when-using-dplyrfull_join.html#cb19-5" aria-hidden="true" tabindex="-1"></a>   <span class="at">fourth =</span> <span class="fu">tibble</span>(<span class="at">name =</span> <span class="st">&quot;Mary&quot;</span>, <span class="at">age =</span> <span class="dv">45</span>), </span>
-<span id="cb19-6"><a href="problems-when-using-dplyrfull_join.html#cb19-6" aria-hidden="true" tabindex="-1"></a>   <span class="at">fifth =</span> <span class="fu">tibble</span>(<span class="at">name =</span> <span class="st">&quot;Mary&quot;</span>, <span class="at">sex =</span> <span class="st">&quot;F&quot;</span>)</span>
-<span id="cb19-7"><a href="problems-when-using-dplyrfull_join.html#cb19-7" aria-hidden="true" tabindex="-1"></a>)</span></code></pre></div>
-<div class="sourceCode" id="cb20"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb20-1"><a href="problems-when-using-dplyrfull_join.html#cb20-1" aria-hidden="true" tabindex="-1"></a>dfs <span class="sc">%&gt;%</span> <span class="fu">reduce</span>(full_join)</span></code></pre></div>
+<div class="sourceCode" id="cb20"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb20-1"><a href="problems-when-using-dplyrfull_join.html#cb20-1" aria-hidden="true" tabindex="-1"></a>dfs <span class="ot">&lt;-</span> <span class="fu">list</span>(</span>
+<span id="cb20-2"><a href="problems-when-using-dplyrfull_join.html#cb20-2" aria-hidden="true" tabindex="-1"></a>   <span class="at">first =</span> <span class="fu">tibble</span>(<span class="at">name =</span> <span class="st">&quot;John&quot;</span>, <span class="at">age =</span> <span class="dv">30</span>),</span>
+<span id="cb20-3"><a href="problems-when-using-dplyrfull_join.html#cb20-3" aria-hidden="true" tabindex="-1"></a>   <span class="at">second =</span> <span class="fu">tibble</span>(<span class="at">name =</span> <span class="fu">c</span>(<span class="st">&quot;John&quot;</span>, <span class="st">&quot;Mary&quot;</span>), <span class="at">sex =</span> <span class="fu">c</span>(<span class="st">&quot;M&quot;</span>, <span class="st">&quot;F&quot;</span>)),</span>
+<span id="cb20-4"><a href="problems-when-using-dplyrfull_join.html#cb20-4" aria-hidden="true" tabindex="-1"></a>   <span class="at">third =</span> <span class="fu">tibble</span>(<span class="at">name =</span> <span class="st">&quot;Mary&quot;</span>, <span class="at">treatment =</span> <span class="st">&quot;A&quot;</span>),</span>
+<span id="cb20-5"><a href="problems-when-using-dplyrfull_join.html#cb20-5" aria-hidden="true" tabindex="-1"></a>   <span class="at">fourth =</span> <span class="fu">tibble</span>(<span class="at">name =</span> <span class="st">&quot;Mary&quot;</span>, <span class="at">age =</span> <span class="dv">45</span>), </span>
+<span id="cb20-6"><a href="problems-when-using-dplyrfull_join.html#cb20-6" aria-hidden="true" tabindex="-1"></a>   <span class="at">fifth =</span> <span class="fu">tibble</span>(<span class="at">name =</span> <span class="st">&quot;Mary&quot;</span>, <span class="at">sex =</span> <span class="st">&quot;F&quot;</span>)</span>
+<span id="cb20-7"><a href="problems-when-using-dplyrfull_join.html#cb20-7" aria-hidden="true" tabindex="-1"></a>)</span></code></pre></div>
+<div class="sourceCode" id="cb21"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb21-1"><a href="problems-when-using-dplyrfull_join.html#cb21-1" aria-hidden="true" tabindex="-1"></a>dfs <span class="sc">%&gt;%</span> <span class="fu">reduce</span>(full_join)</span></code></pre></div>
 <pre><code>## Joining, by = &quot;name&quot;
 ## Joining, by = &quot;name&quot;
 ## Joining, by = c(&quot;name&quot;, &quot;age&quot;)
@@ -315,14 +346,14 @@ code span.wa { color: #60a0b0; font-weight: bold; font-style: italic; } /* Warni
 ## 1 John     30 M     &lt;NA&gt;     
 ## 2 Mary     NA F     A        
 ## 3 Mary     45 &lt;NA&gt;  &lt;NA&gt;</code></pre>
-<div class="sourceCode" id="cb23"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb23-1"><a href="problems-when-using-dplyrfull_join.html#cb23-1" aria-hidden="true" tabindex="-1"></a>dfs <span class="sc">%&gt;%</span> <span class="fu">reduce</span>(full_join, <span class="at">by =</span> <span class="st">&quot;name&quot;</span>)</span></code></pre></div>
+<div class="sourceCode" id="cb24"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb24-1"><a href="problems-when-using-dplyrfull_join.html#cb24-1" aria-hidden="true" tabindex="-1"></a>dfs <span class="sc">%&gt;%</span> <span class="fu">reduce</span>(full_join, <span class="at">by =</span> <span class="st">&quot;name&quot;</span>)</span></code></pre></div>
 <pre><code>## # A tibble: 2 × 6
 ##   name  age.x sex.x treatment age.y sex.y
 ##   &lt;chr&gt; &lt;dbl&gt; &lt;chr&gt; &lt;chr&gt;     &lt;dbl&gt; &lt;chr&gt;
 ## 1 John     30 M     &lt;NA&gt;         NA &lt;NA&gt; 
 ## 2 Mary     NA F     A            45 F</code></pre>
 <p>The <a href="https://github.com/moodymudskipper/powerjoin">powerjoin</a> package helps us collect all available information.</p>
-<div class="sourceCode" id="cb25"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb25-1"><a href="problems-when-using-dplyrfull_join.html#cb25-1" aria-hidden="true" tabindex="-1"></a>dfs <span class="sc">%&gt;%</span> <span class="fu">power_full_join</span>(<span class="at">by=</span> <span class="st">&quot;name&quot;</span>, <span class="at">conflict =</span> coalesce_xy)</span></code></pre></div>
+<div class="sourceCode" id="cb26"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb26-1"><a href="problems-when-using-dplyrfull_join.html#cb26-1" aria-hidden="true" tabindex="-1"></a>dfs <span class="sc">%&gt;%</span> <span class="fu">power_full_join</span>(<span class="at">by=</span> <span class="st">&quot;name&quot;</span>, <span class="at">conflict =</span> coalesce_xy)</span></code></pre></div>
 <pre><code>## # A tibble: 2 × 4
 ##   name  treatment   age sex  
 ##   &lt;chr&gt; &lt;chr&gt;     &lt;dbl&gt; &lt;chr&gt;
@@ -332,21 +363,21 @@ code span.wa { color: #60a0b0; font-weight: bold; font-style: italic; } /* Warni
 <div id="what-if-we-have-conflict-data-sets" class="section level2 hasAnchor" number="4.4">
 <h2><span class="header-section-number">4.4</span> What if we have conflict data sets<a href="problems-when-using-dplyrfull_join.html#what-if-we-have-conflict-data-sets" class="anchor-section" aria-label="Anchor link to header"></a></h2>
 <p>Now, consider that we have two data sets for Mary that have different values for “age” (the fourth and fifth), with ages equal to 45 and 65, respectively.</p>
-<div class="sourceCode" id="cb27"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb27-1"><a href="problems-when-using-dplyrfull_join.html#cb27-1" aria-hidden="true" tabindex="-1"></a>dfs <span class="ot">&lt;-</span> <span class="fu">list</span>(</span>
-<span id="cb27-2"><a href="problems-when-using-dplyrfull_join.html#cb27-2" aria-hidden="true" tabindex="-1"></a>   <span class="at">first =</span> <span class="fu">tibble</span>(<span class="at">name =</span> <span class="st">&quot;John&quot;</span>, <span class="at">age =</span> <span class="dv">30</span>),</span>
-<span id="cb27-3"><a href="problems-when-using-dplyrfull_join.html#cb27-3" aria-hidden="true" tabindex="-1"></a>   <span class="at">second =</span> <span class="fu">tibble</span>(<span class="at">name =</span> <span class="fu">c</span>(<span class="st">&quot;John&quot;</span>, <span class="st">&quot;Mary&quot;</span>), <span class="at">sex =</span> <span class="fu">c</span>(<span class="st">&quot;M&quot;</span>, <span class="st">&quot;F&quot;</span>)),</span>
-<span id="cb27-4"><a href="problems-when-using-dplyrfull_join.html#cb27-4" aria-hidden="true" tabindex="-1"></a>   <span class="at">third =</span> <span class="fu">tibble</span>(<span class="at">name =</span> <span class="st">&quot;Mary&quot;</span>, <span class="at">treatment =</span> <span class="st">&quot;A&quot;</span>),</span>
-<span id="cb27-5"><a href="problems-when-using-dplyrfull_join.html#cb27-5" aria-hidden="true" tabindex="-1"></a>   <span class="at">fourth =</span> <span class="fu">tibble</span>(<span class="at">name =</span> <span class="st">&quot;Mary&quot;</span>, <span class="at">age =</span> <span class="dv">45</span>), </span>
-<span id="cb27-6"><a href="problems-when-using-dplyrfull_join.html#cb27-6" aria-hidden="true" tabindex="-1"></a>   <span class="at">fifth =</span> <span class="fu">tibble</span>(<span class="at">name =</span> <span class="st">&quot;Mary&quot;</span>, <span class="at">age =</span> <span class="dv">65</span>)</span>
-<span id="cb27-7"><a href="problems-when-using-dplyrfull_join.html#cb27-7" aria-hidden="true" tabindex="-1"></a>)</span></code></pre></div>
+<div class="sourceCode" id="cb28"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb28-1"><a href="problems-when-using-dplyrfull_join.html#cb28-1" aria-hidden="true" tabindex="-1"></a>dfs <span class="ot">&lt;-</span> <span class="fu">list</span>(</span>
+<span id="cb28-2"><a href="problems-when-using-dplyrfull_join.html#cb28-2" aria-hidden="true" tabindex="-1"></a>   <span class="at">first =</span> <span class="fu">tibble</span>(<span class="at">name =</span> <span class="st">&quot;John&quot;</span>, <span class="at">age =</span> <span class="dv">30</span>),</span>
+<span id="cb28-3"><a href="problems-when-using-dplyrfull_join.html#cb28-3" aria-hidden="true" tabindex="-1"></a>   <span class="at">second =</span> <span class="fu">tibble</span>(<span class="at">name =</span> <span class="fu">c</span>(<span class="st">&quot;John&quot;</span>, <span class="st">&quot;Mary&quot;</span>), <span class="at">sex =</span> <span class="fu">c</span>(<span class="st">&quot;M&quot;</span>, <span class="st">&quot;F&quot;</span>)),</span>
+<span id="cb28-4"><a href="problems-when-using-dplyrfull_join.html#cb28-4" aria-hidden="true" tabindex="-1"></a>   <span class="at">third =</span> <span class="fu">tibble</span>(<span class="at">name =</span> <span class="st">&quot;Mary&quot;</span>, <span class="at">treatment =</span> <span class="st">&quot;A&quot;</span>),</span>
+<span id="cb28-5"><a href="problems-when-using-dplyrfull_join.html#cb28-5" aria-hidden="true" tabindex="-1"></a>   <span class="at">fourth =</span> <span class="fu">tibble</span>(<span class="at">name =</span> <span class="st">&quot;Mary&quot;</span>, <span class="at">age =</span> <span class="dv">45</span>), </span>
+<span id="cb28-6"><a href="problems-when-using-dplyrfull_join.html#cb28-6" aria-hidden="true" tabindex="-1"></a>   <span class="at">fifth =</span> <span class="fu">tibble</span>(<span class="at">name =</span> <span class="st">&quot;Mary&quot;</span>, <span class="at">age =</span> <span class="dv">65</span>)</span>
+<span id="cb28-7"><a href="problems-when-using-dplyrfull_join.html#cb28-7" aria-hidden="true" tabindex="-1"></a>)</span></code></pre></div>
 <p>Then the argument <code>conflict = coalesce_xy</code> will take the first available value (age = 45), while <code>conflict = coalesce_yx</code> will take the second available value (age = 65).</p>
-<div class="sourceCode" id="cb28"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb28-1"><a href="problems-when-using-dplyrfull_join.html#cb28-1" aria-hidden="true" tabindex="-1"></a>dfs <span class="sc">%&gt;%</span> <span class="fu">power_full_join</span>(<span class="at">by=</span> <span class="st">&quot;name&quot;</span>, <span class="at">conflict =</span> coalesce_xy)</span></code></pre></div>
+<div class="sourceCode" id="cb29"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb29-1"><a href="problems-when-using-dplyrfull_join.html#cb29-1" aria-hidden="true" tabindex="-1"></a>dfs <span class="sc">%&gt;%</span> <span class="fu">power_full_join</span>(<span class="at">by=</span> <span class="st">&quot;name&quot;</span>, <span class="at">conflict =</span> coalesce_xy)</span></code></pre></div>
 <pre><code>## # A tibble: 2 × 4
 ##   name  sex   treatment   age
 ##   &lt;chr&gt; &lt;chr&gt; &lt;chr&gt;     &lt;dbl&gt;
 ## 1 John  M     &lt;NA&gt;         30
 ## 2 Mary  F     A            45</code></pre>
-<div class="sourceCode" id="cb30"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb30-1"><a href="problems-when-using-dplyrfull_join.html#cb30-1" aria-hidden="true" tabindex="-1"></a>dfs <span class="sc">%&gt;%</span> <span class="fu">power_full_join</span>(<span class="at">by=</span> <span class="st">&quot;name&quot;</span>, <span class="at">conflict =</span> coalesce_yx)</span></code></pre></div>
+<div class="sourceCode" id="cb31"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb31-1"><a href="problems-when-using-dplyrfull_join.html#cb31-1" aria-hidden="true" tabindex="-1"></a>dfs <span class="sc">%&gt;%</span> <span class="fu">power_full_join</span>(<span class="at">by=</span> <span class="st">&quot;name&quot;</span>, <span class="at">conflict =</span> coalesce_yx)</span></code></pre></div>
 <pre><code>## # A tibble: 2 × 4
 ##   name  sex   treatment   age
 ##   &lt;chr&gt; &lt;chr&gt; &lt;chr&gt;     &lt;dbl&gt;

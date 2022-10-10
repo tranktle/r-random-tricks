@@ -4,18 +4,18 @@
 
   <meta charset="utf-8" />
   <meta http-equiv="X-UA-Compatible" content="IE=edge" />
-  <title>Untitled</title>
+  <title>Section 5 Load and write to an excel sheet | Untitled</title>
   <meta name="description" content="Some R observations/tricks ." />
   <meta name="generator" content="bookdown 0.26 and GitBook 2.6.7" />
 
-  <meta property="og:title" content="Untitled" />
+  <meta property="og:title" content="Section 5 Load and write to an excel sheet | Untitled" />
   <meta property="og:type" content="book" />
   
   <meta property="og:description" content="Some R observations/tricks ." />
   <meta name="github-repo" content="rstudio/bookdown-demo" />
 
   <meta name="twitter:card" content="summary" />
-  <meta name="twitter:title" content="Untitled" />
+  <meta name="twitter:title" content="Section 5 Load and write to an excel sheet | Untitled" />
   
   <meta name="twitter:description" content="Some R observations/tricks ." />
   
@@ -30,8 +30,8 @@
   <meta name="apple-mobile-web-app-status-bar-style" content="black" />
   
   
-
-<link rel="next" href="github-cheatsheet.html"/>
+<link rel="prev" href="problems-when-using-dplyrfull_join.html"/>
+<link rel="next" href="replace-values-by-nasa-specfic-value.html"/>
 <script src="libs/jquery-3.6.0/jquery-3.6.0.min.js"></script>
 <script src="https://cdn.jsdelivr.net/npm/fuse.js@6.4.6/dist/fuse.min.js"></script>
 <link href="libs/gitbook-2.6.7/css/style.css" rel="stylesheet" />
@@ -235,32 +235,36 @@ code span.wa { color: #60a0b0; font-weight: bold; font-style: italic; } /* Warni
           <div class="page-inner">
 
             <section class="normal" id="section-">
-<div id="header">
-<h1 class="title">Untitled</h1>
-<p class="author"><em>Tran Le</em></p>
-<p class="date"><em>2022-10-10</em></p>
+<div id="load-and-write-to-an-excel-sheet" class="section level1 hasAnchor" number="5">
+<h1><span class="header-section-number">Section 5</span> Load and write to an excel sheet<a href="load-and-write-to-an-excel-sheet.html#load-and-write-to-an-excel-sheet" class="anchor-section" aria-label="Anchor link to header"></a></h1>
+<div id="introduction-4" class="section level2 hasAnchor" number="5.1">
+<h2><span class="header-section-number">5.1</span> Introduction<a href="load-and-write-to-an-excel-sheet.html#introduction-4" class="anchor-section" aria-label="Anchor link to header"></a></h2>
+<p>This section can be considered as a cheat sheet for loading and writing to an excel sheet.</p>
 </div>
-<div id="introduction" class="section level1 hasAnchor" number="1">
-<h1><span class="header-section-number">Section 1</span> Introduction<a href="index.html#introduction" class="anchor-section" aria-label="Anchor link to header"></a></h1>
-<p>This book-down file is where I keep the observations/tricks I got while using R. I also use this file to write some cheat sheets for later quick reference. Sometimes, I write something when my friends ask me a question. I believe explaining to someone is an excellent way to help me understand and learn better.</p>
-<p>These are my <a href="https://www.linkedin.com/in/tran-le-767470229/">LinkedIn</a> and <a href="https://github.com/tranktle">GitHub</a> pages. Please connect so that we can learn from each other. Happy studying 😄!</p>
+<div id="code" class="section level2 hasAnchor" number="5.2">
+<h2><span class="header-section-number">5.2</span> Code<a href="load-and-write-to-an-excel-sheet.html#code" class="anchor-section" aria-label="Anchor link to header"></a></h2>
+<div class="sourceCode" id="cb33"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb33-1"><a href="load-and-write-to-an-excel-sheet.html#cb33-1" aria-hidden="true" tabindex="-1"></a><span class="fu">library</span>(openxlsx)</span>
+<span id="cb33-2"><a href="load-and-write-to-an-excel-sheet.html#cb33-2" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb33-3"><a href="load-and-write-to-an-excel-sheet.html#cb33-3" aria-hidden="true" tabindex="-1"></a><span class="co"># Put in HTML result table</span></span>
+<span id="cb33-4"><a href="load-and-write-to-an-excel-sheet.html#cb33-4" aria-hidden="true" tabindex="-1"></a><span class="fu">source</span>(<span class="st">&quot;utilities.R&quot;</span>)</span>
+<span id="cb33-5"><a href="load-and-write-to-an-excel-sheet.html#cb33-5" aria-hidden="true" tabindex="-1"></a>wb <span class="ot">&lt;-</span> <span class="fu">loadWorkbook</span>(<span class="st">&quot;location/Your_Excel_File_Name.xlsx&quot;</span>)</span>
+<span id="cb33-6"><a href="load-and-write-to-an-excel-sheet.html#cb33-6" aria-hidden="true" tabindex="-1"></a>sheetname <span class="ot">=</span><span class="st">&quot;Sheet_name_that_you_want_to_write_on&quot;</span></span>
+<span id="cb33-7"><a href="load-and-write-to-an-excel-sheet.html#cb33-7" aria-hidden="true" tabindex="-1"></a><span class="co"># You can write many table/content that you want in a sheet using writeData</span></span>
+<span id="cb33-8"><a href="load-and-write-to-an-excel-sheet.html#cb33-8" aria-hidden="true" tabindex="-1"></a><span class="fu">writeData</span>(wb, sheetname, table_you_want_to_write_on, <span class="at">startRow =</span> <span class="dv">11</span>, <span class="at">startCol =</span> <span class="st">&quot;F&quot;</span>, <span class="at">colNames =</span> F)</span>
+<span id="cb33-9"><a href="load-and-write-to-an-excel-sheet.html#cb33-9" aria-hidden="true" tabindex="-1"></a><span class="co"># Open a temporary version to check if we have the correct way that we want our data to be written in the Excel sheet file.</span></span>
+<span id="cb33-10"><a href="load-and-write-to-an-excel-sheet.html#cb33-10" aria-hidden="true" tabindex="-1"></a><span class="fu">openXL</span>(wb) </span>
+<span id="cb33-11"><a href="load-and-write-to-an-excel-sheet.html#cb33-11" aria-hidden="true" tabindex="-1"></a><span class="co"># Then you can write the file with new/old name.</span></span>
+<span id="cb33-12"><a href="load-and-write-to-an-excel-sheet.html#cb33-12" aria-hidden="true" tabindex="-1"></a><span class="fu">saveWorkbook</span>(<span class="at">wb =</span> wb, <span class="at">file =</span> <span class="st">&quot;location/Your_New/Old_Excel_File_Name.xlsx&quot;</span>,<span class="at">overwrite =</span> T)</span></code></pre></div>
 
-<div class="sourceCode" id="cb1"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb1-1"><a href="index.html#cb1-1" aria-hidden="true" tabindex="-1"></a>data_disp <span class="ot">&lt;-</span> <span class="cf">function</span>(x){</span>
-<span id="cb1-2"><a href="index.html#cb1-2" aria-hidden="true" tabindex="-1"></a>   <span class="co"># x: a datafarme gotton from xcov_results(xcov, data_use)</span></span>
-<span id="cb1-3"><a href="index.html#cb1-3" aria-hidden="true" tabindex="-1"></a>  x <span class="sc">%&gt;%</span> <span class="fu">datatable</span>(<span class="at">rownames =</span> F,</span>
-<span id="cb1-4"><a href="index.html#cb1-4" aria-hidden="true" tabindex="-1"></a>  <span class="at">extensions =</span> <span class="st">&#39;Buttons&#39;</span>, <span class="at">options =</span> <span class="fu">list</span>(</span>
-<span id="cb1-5"><a href="index.html#cb1-5" aria-hidden="true" tabindex="-1"></a>    <span class="at">pageLength =</span> <span class="dv">200</span>,</span>
-<span id="cb1-6"><a href="index.html#cb1-6" aria-hidden="true" tabindex="-1"></a>    <span class="at">dom =</span> <span class="st">&#39;Brt&#39;</span>,</span>
-<span id="cb1-7"><a href="index.html#cb1-7" aria-hidden="true" tabindex="-1"></a>    <span class="at">buttons =</span> <span class="fu">c</span>(<span class="st">&#39;copy&#39;</span>, <span class="st">&#39;csv&#39;</span>, <span class="st">&#39;excel&#39;</span>, <span class="st">&#39;pdf&#39;</span>, <span class="st">&#39;print&#39;</span>)))}</span></code></pre></div>
-
+</div>
 </div>
             </section>
 
           </div>
         </div>
       </div>
-
-<a href="github-cheatsheet.html" class="navigation navigation-next navigation-unique" aria-label="Next page"><i class="fa fa-angle-right"></i></a>
+<a href="problems-when-using-dplyrfull_join.html" class="navigation navigation-prev " aria-label="Previous page"><i class="fa fa-angle-left"></i></a>
+<a href="replace-values-by-nasa-specfic-value.html" class="navigation navigation-next " aria-label="Next page"><i class="fa fa-angle-right"></i></a>
     </div>
   </div>
 <script src="libs/gitbook-2.6.7/js/app.min.js"></script>
@@ -291,7 +295,7 @@ gitbook.start({
 "size": 2
 },
 "edit": {
-"link": "https://github.com/USERNAME/REPO/edit/BRANCH/index.Rmd",
+"link": "https://github.com/USERNAME/REPO/edit/BRANCH/04_Load_WriteOn_Save_ExcelFile.Rmd",
 "text": "Edit"
 },
 "history": {

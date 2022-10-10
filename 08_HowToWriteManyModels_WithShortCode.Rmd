@@ -1,0 +1,111 @@
+# Write many models with shortest code using glue and rlang
+
+## Introduction
+
+- In case you want to fit many models, even if each is a really simple model, say linear regression, $model_i \leftarrow  lm(Y_i\sim X1+X2+X3+X4)$, for $i=\overline{1,30}$. To fit these 30 models, you may have to write 30 lines unnecessarily long and error-prone with copy and paste. 
+
+- In this section, I will briefly introduce two ways that save you time and make your code look nicer and more accessible to debug:
+
+I will give just a small example that we want to fit 3 models $model_i \leftarrow lm(Y_i\sim X1+X2+X3+X4, data = syn\space data)$, for $i=\overline{1,3}$. But the idea for writing more models is just the same. This example may not give you a strong impression when I just fit linear regression models, but believe me, it will be a different story when we have more complicated models.
+
+- This section includes the following:
+  - Create a synthesis of data. 
+  - Way 1 for writing many models: using glue::glue, parse, and eval.
+  - Way 2 for writing many models: using rlang tidy evaluation operator.
+
+## Create a synthesis data
+
+```{r, warning=FALSE}
+suppressPackageStartupMessages(library(tidyverse))
+```
+
+```{r}
+set.seed(386827)
+n = 100 # sample size
+# Synthesis inputs
+X1 <- rnorm(n, mean = 10, sd = 3)
+X2 <- rnorm(n, mean = 16, sd  = 2)
+X3 <- rbinom(n, 1, 0.4)
+X4 <- rbinom(n, 1, 0.5)
+# epsilons
+eps1 <- rnorm(n, 0, 1)
+eps2 <- rnorm(n, 0, 0.5)
+eps3 <- eps2
+# Create synthesis output
+Y1 <- 3*X1 + 2*X2 + 8*X3 + 5*X4 + eps1
+Y2 <- 15*X1 + 0*X2 + 5*X3 + 3*X4 + eps2
+Y3 <- 1*X1 + 12* X2 + 2*X3 + 4*X4 + eps3
+# Synthesis data
+syn_dat <- tibble::tibble(X1, X2, X3, X4, Y1, Y2, Y3)
+head(syn_dat)
+```
+
+To fit the three above linear models, you will have to write:
+
+```{r}
+(model1 <- lm(Y1~X1+X2+X3+X4, data=syn_dat))
+(model2 <- lm(Y2~X1+X2+X3+X4, data=syn_dat))
+(model3 <- lm(Y3~X1+X2+X3+X4, data=syn_dat))
+```
+
+## First way: using glue::glue, parse and eval
+
+We will not see much difference with three models. However, this way saves you lots of time if you have 30 models to write.
+
+```{r}
+out <- c("Y1", "Y2", "Y3")
+model <- c("model1", "model2", "model3")
+num_model = length(model)
+glue::glue('{model[1:num_model]} <- 
+           lm({out[1:num_model]}~X1+X2+X3+X4, data=syn_dat)')  %>%
+  parse(text = .) %>%
+  eval(envir = globalenv())
+```
+
+When we finish the above code chunk, we will have the three needed models. Now, we can print them.
+
+```{r}
+model1; model2; model3
+```
+
+## Second way: using tidy evaluation operator
+
+For more information about rlang- tidy evaluation operator, read this awesome introduction for an awesome package [rlang-0-4-0](https://www.tidyverse.org/blog/2019/06/rlang-0-4-0/). This way is the best when we have more complicated models. 
+
+```{r}
+fit_many_model <- function(data, out){
+    # out: output names
+    model <- lm({{out}}~X1+X2+X3+X4, data=data)
+    return(model)
+}
+```
+So now we have our models
+```{r}
+# Or you can use 
+# (model1 <- syn_dat %>% fit_many_regression(Y1))
+(model1 <- fit_many_model(syn_dat, Y1))
+(model2 <- fit_many_model(syn_dat, Y2))
+(model3 <- fit_many_model(syn_dat, Y3))
+```
+
+## Other tips
+
+We can write many lines of code using cat, paste the result in your R_script/Rmarkdown-code chunk, and then run them. For example, this is how you can have three linear regression models put in three different sections and code chunks in R Markdown. Add more in i_list then we have more models. 
+
+```{r}
+i_list <- c(1,2,3)
+for(i in i_list) {
+  cat("\n")
+  cat("### ", "model", i,"\n",sep="")
+  cat("```{r}","\n",sep="")
+  cat("model",i , "<-fit_many_model(syn_dat, Y", i, ")\n",sep="")
+  cat("```","\n",sep="")
+  }
+```
+
+## References
+[Main reference _ rlang-0-4-0/](https://www.tidyverse.org/blog/2019/06/rlang-0-4-0/)
+[Introduction to tidyeval](https://rstudio-pubs-static.s3.amazonaws.com/412870_efd2f2309b6b4720b9019f3eba6cf0ec.html)
+[Tidy eval in R: A simple example](https://www.youtube.com/watch?v=YlZuT6PWOEY)
+[https://www.youtube.com/watch?v=9v9-EpTuwk0](https://www.youtube.com/watch?v=9v9-EpTuwk0)
+

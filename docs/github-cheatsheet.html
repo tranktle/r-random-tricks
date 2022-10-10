@@ -4,18 +4,18 @@
 
   <meta charset="utf-8" />
   <meta http-equiv="X-UA-Compatible" content="IE=edge" />
-  <title>Section 2 Github-Cheatsheet | Random R tricks</title>
+  <title>Section 2 Github-Cheatsheet | Untitled</title>
   <meta name="description" content="Some R observations/tricks ." />
   <meta name="generator" content="bookdown 0.26 and GitBook 2.6.7" />
 
-  <meta property="og:title" content="Section 2 Github-Cheatsheet | Random R tricks" />
+  <meta property="og:title" content="Section 2 Github-Cheatsheet | Untitled" />
   <meta property="og:type" content="book" />
   
   <meta property="og:description" content="Some R observations/tricks ." />
   <meta name="github-repo" content="rstudio/bookdown-demo" />
 
   <meta name="twitter:card" content="summary" />
-  <meta name="twitter:title" content="Section 2 Github-Cheatsheet | Random R tricks" />
+  <meta name="twitter:title" content="Section 2 Github-Cheatsheet | Untitled" />
   
   <meta name="twitter:description" content="Some R observations/tricks ." />
   
@@ -23,6 +23,7 @@
 <meta name="author" content="Tran Le" />
 
 
+<meta name="date" content="2022-10-10" />
 
   <meta name="viewport" content="width=device-width, initial-scale=1" />
   <meta name="apple-mobile-web-app-capable" content="yes" />
@@ -51,6 +52,14 @@
 <link href="libs/anchor-sections-1.1.0/anchor-sections.css" rel="stylesheet" />
 <link href="libs/anchor-sections-1.1.0/anchor-sections-hash.css" rel="stylesheet" />
 <script src="libs/anchor-sections-1.1.0/anchor-sections.js"></script>
+<script src="libs/htmlwidgets-1.5.4/htmlwidgets.js"></script>
+<link href="libs/datatables-css-0.0.0/datatables-crosstalk.css" rel="stylesheet" />
+<script src="libs/datatables-binding-0.23/datatables.js"></script>
+<link href="libs/dt-core-1.11.3/css/jquery.dataTables.min.css" rel="stylesheet" />
+<link href="libs/dt-core-1.11.3/css/jquery.dataTables.extra.css" rel="stylesheet" />
+<script src="libs/dt-core-1.11.3/js/jquery.dataTables.min.js"></script>
+<link href="libs/crosstalk-1.2.0/css/crosstalk.min.css" rel="stylesheet" />
+<script src="libs/crosstalk-1.2.0/js/crosstalk.min.js"></script>
 
 
 <style type="text/css">
@@ -165,14 +174,15 @@ code span.wa { color: #60a0b0; font-weight: bold; font-style: italic; } /* Warni
 <li class="chapter" data-level="5.1" data-path="load-and-write-to-an-excel-sheet.html"><a href="load-and-write-to-an-excel-sheet.html#introduction-4"><i class="fa fa-check"></i><b>5.1</b> Introduction</a></li>
 <li class="chapter" data-level="5.2" data-path="load-and-write-to-an-excel-sheet.html"><a href="load-and-write-to-an-excel-sheet.html#code"><i class="fa fa-check"></i><b>5.2</b> Code</a></li>
 </ul></li>
-<li class="chapter" data-level="6" data-path="replace-values-by-nas.html"><a href="replace-values-by-nas.html"><i class="fa fa-check"></i><b>6</b> Replace Values by Nas</a>
+<li class="chapter" data-level="6" data-path="replace-values-by-nasa-specfic-value.html"><a href="replace-values-by-nasa-specfic-value.html"><i class="fa fa-check"></i><b>6</b> Replace Values by Nas/A specfic value</a>
 <ul>
-<li class="chapter" data-level="6.1" data-path="replace-values-by-nas.html"><a href="replace-values-by-nas.html#introduction-5"><i class="fa fa-check"></i><b>6.1</b> Introduction</a></li>
-<li class="chapter" data-level="6.2" data-path="replace-values-by-nas.html"><a href="replace-values-by-nas.html#replace_with_na-replace-specific-values-at-in-specific-columns-by-nas."><i class="fa fa-check"></i><b>6.2</b> replace_with_na(): replace specific value(s) at in specific columns by NAs.</a></li>
-<li class="chapter" data-level="6.3" data-path="replace-values-by-nas.html"><a href="replace-values-by-nas.html#replace_with_na_all-replaces-some-values-by-na-for-all-columns."><i class="fa fa-check"></i><b>6.3</b> replace_with_na_all() Replaces some values by NA for all columns.</a></li>
-<li class="chapter" data-level="6.4" data-path="replace-values-by-nas.html"><a href="replace-values-by-nas.html#replace_with_na_at-replaces-some-chosen-values-in-a-chosen-set-of-columns-by-nas."><i class="fa fa-check"></i><b>6.4</b> replace_with_na_at(): replaces some chosen values in a chosen set of columns by NAs.</a></li>
-<li class="chapter" data-level="6.5" data-path="replace-values-by-nas.html"><a href="replace-values-by-nas.html#replace_with_na_if-replaces-some-values-on-some-columns-with-conditions-is.numeric-is.character-by-na."><i class="fa fa-check"></i><b>6.5</b> replace_with_na_if(): Replaces some values on some columns with conditions (is.numeric, is.character) by NA.</a></li>
-<li class="chapter" data-level="6.6" data-path="replace-values-by-nas.html"><a href="replace-values-by-nas.html#references-2"><i class="fa fa-check"></i><b>6.6</b> References</a></li>
+<li class="chapter" data-level="6.1" data-path="replace-values-by-nasa-specfic-value.html"><a href="replace-values-by-nasa-specfic-value.html#introduction-5"><i class="fa fa-check"></i><b>6.1</b> Introduction</a></li>
+<li class="chapter" data-level="6.2" data-path="replace-values-by-nasa-specfic-value.html"><a href="replace-values-by-nasa-specfic-value.html#replace_with_na-replace-specific-values-at-in-specific-columns-by-nas."><i class="fa fa-check"></i><b>6.2</b> replace_with_na(): replace specific value(s) at in specific columns by NAs.</a></li>
+<li class="chapter" data-level="6.3" data-path="replace-values-by-nasa-specfic-value.html"><a href="replace-values-by-nasa-specfic-value.html#replace_with_na_all-replaces-some-values-by-na-for-all-columns."><i class="fa fa-check"></i><b>6.3</b> replace_with_na_all() Replaces some values by NA for all columns.</a></li>
+<li class="chapter" data-level="6.4" data-path="replace-values-by-nasa-specfic-value.html"><a href="replace-values-by-nasa-specfic-value.html#replace_with_na_at-replaces-some-chosen-values-in-a-chosen-set-of-columns-by-nas."><i class="fa fa-check"></i><b>6.4</b> replace_with_na_at(): replaces some chosen values in a chosen set of columns by NAs.</a></li>
+<li class="chapter" data-level="6.5" data-path="replace-values-by-nasa-specfic-value.html"><a href="replace-values-by-nasa-specfic-value.html#replace_with_na_if-replaces-some-values-on-some-columns-with-conditions-is.numeric-is.character-by-na."><i class="fa fa-check"></i><b>6.5</b> replace_with_na_if(): Replaces some values on some columns with conditions (is.numeric, is.character) by NA.</a></li>
+<li class="chapter" data-level="6.6" data-path="replace-values-by-nasa-specfic-value.html"><a href="replace-values-by-nasa-specfic-value.html#a-helpfull-observation-using-mutate_at-and-replace"><i class="fa fa-check"></i><b>6.6</b> A helpfull observation using mutate_at and replace</a></li>
+<li class="chapter" data-level="6.7" data-path="replace-values-by-nasa-specfic-value.html"><a href="replace-values-by-nasa-specfic-value.html#references-2"><i class="fa fa-check"></i><b>6.7</b> References</a></li>
 </ul></li>
 <li class="chapter" data-level="7" data-path="find-group-of-highly-correlated-columns.html"><a href="find-group-of-highly-correlated-columns.html"><i class="fa fa-check"></i><b>7</b> Find group of highly correlated columns</a>
 <ul>
@@ -182,8 +192,29 @@ code span.wa { color: #60a0b0; font-weight: bold; font-style: italic; } /* Warni
 <li class="chapter" data-level="7.4" data-path="find-group-of-highly-correlated-columns.html"><a href="find-group-of-highly-correlated-columns.html#deal-with-nominal-nominal-variables"><i class="fa fa-check"></i><b>7.4</b> Deal with nominal-nominal variables</a></li>
 <li class="chapter" data-level="7.5" data-path="find-group-of-highly-correlated-columns.html"><a href="find-group-of-highly-correlated-columns.html#here-is-the-code-to-get-group-of-highly-correlated-columns"><i class="fa fa-check"></i><b>7.5</b> Here is the code to get group of highly correlated columns</a></li>
 <li class="chapter" data-level="7.6" data-path="find-group-of-highly-correlated-columns.html"><a href="find-group-of-highly-correlated-columns.html#explain-the-steps-in-details"><i class="fa fa-check"></i><b>7.6</b> Explain the steps in details</a></li>
+<li class="chapter" data-level="7.7" data-path="find-group-of-highly-correlated-columns.html"><a href="find-group-of-highly-correlated-columns.html#references-3"><i class="fa fa-check"></i><b>7.7</b> References</a></li>
 </ul></li>
-<li class="chapter" data-level="8" data-path="references-3.html"><a href="references-3.html"><i class="fa fa-check"></i><b>8</b> References</a></li>
+<li class="chapter" data-level="8" data-path="relabel-study-names-into-a-numeric-sequence.html"><a href="relabel-study-names-into-a-numeric-sequence.html"><i class="fa fa-check"></i><b>8</b> Relabel study names into a numeric sequence</a>
+<ul>
+<li class="chapter" data-level="8.1" data-path="relabel-study-names-into-a-numeric-sequence.html"><a href="relabel-study-names-into-a-numeric-sequence.html#introduction-7"><i class="fa fa-check"></i><b>8.1</b> Introduction</a></li>
+<li class="chapter" data-level="8.2" data-path="relabel-study-names-into-a-numeric-sequence.html"><a href="relabel-study-names-into-a-numeric-sequence.html#create-data"><i class="fa fa-check"></i><b>8.2</b> Create data</a>
+<ul>
+<li class="chapter" data-level="8.2.1" data-path="relabel-study-names-into-a-numeric-sequence.html"><a href="relabel-study-names-into-a-numeric-sequence.html#what-if-we-want-to-keep-the-order-of-study-names-as-they-were"><i class="fa fa-check"></i><b>8.2.1</b> What if we want to keep the order of Study names as they were</a></li>
+</ul></li>
+<li class="chapter" data-level="8.3" data-path="relabel-study-names-into-a-numeric-sequence.html"><a href="relabel-study-names-into-a-numeric-sequence.html#transform-an-arm-based-data-table-to-a-study-based-data-table"><i class="fa fa-check"></i><b>8.3</b> Transform an arm-based data table to a study-based data table</a></li>
+<li class="chapter" data-level="8.4" data-path="relabel-study-names-into-a-numeric-sequence.html"><a href="relabel-study-names-into-a-numeric-sequence.html#frequentist-network-meta-analysis"><i class="fa fa-check"></i><b>8.4</b> Frequentist Network meta analysis</a></li>
+<li class="chapter" data-level="8.5" data-path="relabel-study-names-into-a-numeric-sequence.html"><a href="relabel-study-names-into-a-numeric-sequence.html#arm-base-network-meta-analysis-using-pcnetmeta-package"><i class="fa fa-check"></i><b>8.5</b> Arm base Network Meta Analysis using pcnetmeta package</a></li>
+<li class="chapter" data-level="8.6" data-path="relabel-study-names-into-a-numeric-sequence.html"><a href="relabel-study-names-into-a-numeric-sequence.html#references-4"><i class="fa fa-check"></i><b>8.6</b> References</a></li>
+</ul></li>
+<li class="chapter" data-level="9" data-path="write-many-models-with-shortest-code-using-glue-and-rlang.html"><a href="write-many-models-with-shortest-code-using-glue-and-rlang.html"><i class="fa fa-check"></i><b>9</b> Write many models with shortest code using glue and rlang</a>
+<ul>
+<li class="chapter" data-level="9.1" data-path="write-many-models-with-shortest-code-using-glue-and-rlang.html"><a href="write-many-models-with-shortest-code-using-glue-and-rlang.html#introduction-8"><i class="fa fa-check"></i><b>9.1</b> Introduction</a></li>
+<li class="chapter" data-level="9.2" data-path="write-many-models-with-shortest-code-using-glue-and-rlang.html"><a href="write-many-models-with-shortest-code-using-glue-and-rlang.html#create-a-synthesis-data"><i class="fa fa-check"></i><b>9.2</b> Create a synthesis data</a></li>
+<li class="chapter" data-level="9.3" data-path="write-many-models-with-shortest-code-using-glue-and-rlang.html"><a href="write-many-models-with-shortest-code-using-glue-and-rlang.html#first-way-using-glueglue-parse-and-eval"><i class="fa fa-check"></i><b>9.3</b> First way: using glue::glue, parse and eval</a></li>
+<li class="chapter" data-level="9.4" data-path="write-many-models-with-shortest-code-using-glue-and-rlang.html"><a href="write-many-models-with-shortest-code-using-glue-and-rlang.html#second-way-using-tidy-evaluation-operator"><i class="fa fa-check"></i><b>9.4</b> Second way: using tidy evaluation operator</a></li>
+<li class="chapter" data-level="9.5" data-path="write-many-models-with-shortest-code-using-glue-and-rlang.html"><a href="write-many-models-with-shortest-code-using-glue-and-rlang.html#other-tips"><i class="fa fa-check"></i><b>9.5</b> Other tips</a></li>
+<li class="chapter" data-level="9.6" data-path="write-many-models-with-shortest-code-using-glue-and-rlang.html"><a href="write-many-models-with-shortest-code-using-glue-and-rlang.html#references-5"><i class="fa fa-check"></i><b>9.6</b> References</a></li>
+</ul></li>
 <li class="divider"></li>
 <li><a href="https://github.com/rstudio/bookdown" target="blank">Published with bookdown</a></li>
 
@@ -196,7 +227,7 @@ code span.wa { color: #60a0b0; font-weight: bold; font-style: italic; } /* Warni
       <div class="body-inner">
         <div class="book-header" role="navigation">
           <h1>
-            <i class="fa fa-circle-o-notch fa-spin"></i><a href="./">Random R tricks</a>
+            <i class="fa fa-circle-o-notch fa-spin"></i><a href="./">Untitled</a>
           </h1>
         </div>
 

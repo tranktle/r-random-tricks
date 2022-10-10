@@ -1,0 +1,17 @@
+---
+title: "Untitled"
+author: "Tran Le"
+date: "2022-10-10"
+output: html_document
+---
+
+```{r}
+data_disp <- function(x){
+   # x: a datafarme gotton from xcov_results(xcov, data_use)
+  x %>% datatable(rownames = F,
+  extensions = 'Buttons', options = list(
+    pageLength = 200,
+    dom = 'Brt',
+    buttons = c('copy', 'csv', 'excel', 'pdf', 'print')))}
+```
+

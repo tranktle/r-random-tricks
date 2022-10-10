@@ -1,0 +1,592 @@
+<!DOCTYPE html>
+<html lang="" xml:lang="">
+<head>
+
+  <meta charset="utf-8" />
+  <meta http-equiv="X-UA-Compatible" content="IE=edge" />
+  <title>Section 7 Find group of highly correlated columns | Untitled</title>
+  <meta name="description" content="Some R observations/tricks ." />
+  <meta name="generator" content="bookdown 0.26 and GitBook 2.6.7" />
+
+  <meta property="og:title" content="Section 7 Find group of highly correlated columns | Untitled" />
+  <meta property="og:type" content="book" />
+  
+  <meta property="og:description" content="Some R observations/tricks ." />
+  <meta name="github-repo" content="rstudio/bookdown-demo" />
+
+  <meta name="twitter:card" content="summary" />
+  <meta name="twitter:title" content="Section 7 Find group of highly correlated columns | Untitled" />
+  
+  <meta name="twitter:description" content="Some R observations/tricks ." />
+  
+
+<meta name="author" content="Tran Le" />
+
+
+<meta name="date" content="2022-10-10" />
+
+  <meta name="viewport" content="width=device-width, initial-scale=1" />
+  <meta name="apple-mobile-web-app-capable" content="yes" />
+  <meta name="apple-mobile-web-app-status-bar-style" content="black" />
+  
+  
+<link rel="prev" href="replace-values-by-nasa-specfic-value.html"/>
+<link rel="next" href="relabel-study-names-into-a-numeric-sequence.html"/>
+<script src="libs/jquery-3.6.0/jquery-3.6.0.min.js"></script>
+<script src="https://cdn.jsdelivr.net/npm/fuse.js@6.4.6/dist/fuse.min.js"></script>
+<link href="libs/gitbook-2.6.7/css/style.css" rel="stylesheet" />
+<link href="libs/gitbook-2.6.7/css/plugin-table.css" rel="stylesheet" />
+<link href="libs/gitbook-2.6.7/css/plugin-bookdown.css" rel="stylesheet" />
+<link href="libs/gitbook-2.6.7/css/plugin-highlight.css" rel="stylesheet" />
+<link href="libs/gitbook-2.6.7/css/plugin-search.css" rel="stylesheet" />
+<link href="libs/gitbook-2.6.7/css/plugin-fontsettings.css" rel="stylesheet" />
+<link href="libs/gitbook-2.6.7/css/plugin-clipboard.css" rel="stylesheet" />
+
+
+
+
+
+
+
+
+<link href="libs/anchor-sections-1.1.0/anchor-sections.css" rel="stylesheet" />
+<link href="libs/anchor-sections-1.1.0/anchor-sections-hash.css" rel="stylesheet" />
+<script src="libs/anchor-sections-1.1.0/anchor-sections.js"></script>
+<script src="libs/htmlwidgets-1.5.4/htmlwidgets.js"></script>
+<link href="libs/datatables-css-0.0.0/datatables-crosstalk.css" rel="stylesheet" />
+<script src="libs/datatables-binding-0.23/datatables.js"></script>
+<link href="libs/dt-core-1.11.3/css/jquery.dataTables.min.css" rel="stylesheet" />
+<link href="libs/dt-core-1.11.3/css/jquery.dataTables.extra.css" rel="stylesheet" />
+<script src="libs/dt-core-1.11.3/js/jquery.dataTables.min.js"></script>
+<link href="libs/crosstalk-1.2.0/css/crosstalk.min.css" rel="stylesheet" />
+<script src="libs/crosstalk-1.2.0/js/crosstalk.min.js"></script>
+
+
+<style type="text/css">
+pre > code.sourceCode { white-space: pre; position: relative; }
+pre > code.sourceCode > span { display: inline-block; line-height: 1.25; }
+pre > code.sourceCode > span:empty { height: 1.2em; }
+.sourceCode { overflow: visible; }
+code.sourceCode > span { color: inherit; text-decoration: inherit; }
+pre.sourceCode { margin: 0; }
+@media screen {
+div.sourceCode { overflow: auto; }
+}
+@media print {
+pre > code.sourceCode { white-space: pre-wrap; }
+pre > code.sourceCode > span { text-indent: -5em; padding-left: 5em; }
+}
+pre.numberSource code
+  { counter-reset: source-line 0; }
+pre.numberSource code > span
+  { position: relative; left: -4em; counter-increment: source-line; }
+pre.numberSource code > span > a:first-child::before
+  { content: counter(source-line);
+    position: relative; left: -1em; text-align: right; vertical-align: baseline;
+    border: none; display: inline-block;
+    -webkit-touch-callout: none; -webkit-user-select: none;
+    -khtml-user-select: none; -moz-user-select: none;
+    -ms-user-select: none; user-select: none;
+    padding: 0 4px; width: 4em;
+    color: #aaaaaa;
+  }
+pre.numberSource { margin-left: 3em; border-left: 1px solid #aaaaaa;  padding-left: 4px; }
+div.sourceCode
+  {   }
+@media screen {
+pre > code.sourceCode > span > a:first-child::before { text-decoration: underline; }
+}
+code span.al { color: #ff0000; font-weight: bold; } /* Alert */
+code span.an { color: #60a0b0; font-weight: bold; font-style: italic; } /* Annotation */
+code span.at { color: #7d9029; } /* Attribute */
+code span.bn { color: #40a070; } /* BaseN */
+code span.bu { } /* BuiltIn */
+code span.cf { color: #007020; font-weight: bold; } /* ControlFlow */
+code span.ch { color: #4070a0; } /* Char */
+code span.cn { color: #880000; } /* Constant */
+code span.co { color: #60a0b0; font-style: italic; } /* Comment */
+code span.cv { color: #60a0b0; font-weight: bold; font-style: italic; } /* CommentVar */
+code span.do { color: #ba2121; font-style: italic; } /* Documentation */
+code span.dt { color: #902000; } /* DataType */
+code span.dv { color: #40a070; } /* DecVal */
+code span.er { color: #ff0000; font-weight: bold; } /* Error */
+code span.ex { } /* Extension */
+code span.fl { color: #40a070; } /* Float */
+code span.fu { color: #06287e; } /* Function */
+code span.im { } /* Import */
+code span.in { color: #60a0b0; font-weight: bold; font-style: italic; } /* Information */
+code span.kw { color: #007020; font-weight: bold; } /* Keyword */
+code span.op { color: #666666; } /* Operator */
+code span.ot { color: #007020; } /* Other */
+code span.pp { color: #bc7a00; } /* Preprocessor */
+code span.sc { color: #4070a0; } /* SpecialChar */
+code span.ss { color: #bb6688; } /* SpecialString */
+code span.st { color: #4070a0; } /* String */
+code span.va { color: #19177c; } /* Variable */
+code span.vs { color: #4070a0; } /* VerbatimString */
+code span.wa { color: #60a0b0; font-weight: bold; font-style: italic; } /* Warning */
+</style>
+
+
+<link rel="stylesheet" href="style.css" type="text/css" />
+</head>
+
+<body>
+
+
+
+  <div class="book without-animation with-summary font-size-2 font-family-1" data-basepath=".">
+
+    <div class="book-summary">
+      <nav role="navigation">
+
+<ul class="summary">
+<li><a href="./"> Tran Le - Some random R tricks</a></li>
+
+<li class="divider"></li>
+<li class="chapter" data-level="1" data-path="index.html"><a href="index.html"><i class="fa fa-check"></i><b>1</b> Introduction</a></li>
+<li class="chapter" data-level="2" data-path="github-cheatsheet.html"><a href="github-cheatsheet.html"><i class="fa fa-check"></i><b>2</b> Github-Cheatsheet</a>
+<ul>
+<li class="chapter" data-level="2.1" data-path="github-cheatsheet.html"><a href="github-cheatsheet.html#introduction-1"><i class="fa fa-check"></i><b>2.1</b> Introduction</a></li>
+<li class="chapter" data-level="2.2" data-path="github-cheatsheet.html"><a href="github-cheatsheet.html#connecting-an-existing-rstudio-project-to-github."><i class="fa fa-check"></i><b>2.2</b> Connecting an existing Rstudio project to Github.</a></li>
+<li class="chapter" data-level="2.3" data-path="github-cheatsheet.html"><a href="github-cheatsheet.html#integrate-rstudio-with-an-existing-project-on-github"><i class="fa fa-check"></i><b>2.3</b> Integrate Rstudio with an existing project on Github</a></li>
+<li class="chapter" data-level="2.4" data-path="github-cheatsheet.html"><a href="github-cheatsheet.html#how-to-post-your-bookdown-file-to-github"><i class="fa fa-check"></i><b>2.4</b> How to post your Bookdown file to Github</a></li>
+<li class="chapter" data-level="2.5" data-path="github-cheatsheet.html"><a href="github-cheatsheet.html#some-most-common-git-commands."><i class="fa fa-check"></i><b>2.5</b> Some most common git commands.</a></li>
+<li class="chapter" data-level="2.6" data-path="github-cheatsheet.html"><a href="github-cheatsheet.html#references"><i class="fa fa-check"></i><b>2.6</b> References</a></li>
+</ul></li>
+<li class="chapter" data-level="3" data-path="r-resources-from-absolute-beginners-to-more-advance.html"><a href="r-resources-from-absolute-beginners-to-more-advance.html"><i class="fa fa-check"></i><b>3</b> R resources from absolute beginners to more advance</a>
+<ul>
+<li class="chapter" data-level="3.1" data-path="r-resources-from-absolute-beginners-to-more-advance.html"><a href="r-resources-from-absolute-beginners-to-more-advance.html#introduction-2"><i class="fa fa-check"></i><b>3.1</b> Introduction</a></li>
+<li class="chapter" data-level="3.2" data-path="r-resources-from-absolute-beginners-to-more-advance.html"><a href="r-resources-from-absolute-beginners-to-more-advance.html#for-absolute-beginners."><i class="fa fa-check"></i><b>3.2</b> For absolute beginners.</a></li>
+<li class="chapter" data-level="3.3" data-path="r-resources-from-absolute-beginners-to-more-advance.html"><a href="r-resources-from-absolute-beginners-to-more-advance.html#r-graphs-galleries"><i class="fa fa-check"></i><b>3.3</b> R graphs galleries</a></li>
+<li class="chapter" data-level="3.4" data-path="r-resources-from-absolute-beginners-to-more-advance.html"><a href="r-resources-from-absolute-beginners-to-more-advance.html#some-r-excellent-books"><i class="fa fa-check"></i><b>3.4</b> Some R excellent books</a></li>
+</ul></li>
+<li class="chapter" data-level="4" data-path="problems-when-using-dplyrfull_join.html"><a href="problems-when-using-dplyrfull_join.html"><i class="fa fa-check"></i><b>4</b> Problems when using dplyr::full_join</a>
+<ul>
+<li class="chapter" data-level="4.1" data-path="problems-when-using-dplyrfull_join.html"><a href="problems-when-using-dplyrfull_join.html#introduction-3"><i class="fa fa-check"></i><b>4.1</b> Introduction</a></li>
+<li class="chapter" data-level="4.2" data-path="problems-when-using-dplyrfull_join.html"><a href="problems-when-using-dplyrfull_join.html#using-dplyrfull_join"><i class="fa fa-check"></i><b>4.2</b> Using dplyr::full_join</a></li>
+<li class="chapter" data-level="4.3" data-path="problems-when-using-dplyrfull_join.html"><a href="problems-when-using-dplyrfull_join.html#using-powerjoinpower_full_join"><i class="fa fa-check"></i><b>4.3</b> Using powerjoin::power_full_join</a></li>
+<li class="chapter" data-level="4.4" data-path="problems-when-using-dplyrfull_join.html"><a href="problems-when-using-dplyrfull_join.html#what-if-we-have-conflict-data-sets"><i class="fa fa-check"></i><b>4.4</b> What if we have conflict data sets</a></li>
+<li class="chapter" data-level="4.5" data-path="problems-when-using-dplyrfull_join.html"><a href="problems-when-using-dplyrfull_join.html#references-1"><i class="fa fa-check"></i><b>4.5</b> References</a></li>
+</ul></li>
+<li class="chapter" data-level="5" data-path="load-and-write-to-an-excel-sheet.html"><a href="load-and-write-to-an-excel-sheet.html"><i class="fa fa-check"></i><b>5</b> Load and write to an excel sheet</a>
+<ul>
+<li class="chapter" data-level="5.1" data-path="load-and-write-to-an-excel-sheet.html"><a href="load-and-write-to-an-excel-sheet.html#introduction-4"><i class="fa fa-check"></i><b>5.1</b> Introduction</a></li>
+<li class="chapter" data-level="5.2" data-path="load-and-write-to-an-excel-sheet.html"><a href="load-and-write-to-an-excel-sheet.html#code"><i class="fa fa-check"></i><b>5.2</b> Code</a></li>
+</ul></li>
+<li class="chapter" data-level="6" data-path="replace-values-by-nasa-specfic-value.html"><a href="replace-values-by-nasa-specfic-value.html"><i class="fa fa-check"></i><b>6</b> Replace Values by Nas/A specfic value</a>
+<ul>
+<li class="chapter" data-level="6.1" data-path="replace-values-by-nasa-specfic-value.html"><a href="replace-values-by-nasa-specfic-value.html#introduction-5"><i class="fa fa-check"></i><b>6.1</b> Introduction</a></li>
+<li class="chapter" data-level="6.2" data-path="replace-values-by-nasa-specfic-value.html"><a href="replace-values-by-nasa-specfic-value.html#replace_with_na-replace-specific-values-at-in-specific-columns-by-nas."><i class="fa fa-check"></i><b>6.2</b> replace_with_na(): replace specific value(s) at in specific columns by NAs.</a></li>
+<li class="chapter" data-level="6.3" data-path="replace-values-by-nasa-specfic-value.html"><a href="replace-values-by-nasa-specfic-value.html#replace_with_na_all-replaces-some-values-by-na-for-all-columns."><i class="fa fa-check"></i><b>6.3</b> replace_with_na_all() Replaces some values by NA for all columns.</a></li>
+<li class="chapter" data-level="6.4" data-path="replace-values-by-nasa-specfic-value.html"><a href="replace-values-by-nasa-specfic-value.html#replace_with_na_at-replaces-some-chosen-values-in-a-chosen-set-of-columns-by-nas."><i class="fa fa-check"></i><b>6.4</b> replace_with_na_at(): replaces some chosen values in a chosen set of columns by NAs.</a></li>
+<li class="chapter" data-level="6.5" data-path="replace-values-by-nasa-specfic-value.html"><a href="replace-values-by-nasa-specfic-value.html#replace_with_na_if-replaces-some-values-on-some-columns-with-conditions-is.numeric-is.character-by-na."><i class="fa fa-check"></i><b>6.5</b> replace_with_na_if(): Replaces some values on some columns with conditions (is.numeric, is.character) by NA.</a></li>
+<li class="chapter" data-level="6.6" data-path="replace-values-by-nasa-specfic-value.html"><a href="replace-values-by-nasa-specfic-value.html#a-helpfull-observation-using-mutate_at-and-replace"><i class="fa fa-check"></i><b>6.6</b> A helpfull observation using mutate_at and replace</a></li>
+<li class="chapter" data-level="6.7" data-path="replace-values-by-nasa-specfic-value.html"><a href="replace-values-by-nasa-specfic-value.html#references-2"><i class="fa fa-check"></i><b>6.7</b> References</a></li>
+</ul></li>
+<li class="chapter" data-level="7" data-path="find-group-of-highly-correlated-columns.html"><a href="find-group-of-highly-correlated-columns.html"><i class="fa fa-check"></i><b>7</b> Find group of highly correlated columns</a>
+<ul>
+<li class="chapter" data-level="7.1" data-path="find-group-of-highly-correlated-columns.html"><a href="find-group-of-highly-correlated-columns.html#introduction-6"><i class="fa fa-check"></i><b>7.1</b> Introduction</a></li>
+<li class="chapter" data-level="7.2" data-path="find-group-of-highly-correlated-columns.html"><a href="find-group-of-highly-correlated-columns.html#data-set-and-the-code-to-get-the-result"><i class="fa fa-check"></i><b>7.2</b> Data set and the code to get the result</a></li>
+<li class="chapter" data-level="7.3" data-path="find-group-of-highly-correlated-columns.html"><a href="find-group-of-highly-correlated-columns.html#explain-the-code-in-details"><i class="fa fa-check"></i><b>7.3</b> Explain the code in details</a></li>
+<li class="chapter" data-level="7.4" data-path="find-group-of-highly-correlated-columns.html"><a href="find-group-of-highly-correlated-columns.html#deal-with-nominal-nominal-variables"><i class="fa fa-check"></i><b>7.4</b> Deal with nominal-nominal variables</a></li>
+<li class="chapter" data-level="7.5" data-path="find-group-of-highly-correlated-columns.html"><a href="find-group-of-highly-correlated-columns.html#here-is-the-code-to-get-group-of-highly-correlated-columns"><i class="fa fa-check"></i><b>7.5</b> Here is the code to get group of highly correlated columns</a></li>
+<li class="chapter" data-level="7.6" data-path="find-group-of-highly-correlated-columns.html"><a href="find-group-of-highly-correlated-columns.html#explain-the-steps-in-details"><i class="fa fa-check"></i><b>7.6</b> Explain the steps in details</a></li>
+<li class="chapter" data-level="7.7" data-path="find-group-of-highly-correlated-columns.html"><a href="find-group-of-highly-correlated-columns.html#references-3"><i class="fa fa-check"></i><b>7.7</b> References</a></li>
+</ul></li>
+<li class="chapter" data-level="8" data-path="relabel-study-names-into-a-numeric-sequence.html"><a href="relabel-study-names-into-a-numeric-sequence.html"><i class="fa fa-check"></i><b>8</b> Relabel study names into a numeric sequence</a>
+<ul>
+<li class="chapter" data-level="8.1" data-path="relabel-study-names-into-a-numeric-sequence.html"><a href="relabel-study-names-into-a-numeric-sequence.html#introduction-7"><i class="fa fa-check"></i><b>8.1</b> Introduction</a></li>
+<li class="chapter" data-level="8.2" data-path="relabel-study-names-into-a-numeric-sequence.html"><a href="relabel-study-names-into-a-numeric-sequence.html#create-data"><i class="fa fa-check"></i><b>8.2</b> Create data</a>
+<ul>
+<li class="chapter" data-level="8.2.1" data-path="relabel-study-names-into-a-numeric-sequence.html"><a href="relabel-study-names-into-a-numeric-sequence.html#what-if-we-want-to-keep-the-order-of-study-names-as-they-were"><i class="fa fa-check"></i><b>8.2.1</b> What if we want to keep the order of Study names as they were</a></li>
+</ul></li>
+<li class="chapter" data-level="8.3" data-path="relabel-study-names-into-a-numeric-sequence.html"><a href="relabel-study-names-into-a-numeric-sequence.html#transform-an-arm-based-data-table-to-a-study-based-data-table"><i class="fa fa-check"></i><b>8.3</b> Transform an arm-based data table to a study-based data table</a></li>
+<li class="chapter" data-level="8.4" data-path="relabel-study-names-into-a-numeric-sequence.html"><a href="relabel-study-names-into-a-numeric-sequence.html#frequentist-network-meta-analysis"><i class="fa fa-check"></i><b>8.4</b> Frequentist Network meta analysis</a></li>
+<li class="chapter" data-level="8.5" data-path="relabel-study-names-into-a-numeric-sequence.html"><a href="relabel-study-names-into-a-numeric-sequence.html#arm-base-network-meta-analysis-using-pcnetmeta-package"><i class="fa fa-check"></i><b>8.5</b> Arm base Network Meta Analysis using pcnetmeta package</a></li>
+<li class="chapter" data-level="8.6" data-path="relabel-study-names-into-a-numeric-sequence.html"><a href="relabel-study-names-into-a-numeric-sequence.html#references-4"><i class="fa fa-check"></i><b>8.6</b> References</a></li>
+</ul></li>
+<li class="chapter" data-level="9" data-path="write-many-models-with-shortest-code-using-glue-and-rlang.html"><a href="write-many-models-with-shortest-code-using-glue-and-rlang.html"><i class="fa fa-check"></i><b>9</b> Write many models with shortest code using glue and rlang</a>
+<ul>
+<li class="chapter" data-level="9.1" data-path="write-many-models-with-shortest-code-using-glue-and-rlang.html"><a href="write-many-models-with-shortest-code-using-glue-and-rlang.html#introduction-8"><i class="fa fa-check"></i><b>9.1</b> Introduction</a></li>
+<li class="chapter" data-level="9.2" data-path="write-many-models-with-shortest-code-using-glue-and-rlang.html"><a href="write-many-models-with-shortest-code-using-glue-and-rlang.html#create-a-synthesis-data"><i class="fa fa-check"></i><b>9.2</b> Create a synthesis data</a></li>
+<li class="chapter" data-level="9.3" data-path="write-many-models-with-shortest-code-using-glue-and-rlang.html"><a href="write-many-models-with-shortest-code-using-glue-and-rlang.html#first-way-using-glueglue-parse-and-eval"><i class="fa fa-check"></i><b>9.3</b> First way: using glue::glue, parse and eval</a></li>
+<li class="chapter" data-level="9.4" data-path="write-many-models-with-shortest-code-using-glue-and-rlang.html"><a href="write-many-models-with-shortest-code-using-glue-and-rlang.html#second-way-using-tidy-evaluation-operator"><i class="fa fa-check"></i><b>9.4</b> Second way: using tidy evaluation operator</a></li>
+<li class="chapter" data-level="9.5" data-path="write-many-models-with-shortest-code-using-glue-and-rlang.html"><a href="write-many-models-with-shortest-code-using-glue-and-rlang.html#other-tips"><i class="fa fa-check"></i><b>9.5</b> Other tips</a></li>
+<li class="chapter" data-level="9.6" data-path="write-many-models-with-shortest-code-using-glue-and-rlang.html"><a href="write-many-models-with-shortest-code-using-glue-and-rlang.html#references-5"><i class="fa fa-check"></i><b>9.6</b> References</a></li>
+</ul></li>
+<li class="divider"></li>
+<li><a href="https://github.com/rstudio/bookdown" target="blank">Published with bookdown</a></li>
+
+</ul>
+
+      </nav>
+    </div>
+
+    <div class="book-body">
+      <div class="body-inner">
+        <div class="book-header" role="navigation">
+          <h1>
+            <i class="fa fa-circle-o-notch fa-spin"></i><a href="./">Untitled</a>
+          </h1>
+        </div>
+
+        <div class="page-wrapper" tabindex="-1" role="main">
+          <div class="page-inner">
+
+            <section class="normal" id="section-">
+<div id="find-group-of-highly-correlated-columns" class="section level1 hasAnchor" number="7">
+<h1><span class="header-section-number">Section 7</span> Find group of highly correlated columns<a href="find-group-of-highly-correlated-columns.html#find-group-of-highly-correlated-columns" class="anchor-section" aria-label="Anchor link to header"></a></h1>
+<div id="introduction-6" class="section level2 hasAnchor" number="7.1">
+<h2><span class="header-section-number">7.1</span> Introduction<a href="find-group-of-highly-correlated-columns.html#introduction-6" class="anchor-section" aria-label="Anchor link to header"></a></h2>
+<p>Here, we will explore how to find groups of highly correlated columns. Each group contains columns having a correlation higher than a fixed chosen threshold.</p>
+<p>We will first give a simple data set, then give the code and the result we get. After all, we will explore how the code works. This example based on the question and answer that I got from <a href="https://stackoverflow.com/questions/39482364/group-of-highly-correlated-variables">stackoverflow.com</a>. Some of the functions have been updated since the package is updated at the time I wrote this section (2022).</p>
+<p>Besides exploring how to find groups of highly correlated numerical columns, I also do the same with (binary) nominal columns. However, since no command helps compute the correlation matrix with a numerical column, we will need to process this step slightly differently than the above example. This way can be applied if we want to find other kinds of groups of highly correlated variables, such as numeric-numeric and numeric-ordinal,…</p>
+</div>
+<div id="data-set-and-the-code-to-get-the-result" class="section level2 hasAnchor" number="7.2">
+<h2><span class="header-section-number">7.2</span> Data set and the code to get the result<a href="find-group-of-highly-correlated-columns.html#data-set-and-the-code-to-get-the-result" class="anchor-section" aria-label="Anchor link to header"></a></h2>
+<div class="sourceCode" id="cb50"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb50-1"><a href="find-group-of-highly-correlated-columns.html#cb50-1" aria-hidden="true" tabindex="-1"></a><span class="fu">suppressPackageStartupMessages</span>(<span class="fu">library</span>(tidyverse))</span>
+<span id="cb50-2"><a href="find-group-of-highly-correlated-columns.html#cb50-2" aria-hidden="true" tabindex="-1"></a><span class="fu">suppressPackageStartupMessages</span>(<span class="fu">library</span>(igraph))</span>
+<span id="cb50-3"><a href="find-group-of-highly-correlated-columns.html#cb50-3" aria-hidden="true" tabindex="-1"></a><span class="fu">suppressPackageStartupMessages</span>(<span class="fu">library</span>(DescTools))</span>
+<span id="cb50-4"><a href="find-group-of-highly-correlated-columns.html#cb50-4" aria-hidden="true" tabindex="-1"></a><span class="fu">suppressPackageStartupMessages</span>(<span class="fu">library</span>(psych))  </span></code></pre></div>
+<div class="sourceCode" id="cb51"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb51-1"><a href="find-group-of-highly-correlated-columns.html#cb51-1" aria-hidden="true" tabindex="-1"></a>data1 <span class="ot">&lt;-</span> <span class="fu">structure</span>(<span class="fu">list</span>(<span class="at">A =</span> <span class="fu">c</span>(1L, 2L, 5L, 4L, 366L, 65L, 43L, 456L, 876L, 78L, 687L, 378L, 378L, 34L, 53L, 43L), </span>
+<span id="cb51-2"><a href="find-group-of-highly-correlated-columns.html#cb51-2" aria-hidden="true" tabindex="-1"></a>                         <span class="at">B =</span> <span class="fu">c</span>(2L, 2L, 5L, 4L, 366L, 65L, 43L, 456L, 876L, 78L, 687L, 378L, 378L, 34L, 53L, 41L), </span>
+<span id="cb51-3"><a href="find-group-of-highly-correlated-columns.html#cb51-3" aria-hidden="true" tabindex="-1"></a>                         <span class="at">C =</span> <span class="fu">c</span>(10L, 20L, 10L, 20L, 10L, 20L, 1L, 0L, 1L, 2010L,20L, 10L, 10L, 10L, 10L, 10L), </span>
+<span id="cb51-4"><a href="find-group-of-highly-correlated-columns.html#cb51-4" aria-hidden="true" tabindex="-1"></a>                         <span class="at">D =</span> <span class="fu">c</span>(2L, 10L, 31L, 2L, 2L, 5L, 2L, 5L, 1L, 52L, 1L, 2L, 52L, 6L, 2L, 1L), </span>
+<span id="cb51-5"><a href="find-group-of-highly-correlated-columns.html#cb51-5" aria-hidden="true" tabindex="-1"></a>                         <span class="at">E =</span> <span class="fu">c</span>(4L, 10L, 31L, 2L, 2L, 5L, 2L, 5L, 1L, 52L, 1L, 2L, 52L, 6L, 2L, 3L)), </span>
+<span id="cb51-6"><a href="find-group-of-highly-correlated-columns.html#cb51-6" aria-hidden="true" tabindex="-1"></a>                    <span class="at">.Names =</span> <span class="fu">c</span>(<span class="st">&quot;A&quot;</span>, <span class="st">&quot;B&quot;</span>, <span class="st">&quot;C&quot;</span>, <span class="st">&quot;D&quot;</span>, <span class="st">&quot;E&quot;</span>), </span>
+<span id="cb51-7"><a href="find-group-of-highly-correlated-columns.html#cb51-7" aria-hidden="true" tabindex="-1"></a>                    <span class="at">class =</span> <span class="st">&quot;data.frame&quot;</span>, <span class="at">row.names =</span> <span class="fu">c</span>(<span class="cn">NA</span>,<span class="sc">-</span>16L))</span></code></pre></div>
+<p>Here is the code that we can use to get the result</p>
+<div class="sourceCode" id="cb52"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb52-1"><a href="find-group-of-highly-correlated-columns.html#cb52-1" aria-hidden="true" tabindex="-1"></a><span class="co"># Compute correlation of columns in data1 using pearson</span></span>
+<span id="cb52-2"><a href="find-group-of-highly-correlated-columns.html#cb52-2" aria-hidden="true" tabindex="-1"></a>var.corelation <span class="ot">&lt;-</span> <span class="fu">cor</span>(<span class="fu">as.matrix</span>(data1), <span class="at">method=</span><span class="st">&quot;pearson&quot;</span>)</span>
+<span id="cb52-3"><a href="find-group-of-highly-correlated-columns.html#cb52-3" aria-hidden="true" tabindex="-1"></a><span class="co"># prevent duplicated pairs</span></span>
+<span id="cb52-4"><a href="find-group-of-highly-correlated-columns.html#cb52-4" aria-hidden="true" tabindex="-1"></a>var.corelation <span class="ot">&lt;-</span> var.corelation<span class="sc">*</span><span class="fu">lower.tri</span>(var.corelation)</span>
+<span id="cb52-5"><a href="find-group-of-highly-correlated-columns.html#cb52-5" aria-hidden="true" tabindex="-1"></a><span class="co"># Filter pairs having correlation &gt; threshold</span></span>
+<span id="cb52-6"><a href="find-group-of-highly-correlated-columns.html#cb52-6" aria-hidden="true" tabindex="-1"></a>check.corelation <span class="ot">&lt;-</span> <span class="fu">which</span>(<span class="fu">abs</span>(var.corelation)<span class="sc">&gt;</span><span class="fl">0.62</span>, <span class="at">arr.ind=</span><span class="cn">TRUE</span>)</span>
+<span id="cb52-7"><a href="find-group-of-highly-correlated-columns.html#cb52-7" aria-hidden="true" tabindex="-1"></a>graph.cor <span class="ot">&lt;-</span> <span class="fu">graph_from_data_frame</span>(check.corelation, <span class="at">directed =</span> <span class="cn">FALSE</span>)</span>
+<span id="cb52-8"><a href="find-group-of-highly-correlated-columns.html#cb52-8" aria-hidden="true" tabindex="-1"></a><span class="co">#</span></span>
+<span id="cb52-9"><a href="find-group-of-highly-correlated-columns.html#cb52-9" aria-hidden="true" tabindex="-1"></a>groups.cor <span class="ot">&lt;-</span> <span class="fu">split</span>(<span class="fu">unique</span>(<span class="fu">as.vector</span>(check.corelation)),    </span>
+<span id="cb52-10"><a href="find-group-of-highly-correlated-columns.html#cb52-10" aria-hidden="true" tabindex="-1"></a>                    <span class="fu">clusters</span>(graph.cor)<span class="sc">$</span>membership)</span>
+<span id="cb52-11"><a href="find-group-of-highly-correlated-columns.html#cb52-11" aria-hidden="true" tabindex="-1"></a><span class="co"># Get the row name of highly correlated groups</span></span>
+<span id="cb52-12"><a href="find-group-of-highly-correlated-columns.html#cb52-12" aria-hidden="true" tabindex="-1"></a><span class="fu">lapply</span>(groups.cor,<span class="at">FUN=</span><span class="cf">function</span>(list.cor){<span class="fu">rownames</span>(var.corelation)[list.cor]})</span></code></pre></div>
+<pre><code>## $`1`
+## [1] &quot;B&quot; &quot;A&quot;
+## 
+## $`2`
+## [1] &quot;D&quot; &quot;E&quot; &quot;C&quot;</code></pre>
+<p>If our data has a small number of columns, we can plot groups of highly correlated columns. The below graph gives <strong>indexed</strong> highly correlated clusters.</p>
+<div class="sourceCode" id="cb54"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb54-1"><a href="find-group-of-highly-correlated-columns.html#cb54-1" aria-hidden="true" tabindex="-1"></a><span class="fu">plot</span>(graph.cor, <span class="at">vertex.label =</span> <span class="fu">V</span>(graph.cor)<span class="sc">$</span>name)</span></code></pre></div>
+<p><img src="_main_files/figure-html/unnamed-chunk-31-1.png" width="672" /></p>
+</div>
+<div id="explain-the-code-in-details" class="section level2 hasAnchor" number="7.3">
+<h2><span class="header-section-number">7.3</span> Explain the code in details<a href="find-group-of-highly-correlated-columns.html#explain-the-code-in-details" class="anchor-section" aria-label="Anchor link to header"></a></h2>
+<p>First, notice that our data only contains numeric columns; we can compute a correlation matrix using Pearson correlation.</p>
+<div class="sourceCode" id="cb55"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb55-1"><a href="find-group-of-highly-correlated-columns.html#cb55-1" aria-hidden="true" tabindex="-1"></a>var.corelation <span class="ot">&lt;-</span> <span class="fu">cor</span>(<span class="fu">as.matrix</span>(data1), <span class="at">method=</span><span class="st">&quot;pearson&quot;</span>)</span>
+<span id="cb55-2"><a href="find-group-of-highly-correlated-columns.html#cb55-2" aria-hidden="true" tabindex="-1"></a>var.corelation</span></code></pre></div>
+<pre><code>##            A          B          C          D          E
+## A  1.0000000  0.9999978 -0.1385469 -0.1125711 -0.1242381
+## B  0.9999978  1.0000000 -0.1384694 -0.1124062 -0.1240949
+## C -0.1385469 -0.1384694  1.0000000  0.6212136  0.6220380
+## D -0.1125711 -0.1124062  0.6212136  1.0000000  0.9992690
+## E -0.1242381 -0.1240949  0.6220380  0.9992690  1.0000000</code></pre>
+<p>Since the correlation matrix is symmetric through the diagonal and the values on the diagonal are equal to 1, we just need to keep the values in the lower diagonal.</p>
+<div class="sourceCode" id="cb57"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb57-1"><a href="find-group-of-highly-correlated-columns.html#cb57-1" aria-hidden="true" tabindex="-1"></a><span class="fu">lower.tri</span>(var.corelation)</span></code></pre></div>
+<pre><code>##       [,1]  [,2]  [,3]  [,4]  [,5]
+## [1,] FALSE FALSE FALSE FALSE FALSE
+## [2,]  TRUE FALSE FALSE FALSE FALSE
+## [3,]  TRUE  TRUE FALSE FALSE FALSE
+## [4,]  TRUE  TRUE  TRUE FALSE FALSE
+## [5,]  TRUE  TRUE  TRUE  TRUE FALSE</code></pre>
+<div class="sourceCode" id="cb59"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb59-1"><a href="find-group-of-highly-correlated-columns.html#cb59-1" aria-hidden="true" tabindex="-1"></a>var.corelation <span class="ot">&lt;-</span> var.corelation<span class="sc">*</span><span class="fu">lower.tri</span>(var.corelation)<span class="sc">-</span></span>
+<span id="cb59-2"><a href="find-group-of-highly-correlated-columns.html#cb59-2" aria-hidden="true" tabindex="-1"></a>var.corelation</span></code></pre></div>
+<p>With this example, we only filter columns with a correlation &gt; 0.62. The result below shows us the location row and columns of highly correlated pairs. For example, The first one is (row 2, column 1) associated with (B, A) is a pair of columns having correlation &gt; threshold, etc.</p>
+<div class="sourceCode" id="cb60"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb60-1"><a href="find-group-of-highly-correlated-columns.html#cb60-1" aria-hidden="true" tabindex="-1"></a>threshold <span class="ot">=</span> <span class="fl">0.62</span></span>
+<span id="cb60-2"><a href="find-group-of-highly-correlated-columns.html#cb60-2" aria-hidden="true" tabindex="-1"></a>check_corelation <span class="ot">&lt;-</span> <span class="fu">which</span>(<span class="fu">abs</span>(var.corelation)<span class="sc">&gt;</span><span class="fl">0.62</span>, <span class="at">arr.ind=</span><span class="cn">TRUE</span>)</span>
+<span id="cb60-3"><a href="find-group-of-highly-correlated-columns.html#cb60-3" aria-hidden="true" tabindex="-1"></a>check_corelation</span></code></pre></div>
+<pre><code>##   row col
+## A   1   1
+## A   1   2
+## B   2   2
+## C   3   3
+## C   3   4
+## D   4   4
+## C   3   5
+## D   4   5
+## E   5   5</code></pre>
+<div class="sourceCode" id="cb62"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb62-1"><a href="find-group-of-highly-correlated-columns.html#cb62-1" aria-hidden="true" tabindex="-1"></a>graph.cor <span class="ot">&lt;-</span> <span class="fu">graph_from_data_frame</span>(check.corelation, <span class="at">directed =</span> <span class="cn">FALSE</span>)</span>
+<span id="cb62-2"><a href="find-group-of-highly-correlated-columns.html#cb62-2" aria-hidden="true" tabindex="-1"></a>graph.cor</span></code></pre></div>
+<pre><code>## IGRAPH 671e094 UN-- 5 4 -- 
+## + attr: name (v/c)
+## + edges from 671e094 (vertex names):
+## [1] 2--1 4--3 5--3 4--5</code></pre>
+<p>Now, we will consider the clusters’ membership used to split our data. From the membership, the first row is the indexes of columns, and the second row is the index of the cluster that those columns belong to. We see that column with indexes 2 and 1 (columns B and A) is in cluster 1, and columns with indexes 4, 5, and 3 (columns D, E, and C) are in cluster 2.</p>
+<div class="sourceCode" id="cb64"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb64-1"><a href="find-group-of-highly-correlated-columns.html#cb64-1" aria-hidden="true" tabindex="-1"></a><span class="fu">components</span>(graph.cor)</span></code></pre></div>
+<pre><code>## $membership
+## 2 4 5 1 3 
+## 1 2 2 1 2 
+## 
+## $csize
+## [1] 2 3
+## 
+## $no
+## [1] 2</code></pre>
+<p>So, now we split the column indexes into cluster</p>
+<div class="sourceCode" id="cb66"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb66-1"><a href="find-group-of-highly-correlated-columns.html#cb66-1" aria-hidden="true" tabindex="-1"></a><span class="fu">unique</span>(<span class="fu">as.vector</span>(check.corelation))</span></code></pre></div>
+<pre><code>## [1] 2 4 5 1 3</code></pre>
+<div class="sourceCode" id="cb68"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb68-1"><a href="find-group-of-highly-correlated-columns.html#cb68-1" aria-hidden="true" tabindex="-1"></a>groups.cor <span class="ot">&lt;-</span> <span class="fu">split</span>(<span class="fu">unique</span>(<span class="fu">as.vector</span>(check.corelation)),  </span>
+<span id="cb68-2"><a href="find-group-of-highly-correlated-columns.html#cb68-2" aria-hidden="true" tabindex="-1"></a>                    <span class="fu">components</span>(graph.cor)<span class="sc">$</span>membership)</span>
+<span id="cb68-3"><a href="find-group-of-highly-correlated-columns.html#cb68-3" aria-hidden="true" tabindex="-1"></a>groups.cor</span></code></pre></div>
+<pre><code>## $`1`
+## [1] 2 1
+## 
+## $`2`
+## [1] 4 5 3</code></pre>
+<p>And get the column names of the columns in each cluster.</p>
+<div class="sourceCode" id="cb70"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb70-1"><a href="find-group-of-highly-correlated-columns.html#cb70-1" aria-hidden="true" tabindex="-1"></a><span class="fu">lapply</span>(groups.cor,<span class="at">FUN=</span><span class="cf">function</span>(list.cor){<span class="fu">rownames</span>(var.corelation)[list.cor]})</span></code></pre></div>
+<pre><code>## $`1`
+## [1] &quot;B&quot; &quot;A&quot;
+## 
+## $`2`
+## [1] &quot;D&quot; &quot;E&quot; &quot;C&quot;</code></pre>
+</div>
+<div id="deal-with-nominal-nominal-variables" class="section level2 hasAnchor" number="7.4">
+<h2><span class="header-section-number">7.4</span> Deal with nominal-nominal variables<a href="find-group-of-highly-correlated-columns.html#deal-with-nominal-nominal-variables" class="anchor-section" aria-label="Anchor link to header"></a></h2>
+<div class="sourceCode" id="cb72"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb72-1"><a href="find-group-of-highly-correlated-columns.html#cb72-1" aria-hidden="true" tabindex="-1"></a><span class="fu">set.seed</span>(<span class="dv">365263</span>)</span>
+<span id="cb72-2"><a href="find-group-of-highly-correlated-columns.html#cb72-2" aria-hidden="true" tabindex="-1"></a>X1 <span class="ot">&lt;-</span> <span class="fu">sample</span>(<span class="fu">c</span>(<span class="st">&quot;A&quot;</span>, <span class="st">&quot;B&quot;</span>), <span class="at">size =</span> <span class="dv">16</span>, <span class="at">replace =</span> <span class="cn">TRUE</span>)</span>
+<span id="cb72-3"><a href="find-group-of-highly-correlated-columns.html#cb72-3" aria-hidden="true" tabindex="-1"></a>X2 <span class="ot">&lt;-</span> <span class="fu">sample</span>(<span class="fu">c</span>(<span class="st">&quot;E&quot;</span>, <span class="st">&quot;H&quot;</span> ), <span class="at">size =</span> <span class="dv">16</span>, <span class="at">replace =</span> <span class="cn">TRUE</span>)</span>
+<span id="cb72-4"><a href="find-group-of-highly-correlated-columns.html#cb72-4" aria-hidden="true" tabindex="-1"></a>X3 <span class="ot">&lt;-</span> <span class="fu">sample</span>(<span class="fu">c</span>(<span class="st">&quot;X&quot;</span>, <span class="st">&quot;Y&quot;</span>), <span class="at">size =</span> <span class="dv">16</span>, <span class="at">replace =</span> <span class="cn">TRUE</span>)</span>
+<span id="cb72-5"><a href="find-group-of-highly-correlated-columns.html#cb72-5" aria-hidden="true" tabindex="-1"></a>X4 <span class="ot">&lt;-</span> <span class="fu">sample</span>(<span class="fu">c</span>(<span class="st">&quot;L&quot;</span>, <span class="st">&quot;M&quot;</span>), <span class="at">size =</span> <span class="dv">16</span>, <span class="at">replace =</span> <span class="cn">TRUE</span>)</span>
+<span id="cb72-6"><a href="find-group-of-highly-correlated-columns.html#cb72-6" aria-hidden="true" tabindex="-1"></a>X5 <span class="ot">&lt;-</span> <span class="fu">sample</span>(<span class="fu">c</span>(<span class="st">&quot;K&quot;</span>, <span class="st">&quot;L&quot;</span>), <span class="at">size =</span> <span class="dv">16</span>, <span class="at">replace =</span> <span class="cn">TRUE</span>)</span>
+<span id="cb72-7"><a href="find-group-of-highly-correlated-columns.html#cb72-7" aria-hidden="true" tabindex="-1"></a>data2 <span class="ot">&lt;-</span> <span class="fu">tibble</span>(X1, X2, X3, X4, X5)</span>
+<span id="cb72-8"><a href="find-group-of-highly-correlated-columns.html#cb72-8" aria-hidden="true" tabindex="-1"></a><span class="fu">head</span>(data2)</span></code></pre></div>
+<pre><code>## # A tibble: 6 × 5
+##   X1    X2    X3    X4    X5   
+##   &lt;chr&gt; &lt;chr&gt; &lt;chr&gt; &lt;chr&gt; &lt;chr&gt;
+## 1 B     H     X     M     L    
+## 2 B     H     Y     M     K    
+## 3 A     H     Y     L     L    
+## 4 B     E     Y     L     L    
+## 5 B     E     Y     L     L    
+## 6 B     H     X     M     L</code></pre>
+</div>
+<div id="here-is-the-code-to-get-group-of-highly-correlated-columns" class="section level2 hasAnchor" number="7.5">
+<h2><span class="header-section-number">7.5</span> Here is the code to get group of highly correlated columns<a href="find-group-of-highly-correlated-columns.html#here-is-the-code-to-get-group-of-highly-correlated-columns" class="anchor-section" aria-label="Anchor link to header"></a></h2>
+<div class="sourceCode" id="cb74"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb74-1"><a href="find-group-of-highly-correlated-columns.html#cb74-1" aria-hidden="true" tabindex="-1"></a>colname <span class="ot">&lt;-</span> <span class="fu">colnames</span>(data2)</span>
+<span id="cb74-2"><a href="find-group-of-highly-correlated-columns.html#cb74-2" aria-hidden="true" tabindex="-1"></a>pair_cols<span class="ot">&lt;-</span> <span class="fu">combn</span>(colname, <span class="dv">2</span>) <span class="sc">%&gt;%</span> t <span class="sc">%&gt;%</span> <span class="fu">as_tibble</span>()</span></code></pre></div>
+<pre><code>## Warning: The `x` argument of `as_tibble.matrix()` must have unique column names if `.name_repair` is omitted as of tibble 2.0.0.
+## Using compatibility `.name_repair`.
+## This warning is displayed once every 8 hours.
+## Call `lifecycle::last_lifecycle_warnings()` to see where this warning was generated.</code></pre>
+<div class="sourceCode" id="cb76"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb76-1"><a href="find-group-of-highly-correlated-columns.html#cb76-1" aria-hidden="true" tabindex="-1"></a>com_phi_f <span class="ot">&lt;-</span><span class="cf">function</span>(var1, var2){<span class="fu">return</span>(<span class="fu">phi</span>(<span class="fu">table</span>(var1, var2)))}</span>
+<span id="cb76-2"><a href="find-group-of-highly-correlated-columns.html#cb76-2" aria-hidden="true" tabindex="-1"></a><span class="co"># Create a vector that contain phi corr(V1, V2) for all of pairs</span></span>
+<span id="cb76-3"><a href="find-group-of-highly-correlated-columns.html#cb76-3" aria-hidden="true" tabindex="-1"></a>nom_cor <span class="ot">&lt;-</span> <span class="fu">c</span>()</span>
+<span id="cb76-4"><a href="find-group-of-highly-correlated-columns.html#cb76-4" aria-hidden="true" tabindex="-1"></a><span class="cf">for</span> (i <span class="cf">in</span> <span class="dv">1</span><span class="sc">:</span><span class="fu">dim</span>(pair_cols)[<span class="dv">1</span>]){</span>
+<span id="cb76-5"><a href="find-group-of-highly-correlated-columns.html#cb76-5" aria-hidden="true" tabindex="-1"></a>  <span class="co"># get the values of the variable associated with variable </span></span>
+<span id="cb76-6"><a href="find-group-of-highly-correlated-columns.html#cb76-6" aria-hidden="true" tabindex="-1"></a>  <span class="co">#pair_cols$V1[row==i] and pair_cols$V2[row==i]</span></span>
+<span id="cb76-7"><a href="find-group-of-highly-correlated-columns.html#cb76-7" aria-hidden="true" tabindex="-1"></a>  var1 <span class="ot">&lt;-</span> data2 <span class="sc">%&gt;%</span> <span class="fu">select</span>(<span class="fu">all_of</span>(pair_cols<span class="sc">$</span>V1[i])) <span class="sc">%&gt;%</span> pull</span>
+<span id="cb76-8"><a href="find-group-of-highly-correlated-columns.html#cb76-8" aria-hidden="true" tabindex="-1"></a>  var2 <span class="ot">&lt;-</span> data2 <span class="sc">%&gt;%</span> <span class="fu">select</span>(<span class="fu">all_of</span>(pair_cols<span class="sc">$</span>V2[i])) <span class="sc">%&gt;%</span> pull</span>
+<span id="cb76-9"><a href="find-group-of-highly-correlated-columns.html#cb76-9" aria-hidden="true" tabindex="-1"></a>  nom_cor[i] <span class="ot">=</span> <span class="fu">com_phi_f</span>(var1, var2)}</span>
+<span id="cb76-10"><a href="find-group-of-highly-correlated-columns.html#cb76-10" aria-hidden="true" tabindex="-1"></a><span class="co"># Combine the nom_cor (corrlation value column) to the pair_cols data frame</span></span>
+<span id="cb76-11"><a href="find-group-of-highly-correlated-columns.html#cb76-11" aria-hidden="true" tabindex="-1"></a>pair_cols <span class="ot">&lt;-</span> <span class="fu">cbind</span>(pair_cols, nom_cor) </span>
+<span id="cb76-12"><a href="find-group-of-highly-correlated-columns.html#cb76-12" aria-hidden="true" tabindex="-1"></a><span class="co"># Filter pairs having corrleation &gt;= threshold</span></span>
+<span id="cb76-13"><a href="find-group-of-highly-correlated-columns.html#cb76-13" aria-hidden="true" tabindex="-1"></a>threshold <span class="ot">=</span> <span class="fl">0.20</span></span>
+<span id="cb76-14"><a href="find-group-of-highly-correlated-columns.html#cb76-14" aria-hidden="true" tabindex="-1"></a>pair_cols <span class="ot">&lt;-</span> pair_cols <span class="sc">%&gt;%</span> <span class="fu">filter</span>(<span class="fu">abs</span>(nom_cor) <span class="sc">&gt;=</span> threshold)</span>
+<span id="cb76-15"><a href="find-group-of-highly-correlated-columns.html#cb76-15" aria-hidden="true" tabindex="-1"></a><span class="co"># Connect the var_name of pairs having corr &gt; threshold</span></span>
+<span id="cb76-16"><a href="find-group-of-highly-correlated-columns.html#cb76-16" aria-hidden="true" tabindex="-1"></a>high_cor_pair <span class="ot">&lt;-</span> igraph<span class="sc">::</span><span class="fu">graph_from_data_frame</span>(pair_cols, <span class="at">directed =</span> <span class="cn">FALSE</span>)</span>
+<span id="cb76-17"><a href="find-group-of-highly-correlated-columns.html#cb76-17" aria-hidden="true" tabindex="-1"></a><span class="co"># </span></span>
+<span id="cb76-18"><a href="find-group-of-highly-correlated-columns.html#cb76-18" aria-hidden="true" tabindex="-1"></a>col_cluster <span class="ot">&lt;-</span> <span class="fu">clusters</span>(high_cor_pair)</span>
+<span id="cb76-19"><a href="find-group-of-highly-correlated-columns.html#cb76-19" aria-hidden="true" tabindex="-1"></a><span class="co"># Create a table include cluster_index and var_name</span></span>
+<span id="cb76-20"><a href="find-group-of-highly-correlated-columns.html#cb76-20" aria-hidden="true" tabindex="-1"></a>group_var_dat <span class="ot">&lt;-</span> col_cluster<span class="sc">$</span>membership <span class="sc">%&gt;%</span> </span>
+<span id="cb76-21"><a href="find-group-of-highly-correlated-columns.html#cb76-21" aria-hidden="true" tabindex="-1"></a>  <span class="fu">as.matrix</span>() <span class="sc">%&gt;%</span> <span class="fu">data.frame</span>() <span class="sc">%&gt;%</span> </span>
+<span id="cb76-22"><a href="find-group-of-highly-correlated-columns.html#cb76-22" aria-hidden="true" tabindex="-1"></a>  <span class="fu">rownames_to_column</span>(<span class="st">&quot;var_name&quot;</span>)<span class="sc">%&gt;%</span> </span>
+<span id="cb76-23"><a href="find-group-of-highly-correlated-columns.html#cb76-23" aria-hidden="true" tabindex="-1"></a>  <span class="fu">rename</span>(<span class="at">group_index =</span> <span class="st">&quot;.&quot;</span>) <span class="sc">%&gt;%</span> </span>
+<span id="cb76-24"><a href="find-group-of-highly-correlated-columns.html#cb76-24" aria-hidden="true" tabindex="-1"></a>  <span class="fu">select</span>(group_index, var_name)</span>
+<span id="cb76-25"><a href="find-group-of-highly-correlated-columns.html#cb76-25" aria-hidden="true" tabindex="-1"></a><span class="co"># Split the var_name based on cluster index</span></span>
+<span id="cb76-26"><a href="find-group-of-highly-correlated-columns.html#cb76-26" aria-hidden="true" tabindex="-1"></a><span class="co"># Each cluster contains cluster index and variable (column) names</span></span>
+<span id="cb76-27"><a href="find-group-of-highly-correlated-columns.html#cb76-27" aria-hidden="true" tabindex="-1"></a><span class="co"># of highly correlated columns in the cluster</span></span>
+<span id="cb76-28"><a href="find-group-of-highly-correlated-columns.html#cb76-28" aria-hidden="true" tabindex="-1"></a>my_cluster <span class="ot">&lt;-</span> <span class="fu">split</span>(group_var_dat, <span class="at">f=</span>group_var_dat<span class="sc">$</span>group_index)</span>
+<span id="cb76-29"><a href="find-group-of-highly-correlated-columns.html#cb76-29" aria-hidden="true" tabindex="-1"></a>my_cluster</span></code></pre></div>
+<pre><code>## $`1`
+##   group_index var_name
+## 1           1       X1
+## 4           1       X5
+## 
+## $`2`
+##   group_index var_name
+## 2           2       X2
+## 3           2       X3
+## 5           2       X4</code></pre>
+<p>The below code chunk gives you tables of group indexes and names of variables in each group. In case you want to combine the result, which means you want to create a table with the names of variables in each group in one row, then you can do this:</p>
+<div class="sourceCode" id="cb78"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb78-1"><a href="find-group-of-highly-correlated-columns.html#cb78-1" aria-hidden="true" tabindex="-1"></a><span class="co"># Create nested tables depending on group index</span></span>
+<span id="cb78-2"><a href="find-group-of-highly-correlated-columns.html#cb78-2" aria-hidden="true" tabindex="-1"></a>nest_data <span class="ot">&lt;-</span> group_var_dat <span class="sc">%&gt;%</span> <span class="fu">group_by</span>(group_index) <span class="sc">%&gt;%</span> <span class="fu">nest</span>() </span>
+<span id="cb78-3"><a href="find-group-of-highly-correlated-columns.html#cb78-3" aria-hidden="true" tabindex="-1"></a><span class="co"># Create a table that that take names (values) in each nested tibble and paste them together</span></span>
+<span id="cb78-4"><a href="find-group-of-highly-correlated-columns.html#cb78-4" aria-hidden="true" tabindex="-1"></a>my_table <span class="ot">&lt;-</span> <span class="fu">data.frame</span>(<span class="fu">matrix</span>(<span class="at">ncol=</span><span class="dv">1</span>,<span class="at">nrow=</span><span class="dv">0</span>, <span class="at">dimnames=</span><span class="fu">list</span>(<span class="cn">NULL</span>, <span class="fu">c</span>(<span class="st">&quot;high_corrected_var&quot;</span>))))</span>
+<span id="cb78-5"><a href="find-group-of-highly-correlated-columns.html#cb78-5" aria-hidden="true" tabindex="-1"></a><span class="cf">for</span> (i <span class="cf">in</span> <span class="dv">1</span><span class="sc">:</span><span class="fu">dim</span>(nest_data)[<span class="dv">1</span>]){</span>
+<span id="cb78-6"><a href="find-group-of-highly-correlated-columns.html#cb78-6" aria-hidden="true" tabindex="-1"></a>  high_correted_var <span class="ot">&lt;-</span> (<span class="fu">str_c</span>(nest_data<span class="sc">$</span>data[[i]]<span class="sc">%&gt;%</span> <span class="fu">unlist</span>(<span class="at">use.names =</span> F), <span class="at">collapse=</span><span class="st">&quot;, &quot;</span>))</span>
+<span id="cb78-7"><a href="find-group-of-highly-correlated-columns.html#cb78-7" aria-hidden="true" tabindex="-1"></a>  my_table <span class="ot">&lt;-</span> <span class="fu">rbind</span>(my_table, <span class="fu">data.frame</span>(high_correted_var))}</span></code></pre></div>
+<p>Now you have a table with just one column, each row contains names of columns in each highly-correlated-columns cluster.</p>
+<div class="sourceCode" id="cb79"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb79-1"><a href="find-group-of-highly-correlated-columns.html#cb79-1" aria-hidden="true" tabindex="-1"></a>my_table</span></code></pre></div>
+<pre><code>##   high_correted_var
+## 1            X1, X5
+## 2        X2, X3, X4</code></pre>
+</div>
+<div id="explain-the-steps-in-details" class="section level2 hasAnchor" number="7.6">
+<h2><span class="header-section-number">7.6</span> Explain the steps in details<a href="find-group-of-highly-correlated-columns.html#explain-the-steps-in-details" class="anchor-section" aria-label="Anchor link to header"></a></h2>
+<div class="sourceCode" id="cb81"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb81-1"><a href="find-group-of-highly-correlated-columns.html#cb81-1" aria-hidden="true" tabindex="-1"></a>colname <span class="ot">&lt;-</span> <span class="fu">colnames</span>(data2)</span>
+<span id="cb81-2"><a href="find-group-of-highly-correlated-columns.html#cb81-2" aria-hidden="true" tabindex="-1"></a>pair_cols<span class="ot">&lt;-</span> <span class="fu">combn</span>(colname, <span class="dv">2</span>) <span class="sc">%&gt;%</span> t <span class="sc">%&gt;%</span> <span class="fu">as_tibble</span>()</span>
+<span id="cb81-3"><a href="find-group-of-highly-correlated-columns.html#cb81-3" aria-hidden="true" tabindex="-1"></a>pair_cols</span></code></pre></div>
+<pre><code>## # A tibble: 10 × 2
+##    V1    V2   
+##    &lt;chr&gt; &lt;chr&gt;
+##  1 X1    X2   
+##  2 X1    X3   
+##  3 X1    X4   
+##  4 X1    X5   
+##  5 X2    X3   
+##  6 X2    X4   
+##  7 X2    X5   
+##  8 X3    X4   
+##  9 X3    X5   
+## 10 X4    X5</code></pre>
+<div class="sourceCode" id="cb83"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb83-1"><a href="find-group-of-highly-correlated-columns.html#cb83-1" aria-hidden="true" tabindex="-1"></a>com_phi_f <span class="ot">&lt;-</span><span class="cf">function</span>(var1, var2){<span class="fu">return</span>(<span class="fu">phi</span>(<span class="fu">table</span>(var1, var2)))}</span></code></pre></div>
+<div class="sourceCode" id="cb84"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb84-1"><a href="find-group-of-highly-correlated-columns.html#cb84-1" aria-hidden="true" tabindex="-1"></a><span class="co"># Create a vector that contain phi corr(V1, V2) for all of pairs</span></span>
+<span id="cb84-2"><a href="find-group-of-highly-correlated-columns.html#cb84-2" aria-hidden="true" tabindex="-1"></a>nom_cor <span class="ot">&lt;-</span> <span class="fu">c</span>()</span>
+<span id="cb84-3"><a href="find-group-of-highly-correlated-columns.html#cb84-3" aria-hidden="true" tabindex="-1"></a><span class="cf">for</span> (i <span class="cf">in</span> <span class="dv">1</span><span class="sc">:</span><span class="fu">dim</span>(pair_cols)[<span class="dv">1</span>]){</span>
+<span id="cb84-4"><a href="find-group-of-highly-correlated-columns.html#cb84-4" aria-hidden="true" tabindex="-1"></a>    <span class="co"># get the values of the variable associated with variable </span></span>
+<span id="cb84-5"><a href="find-group-of-highly-correlated-columns.html#cb84-5" aria-hidden="true" tabindex="-1"></a>    <span class="co">#pair_cols$V1[row==i] and pair_cols$V2[row==i]</span></span>
+<span id="cb84-6"><a href="find-group-of-highly-correlated-columns.html#cb84-6" aria-hidden="true" tabindex="-1"></a>  var1 <span class="ot">&lt;-</span> data2 <span class="sc">%&gt;%</span> <span class="fu">select</span>(<span class="fu">all_of</span>(pair_cols<span class="sc">$</span>V1[i])) <span class="sc">%&gt;%</span> pull</span>
+<span id="cb84-7"><a href="find-group-of-highly-correlated-columns.html#cb84-7" aria-hidden="true" tabindex="-1"></a>  var2 <span class="ot">&lt;-</span> data2 <span class="sc">%&gt;%</span> <span class="fu">select</span>(<span class="fu">all_of</span>(pair_cols<span class="sc">$</span>V2[i])) <span class="sc">%&gt;%</span> pull</span>
+<span id="cb84-8"><a href="find-group-of-highly-correlated-columns.html#cb84-8" aria-hidden="true" tabindex="-1"></a>  nom_cor[i] <span class="ot">=</span> <span class="fu">com_phi_f</span>(var1, var2)}</span></code></pre></div>
+<div class="sourceCode" id="cb85"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb85-1"><a href="find-group-of-highly-correlated-columns.html#cb85-1" aria-hidden="true" tabindex="-1"></a>pair_cols <span class="ot">&lt;-</span> <span class="fu">cbind</span>(pair_cols, nom_cor) </span></code></pre></div>
+<p>For doing the example, just choose a really small threshold = 0.20</p>
+<div class="sourceCode" id="cb86"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb86-1"><a href="find-group-of-highly-correlated-columns.html#cb86-1" aria-hidden="true" tabindex="-1"></a>threshold <span class="ot">=</span> <span class="fl">0.20</span></span>
+<span id="cb86-2"><a href="find-group-of-highly-correlated-columns.html#cb86-2" aria-hidden="true" tabindex="-1"></a>pair_cols <span class="ot">&lt;-</span> pair_cols <span class="sc">%&gt;%</span> <span class="fu">filter</span>(<span class="fu">abs</span>(nom_cor) <span class="sc">&gt;=</span> threshold)</span>
+<span id="cb86-3"><a href="find-group-of-highly-correlated-columns.html#cb86-3" aria-hidden="true" tabindex="-1"></a>pair_cols</span></code></pre></div>
+<pre><code>##   V1 V2 nom_cor
+## 1 X1 X5    0.22
+## 2 X2 X3    0.20
+## 3 X3 X4   -0.26</code></pre>
+<p>Now, we can create a list of highly correlated pairs using <a href="https://igraph.org/r/doc/graph_from_data_frame.html">graph_from_data_frame</a></p>
+<div class="sourceCode" id="cb88"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb88-1"><a href="find-group-of-highly-correlated-columns.html#cb88-1" aria-hidden="true" tabindex="-1"></a>high_cor_pair <span class="ot">&lt;-</span> igraph<span class="sc">::</span><span class="fu">graph_from_data_frame</span>(pair_cols, <span class="at">directed =</span> <span class="cn">FALSE</span>)</span>
+<span id="cb88-2"><a href="find-group-of-highly-correlated-columns.html#cb88-2" aria-hidden="true" tabindex="-1"></a>high_cor_pair</span></code></pre></div>
+<pre><code>## IGRAPH 67658ee UN-- 5 3 -- 
+## + attr: name (v/c), nom_cor (e/n)
+## + edges from 67658ee (vertex names):
+## [1] X1--X5 X2--X3 X3--X4</code></pre>
+<div class="sourceCode" id="cb90"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb90-1"><a href="find-group-of-highly-correlated-columns.html#cb90-1" aria-hidden="true" tabindex="-1"></a>col_cluster <span class="ot">&lt;-</span> <span class="fu">clusters</span>(high_cor_pair)</span>
+<span id="cb90-2"><a href="find-group-of-highly-correlated-columns.html#cb90-2" aria-hidden="true" tabindex="-1"></a>col_cluster</span></code></pre></div>
+<pre><code>## $membership
+## X1 X2 X3 X5 X4 
+##  1  2  2  1  2 
+## 
+## $csize
+## [1] 2 3
+## 
+## $no
+## [1] 2</code></pre>
+<div class="sourceCode" id="cb92"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb92-1"><a href="find-group-of-highly-correlated-columns.html#cb92-1" aria-hidden="true" tabindex="-1"></a>group_var_dat <span class="ot">&lt;-</span> col_cluster<span class="sc">$</span>membership <span class="sc">%&gt;%</span> </span>
+<span id="cb92-2"><a href="find-group-of-highly-correlated-columns.html#cb92-2" aria-hidden="true" tabindex="-1"></a>    <span class="fu">as.matrix</span>() <span class="sc">%&gt;%</span> <span class="fu">data.frame</span>() <span class="sc">%&gt;%</span>  <span class="fu">rownames_to_column</span>(<span class="st">&quot;var_name&quot;</span>) <span class="sc">%&gt;%</span> <span class="fu">rename</span>(<span class="at">group_index =</span> <span class="st">&quot;.&quot;</span>) <span class="sc">%&gt;%</span> <span class="fu">select</span>(group_index, var_name)</span>
+<span id="cb92-3"><a href="find-group-of-highly-correlated-columns.html#cb92-3" aria-hidden="true" tabindex="-1"></a>group_var_dat</span></code></pre></div>
+<pre><code>##   group_index var_name
+## 1           1       X1
+## 2           2       X2
+## 3           2       X3
+## 4           1       X5
+## 5           2       X4</code></pre>
+<div class="sourceCode" id="cb94"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb94-1"><a href="find-group-of-highly-correlated-columns.html#cb94-1" aria-hidden="true" tabindex="-1"></a>my_cluster <span class="ot">&lt;-</span> <span class="fu">split</span>(group_var_dat, <span class="at">f=</span>group_var_dat<span class="sc">$</span>group_index)</span>
+<span id="cb94-2"><a href="find-group-of-highly-correlated-columns.html#cb94-2" aria-hidden="true" tabindex="-1"></a>my_cluster</span></code></pre></div>
+<pre><code>## $`1`
+##   group_index var_name
+## 1           1       X1
+## 4           1       X5
+## 
+## $`2`
+##   group_index var_name
+## 2           2       X2
+## 3           2       X3
+## 5           2       X4</code></pre>
+</div>
+<div id="references-3" class="section level2 hasAnchor" number="7.7">
+<h2><span class="header-section-number">7.7</span> References<a href="find-group-of-highly-correlated-columns.html#references-3" class="anchor-section" aria-label="Anchor link to header"></a></h2>
+<p>[(<a href="https://stackoverflow.com/questions/39482364/group-of-highly-correlated-variables" class="uri">https://stackoverflow.com/questions/39482364/group-of-highly-correlated-variables</a>]((<a href="https://stackoverflow.com/questions/39482364/group-of-highly-correlated-variables" class="uri">https://stackoverflow.com/questions/39482364/group-of-highly-correlated-variables</a>)<br />
+<a href="https://igraph.org/">igraph - The network analysis package - webpage</a></p>
+
+</div>
+</div>
+            </section>
+
+          </div>
+        </div>
+      </div>
+<a href="replace-values-by-nasa-specfic-value.html" class="navigation navigation-prev " aria-label="Previous page"><i class="fa fa-angle-left"></i></a>
+<a href="relabel-study-names-into-a-numeric-sequence.html" class="navigation navigation-next " aria-label="Next page"><i class="fa fa-angle-right"></i></a>
+    </div>
+  </div>
+<script src="libs/gitbook-2.6.7/js/app.min.js"></script>
+<script src="libs/gitbook-2.6.7/js/clipboard.min.js"></script>
+<script src="libs/gitbook-2.6.7/js/plugin-search.js"></script>
+<script src="libs/gitbook-2.6.7/js/plugin-sharing.js"></script>
+<script src="libs/gitbook-2.6.7/js/plugin-fontsettings.js"></script>
+<script src="libs/gitbook-2.6.7/js/plugin-bookdown.js"></script>
+<script src="libs/gitbook-2.6.7/js/jquery.highlight.js"></script>
+<script src="libs/gitbook-2.6.7/js/plugin-clipboard.js"></script>
+<script>
+gitbook.require(["gitbook"], function(gitbook) {
+gitbook.start({
+"sharing": {
+"github": false,
+"facebook": true,
+"twitter": true,
+"linkedin": false,
+"weibo": false,
+"instapaper": false,
+"vk": false,
+"whatsapp": false,
+"all": ["facebook", "twitter", "linkedin", "weibo", "instapaper"]
+},
+"fontsettings": {
+"theme": "white",
+"family": "sans",
+"size": 2
+},
+"edit": {
+"link": "https://github.com/USERNAME/REPO/edit/BRANCH/06_Find_Group_Of_Highly_Correlated_Column.Rmd",
+"text": "Edit"
+},
+"history": {
+"link": null,
+"text": null
+},
+"view": {
+"link": null,
+"text": null
+},
+"download": ["_main.pdf", "_main.epub"],
+"search": {
+"engine": "fuse",
+"options": null
+},
+"toc": {
+"collapse": "subsection"
+}
+});
+});
+</script>
+
+<!-- dynamically load mathjax for compatibility with self-contained -->
+<script>
+  (function () {
+    var script = document.createElement("script");
+    script.type = "text/javascript";
+    var src = "true";
+    if (src === "" || src === "true") src = "https://mathjax.rstudio.com/latest/MathJax.js?config=TeX-MML-AM_CHTML";
+    if (location.protocol !== "file:")
+      if (/^https?:/.test(src))
+        src = src.replace(/^https?:/, '');
+    script.src = src;
+    document.getElementsByTagName("head")[0].appendChild(script);
+  })();
+</script>
+</body>
+
+</html>
