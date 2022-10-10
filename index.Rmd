@@ -15,4 +15,6 @@ github-repo: rstudio/bookdown-demo
 
 # Introduction
 
-This book-down file is where I keep the observations/tricks I got while using R. I also use this file to write some cheatsheets for later quick reference. 
+This book-down file is where I keep the observations/tricks I got while using R. I also use this file to write some cheat sheets for later quick reference. Sometimes, I write something when my friends ask me a question. I believe explaining to someone is an excellent way to help me understand and learn better. 
+
+These are my [LinkedIn](https://www.linkedin.com/in/tran-le-767470229/) and [GitHub](https://github.com/tranktle) pages. Please connect so that we can learn from each other. Happy studying `r emo::ji("smile")`!
