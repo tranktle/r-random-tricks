@@ -144,6 +144,7 @@ group_var_dat <- col_cluster$membership %>%
 my_cluster <- split(group_var_dat, f=group_var_dat$group_index)
 my_cluster
 ```
+<<<<<<< HEAD
 The below code chunk gives you tables of group indexes and names of variables in each group. In case you want to combine the result, which means you want to create a table with the names of variables in each group in one row, then you can do this:
 
 ```{r}
@@ -161,6 +162,10 @@ Now you have a table with just one column, each row contains names of columns in
 ```{r}
 my_table
 ```
+=======
+
+
+>>>>>>> 56eeb42d87bc29311ec57c37bae5be9a4b59edac
 
 ## Explain the steps in details
 
@@ -219,7 +224,11 @@ my_cluster
 ```
 
 
+<<<<<<< HEAD
 ## References 
+=======
+# References 
+>>>>>>> 56eeb42d87bc29311ec57c37bae5be9a4b59edac
 
 [(https://stackoverflow.com/questions/39482364/group-of-highly-correlated-variables]((https://stackoverflow.com/questions/39482364/group-of-highly-correlated-variables) \
 [igraph - The network analysis package - webpage](https://igraph.org/)

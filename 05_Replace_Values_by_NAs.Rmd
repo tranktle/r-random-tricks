@@ -1,4 +1,8 @@
+<<<<<<< HEAD
 # Replace Values by Nas/A specfic value
+=======
+# Replace Values by Nas
+>>>>>>> 56eeb42d87bc29311ec57c37bae5be9a4b59edac
 
 ## Introduction
 
@@ -77,6 +81,7 @@ data_example %>% replace_with_na_if(is_character,
                                     condition = ~.x %in% c("NR", "."))
 ```
 
+<<<<<<< HEAD
 ## A helpfull observation using mutate_at and replace
 
 Besides of replace values by Na. We also can replace specific values by a value in some selected columns. One example can be
@@ -88,6 +93,8 @@ data_example %>%  mutate_at(c("name"),
 
 
 
+=======
+>>>>>>> 56eeb42d87bc29311ec57c37bae5be9a4b59edac
 ## References
 
 [https://www.rdocumentation.org/packages/naniar/versions/0.6.1/topics/replace_with_na](https://www.rdocumentation.org/packages/naniar/versions/0.6.1/topics/replace_with_na)
