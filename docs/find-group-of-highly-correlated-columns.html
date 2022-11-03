@@ -315,9 +315,9 @@ code span.wa { color: #60a0b0; font-weight: bold; font-style: italic; } /* Warni
 ## E   5   5</code></pre>
 <div class="sourceCode" id="cb62"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb62-1"><a href="find-group-of-highly-correlated-columns.html#cb62-1" aria-hidden="true" tabindex="-1"></a>graph.cor <span class="ot">&lt;-</span> <span class="fu">graph_from_data_frame</span>(check.corelation, <span class="at">directed =</span> <span class="cn">FALSE</span>)</span>
 <span id="cb62-2"><a href="find-group-of-highly-correlated-columns.html#cb62-2" aria-hidden="true" tabindex="-1"></a>graph.cor</span></code></pre></div>
-<pre><code>## IGRAPH 671e094 UN-- 5 4 -- 
+<pre><code>## IGRAPH 69007dd UN-- 5 4 -- 
 ## + attr: name (v/c)
-## + edges from 671e094 (vertex names):
+## + edges from 69007dd (vertex names):
 ## [1] 2--1 4--3 5--3 4--5</code></pre>
 <p>Now, we will consider the clusters’ membership used to split our data. From the membership, the first row is the indexes of columns, and the second row is the index of the cluster that those columns belong to. We see that column with indexes 2 and 1 (columns B and A) is in cluster 1, and columns with indexes 4, 5, and 3 (columns D, E, and C) are in cluster 2.</p>
 <div class="sourceCode" id="cb64"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb64-1"><a href="find-group-of-highly-correlated-columns.html#cb64-1" aria-hidden="true" tabindex="-1"></a><span class="fu">components</span>(graph.cor)</span></code></pre></div>
@@ -469,9 +469,9 @@ code span.wa { color: #60a0b0; font-weight: bold; font-style: italic; } /* Warni
 <p>Now, we can create a list of highly correlated pairs using <a href="https://igraph.org/r/doc/graph_from_data_frame.html">graph_from_data_frame</a></p>
 <div class="sourceCode" id="cb88"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb88-1"><a href="find-group-of-highly-correlated-columns.html#cb88-1" aria-hidden="true" tabindex="-1"></a>high_cor_pair <span class="ot">&lt;-</span> igraph<span class="sc">::</span><span class="fu">graph_from_data_frame</span>(pair_cols, <span class="at">directed =</span> <span class="cn">FALSE</span>)</span>
 <span id="cb88-2"><a href="find-group-of-highly-correlated-columns.html#cb88-2" aria-hidden="true" tabindex="-1"></a>high_cor_pair</span></code></pre></div>
-<pre><code>## IGRAPH 67658ee UN-- 5 3 -- 
+<pre><code>## IGRAPH 694792d UN-- 5 3 -- 
 ## + attr: name (v/c), nom_cor (e/n)
-## + edges from 67658ee (vertex names):
+## + edges from 694792d (vertex names):
 ## [1] X1--X5 X2--X3 X3--X4</code></pre>
 <div class="sourceCode" id="cb90"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb90-1"><a href="find-group-of-highly-correlated-columns.html#cb90-1" aria-hidden="true" tabindex="-1"></a>col_cluster <span class="ot">&lt;-</span> <span class="fu">clusters</span>(high_cor_pair)</span>
 <span id="cb90-2"><a href="find-group-of-highly-correlated-columns.html#cb90-2" aria-hidden="true" tabindex="-1"></a>col_cluster</span></code></pre></div>
