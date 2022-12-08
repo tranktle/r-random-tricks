@@ -1,5 +1,5 @@
 --- 
-title: "Random R tricks"
+title: "Tran Le _ Random R tricks"
 author: "Tran Le"
 date: "04-01-2022 Updated:`r Sys.Date()`"
 site: bookdown::bookdown_site

@@ -1,13 +1,18 @@
-bookdown::gitbook:
+bookdown::bs4_book:
   css: style.css
-  config:
-    toc:
-      before: |
-        <li><a href="./"> Tran Le - Some random R tricks</a></li>
-      after: |
-        <li><a href="https://github.com/rstudio/bookdown" target="blank">Published with bookdown</a></li>
-    edit: https://github.com/USERNAME/REPO/edit/BRANCH/%s
-    download: ["pdf", "epub"]
+  theme:
+    primary: "#046E83"
+  repo: https://github.com/tranktle/r-random-tricks
+# bookdown::gitbook:
+#   css: style.css
+#   config:
+#     toc:
+#       before: |
+#         <li><a href="./"> Tran Le - Some random R tricks</a></li>
+#       after: |
+#         <li><a href="https://github.com/rstudio/bookdown" target="blank">Published with bookdown</a></li>
+#     edit: https://github.com/USERNAME/REPO/edit/BRANCH/%s
+#     download: ["pdf", "epub"]
 # bookdown::pdf_book:
 #   includes:
 #     in_header: preamble.tex

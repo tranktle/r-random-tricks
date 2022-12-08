@@ -1,244 +1,73 @@
 <!DOCTYPE html>
-<html lang="" xml:lang="">
+<html lang="en">
 <head>
-
-  <meta charset="utf-8" />
-  <meta http-equiv="X-UA-Compatible" content="IE=edge" />
-  <title>Section 9 Write many models with shortest code using glue and rlang | Untitled</title>
-  <meta name="description" content="Some R observations/tricks ." />
-  <meta name="generator" content="bookdown 0.26 and GitBook 2.6.7" />
-
-  <meta property="og:title" content="Section 9 Write many models with shortest code using glue and rlang | Untitled" />
-  <meta property="og:type" content="book" />
-  
-  <meta property="og:description" content="Some R observations/tricks ." />
-  <meta name="github-repo" content="rstudio/bookdown-demo" />
-
-  <meta name="twitter:card" content="summary" />
-  <meta name="twitter:title" content="Section 9 Write many models with shortest code using glue and rlang | Untitled" />
-  
-  <meta name="twitter:description" content="Some R observations/tricks ." />
-  
-
-<meta name="author" content="Tran Le" />
-
-
-<meta name="date" content="2022-10-10" />
-
-  <meta name="viewport" content="width=device-width, initial-scale=1" />
-  <meta name="apple-mobile-web-app-capable" content="yes" />
-  <meta name="apple-mobile-web-app-status-bar-style" content="black" />
-  
-  
-<link rel="prev" href="relabel-study-names-into-a-numeric-sequence.html"/>
-
-<script src="libs/jquery-3.6.0/jquery-3.6.0.min.js"></script>
-<script src="https://cdn.jsdelivr.net/npm/fuse.js@6.4.6/dist/fuse.min.js"></script>
-<link href="libs/gitbook-2.6.7/css/style.css" rel="stylesheet" />
-<link href="libs/gitbook-2.6.7/css/plugin-table.css" rel="stylesheet" />
-<link href="libs/gitbook-2.6.7/css/plugin-bookdown.css" rel="stylesheet" />
-<link href="libs/gitbook-2.6.7/css/plugin-highlight.css" rel="stylesheet" />
-<link href="libs/gitbook-2.6.7/css/plugin-search.css" rel="stylesheet" />
-<link href="libs/gitbook-2.6.7/css/plugin-fontsettings.css" rel="stylesheet" />
-<link href="libs/gitbook-2.6.7/css/plugin-clipboard.css" rel="stylesheet" />
-
-
-
-
-
-
-
-
-<link href="libs/anchor-sections-1.1.0/anchor-sections.css" rel="stylesheet" />
-<link href="libs/anchor-sections-1.1.0/anchor-sections-hash.css" rel="stylesheet" />
-<script src="libs/anchor-sections-1.1.0/anchor-sections.js"></script>
-<script src="libs/htmlwidgets-1.5.4/htmlwidgets.js"></script>
-<link href="libs/datatables-css-0.0.0/datatables-crosstalk.css" rel="stylesheet" />
-<script src="libs/datatables-binding-0.23/datatables.js"></script>
-<link href="libs/dt-core-1.11.3/css/jquery.dataTables.min.css" rel="stylesheet" />
-<link href="libs/dt-core-1.11.3/css/jquery.dataTables.extra.css" rel="stylesheet" />
-<script src="libs/dt-core-1.11.3/js/jquery.dataTables.min.js"></script>
-<link href="libs/crosstalk-1.2.0/css/crosstalk.min.css" rel="stylesheet" />
-<script src="libs/crosstalk-1.2.0/js/crosstalk.min.js"></script>
-
-
-<style type="text/css">
-pre > code.sourceCode { white-space: pre; position: relative; }
-pre > code.sourceCode > span { display: inline-block; line-height: 1.25; }
-pre > code.sourceCode > span:empty { height: 1.2em; }
-.sourceCode { overflow: visible; }
-code.sourceCode > span { color: inherit; text-decoration: inherit; }
-pre.sourceCode { margin: 0; }
-@media screen {
-div.sourceCode { overflow: auto; }
-}
-@media print {
-pre > code.sourceCode { white-space: pre-wrap; }
-pre > code.sourceCode > span { text-indent: -5em; padding-left: 5em; }
-}
-pre.numberSource code
-  { counter-reset: source-line 0; }
-pre.numberSource code > span
-  { position: relative; left: -4em; counter-increment: source-line; }
-pre.numberSource code > span > a:first-child::before
-  { content: counter(source-line);
-    position: relative; left: -1em; text-align: right; vertical-align: baseline;
-    border: none; display: inline-block;
-    -webkit-touch-callout: none; -webkit-user-select: none;
-    -khtml-user-select: none; -moz-user-select: none;
-    -ms-user-select: none; user-select: none;
-    padding: 0 4px; width: 4em;
-    color: #aaaaaa;
-  }
-pre.numberSource { margin-left: 3em; border-left: 1px solid #aaaaaa;  padding-left: 4px; }
-div.sourceCode
-  {   }
-@media screen {
-pre > code.sourceCode > span > a:first-child::before { text-decoration: underline; }
-}
-code span.al { color: #ff0000; font-weight: bold; } /* Alert */
-code span.an { color: #60a0b0; font-weight: bold; font-style: italic; } /* Annotation */
-code span.at { color: #7d9029; } /* Attribute */
-code span.bn { color: #40a070; } /* BaseN */
-code span.bu { } /* BuiltIn */
-code span.cf { color: #007020; font-weight: bold; } /* ControlFlow */
-code span.ch { color: #4070a0; } /* Char */
-code span.cn { color: #880000; } /* Constant */
-code span.co { color: #60a0b0; font-style: italic; } /* Comment */
-code span.cv { color: #60a0b0; font-weight: bold; font-style: italic; } /* CommentVar */
-code span.do { color: #ba2121; font-style: italic; } /* Documentation */
-code span.dt { color: #902000; } /* DataType */
-code span.dv { color: #40a070; } /* DecVal */
-code span.er { color: #ff0000; font-weight: bold; } /* Error */
-code span.ex { } /* Extension */
-code span.fl { color: #40a070; } /* Float */
-code span.fu { color: #06287e; } /* Function */
-code span.im { } /* Import */
-code span.in { color: #60a0b0; font-weight: bold; font-style: italic; } /* Information */
-code span.kw { color: #007020; font-weight: bold; } /* Keyword */
-code span.op { color: #666666; } /* Operator */
-code span.ot { color: #007020; } /* Other */
-code span.pp { color: #bc7a00; } /* Preprocessor */
-code span.sc { color: #4070a0; } /* SpecialChar */
-code span.ss { color: #bb6688; } /* SpecialString */
-code span.st { color: #4070a0; } /* String */
-code span.va { color: #19177c; } /* Variable */
-code span.vs { color: #4070a0; } /* VerbatimString */
-code span.wa { color: #60a0b0; font-weight: bold; font-style: italic; } /* Warning */
-</style>
-
-
-<link rel="stylesheet" href="style.css" type="text/css" />
+<meta http-equiv="Content-Type" content="text/html; charset=UTF-8">
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no">
+<title>Section 10 Write many models with shortest code using glue and rlang | Tran Le _ Random R tricks</title>
+<meta name="author" content="Tran Le">
+<meta name="description" content="10.1 Introduction In case you want to fit many models, even if each is a really simple model, say linear regression, \(model_i \leftarrow lm(Y_i\sim X1+X2+X3+X4)\), for \(i=\overline{1,30}\). To...">
+<meta name="generator" content="bookdown 0.30 with bs4_book()">
+<meta property="og:title" content="Section 10 Write many models with shortest code using glue and rlang | Tran Le _ Random R tricks">
+<meta property="og:type" content="book">
+<meta property="og:description" content="10.1 Introduction In case you want to fit many models, even if each is a really simple model, say linear regression, \(model_i \leftarrow lm(Y_i\sim X1+X2+X3+X4)\), for \(i=\overline{1,30}\). To...">
+<meta name="twitter:card" content="summary">
+<meta name="twitter:title" content="Section 10 Write many models with shortest code using glue and rlang | Tran Le _ Random R tricks">
+<meta name="twitter:description" content="10.1 Introduction In case you want to fit many models, even if each is a really simple model, say linear regression, \(model_i \leftarrow lm(Y_i\sim X1+X2+X3+X4)\), for \(i=\overline{1,30}\). To...">
+<!-- JS --><script src="https://cdnjs.cloudflare.com/ajax/libs/clipboard.js/2.0.6/clipboard.min.js" integrity="sha256-inc5kl9MA1hkeYUt+EC3BhlIgyp/2jDIyBLS6k3UxPI=" crossorigin="anonymous"></script><script src="https://cdnjs.cloudflare.com/ajax/libs/fuse.js/6.4.6/fuse.js" integrity="sha512-zv6Ywkjyktsohkbp9bb45V6tEMoWhzFzXis+LrMehmJZZSys19Yxf1dopHx7WzIKxr5tK2dVcYmaCk2uqdjF4A==" crossorigin="anonymous"></script><script src="https://kit.fontawesome.com/6ecbd6c532.js" crossorigin="anonymous"></script><script src="libs/jquery-3.6.0/jquery-3.6.0.min.js"></script><meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no">
+<link href="libs/bootstrap-4.6.0/bootstrap.min.css" rel="stylesheet">
+<script src="libs/bootstrap-4.6.0/bootstrap.bundle.min.js"></script><script src="libs/bs3compat-0.3.1/transition.js"></script><script src="libs/bs3compat-0.3.1/tabs.js"></script><script src="libs/bs3compat-0.3.1/bs3compat.js"></script><link href="libs/bs4_book-1.0.0/bs4_book.css" rel="stylesheet">
+<script src="libs/bs4_book-1.0.0/bs4_book.js"></script><script src="https://cdnjs.cloudflare.com/ajax/libs/autocomplete.js/0.38.0/autocomplete.jquery.min.js" integrity="sha512-GU9ayf+66Xx2TmpxqJpliWbT5PiGYxpaG8rfnBEk1LL8l1KGkRShhngwdXK1UgqhAzWpZHSiYPc09/NwDQIGyg==" crossorigin="anonymous"></script><script src="https://cdnjs.cloudflare.com/ajax/libs/mark.js/8.11.1/mark.min.js" integrity="sha512-5CYOlHXGh6QpOFA/TeTylKLWfB3ftPsde7AnmhuitiTX4K5SqCLBeKro6sPS8ilsz1Q4NRx3v8Ko2IBiszzdww==" crossorigin="anonymous"></script><!-- CSS --><style type="text/css">
+    
+    div.hanging-indent{margin-left: 1.5em; text-indent: -1.5em;}
+  </style>
+<link rel="stylesheet" href="style.css">
 </head>
+<body data-spy="scroll" data-target="#toc">
 
-<body>
+<div class="container-fluid">
+<div class="row">
+  <header class="col-sm-12 col-lg-3 sidebar sidebar-book"><a class="sr-only sr-only-focusable" href="#content">Skip to main content</a>
 
-
-
-  <div class="book without-animation with-summary font-size-2 font-family-1" data-basepath=".">
-
-    <div class="book-summary">
-      <nav role="navigation">
-
-<ul class="summary">
-<li><a href="./"> Tran Le - Some random R tricks</a></li>
-
-<li class="divider"></li>
-<li class="chapter" data-level="1" data-path="index.html"><a href="index.html"><i class="fa fa-check"></i><b>1</b> Introduction</a></li>
-<li class="chapter" data-level="2" data-path="github-cheatsheet.html"><a href="github-cheatsheet.html"><i class="fa fa-check"></i><b>2</b> Github-Cheatsheet</a>
-<ul>
-<li class="chapter" data-level="2.1" data-path="github-cheatsheet.html"><a href="github-cheatsheet.html#introduction-1"><i class="fa fa-check"></i><b>2.1</b> Introduction</a></li>
-<li class="chapter" data-level="2.2" data-path="github-cheatsheet.html"><a href="github-cheatsheet.html#connecting-an-existing-rstudio-project-to-github."><i class="fa fa-check"></i><b>2.2</b> Connecting an existing Rstudio project to Github.</a></li>
-<li class="chapter" data-level="2.3" data-path="github-cheatsheet.html"><a href="github-cheatsheet.html#integrate-rstudio-with-an-existing-project-on-github"><i class="fa fa-check"></i><b>2.3</b> Integrate Rstudio with an existing project on Github</a></li>
-<li class="chapter" data-level="2.4" data-path="github-cheatsheet.html"><a href="github-cheatsheet.html#how-to-post-your-bookdown-file-to-github"><i class="fa fa-check"></i><b>2.4</b> How to post your Bookdown file to Github</a></li>
-<li class="chapter" data-level="2.5" data-path="github-cheatsheet.html"><a href="github-cheatsheet.html#some-most-common-git-commands."><i class="fa fa-check"></i><b>2.5</b> Some most common git commands.</a></li>
-<li class="chapter" data-level="2.6" data-path="github-cheatsheet.html"><a href="github-cheatsheet.html#references"><i class="fa fa-check"></i><b>2.6</b> References</a></li>
-</ul></li>
-<li class="chapter" data-level="3" data-path="r-resources-from-absolute-beginners-to-more-advance.html"><a href="r-resources-from-absolute-beginners-to-more-advance.html"><i class="fa fa-check"></i><b>3</b> R resources from absolute beginners to more advance</a>
-<ul>
-<li class="chapter" data-level="3.1" data-path="r-resources-from-absolute-beginners-to-more-advance.html"><a href="r-resources-from-absolute-beginners-to-more-advance.html#introduction-2"><i class="fa fa-check"></i><b>3.1</b> Introduction</a></li>
-<li class="chapter" data-level="3.2" data-path="r-resources-from-absolute-beginners-to-more-advance.html"><a href="r-resources-from-absolute-beginners-to-more-advance.html#for-absolute-beginners."><i class="fa fa-check"></i><b>3.2</b> For absolute beginners.</a></li>
-<li class="chapter" data-level="3.3" data-path="r-resources-from-absolute-beginners-to-more-advance.html"><a href="r-resources-from-absolute-beginners-to-more-advance.html#r-graphs-galleries"><i class="fa fa-check"></i><b>3.3</b> R graphs galleries</a></li>
-<li class="chapter" data-level="3.4" data-path="r-resources-from-absolute-beginners-to-more-advance.html"><a href="r-resources-from-absolute-beginners-to-more-advance.html#some-r-excellent-books"><i class="fa fa-check"></i><b>3.4</b> Some R excellent books</a></li>
-</ul></li>
-<li class="chapter" data-level="4" data-path="problems-when-using-dplyrfull_join.html"><a href="problems-when-using-dplyrfull_join.html"><i class="fa fa-check"></i><b>4</b> Problems when using dplyr::full_join</a>
-<ul>
-<li class="chapter" data-level="4.1" data-path="problems-when-using-dplyrfull_join.html"><a href="problems-when-using-dplyrfull_join.html#introduction-3"><i class="fa fa-check"></i><b>4.1</b> Introduction</a></li>
-<li class="chapter" data-level="4.2" data-path="problems-when-using-dplyrfull_join.html"><a href="problems-when-using-dplyrfull_join.html#using-dplyrfull_join"><i class="fa fa-check"></i><b>4.2</b> Using dplyr::full_join</a></li>
-<li class="chapter" data-level="4.3" data-path="problems-when-using-dplyrfull_join.html"><a href="problems-when-using-dplyrfull_join.html#using-powerjoinpower_full_join"><i class="fa fa-check"></i><b>4.3</b> Using powerjoin::power_full_join</a></li>
-<li class="chapter" data-level="4.4" data-path="problems-when-using-dplyrfull_join.html"><a href="problems-when-using-dplyrfull_join.html#what-if-we-have-conflict-data-sets"><i class="fa fa-check"></i><b>4.4</b> What if we have conflict data sets</a></li>
-<li class="chapter" data-level="4.5" data-path="problems-when-using-dplyrfull_join.html"><a href="problems-when-using-dplyrfull_join.html#references-1"><i class="fa fa-check"></i><b>4.5</b> References</a></li>
-</ul></li>
-<li class="chapter" data-level="5" data-path="load-and-write-to-an-excel-sheet.html"><a href="load-and-write-to-an-excel-sheet.html"><i class="fa fa-check"></i><b>5</b> Load and write to an excel sheet</a>
-<ul>
-<li class="chapter" data-level="5.1" data-path="load-and-write-to-an-excel-sheet.html"><a href="load-and-write-to-an-excel-sheet.html#introduction-4"><i class="fa fa-check"></i><b>5.1</b> Introduction</a></li>
-<li class="chapter" data-level="5.2" data-path="load-and-write-to-an-excel-sheet.html"><a href="load-and-write-to-an-excel-sheet.html#code"><i class="fa fa-check"></i><b>5.2</b> Code</a></li>
-</ul></li>
-<li class="chapter" data-level="6" data-path="replace-values-by-nasa-specfic-value.html"><a href="replace-values-by-nasa-specfic-value.html"><i class="fa fa-check"></i><b>6</b> Replace Values by Nas/A specfic value</a>
-<ul>
-<li class="chapter" data-level="6.1" data-path="replace-values-by-nasa-specfic-value.html"><a href="replace-values-by-nasa-specfic-value.html#introduction-5"><i class="fa fa-check"></i><b>6.1</b> Introduction</a></li>
-<li class="chapter" data-level="6.2" data-path="replace-values-by-nasa-specfic-value.html"><a href="replace-values-by-nasa-specfic-value.html#replace_with_na-replace-specific-values-at-in-specific-columns-by-nas."><i class="fa fa-check"></i><b>6.2</b> replace_with_na(): replace specific value(s) at in specific columns by NAs.</a></li>
-<li class="chapter" data-level="6.3" data-path="replace-values-by-nasa-specfic-value.html"><a href="replace-values-by-nasa-specfic-value.html#replace_with_na_all-replaces-some-values-by-na-for-all-columns."><i class="fa fa-check"></i><b>6.3</b> replace_with_na_all() Replaces some values by NA for all columns.</a></li>
-<li class="chapter" data-level="6.4" data-path="replace-values-by-nasa-specfic-value.html"><a href="replace-values-by-nasa-specfic-value.html#replace_with_na_at-replaces-some-chosen-values-in-a-chosen-set-of-columns-by-nas."><i class="fa fa-check"></i><b>6.4</b> replace_with_na_at(): replaces some chosen values in a chosen set of columns by NAs.</a></li>
-<li class="chapter" data-level="6.5" data-path="replace-values-by-nasa-specfic-value.html"><a href="replace-values-by-nasa-specfic-value.html#replace_with_na_if-replaces-some-values-on-some-columns-with-conditions-is.numeric-is.character-by-na."><i class="fa fa-check"></i><b>6.5</b> replace_with_na_if(): Replaces some values on some columns with conditions (is.numeric, is.character) by NA.</a></li>
-<li class="chapter" data-level="6.6" data-path="replace-values-by-nasa-specfic-value.html"><a href="replace-values-by-nasa-specfic-value.html#a-helpfull-observation-using-mutate_at-and-replace"><i class="fa fa-check"></i><b>6.6</b> A helpfull observation using mutate_at and replace</a></li>
-<li class="chapter" data-level="6.7" data-path="replace-values-by-nasa-specfic-value.html"><a href="replace-values-by-nasa-specfic-value.html#references-2"><i class="fa fa-check"></i><b>6.7</b> References</a></li>
-</ul></li>
-<li class="chapter" data-level="7" data-path="find-group-of-highly-correlated-columns.html"><a href="find-group-of-highly-correlated-columns.html"><i class="fa fa-check"></i><b>7</b> Find group of highly correlated columns</a>
-<ul>
-<li class="chapter" data-level="7.1" data-path="find-group-of-highly-correlated-columns.html"><a href="find-group-of-highly-correlated-columns.html#introduction-6"><i class="fa fa-check"></i><b>7.1</b> Introduction</a></li>
-<li class="chapter" data-level="7.2" data-path="find-group-of-highly-correlated-columns.html"><a href="find-group-of-highly-correlated-columns.html#data-set-and-the-code-to-get-the-result"><i class="fa fa-check"></i><b>7.2</b> Data set and the code to get the result</a></li>
-<li class="chapter" data-level="7.3" data-path="find-group-of-highly-correlated-columns.html"><a href="find-group-of-highly-correlated-columns.html#explain-the-code-in-details"><i class="fa fa-check"></i><b>7.3</b> Explain the code in details</a></li>
-<li class="chapter" data-level="7.4" data-path="find-group-of-highly-correlated-columns.html"><a href="find-group-of-highly-correlated-columns.html#deal-with-nominal-nominal-variables"><i class="fa fa-check"></i><b>7.4</b> Deal with nominal-nominal variables</a></li>
-<li class="chapter" data-level="7.5" data-path="find-group-of-highly-correlated-columns.html"><a href="find-group-of-highly-correlated-columns.html#here-is-the-code-to-get-group-of-highly-correlated-columns"><i class="fa fa-check"></i><b>7.5</b> Here is the code to get group of highly correlated columns</a></li>
-<li class="chapter" data-level="7.6" data-path="find-group-of-highly-correlated-columns.html"><a href="find-group-of-highly-correlated-columns.html#explain-the-steps-in-details"><i class="fa fa-check"></i><b>7.6</b> Explain the steps in details</a></li>
-<li class="chapter" data-level="7.7" data-path="find-group-of-highly-correlated-columns.html"><a href="find-group-of-highly-correlated-columns.html#references-3"><i class="fa fa-check"></i><b>7.7</b> References</a></li>
-</ul></li>
-<li class="chapter" data-level="8" data-path="relabel-study-names-into-a-numeric-sequence.html"><a href="relabel-study-names-into-a-numeric-sequence.html"><i class="fa fa-check"></i><b>8</b> Relabel study names into a numeric sequence</a>
-<ul>
-<li class="chapter" data-level="8.1" data-path="relabel-study-names-into-a-numeric-sequence.html"><a href="relabel-study-names-into-a-numeric-sequence.html#introduction-7"><i class="fa fa-check"></i><b>8.1</b> Introduction</a></li>
-<li class="chapter" data-level="8.2" data-path="relabel-study-names-into-a-numeric-sequence.html"><a href="relabel-study-names-into-a-numeric-sequence.html#create-data"><i class="fa fa-check"></i><b>8.2</b> Create data</a>
-<ul>
-<li class="chapter" data-level="8.2.1" data-path="relabel-study-names-into-a-numeric-sequence.html"><a href="relabel-study-names-into-a-numeric-sequence.html#what-if-we-want-to-keep-the-order-of-study-names-as-they-were"><i class="fa fa-check"></i><b>8.2.1</b> What if we want to keep the order of Study names as they were</a></li>
-</ul></li>
-<li class="chapter" data-level="8.3" data-path="relabel-study-names-into-a-numeric-sequence.html"><a href="relabel-study-names-into-a-numeric-sequence.html#transform-an-arm-based-data-table-to-a-study-based-data-table"><i class="fa fa-check"></i><b>8.3</b> Transform an arm-based data table to a study-based data table</a></li>
-<li class="chapter" data-level="8.4" data-path="relabel-study-names-into-a-numeric-sequence.html"><a href="relabel-study-names-into-a-numeric-sequence.html#frequentist-network-meta-analysis"><i class="fa fa-check"></i><b>8.4</b> Frequentist Network meta analysis</a></li>
-<li class="chapter" data-level="8.5" data-path="relabel-study-names-into-a-numeric-sequence.html"><a href="relabel-study-names-into-a-numeric-sequence.html#arm-base-network-meta-analysis-using-pcnetmeta-package"><i class="fa fa-check"></i><b>8.5</b> Arm base Network Meta Analysis using pcnetmeta package</a></li>
-<li class="chapter" data-level="8.6" data-path="relabel-study-names-into-a-numeric-sequence.html"><a href="relabel-study-names-into-a-numeric-sequence.html#references-4"><i class="fa fa-check"></i><b>8.6</b> References</a></li>
-</ul></li>
-<li class="chapter" data-level="9" data-path="write-many-models-with-shortest-code-using-glue-and-rlang.html"><a href="write-many-models-with-shortest-code-using-glue-and-rlang.html"><i class="fa fa-check"></i><b>9</b> Write many models with shortest code using glue and rlang</a>
-<ul>
-<li class="chapter" data-level="9.1" data-path="write-many-models-with-shortest-code-using-glue-and-rlang.html"><a href="write-many-models-with-shortest-code-using-glue-and-rlang.html#introduction-8"><i class="fa fa-check"></i><b>9.1</b> Introduction</a></li>
-<li class="chapter" data-level="9.2" data-path="write-many-models-with-shortest-code-using-glue-and-rlang.html"><a href="write-many-models-with-shortest-code-using-glue-and-rlang.html#create-a-synthesis-data"><i class="fa fa-check"></i><b>9.2</b> Create a synthesis data</a></li>
-<li class="chapter" data-level="9.3" data-path="write-many-models-with-shortest-code-using-glue-and-rlang.html"><a href="write-many-models-with-shortest-code-using-glue-and-rlang.html#first-way-using-glueglue-parse-and-eval"><i class="fa fa-check"></i><b>9.3</b> First way: using glue::glue, parse and eval</a></li>
-<li class="chapter" data-level="9.4" data-path="write-many-models-with-shortest-code-using-glue-and-rlang.html"><a href="write-many-models-with-shortest-code-using-glue-and-rlang.html#second-way-using-tidy-evaluation-operator"><i class="fa fa-check"></i><b>9.4</b> Second way: using tidy evaluation operator</a></li>
-<li class="chapter" data-level="9.5" data-path="write-many-models-with-shortest-code-using-glue-and-rlang.html"><a href="write-many-models-with-shortest-code-using-glue-and-rlang.html#other-tips"><i class="fa fa-check"></i><b>9.5</b> Other tips</a></li>
-<li class="chapter" data-level="9.6" data-path="write-many-models-with-shortest-code-using-glue-and-rlang.html"><a href="write-many-models-with-shortest-code-using-glue-and-rlang.html#references-5"><i class="fa fa-check"></i><b>9.6</b> References</a></li>
-</ul></li>
-<li class="divider"></li>
-<li><a href="https://github.com/rstudio/bookdown" target="blank">Published with bookdown</a></li>
-
-</ul>
-
-      </nav>
+    <div class="d-flex align-items-start justify-content-between">
+      <h1>
+        <a href="index.html" title="">Tran Le _ Random R tricks</a>
+      </h1>
+      <button class="btn btn-outline-primary d-lg-none ml-2 mt-1" type="button" data-toggle="collapse" data-target="#main-nav" aria-expanded="true" aria-controls="main-nav"><i class="fas fa-bars"></i><span class="sr-only">Show table of contents</span></button>
     </div>
 
-    <div class="book-body">
-      <div class="body-inner">
-        <div class="book-header" role="navigation">
-          <h1>
-            <i class="fa fa-circle-o-notch fa-spin"></i><a href="./">Untitled</a>
-          </h1>
+    <div id="main-nav" class="collapse-lg">
+      <form role="search">
+        <input id="search" class="form-control" type="search" placeholder="Search" aria-label="Search">
+</form>
+
+      <nav aria-label="Table of contents"><h2>Table of contents</h2>
+        <ul class="book-toc list-unstyled">
+<li><a class="" href="index.html"><span class="header-section-number">1</span> Introduction</a></li>
+<li><a class="" href="github-cheatsheet.html"><span class="header-section-number">2</span> Github-Cheatsheet</a></li>
+<li><a class="" href="r-resources-from-absolute-beginners-to-more-advance.html"><span class="header-section-number">3</span> R resources from absolute beginners to more advance</a></li>
+<li><a class="" href="problems-when-using-dplyrfull_join.html"><span class="header-section-number">4</span> Problems when using dplyr::full_join</a></li>
+<li><a class="" href="load-and-write-to-an-excel-sheet.html"><span class="header-section-number">5</span> Load and write to an excel sheet</a></li>
+<li><a class="" href="replace-values-by-nasa-specfic-value.html"><span class="header-section-number">6</span> Replace Values by Nas/A specfic value</a></li>
+<li><a class="" href="find-group-of-highly-correlated-columns.html"><span class="header-section-number">7</span> Find group of highly correlated columns</a></li>
+<li><a class="" href="relabel-study-names-into-a-numeric-sequence.html"><span class="header-section-number">8</span> Relabel study names into a numeric sequence</a></li>
+<li><a class="" href="arm-base-network-meta-analysis-using-pcnetmeta-package.html"><span class="header-section-number">9</span> Arm base Network Meta Analysis using pcnetmeta package</a></li>
+<li><a class="active" href="write-many-models-with-shortest-code-using-glue-and-rlang.html"><span class="header-section-number">10</span> Write many models with shortest code using glue and rlang</a></li>
+</ul>
+
+        <div class="book-extra">
+          <p><a id="book-repo" href="https://github.com/tranktle/r-random-tricks">View book source <i class="fab fa-github"></i></a></p>
         </div>
-
-        <div class="page-wrapper" tabindex="-1" role="main">
-          <div class="page-inner">
-
-            <section class="normal" id="section-">
-<div id="write-many-models-with-shortest-code-using-glue-and-rlang" class="section level1 hasAnchor" number="9">
-<h1><span class="header-section-number">Section 9</span> Write many models with shortest code using glue and rlang<a href="write-many-models-with-shortest-code-using-glue-and-rlang.html#write-many-models-with-shortest-code-using-glue-and-rlang" class="anchor-section" aria-label="Anchor link to header"></a></h1>
-<div id="introduction-8" class="section level2 hasAnchor" number="9.1">
-<h2><span class="header-section-number">9.1</span> Introduction<a href="write-many-models-with-shortest-code-using-glue-and-rlang.html#introduction-8" class="anchor-section" aria-label="Anchor link to header"></a></h2>
+      </nav>
+</div>
+  </header><main class="col-sm-12 col-md-9 col-lg-7" id="content"><div id="write-many-models-with-shortest-code-using-glue-and-rlang" class="section level1" number="10">
+<h1>
+<span class="header-section-number">Section 10</span> Write many models with shortest code using glue and rlang<a class="anchor" aria-label="anchor" href="#write-many-models-with-shortest-code-using-glue-and-rlang"><i class="fas fa-link"></i></a>
+</h1>
+<div id="introduction-9" class="section level2" number="10.1">
+<h2>
+<span class="header-section-number">10.1</span> Introduction<a class="anchor" aria-label="anchor" href="#introduction-9"><i class="fas fa-link"></i></a>
+</h2>
 <ul>
 <li><p>In case you want to fit many models, even if each is a really simple model, say linear regression, <span class="math inline">\(model_i \leftarrow lm(Y_i\sim X1+X2+X3+X4)\)</span>, for <span class="math inline">\(i=\overline{1,30}\)</span>. To fit these 30 models, you may have to write 30 lines unnecessarily long and error-prone with copy and paste.</p></li>
 <li><p>In this section, I will briefly introduce two ways that save you time and make your code look nicer and more accessible to debug:</p></li>
@@ -250,30 +79,35 @@ code span.wa { color: #60a0b0; font-weight: bold; font-style: italic; } /* Warni
 <li>Create a synthesis of data.</li>
 <li>Way 1 for writing many models: using glue::glue, parse, and eval.</li>
 <li>Way 2 for writing many models: using rlang tidy evaluation operator.</li>
-</ul></li>
+</ul>
+</li>
 </ul>
 </div>
-<div id="create-a-synthesis-data" class="section level2 hasAnchor" number="9.2">
-<h2><span class="header-section-number">9.2</span> Create a synthesis data<a href="write-many-models-with-shortest-code-using-glue-and-rlang.html#create-a-synthesis-data" class="anchor-section" aria-label="Anchor link to header"></a></h2>
-<div class="sourceCode" id="cb130"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb130-1"><a href="write-many-models-with-shortest-code-using-glue-and-rlang.html#cb130-1" aria-hidden="true" tabindex="-1"></a><span class="fu">suppressPackageStartupMessages</span>(<span class="fu">library</span>(tidyverse))</span></code></pre></div>
-<div class="sourceCode" id="cb131"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb131-1"><a href="write-many-models-with-shortest-code-using-glue-and-rlang.html#cb131-1" aria-hidden="true" tabindex="-1"></a><span class="fu">set.seed</span>(<span class="dv">386827</span>)</span>
-<span id="cb131-2"><a href="write-many-models-with-shortest-code-using-glue-and-rlang.html#cb131-2" aria-hidden="true" tabindex="-1"></a>n <span class="ot">=</span> <span class="dv">100</span> <span class="co"># sample size</span></span>
-<span id="cb131-3"><a href="write-many-models-with-shortest-code-using-glue-and-rlang.html#cb131-3" aria-hidden="true" tabindex="-1"></a><span class="co"># Synthesis inputs</span></span>
-<span id="cb131-4"><a href="write-many-models-with-shortest-code-using-glue-and-rlang.html#cb131-4" aria-hidden="true" tabindex="-1"></a>X1 <span class="ot">&lt;-</span> <span class="fu">rnorm</span>(n, <span class="at">mean =</span> <span class="dv">10</span>, <span class="at">sd =</span> <span class="dv">3</span>)</span>
-<span id="cb131-5"><a href="write-many-models-with-shortest-code-using-glue-and-rlang.html#cb131-5" aria-hidden="true" tabindex="-1"></a>X2 <span class="ot">&lt;-</span> <span class="fu">rnorm</span>(n, <span class="at">mean =</span> <span class="dv">16</span>, <span class="at">sd  =</span> <span class="dv">2</span>)</span>
-<span id="cb131-6"><a href="write-many-models-with-shortest-code-using-glue-and-rlang.html#cb131-6" aria-hidden="true" tabindex="-1"></a>X3 <span class="ot">&lt;-</span> <span class="fu">rbinom</span>(n, <span class="dv">1</span>, <span class="fl">0.4</span>)</span>
-<span id="cb131-7"><a href="write-many-models-with-shortest-code-using-glue-and-rlang.html#cb131-7" aria-hidden="true" tabindex="-1"></a>X4 <span class="ot">&lt;-</span> <span class="fu">rbinom</span>(n, <span class="dv">1</span>, <span class="fl">0.5</span>)</span>
-<span id="cb131-8"><a href="write-many-models-with-shortest-code-using-glue-and-rlang.html#cb131-8" aria-hidden="true" tabindex="-1"></a><span class="co"># epsilons</span></span>
-<span id="cb131-9"><a href="write-many-models-with-shortest-code-using-glue-and-rlang.html#cb131-9" aria-hidden="true" tabindex="-1"></a>eps1 <span class="ot">&lt;-</span> <span class="fu">rnorm</span>(n, <span class="dv">0</span>, <span class="dv">1</span>)</span>
-<span id="cb131-10"><a href="write-many-models-with-shortest-code-using-glue-and-rlang.html#cb131-10" aria-hidden="true" tabindex="-1"></a>eps2 <span class="ot">&lt;-</span> <span class="fu">rnorm</span>(n, <span class="dv">0</span>, <span class="fl">0.5</span>)</span>
-<span id="cb131-11"><a href="write-many-models-with-shortest-code-using-glue-and-rlang.html#cb131-11" aria-hidden="true" tabindex="-1"></a>eps3 <span class="ot">&lt;-</span> eps2</span>
-<span id="cb131-12"><a href="write-many-models-with-shortest-code-using-glue-and-rlang.html#cb131-12" aria-hidden="true" tabindex="-1"></a><span class="co"># Create synthesis output</span></span>
-<span id="cb131-13"><a href="write-many-models-with-shortest-code-using-glue-and-rlang.html#cb131-13" aria-hidden="true" tabindex="-1"></a>Y1 <span class="ot">&lt;-</span> <span class="dv">3</span><span class="sc">*</span>X1 <span class="sc">+</span> <span class="dv">2</span><span class="sc">*</span>X2 <span class="sc">+</span> <span class="dv">8</span><span class="sc">*</span>X3 <span class="sc">+</span> <span class="dv">5</span><span class="sc">*</span>X4 <span class="sc">+</span> eps1</span>
-<span id="cb131-14"><a href="write-many-models-with-shortest-code-using-glue-and-rlang.html#cb131-14" aria-hidden="true" tabindex="-1"></a>Y2 <span class="ot">&lt;-</span> <span class="dv">15</span><span class="sc">*</span>X1 <span class="sc">+</span> <span class="dv">0</span><span class="sc">*</span>X2 <span class="sc">+</span> <span class="dv">5</span><span class="sc">*</span>X3 <span class="sc">+</span> <span class="dv">3</span><span class="sc">*</span>X4 <span class="sc">+</span> eps2</span>
-<span id="cb131-15"><a href="write-many-models-with-shortest-code-using-glue-and-rlang.html#cb131-15" aria-hidden="true" tabindex="-1"></a>Y3 <span class="ot">&lt;-</span> <span class="dv">1</span><span class="sc">*</span>X1 <span class="sc">+</span> <span class="dv">12</span><span class="sc">*</span> X2 <span class="sc">+</span> <span class="dv">2</span><span class="sc">*</span>X3 <span class="sc">+</span> <span class="dv">4</span><span class="sc">*</span>X4 <span class="sc">+</span> eps3</span>
-<span id="cb131-16"><a href="write-many-models-with-shortest-code-using-glue-and-rlang.html#cb131-16" aria-hidden="true" tabindex="-1"></a><span class="co"># Synthesis data</span></span>
-<span id="cb131-17"><a href="write-many-models-with-shortest-code-using-glue-and-rlang.html#cb131-17" aria-hidden="true" tabindex="-1"></a>syn_dat <span class="ot">&lt;-</span> tibble<span class="sc">::</span><span class="fu">tibble</span>(X1, X2, X3, X4, Y1, Y2, Y3)</span>
-<span id="cb131-18"><a href="write-many-models-with-shortest-code-using-glue-and-rlang.html#cb131-18" aria-hidden="true" tabindex="-1"></a><span class="fu">head</span>(syn_dat)</span></code></pre></div>
+<div id="create-a-synthesis-data" class="section level2" number="10.2">
+<h2>
+<span class="header-section-number">10.2</span> Create a synthesis data<a class="anchor" aria-label="anchor" href="#create-a-synthesis-data"><i class="fas fa-link"></i></a>
+</h2>
+<div class="sourceCode" id="cb130"><pre class="downlit sourceCode r">
+<code class="sourceCode R"><span><span class="fu"><a href="https://rdrr.io/r/base/message.html">suppressPackageStartupMessages</a></span><span class="op">(</span><span class="kw"><a href="https://rdrr.io/r/base/library.html">library</a></span><span class="op">(</span><span class="va"><a href="https://tidyverse.tidyverse.org">tidyverse</a></span><span class="op">)</span><span class="op">)</span></span></code></pre></div>
+<div class="sourceCode" id="cb131"><pre class="downlit sourceCode r">
+<code class="sourceCode R"><span><span class="fu"><a href="https://rdrr.io/r/base/Random.html">set.seed</a></span><span class="op">(</span><span class="fl">386827</span><span class="op">)</span></span>
+<span><span class="va">n</span> <span class="op">=</span> <span class="fl">100</span> <span class="co"># sample size</span></span>
+<span><span class="co"># Synthesis inputs</span></span>
+<span><span class="va">X1</span> <span class="op">&lt;-</span> <span class="fu"><a href="https://rdrr.io/r/stats/Normal.html">rnorm</a></span><span class="op">(</span><span class="va">n</span>, mean <span class="op">=</span> <span class="fl">10</span>, sd <span class="op">=</span> <span class="fl">3</span><span class="op">)</span></span>
+<span><span class="va">X2</span> <span class="op">&lt;-</span> <span class="fu"><a href="https://rdrr.io/r/stats/Normal.html">rnorm</a></span><span class="op">(</span><span class="va">n</span>, mean <span class="op">=</span> <span class="fl">16</span>, sd  <span class="op">=</span> <span class="fl">2</span><span class="op">)</span></span>
+<span><span class="va">X3</span> <span class="op">&lt;-</span> <span class="fu"><a href="https://rdrr.io/r/stats/Binomial.html">rbinom</a></span><span class="op">(</span><span class="va">n</span>, <span class="fl">1</span>, <span class="fl">0.4</span><span class="op">)</span></span>
+<span><span class="va">X4</span> <span class="op">&lt;-</span> <span class="fu"><a href="https://rdrr.io/r/stats/Binomial.html">rbinom</a></span><span class="op">(</span><span class="va">n</span>, <span class="fl">1</span>, <span class="fl">0.5</span><span class="op">)</span></span>
+<span><span class="co"># epsilons</span></span>
+<span><span class="va">eps1</span> <span class="op">&lt;-</span> <span class="fu"><a href="https://rdrr.io/r/stats/Normal.html">rnorm</a></span><span class="op">(</span><span class="va">n</span>, <span class="fl">0</span>, <span class="fl">1</span><span class="op">)</span></span>
+<span><span class="va">eps2</span> <span class="op">&lt;-</span> <span class="fu"><a href="https://rdrr.io/r/stats/Normal.html">rnorm</a></span><span class="op">(</span><span class="va">n</span>, <span class="fl">0</span>, <span class="fl">0.5</span><span class="op">)</span></span>
+<span><span class="va">eps3</span> <span class="op">&lt;-</span> <span class="va">eps2</span></span>
+<span><span class="co"># Create synthesis output</span></span>
+<span><span class="va">Y1</span> <span class="op">&lt;-</span> <span class="fl">3</span><span class="op">*</span><span class="va">X1</span> <span class="op">+</span> <span class="fl">2</span><span class="op">*</span><span class="va">X2</span> <span class="op">+</span> <span class="fl">8</span><span class="op">*</span><span class="va">X3</span> <span class="op">+</span> <span class="fl">5</span><span class="op">*</span><span class="va">X4</span> <span class="op">+</span> <span class="va">eps1</span></span>
+<span><span class="va">Y2</span> <span class="op">&lt;-</span> <span class="fl">15</span><span class="op">*</span><span class="va">X1</span> <span class="op">+</span> <span class="fl">0</span><span class="op">*</span><span class="va">X2</span> <span class="op">+</span> <span class="fl">5</span><span class="op">*</span><span class="va">X3</span> <span class="op">+</span> <span class="fl">3</span><span class="op">*</span><span class="va">X4</span> <span class="op">+</span> <span class="va">eps2</span></span>
+<span><span class="va">Y3</span> <span class="op">&lt;-</span> <span class="fl">1</span><span class="op">*</span><span class="va">X1</span> <span class="op">+</span> <span class="fl">12</span><span class="op">*</span> <span class="va">X2</span> <span class="op">+</span> <span class="fl">2</span><span class="op">*</span><span class="va">X3</span> <span class="op">+</span> <span class="fl">4</span><span class="op">*</span><span class="va">X4</span> <span class="op">+</span> <span class="va">eps3</span></span>
+<span><span class="co"># Synthesis data</span></span>
+<span><span class="va">syn_dat</span> <span class="op">&lt;-</span> <span class="fu">tibble</span><span class="fu">::</span><span class="fu"><a href="https://tibble.tidyverse.org/reference/tibble.html">tibble</a></span><span class="op">(</span><span class="va">X1</span>, <span class="va">X2</span>, <span class="va">X3</span>, <span class="va">X4</span>, <span class="va">Y1</span>, <span class="va">Y2</span>, <span class="va">Y3</span><span class="op">)</span></span>
+<span><span class="fu"><a href="https://rdrr.io/r/utils/head.html">head</a></span><span class="op">(</span><span class="va">syn_dat</span><span class="op">)</span></span></code></pre></div>
 <pre><code>## # A tibble: 6 × 7
 ##      X1    X2    X3    X4    Y1    Y2    Y3
 ##   &lt;dbl&gt; &lt;dbl&gt; &lt;int&gt; &lt;int&gt; &lt;dbl&gt; &lt;dbl&gt; &lt;dbl&gt;
@@ -284,7 +118,8 @@ code span.wa { color: #60a0b0; font-weight: bold; font-style: italic; } /* Warni
 ## 5  9.75  18.3     0     0  64.7  147.  230.
 ## 6  8.89  14.7     0     0  57.5  134.  186.</code></pre>
 <p>To fit the three above linear models, you will have to write:</p>
-<div class="sourceCode" id="cb133"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb133-1"><a href="write-many-models-with-shortest-code-using-glue-and-rlang.html#cb133-1" aria-hidden="true" tabindex="-1"></a>(model1 <span class="ot">&lt;-</span> <span class="fu">lm</span>(Y1<span class="sc">~</span>X1<span class="sc">+</span>X2<span class="sc">+</span>X3<span class="sc">+</span>X4, <span class="at">data=</span>syn_dat))</span></code></pre></div>
+<div class="sourceCode" id="cb133"><pre class="downlit sourceCode r">
+<code class="sourceCode R"><span><span class="op">(</span><span class="va">model1</span> <span class="op">&lt;-</span> <span class="fu"><a href="https://rdrr.io/r/stats/lm.html">lm</a></span><span class="op">(</span><span class="va">Y1</span><span class="op">~</span><span class="va">X1</span><span class="op">+</span><span class="va">X2</span><span class="op">+</span><span class="va">X3</span><span class="op">+</span><span class="va">X4</span>, data<span class="op">=</span><span class="va">syn_dat</span><span class="op">)</span><span class="op">)</span></span></code></pre></div>
 <pre><code>## 
 ## Call:
 ## lm(formula = Y1 ~ X1 + X2 + X3 + X4, data = syn_dat)
@@ -292,7 +127,8 @@ code span.wa { color: #60a0b0; font-weight: bold; font-style: italic; } /* Warni
 ## Coefficients:
 ## (Intercept)           X1           X2           X3           X4  
 ##       0.583        2.987        1.959        8.151        5.070</code></pre>
-<div class="sourceCode" id="cb135"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb135-1"><a href="write-many-models-with-shortest-code-using-glue-and-rlang.html#cb135-1" aria-hidden="true" tabindex="-1"></a>(model2 <span class="ot">&lt;-</span> <span class="fu">lm</span>(Y2<span class="sc">~</span>X1<span class="sc">+</span>X2<span class="sc">+</span>X3<span class="sc">+</span>X4, <span class="at">data=</span>syn_dat))</span></code></pre></div>
+<div class="sourceCode" id="cb135"><pre class="downlit sourceCode r">
+<code class="sourceCode R"><span><span class="op">(</span><span class="va">model2</span> <span class="op">&lt;-</span> <span class="fu"><a href="https://rdrr.io/r/stats/lm.html">lm</a></span><span class="op">(</span><span class="va">Y2</span><span class="op">~</span><span class="va">X1</span><span class="op">+</span><span class="va">X2</span><span class="op">+</span><span class="va">X3</span><span class="op">+</span><span class="va">X4</span>, data<span class="op">=</span><span class="va">syn_dat</span><span class="op">)</span><span class="op">)</span></span></code></pre></div>
 <pre><code>## 
 ## Call:
 ## lm(formula = Y2 ~ X1 + X2 + X3 + X4, data = syn_dat)
@@ -300,7 +136,8 @@ code span.wa { color: #60a0b0; font-weight: bold; font-style: italic; } /* Warni
 ## Coefficients:
 ## (Intercept)           X1           X2           X3           X4  
 ##  -0.0407353   15.0036299   -0.0001834    4.9775274    3.0010207</code></pre>
-<div class="sourceCode" id="cb137"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb137-1"><a href="write-many-models-with-shortest-code-using-glue-and-rlang.html#cb137-1" aria-hidden="true" tabindex="-1"></a>(model3 <span class="ot">&lt;-</span> <span class="fu">lm</span>(Y3<span class="sc">~</span>X1<span class="sc">+</span>X2<span class="sc">+</span>X3<span class="sc">+</span>X4, <span class="at">data=</span>syn_dat))</span></code></pre></div>
+<div class="sourceCode" id="cb137"><pre class="downlit sourceCode r">
+<code class="sourceCode R"><span><span class="op">(</span><span class="va">model3</span> <span class="op">&lt;-</span> <span class="fu"><a href="https://rdrr.io/r/stats/lm.html">lm</a></span><span class="op">(</span><span class="va">Y3</span><span class="op">~</span><span class="va">X1</span><span class="op">+</span><span class="va">X2</span><span class="op">+</span><span class="va">X3</span><span class="op">+</span><span class="va">X4</span>, data<span class="op">=</span><span class="va">syn_dat</span><span class="op">)</span><span class="op">)</span></span></code></pre></div>
 <pre><code>## 
 ## Call:
 ## lm(formula = Y3 ~ X1 + X2 + X3 + X4, data = syn_dat)
@@ -309,18 +146,22 @@ code span.wa { color: #60a0b0; font-weight: bold; font-style: italic; } /* Warni
 ## (Intercept)           X1           X2           X3           X4  
 ##    -0.04074      1.00363     11.99982      1.97753      4.00102</code></pre>
 </div>
-<div id="first-way-using-glueglue-parse-and-eval" class="section level2 hasAnchor" number="9.3">
-<h2><span class="header-section-number">9.3</span> First way: using glue::glue, parse and eval<a href="write-many-models-with-shortest-code-using-glue-and-rlang.html#first-way-using-glueglue-parse-and-eval" class="anchor-section" aria-label="Anchor link to header"></a></h2>
+<div id="first-way-using-glueglue-parse-and-eval" class="section level2" number="10.3">
+<h2>
+<span class="header-section-number">10.3</span> First way: using glue::glue, parse and eval<a class="anchor" aria-label="anchor" href="#first-way-using-glueglue-parse-and-eval"><i class="fas fa-link"></i></a>
+</h2>
 <p>We will not see much difference with three models. However, this way saves you lots of time if you have 30 models to write.</p>
-<div class="sourceCode" id="cb139"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb139-1"><a href="write-many-models-with-shortest-code-using-glue-and-rlang.html#cb139-1" aria-hidden="true" tabindex="-1"></a>out <span class="ot">&lt;-</span> <span class="fu">c</span>(<span class="st">&quot;Y1&quot;</span>, <span class="st">&quot;Y2&quot;</span>, <span class="st">&quot;Y3&quot;</span>)</span>
-<span id="cb139-2"><a href="write-many-models-with-shortest-code-using-glue-and-rlang.html#cb139-2" aria-hidden="true" tabindex="-1"></a>model <span class="ot">&lt;-</span> <span class="fu">c</span>(<span class="st">&quot;model1&quot;</span>, <span class="st">&quot;model2&quot;</span>, <span class="st">&quot;model3&quot;</span>)</span>
-<span id="cb139-3"><a href="write-many-models-with-shortest-code-using-glue-and-rlang.html#cb139-3" aria-hidden="true" tabindex="-1"></a>num_model <span class="ot">=</span> <span class="fu">length</span>(model)</span>
-<span id="cb139-4"><a href="write-many-models-with-shortest-code-using-glue-and-rlang.html#cb139-4" aria-hidden="true" tabindex="-1"></a>glue<span class="sc">::</span><span class="fu">glue</span>(<span class="st">&#39;{model[1:num_model]} &lt;- </span></span>
-<span id="cb139-5"><a href="write-many-models-with-shortest-code-using-glue-and-rlang.html#cb139-5" aria-hidden="true" tabindex="-1"></a><span class="st">           lm({out[1:num_model]}~X1+X2+X3+X4, data=syn_dat)&#39;</span>)  <span class="sc">%&gt;%</span></span>
-<span id="cb139-6"><a href="write-many-models-with-shortest-code-using-glue-and-rlang.html#cb139-6" aria-hidden="true" tabindex="-1"></a>  <span class="fu">parse</span>(<span class="at">text =</span> .) <span class="sc">%&gt;%</span></span>
-<span id="cb139-7"><a href="write-many-models-with-shortest-code-using-glue-and-rlang.html#cb139-7" aria-hidden="true" tabindex="-1"></a>  <span class="fu">eval</span>(<span class="at">envir =</span> <span class="fu">globalenv</span>())</span></code></pre></div>
+<div class="sourceCode" id="cb139"><pre class="downlit sourceCode r">
+<code class="sourceCode R"><span><span class="va">out</span> <span class="op">&lt;-</span> <span class="fu"><a href="https://rdrr.io/r/base/c.html">c</a></span><span class="op">(</span><span class="st">"Y1"</span>, <span class="st">"Y2"</span>, <span class="st">"Y3"</span><span class="op">)</span></span>
+<span><span class="va">model</span> <span class="op">&lt;-</span> <span class="fu"><a href="https://rdrr.io/r/base/c.html">c</a></span><span class="op">(</span><span class="st">"model1"</span>, <span class="st">"model2"</span>, <span class="st">"model3"</span><span class="op">)</span></span>
+<span><span class="va">num_model</span> <span class="op">=</span> <span class="fu"><a href="https://rdrr.io/r/base/length.html">length</a></span><span class="op">(</span><span class="va">model</span><span class="op">)</span></span>
+<span><span class="fu">glue</span><span class="fu">::</span><span class="fu"><a href="https://glue.tidyverse.org/reference/glue.html">glue</a></span><span class="op">(</span><span class="st">'{model[1:num_model]} &lt;- </span></span>
+<span><span class="st">           lm({out[1:num_model]}~X1+X2+X3+X4, data=syn_dat)'</span><span class="op">)</span>  <span class="op"><a href="https://magrittr.tidyverse.org/reference/pipe.html">%&gt;%</a></span></span>
+<span>  <span class="fu"><a href="https://rdrr.io/r/base/parse.html">parse</a></span><span class="op">(</span>text <span class="op">=</span> <span class="va">.</span><span class="op">)</span> <span class="op"><a href="https://magrittr.tidyverse.org/reference/pipe.html">%&gt;%</a></span></span>
+<span>  <span class="fu"><a href="https://rdrr.io/r/base/eval.html">eval</a></span><span class="op">(</span>envir <span class="op">=</span> <span class="fu"><a href="https://rdrr.io/r/base/environment.html">globalenv</a></span><span class="op">(</span><span class="op">)</span><span class="op">)</span></span></code></pre></div>
 <p>When we finish the above code chunk, we will have the three needed models. Now, we can print them.</p>
-<div class="sourceCode" id="cb140"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb140-1"><a href="write-many-models-with-shortest-code-using-glue-and-rlang.html#cb140-1" aria-hidden="true" tabindex="-1"></a>model1; model2; model3</span></code></pre></div>
+<div class="sourceCode" id="cb140"><pre class="downlit sourceCode r">
+<code class="sourceCode R"><span><span class="va">model1</span>; <span class="va">model2</span>; <span class="va">model3</span></span></code></pre></div>
 <pre><code>## 
 ## Call:
 ## lm(formula = Y1 ~ X1 + X2 + X3 + X4, data = syn_dat)
@@ -343,18 +184,22 @@ code span.wa { color: #60a0b0; font-weight: bold; font-style: italic; } /* Warni
 ## (Intercept)           X1           X2           X3           X4  
 ##    -0.04074      1.00363     11.99982      1.97753      4.00102</code></pre>
 </div>
-<div id="second-way-using-tidy-evaluation-operator" class="section level2 hasAnchor" number="9.4">
-<h2><span class="header-section-number">9.4</span> Second way: using tidy evaluation operator<a href="write-many-models-with-shortest-code-using-glue-and-rlang.html#second-way-using-tidy-evaluation-operator" class="anchor-section" aria-label="Anchor link to header"></a></h2>
+<div id="second-way-using-tidy-evaluation-operator" class="section level2" number="10.4">
+<h2>
+<span class="header-section-number">10.4</span> Second way: using tidy evaluation operator<a class="anchor" aria-label="anchor" href="#second-way-using-tidy-evaluation-operator"><i class="fas fa-link"></i></a>
+</h2>
 <p>For more information about rlang- tidy evaluation operator, read this awesome introduction for an awesome package <a href="https://www.tidyverse.org/blog/2019/06/rlang-0-4-0/">rlang-0-4-0</a>. This way is the best when we have more complicated models.</p>
-<div class="sourceCode" id="cb144"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb144-1"><a href="write-many-models-with-shortest-code-using-glue-and-rlang.html#cb144-1" aria-hidden="true" tabindex="-1"></a>fit_many_model <span class="ot">&lt;-</span> <span class="cf">function</span>(data, out){</span>
-<span id="cb144-2"><a href="write-many-models-with-shortest-code-using-glue-and-rlang.html#cb144-2" aria-hidden="true" tabindex="-1"></a>    <span class="co"># out: output names</span></span>
-<span id="cb144-3"><a href="write-many-models-with-shortest-code-using-glue-and-rlang.html#cb144-3" aria-hidden="true" tabindex="-1"></a>    model <span class="ot">&lt;-</span> <span class="fu">lm</span>({{out}}<span class="sc">~</span>X1<span class="sc">+</span>X2<span class="sc">+</span>X3<span class="sc">+</span>X4, <span class="at">data=</span>data)</span>
-<span id="cb144-4"><a href="write-many-models-with-shortest-code-using-glue-and-rlang.html#cb144-4" aria-hidden="true" tabindex="-1"></a>    <span class="fu">return</span>(model)</span>
-<span id="cb144-5"><a href="write-many-models-with-shortest-code-using-glue-and-rlang.html#cb144-5" aria-hidden="true" tabindex="-1"></a>}</span></code></pre></div>
+<div class="sourceCode" id="cb144"><pre class="downlit sourceCode r">
+<code class="sourceCode R"><span><span class="va">fit_many_model</span> <span class="op">&lt;-</span> <span class="kw">function</span><span class="op">(</span><span class="va">data</span>, <span class="va">out</span><span class="op">)</span><span class="op">{</span></span>
+<span>    <span class="co"># out: output names</span></span>
+<span>    <span class="va">model</span> <span class="op">&lt;-</span> <span class="fu"><a href="https://rdrr.io/r/stats/lm.html">lm</a></span><span class="op">(</span><span class="op">{</span><span class="op">{</span><span class="va">out</span><span class="op">}</span><span class="op">}</span><span class="op">~</span><span class="va">X1</span><span class="op">+</span><span class="va">X2</span><span class="op">+</span><span class="va">X3</span><span class="op">+</span><span class="va">X4</span>, data<span class="op">=</span><span class="va">data</span><span class="op">)</span></span>
+<span>    <span class="kw"><a href="https://rdrr.io/r/base/function.html">return</a></span><span class="op">(</span><span class="va">model</span><span class="op">)</span></span>
+<span><span class="op">}</span></span></code></pre></div>
 <p>So now we have our models</p>
-<div class="sourceCode" id="cb145"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb145-1"><a href="write-many-models-with-shortest-code-using-glue-and-rlang.html#cb145-1" aria-hidden="true" tabindex="-1"></a><span class="co"># Or you can use </span></span>
-<span id="cb145-2"><a href="write-many-models-with-shortest-code-using-glue-and-rlang.html#cb145-2" aria-hidden="true" tabindex="-1"></a><span class="co"># (model1 &lt;- syn_dat %&gt;% fit_many_regression(Y1))</span></span>
-<span id="cb145-3"><a href="write-many-models-with-shortest-code-using-glue-and-rlang.html#cb145-3" aria-hidden="true" tabindex="-1"></a>(model1 <span class="ot">&lt;-</span> <span class="fu">fit_many_model</span>(syn_dat, Y1))</span></code></pre></div>
+<div class="sourceCode" id="cb145"><pre class="downlit sourceCode r">
+<code class="sourceCode R"><span><span class="co"># Or you can use </span></span>
+<span><span class="co"># (model1 &lt;- syn_dat %&gt;% fit_many_regression(Y1))</span></span>
+<span><span class="op">(</span><span class="va">model1</span> <span class="op">&lt;-</span> <span class="fu">fit_many_model</span><span class="op">(</span><span class="va">syn_dat</span>, <span class="va">Y1</span><span class="op">)</span><span class="op">)</span></span></code></pre></div>
 <pre><code>## 
 ## Call:
 ## lm(formula = {
@@ -366,7 +211,8 @@ code span.wa { color: #60a0b0; font-weight: bold; font-style: italic; } /* Warni
 ## Coefficients:
 ## (Intercept)           X1           X2           X3           X4  
 ##       0.583        2.987        1.959        8.151        5.070</code></pre>
-<div class="sourceCode" id="cb147"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb147-1"><a href="write-many-models-with-shortest-code-using-glue-and-rlang.html#cb147-1" aria-hidden="true" tabindex="-1"></a>(model2 <span class="ot">&lt;-</span> <span class="fu">fit_many_model</span>(syn_dat, Y2))</span></code></pre></div>
+<div class="sourceCode" id="cb147"><pre class="downlit sourceCode r">
+<code class="sourceCode R"><span><span class="op">(</span><span class="va">model2</span> <span class="op">&lt;-</span> <span class="fu">fit_many_model</span><span class="op">(</span><span class="va">syn_dat</span>, <span class="va">Y2</span><span class="op">)</span><span class="op">)</span></span></code></pre></div>
 <pre><code>## 
 ## Call:
 ## lm(formula = {
@@ -378,7 +224,8 @@ code span.wa { color: #60a0b0; font-weight: bold; font-style: italic; } /* Warni
 ## Coefficients:
 ## (Intercept)           X1           X2           X3           X4  
 ##  -0.0407353   15.0036299   -0.0001834    4.9775274    3.0010207</code></pre>
-<div class="sourceCode" id="cb149"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb149-1"><a href="write-many-models-with-shortest-code-using-glue-and-rlang.html#cb149-1" aria-hidden="true" tabindex="-1"></a>(model3 <span class="ot">&lt;-</span> <span class="fu">fit_many_model</span>(syn_dat, Y3))</span></code></pre></div>
+<div class="sourceCode" id="cb149"><pre class="downlit sourceCode r">
+<code class="sourceCode R"><span><span class="op">(</span><span class="va">model3</span> <span class="op">&lt;-</span> <span class="fu">fit_many_model</span><span class="op">(</span><span class="va">syn_dat</span>, <span class="va">Y3</span><span class="op">)</span><span class="op">)</span></span></code></pre></div>
 <pre><code>## 
 ## Call:
 ## lm(formula = {
@@ -391,17 +238,20 @@ code span.wa { color: #60a0b0; font-weight: bold; font-style: italic; } /* Warni
 ## (Intercept)           X1           X2           X3           X4  
 ##    -0.04074      1.00363     11.99982      1.97753      4.00102</code></pre>
 </div>
-<div id="other-tips" class="section level2 hasAnchor" number="9.5">
-<h2><span class="header-section-number">9.5</span> Other tips<a href="write-many-models-with-shortest-code-using-glue-and-rlang.html#other-tips" class="anchor-section" aria-label="Anchor link to header"></a></h2>
+<div id="other-tips" class="section level2" number="10.5">
+<h2>
+<span class="header-section-number">10.5</span> Other tips<a class="anchor" aria-label="anchor" href="#other-tips"><i class="fas fa-link"></i></a>
+</h2>
 <p>We can write many lines of code using cat, paste the result in your R_script/Rmarkdown-code chunk, and then run them. For example, this is how you can have three linear regression models put in three different sections and code chunks in R Markdown. Add more in i_list then we have more models.</p>
-<div class="sourceCode" id="cb151"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb151-1"><a href="write-many-models-with-shortest-code-using-glue-and-rlang.html#cb151-1" aria-hidden="true" tabindex="-1"></a>i_list <span class="ot">&lt;-</span> <span class="fu">c</span>(<span class="dv">1</span>,<span class="dv">2</span>,<span class="dv">3</span>)</span>
-<span id="cb151-2"><a href="write-many-models-with-shortest-code-using-glue-and-rlang.html#cb151-2" aria-hidden="true" tabindex="-1"></a><span class="cf">for</span>(i <span class="cf">in</span> i_list) {</span>
-<span id="cb151-3"><a href="write-many-models-with-shortest-code-using-glue-and-rlang.html#cb151-3" aria-hidden="true" tabindex="-1"></a>  <span class="fu">cat</span>(<span class="st">&quot;</span><span class="sc">\n</span><span class="st">&quot;</span>)</span>
-<span id="cb151-4"><a href="write-many-models-with-shortest-code-using-glue-and-rlang.html#cb151-4" aria-hidden="true" tabindex="-1"></a>  <span class="fu">cat</span>(<span class="st">&quot;### &quot;</span>, <span class="st">&quot;model&quot;</span>, i,<span class="st">&quot;</span><span class="sc">\n</span><span class="st">&quot;</span>,<span class="at">sep=</span><span class="st">&quot;&quot;</span>)</span>
-<span id="cb151-5"><a href="write-many-models-with-shortest-code-using-glue-and-rlang.html#cb151-5" aria-hidden="true" tabindex="-1"></a>  <span class="fu">cat</span>(<span class="st">&quot;```{r}&quot;</span>,<span class="st">&quot;</span><span class="sc">\n</span><span class="st">&quot;</span>,<span class="at">sep=</span><span class="st">&quot;&quot;</span>)</span>
-<span id="cb151-6"><a href="write-many-models-with-shortest-code-using-glue-and-rlang.html#cb151-6" aria-hidden="true" tabindex="-1"></a>  <span class="fu">cat</span>(<span class="st">&quot;model&quot;</span>,i , <span class="st">&quot;&lt;-fit_many_model(syn_dat, Y&quot;</span>, i, <span class="st">&quot;)</span><span class="sc">\n</span><span class="st">&quot;</span>,<span class="at">sep=</span><span class="st">&quot;&quot;</span>)</span>
-<span id="cb151-7"><a href="write-many-models-with-shortest-code-using-glue-and-rlang.html#cb151-7" aria-hidden="true" tabindex="-1"></a>  <span class="fu">cat</span>(<span class="st">&quot;```&quot;</span>,<span class="st">&quot;</span><span class="sc">\n</span><span class="st">&quot;</span>,<span class="at">sep=</span><span class="st">&quot;&quot;</span>)</span>
-<span id="cb151-8"><a href="write-many-models-with-shortest-code-using-glue-and-rlang.html#cb151-8" aria-hidden="true" tabindex="-1"></a>  }</span></code></pre></div>
+<div class="sourceCode" id="cb151"><pre class="downlit sourceCode r">
+<code class="sourceCode R"><span><span class="va">i_list</span> <span class="op">&lt;-</span> <span class="fu"><a href="https://rdrr.io/r/base/c.html">c</a></span><span class="op">(</span><span class="fl">1</span>,<span class="fl">2</span>,<span class="fl">3</span><span class="op">)</span></span>
+<span><span class="kw">for</span><span class="op">(</span><span class="va">i</span> <span class="kw">in</span> <span class="va">i_list</span><span class="op">)</span> <span class="op">{</span></span>
+<span>  <span class="fu"><a href="https://rdrr.io/r/base/cat.html">cat</a></span><span class="op">(</span><span class="st">"\n"</span><span class="op">)</span></span>
+<span>  <span class="fu"><a href="https://rdrr.io/r/base/cat.html">cat</a></span><span class="op">(</span><span class="st">"### "</span>, <span class="st">"model"</span>, <span class="va">i</span>,<span class="st">"\n"</span>,sep<span class="op">=</span><span class="st">""</span><span class="op">)</span></span>
+<span>  <span class="fu"><a href="https://rdrr.io/r/base/cat.html">cat</a></span><span class="op">(</span><span class="st">"```{r}"</span>,<span class="st">"\n"</span>,sep<span class="op">=</span><span class="st">""</span><span class="op">)</span></span>
+<span>  <span class="fu"><a href="https://rdrr.io/r/base/cat.html">cat</a></span><span class="op">(</span><span class="st">"model"</span>,<span class="va">i</span> , <span class="st">"&lt;-fit_many_model(syn_dat, Y"</span>, <span class="va">i</span>, <span class="st">")\n"</span>,sep<span class="op">=</span><span class="st">""</span><span class="op">)</span></span>
+<span>  <span class="fu"><a href="https://rdrr.io/r/base/cat.html">cat</a></span><span class="op">(</span><span class="st">"```"</span>,<span class="st">"\n"</span>,sep<span class="op">=</span><span class="st">""</span><span class="op">)</span></span>
+<span>  <span class="op">}</span></span></code></pre></div>
 <pre><code>## 
 ## ### model1
 ## ```{r}
@@ -418,89 +268,84 @@ code span.wa { color: #60a0b0; font-weight: bold; font-style: italic; } /* Warni
 ## model3&lt;-fit_many_model(syn_dat, Y3)
 ## ```</code></pre>
 </div>
-<div id="references-5" class="section level2 hasAnchor" number="9.6">
-<h2><span class="header-section-number">9.6</span> References<a href="write-many-models-with-shortest-code-using-glue-and-rlang.html#references-5" class="anchor-section" aria-label="Anchor link to header"></a></h2>
-<p><a href="https://www.tidyverse.org/blog/2019/06/rlang-0-4-0/">Main reference _ rlang-0-4-0/</a>
-<a href="https://rstudio-pubs-static.s3.amazonaws.com/412870_efd2f2309b6b4720b9019f3eba6cf0ec.html">Introduction to tidyeval</a>
-<a href="https://www.youtube.com/watch?v=YlZuT6PWOEY">Tidy eval in R: A simple example</a>
-<a href="https://www.youtube.com/watch?v=9v9-EpTuwk0">https://www.youtube.com/watch?v=9v9-EpTuwk0</a></p>
-
+<div id="references-4" class="section level2" number="10.6">
+<h2>
+<span class="header-section-number">10.6</span> References<a class="anchor" aria-label="anchor" href="#references-4"><i class="fas fa-link"></i></a>
+</h2>
+<ul>
+<li><a href="https://www.tidyverse.org/blog/2019/06/rlang-0-4-0/">Main reference _ rlang-0-4-0/</a></li>
+<li><a href="https://rstudio-pubs-static.s3.amazonaws.com/412870_efd2f2309b6b4720b9019f3eba6cf0ec.html">Introduction to tidyeval</a></li>
+<li><a href="https://www.youtube.com/watch?v=YlZuT6PWOEY">Tidy eval in R: A simple example</a></li>
+<li><a href="https://www.youtube.com/watch?v=9v9-EpTuwk0">https://www.youtube.com/watch?v=9v9-EpTuwk0</a></li>
+</ul>
 </div>
 </div>
-            </section>
+  <div class="chapter-nav">
+<div class="prev"><a href="arm-base-network-meta-analysis-using-pcnetmeta-package.html"><span class="header-section-number">9</span> Arm base Network Meta Analysis using pcnetmeta package</a></div>
+<div class="empty"></div>
+</div></main><div class="col-md-3 col-lg-2 d-none d-md-block sidebar sidebar-chapter">
+    <nav id="toc" data-toggle="toc" aria-label="On this page"><h2>On this page</h2>
+      <ul class="nav navbar-nav">
+<li><a class="nav-link" href="#write-many-models-with-shortest-code-using-glue-and-rlang"><span class="header-section-number">10</span> Write many models with shortest code using glue and rlang</a></li>
+<li><a class="nav-link" href="#introduction-9"><span class="header-section-number">10.1</span> Introduction</a></li>
+<li><a class="nav-link" href="#create-a-synthesis-data"><span class="header-section-number">10.2</span> Create a synthesis data</a></li>
+<li><a class="nav-link" href="#first-way-using-glueglue-parse-and-eval"><span class="header-section-number">10.3</span> First way: using glue::glue, parse and eval</a></li>
+<li><a class="nav-link" href="#second-way-using-tidy-evaluation-operator"><span class="header-section-number">10.4</span> Second way: using tidy evaluation operator</a></li>
+<li><a class="nav-link" href="#other-tips"><span class="header-section-number">10.5</span> Other tips</a></li>
+<li><a class="nav-link" href="#references-4"><span class="header-section-number">10.6</span> References</a></li>
+</ul>
 
-          </div>
-        </div>
-      </div>
-<a href="relabel-study-names-into-a-numeric-sequence.html" class="navigation navigation-prev navigation-unique" aria-label="Previous page"><i class="fa fa-angle-left"></i></a>
+      <div class="book-extra">
+        <ul class="list-unstyled">
+<li><a id="book-source" href="https://github.com/tranktle/r-random-tricks/blob/master/09_WriteManyModels_WithShortCode.Rmd">View source <i class="fab fa-github"></i></a></li>
+          <li><a id="book-edit" href="https://github.com/tranktle/r-random-tricks/edit/master/09_WriteManyModels_WithShortCode.Rmd">Edit this page <i class="fab fa-github"></i></a></li>
+        </ul>
+</div>
+    </nav>
+</div>
 
-    </div>
+</div>
+</div> <!-- .container -->
+
+<footer class="bg-primary text-light mt-5"><div class="container"><div class="row">
+
+  <div class="col-12 col-md-6 mt-3">
+    <p>"<strong>Tran Le _ Random R tricks</strong>" was written by Tran Le. It was last built on 04-01-2022 Updated:2022-12-07.</p>
   </div>
-<script src="libs/gitbook-2.6.7/js/app.min.js"></script>
-<script src="libs/gitbook-2.6.7/js/clipboard.min.js"></script>
-<script src="libs/gitbook-2.6.7/js/plugin-search.js"></script>
-<script src="libs/gitbook-2.6.7/js/plugin-sharing.js"></script>
-<script src="libs/gitbook-2.6.7/js/plugin-fontsettings.js"></script>
-<script src="libs/gitbook-2.6.7/js/plugin-bookdown.js"></script>
-<script src="libs/gitbook-2.6.7/js/jquery.highlight.js"></script>
-<script src="libs/gitbook-2.6.7/js/plugin-clipboard.js"></script>
-<script>
-gitbook.require(["gitbook"], function(gitbook) {
-gitbook.start({
-"sharing": {
-"github": false,
-"facebook": true,
-"twitter": true,
-"linkedin": false,
-"weibo": false,
-"instapaper": false,
-"vk": false,
-"whatsapp": false,
-"all": ["facebook", "twitter", "linkedin", "weibo", "instapaper"]
-},
-"fontsettings": {
-"theme": "white",
-"family": "sans",
-"size": 2
-},
-"edit": {
-"link": "https://github.com/USERNAME/REPO/edit/BRANCH/08_WriteManyModels_WithShortCode.Rmd",
-"text": "Edit"
-},
-"history": {
-"link": null,
-"text": null
-},
-"view": {
-"link": null,
-"text": null
-},
-"download": ["_main.pdf", "_main.epub"],
-"search": {
-"engine": "fuse",
-"options": null
-},
-"toc": {
-"collapse": "subsection"
-}
-});
-});
-</script>
 
-<!-- dynamically load mathjax for compatibility with self-contained -->
-<script>
+  <div class="col-12 col-md-6 mt-3">
+    <p>This book was built by the <a class="text-light" href="https://bookdown.org">bookdown</a> R package.</p>
+  </div>
+
+</div></div>
+</footer><!-- dynamically load mathjax for compatibility with self-contained --><script>
   (function () {
     var script = document.createElement("script");
     script.type = "text/javascript";
     var src = "true";
-    if (src === "" || src === "true") src = "https://mathjax.rstudio.com/latest/MathJax.js?config=TeX-MML-AM_CHTML";
+    if (src === "" || src === "true") src = "https://cdnjs.cloudflare.com/ajax/libs/mathjax/2.7.9/latest.js?config=TeX-MML-AM_CHTML";
     if (location.protocol !== "file:")
       if (/^https?:/.test(src))
         src = src.replace(/^https?:/, '');
     script.src = src;
     document.getElementsByTagName("head")[0].appendChild(script);
   })();
+</script><script type="text/x-mathjax-config">const popovers = document.querySelectorAll('a.footnote-ref[data-toggle="popover"]');
+for (let popover of popovers) {
+  const div = document.createElement('div');
+  div.setAttribute('style', 'position: absolute; top: 0, left:0; width:0, height:0, overflow: hidden; visibility: hidden;');
+  div.innerHTML = popover.getAttribute('data-content');
+
+  var has_math = div.querySelector("span.math");
+  if (has_math) {
+    document.body.appendChild(div);
+    MathJax.Hub.Queue(["Typeset", MathJax.Hub, div]);
+    MathJax.Hub.Queue(function() {
+      popover.setAttribute('data-content', div.innerHTML);
+      document.body.removeChild(div);
+    })
+  }
+}
 </script>
 </body>
-
 </html>

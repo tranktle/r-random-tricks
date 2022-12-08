@@ -1,8 +1,4 @@
-<<<<<<< HEAD
 # Replace Values by Nas/A specfic value
-=======
-# Replace Values by Nas
->>>>>>> 56eeb42d87bc29311ec57c37bae5be9a4b59edac
 
 ## Introduction
 
