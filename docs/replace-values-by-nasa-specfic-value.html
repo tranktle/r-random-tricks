@@ -6,7 +6,7 @@
   <meta http-equiv="X-UA-Compatible" content="IE=edge" />
   <title>Section 6 Replace Values by Nas/A specfic value | Tran Le _ Random R tricks</title>
   <meta name="description" content="Some R observations/tricks ." />
-  <meta name="generator" content="bookdown 0.30 and GitBook 2.6.7" />
+  <meta name="generator" content="bookdown 0.34 and GitBook 2.6.7" />
 
   <meta property="og:title" content="Section 6 Replace Values by Nas/A specfic value | Tran Le _ Random R tricks" />
   <meta property="og:type" content="book" />
@@ -118,6 +118,10 @@ code span.vs { color: #4070a0; } /* VerbatimString */
 code span.wa { color: #60a0b0; font-weight: bold; font-style: italic; } /* Warning */
 </style>
 
+<style type="text/css">
+  
+  div.hanging-indent{margin-left: 1.5em; text-indent: -1.5em;}
+</style>
 
 <link rel="stylesheet" href="style.css" type="text/css" />
 </head>
@@ -192,22 +196,55 @@ code span.wa { color: #60a0b0; font-weight: bold; font-style: italic; } /* Warni
 <li class="chapter" data-level="8.3" data-path="relabel-study-names-into-a-numeric-sequence.html"><a href="relabel-study-names-into-a-numeric-sequence.html#transform-an-arm-based-data-table-to-a-study-based-data-table"><i class="fa fa-check"></i><b>8.3</b> Transform an arm-based data table to a study-based data table</a></li>
 <li class="chapter" data-level="8.4" data-path="relabel-study-names-into-a-numeric-sequence.html"><a href="relabel-study-names-into-a-numeric-sequence.html#references-2"><i class="fa fa-check"></i><b>8.4</b> References</a></li>
 </ul></li>
-<li class="chapter" data-level="9" data-path="arm-base-network-meta-analysis-using-pcnetmeta-package.html"><a href="arm-base-network-meta-analysis-using-pcnetmeta-package.html"><i class="fa fa-check"></i><b>9</b> Arm base Network Meta Analysis using pcnetmeta package</a>
+<li class="chapter" data-level="9" data-path="mutate-many-columns-conditionally.html"><a href="mutate-many-columns-conditionally.html"><i class="fa fa-check"></i><b>9</b> Mutate many columns conditionally</a>
 <ul>
-<li class="chapter" data-level="9.1" data-path="arm-base-network-meta-analysis-using-pcnetmeta-package.html"><a href="arm-base-network-meta-analysis-using-pcnetmeta-package.html#introduction-8"><i class="fa fa-check"></i><b>9.1</b> Introduction:</a></li>
-<li class="chapter" data-level="9.2" data-path="arm-base-network-meta-analysis-using-pcnetmeta-package.html"><a href="arm-base-network-meta-analysis-using-pcnetmeta-package.html#introduce-our-binary-outcome-data"><i class="fa fa-check"></i><b>9.2</b> Introduce our binary outcome data</a></li>
-<li class="chapter" data-level="9.3" data-path="arm-base-network-meta-analysis-using-pcnetmeta-package.html"><a href="arm-base-network-meta-analysis-using-pcnetmeta-package.html#plot-the-network"><i class="fa fa-check"></i><b>9.3</b> Plot the network</a></li>
-<li class="chapter" data-level="9.4" data-path="arm-base-network-meta-analysis-using-pcnetmeta-package.html"><a href="arm-base-network-meta-analysis-using-pcnetmeta-package.html#performing-arm-based-network-meta-analysis"><i class="fa fa-check"></i><b>9.4</b> Performing arm-based network meta-analysis</a></li>
-<li class="chapter" data-level="9.5" data-path="arm-base-network-meta-analysis-using-pcnetmeta-package.html"><a href="arm-base-network-meta-analysis-using-pcnetmeta-package.html#references-3"><i class="fa fa-check"></i><b>9.5</b> References</a></li>
+<li class="chapter" data-level="9.1" data-path="mutate-many-columns-conditionally.html"><a href="mutate-many-columns-conditionally.html#or-we-can-apply-fancier-mutate-with-our-custom-function"><i class="fa fa-check"></i><b>9.1</b> Or we can apply fancier mutate with our custom function</a></li>
+<li class="chapter" data-level="9.2" data-path="mutate-many-columns-conditionally.html"><a href="mutate-many-columns-conditionally.html#use-mutate-with-group_by-and-custom-function"><i class="fa fa-check"></i><b>9.2</b> Use mutate with group_by and custom function</a></li>
+<li class="chapter" data-level="9.3" data-path="mutate-many-columns-conditionally.html"><a href="mutate-many-columns-conditionally.html#create-many-new-columns-in-r-using-names-from-a-string-vector"><i class="fa fa-check"></i><b>9.3</b> Create many new columns in R using names from a string vector</a>
+<ul>
+<li class="chapter" data-level="9.3.1" data-path="mutate-many-columns-conditionally.html"><a href="mutate-many-columns-conditionally.html#we-will-create-three-columns-named-new_-that-follow-new_-sumx-1"><i class="fa fa-check"></i><b>9.3.1</b> We will create three columns (named new_#) that follow new_# = sum(x#+ 1)</a></li>
+<li class="chapter" data-level="9.3.2" data-path="mutate-many-columns-conditionally.html"><a href="mutate-many-columns-conditionally.html#another-example-will-explore-how-we-can-create-many-new-columns-new_column-new_-using-a-custom-function-on-other-columns-refer_col-x-in-data-and-this-custom-function-depends-on-not-only-the-refer-column-but-also-other-elements-in-a-list."><i class="fa fa-check"></i><b>9.3.2</b> Another example will explore how we can create many new columns (new_column: new_#) using a custom function on other columns (refer_col: x#) in data, and this custom function depends on not only the refer column but also other elements in a list.</a></li>
 </ul></li>
-<li class="chapter" data-level="10" data-path="write-many-models-with-shortest-code-using-glue-and-rlang.html"><a href="write-many-models-with-shortest-code-using-glue-and-rlang.html"><i class="fa fa-check"></i><b>10</b> Write many models with shortest code using glue and rlang</a>
+<li class="chapter" data-level="9.4" data-path="mutate-many-columns-conditionally.html"><a href="mutate-many-columns-conditionally.html#reference"><i class="fa fa-check"></i><b>9.4</b> Reference</a></li>
+</ul></li>
+<li class="chapter" data-level="10" data-path="igraph.html"><a href="igraph.html"><i class="fa fa-check"></i><b>10</b> Igraph</a>
 <ul>
-<li class="chapter" data-level="10.1" data-path="write-many-models-with-shortest-code-using-glue-and-rlang.html"><a href="write-many-models-with-shortest-code-using-glue-and-rlang.html#introduction-9"><i class="fa fa-check"></i><b>10.1</b> Introduction</a></li>
-<li class="chapter" data-level="10.2" data-path="write-many-models-with-shortest-code-using-glue-and-rlang.html"><a href="write-many-models-with-shortest-code-using-glue-and-rlang.html#create-a-synthesis-data"><i class="fa fa-check"></i><b>10.2</b> Create a synthesis data</a></li>
-<li class="chapter" data-level="10.3" data-path="write-many-models-with-shortest-code-using-glue-and-rlang.html"><a href="write-many-models-with-shortest-code-using-glue-and-rlang.html#first-way-using-glueglue-parse-and-eval"><i class="fa fa-check"></i><b>10.3</b> First way: using glue::glue, parse and eval</a></li>
-<li class="chapter" data-level="10.4" data-path="write-many-models-with-shortest-code-using-glue-and-rlang.html"><a href="write-many-models-with-shortest-code-using-glue-and-rlang.html#second-way-using-tidy-evaluation-operator"><i class="fa fa-check"></i><b>10.4</b> Second way: using tidy evaluation operator</a></li>
-<li class="chapter" data-level="10.5" data-path="write-many-models-with-shortest-code-using-glue-and-rlang.html"><a href="write-many-models-with-shortest-code-using-glue-and-rlang.html#other-tips"><i class="fa fa-check"></i><b>10.5</b> Other tips</a></li>
-<li class="chapter" data-level="10.6" data-path="write-many-models-with-shortest-code-using-glue-and-rlang.html"><a href="write-many-models-with-shortest-code-using-glue-and-rlang.html#references-4"><i class="fa fa-check"></i><b>10.6</b> References</a></li>
+<li class="chapter" data-level="10.1" data-path="igraph.html"><a href="igraph.html#about-id-of-subgraph-in-igraph"><i class="fa fa-check"></i><b>10.1</b> About id of subgraph in igraph</a>
+<ul>
+<li class="chapter" data-level="10.1.1" data-path="igraph.html"><a href="igraph.html#create-original-graph"><i class="fa fa-check"></i><b>10.1.1</b> Create original graph</a></li>
+<li class="chapter" data-level="10.1.2" data-path="igraph.html"><a href="igraph.html#what-happen-with-the-subgraph-when-we-do-random-node-sampling"><i class="fa fa-check"></i><b>10.1.2</b> What happen with the subgraph when we do Random node sampling</a></li>
+<li class="chapter" data-level="10.1.3" data-path="igraph.html"><a href="igraph.html#how-to-save-a-subgraph-in-the-way-that-we-can-keep-nodes-name"><i class="fa fa-check"></i><b>10.1.3</b> How to save a subgraph in the way that we can keep nodes’ name</a></li>
+</ul></li>
+<li class="chapter" data-level="10.2" data-path="igraph.html"><a href="igraph.html#what-if-our-original-graph-has-nodesname-taken-from-natural-number-set"><i class="fa fa-check"></i><b>10.2</b> What if our original graph has nodes’name taken from natural number set</a>
+<ul>
+<li class="chapter" data-level="10.2.1" data-path="igraph.html"><a href="igraph.html#convert-a-graph-to-an-adjacency-matrix"><i class="fa fa-check"></i><b>10.2.1</b> Convert a graph to an adjacency matrix</a></li>
+</ul></li>
+<li class="chapter" data-level="10.3" data-path="igraph.html"><a href="igraph.html#induce-subgraph"><i class="fa fa-check"></i><b>10.3</b> Induce subgraph</a></li>
+<li class="chapter" data-level="10.4" data-path="igraph.html"><a href="igraph.html#reference-1"><i class="fa fa-check"></i><b>10.4</b> Reference</a></li>
+</ul></li>
+<li class="chapter" data-level="11" data-path="igraph-get-global-statistics-of-an-igraph-object.html"><a href="igraph-get-global-statistics-of-an-igraph-object.html"><i class="fa fa-check"></i><b>11</b> Igraph: Get global statistics of an igraph object</a>
+<ul>
+<li class="chapter" data-level="11.1" data-path="igraph-get-global-statistics-of-an-igraph-object.html"><a href="igraph-get-global-statistics-of-an-igraph-object.html#goal-compute-some-global-statistics-of-a-igraph"><i class="fa fa-check"></i><b>11.1</b> Goal: compute some global statistics of a igraph</a></li>
+<li class="chapter" data-level="11.2" data-path="igraph-get-global-statistics-of-an-igraph-object.html"><a href="igraph-get-global-statistics-of-an-igraph-object.html#compute-all-clustering-coefficients"><i class="fa fa-check"></i><b>11.2</b> Compute all clustering coefficients</a></li>
+<li class="chapter" data-level="11.3" data-path="igraph-get-global-statistics-of-an-igraph-object.html"><a href="igraph-get-global-statistics-of-an-igraph-object.html#compute-all-distances-between-two-nodes-of-a-graph"><i class="fa fa-check"></i><b>11.3</b> Compute all distances between two nodes of a graph</a></li>
+<li class="chapter" data-level="11.4" data-path="igraph-get-global-statistics-of-an-igraph-object.html"><a href="igraph-get-global-statistics-of-an-igraph-object.html#reference-2"><i class="fa fa-check"></i><b>11.4</b> Reference</a></li>
+</ul></li>
+<li class="chapter" data-level="12" data-path="igraph-split-a-graphs-nodes-in-to-set-isolated-and-non_isolated-nodes.html"><a href="igraph-split-a-graphs-nodes-in-to-set-isolated-and-non_isolated-nodes.html"><i class="fa fa-check"></i><b>12</b> Igraph: split a graph’s nodes in to set isolated and non_isolated nodes</a>
+<ul>
+<li class="chapter" data-level="12.1" data-path="igraph-split-a-graphs-nodes-in-to-set-isolated-and-non_isolated-nodes.html"><a href="igraph-split-a-graphs-nodes-in-to-set-isolated-and-non_isolated-nodes.html#goal-we-have-a-graph-g-and-we-want-to-split-it-into-two-data-one-contains-isolated-nodes-and-another-data-contains-edges-created-from-non-isolated-nodes"><i class="fa fa-check"></i><b>12.1</b> Goal: we have a graph g, and we want to split it into two data, one contains isolated nodes, and another data contains edges created from non-isolated nodes</a></li>
+</ul></li>
+<li class="chapter" data-level="13" data-path="nair-package.html"><a href="nair-package.html"><i class="fa fa-check"></i><b>13</b> NAIR package</a>
+<ul>
+<li class="chapter" data-level="13.1" data-path="nair-package.html"><a href="nair-package.html#plot-network-with-size-of-nodes-based-on-their-abundance"><i class="fa fa-check"></i><b>13.1</b> plot network with size of nodes based on their abundance</a>
+<ul>
+<li class="chapter" data-level="13.1.1" data-path="nair-package.html"><a href="nair-package.html#create-toy-example"><i class="fa fa-check"></i><b>13.1.1</b> Create toy example</a></li>
+<li class="chapter" data-level="13.1.2" data-path="nair-package.html"><a href="nair-package.html#generate-network-for-data"><i class="fa fa-check"></i><b>13.1.2</b> Generate network for data</a></li>
+</ul></li>
+<li class="chapter" data-level="13.2" data-path="nair-package.html"><a href="nair-package.html#plot-the-data-with-node_size-by-their-abundance-clonecount"><i class="fa fa-check"></i><b>13.2</b> Plot the data with node_size by their abundance (CloneCount)</a>
+<ul>
+<li class="chapter" data-level="13.2.1" data-path="nair-package.html"><a href="nair-package.html#plot-the-network-with-node_color-by-clusterid-annd-node_size-by-their-abundance-clonecount"><i class="fa fa-check"></i><b>13.2.1</b> Plot the network with node_color by Clusterid annd node_size by their abundance (CloneCount)</a></li>
+<li class="chapter" data-level="13.2.2" data-path="nair-package.html"><a href="nair-package.html#plot-the-network-with-node_color-by-clusterid-annd-node_size-by-their-abundance-clonecount-when-there-are-extreme-values-for-abundance"><i class="fa fa-check"></i><b>13.2.2</b> Plot the network with node_color by Clusterid annd node_size by their abundance (CloneCount) when there are extreme values for abundance</a></li>
+</ul></li>
 </ul></li>
 <li class="divider"></li>
 <li><a href="https://github.com/rstudio/bookdown" target="blank">Published with bookdown</a></li>
@@ -245,19 +282,19 @@ code span.wa { color: #60a0b0; font-weight: bold; font-style: italic; } /* Warni
 <li>replace_with_na_if(): Replaces some values on some columns with conditions (is.numeric, is.character) by NAs.</li>
 </ul></li>
 </ul>
-<div class="sourceCode" id="cb33"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb33-1"><a href="replace-values-by-nasa-specfic-value.html#cb33-1" aria-hidden="true" tabindex="-1"></a><span class="fu">suppressPackageStartupMessages</span>(<span class="fu">library</span>(tidyverse)) </span>
-<span id="cb33-2"><a href="replace-values-by-nasa-specfic-value.html#cb33-2" aria-hidden="true" tabindex="-1"></a><span class="fu">library</span>(naniar)</span></code></pre></div>
+<div class="sourceCode" id="cb34"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb34-1"><a href="replace-values-by-nasa-specfic-value.html#cb34-1" tabindex="-1"></a><span class="fu">suppressPackageStartupMessages</span>(<span class="fu">library</span>(tidyverse)) </span>
+<span id="cb34-2"><a href="replace-values-by-nasa-specfic-value.html#cb34-2" tabindex="-1"></a><span class="fu">library</span>(naniar)</span></code></pre></div>
 <p>Let’s first create a data example.</p>
 <blockquote>
 <p>You can see that the data_example that we create here represents what we would expect if we have a character value in a numerical column if we read data from a CSV file. For example, column y is a column with numerical values, but since there is NR (NR means not reported) in the column, R will think it is a character column when we read the data.</p>
 </blockquote>
-<div class="sourceCode" id="cb34"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb34-1"><a href="replace-values-by-nasa-specfic-value.html#cb34-1" aria-hidden="true" tabindex="-1"></a>data_example<span class="ot">&lt;-</span> <span class="fu">tribble</span>(</span>
-<span id="cb34-2"><a href="replace-values-by-nasa-specfic-value.html#cb34-2" aria-hidden="true" tabindex="-1"></a>   <span class="sc">~</span>name,    <span class="sc">~</span>x,     <span class="sc">~</span>y,   <span class="sc">~</span>z,   <span class="sc">~</span>t,</span>
-<span id="cb34-3"><a href="replace-values-by-nasa-specfic-value.html#cb34-3" aria-hidden="true" tabindex="-1"></a>  <span class="st">&quot;Mr.A&quot;</span>,   <span class="st">&quot;a&quot;</span>,     <span class="st">&quot;2&quot;</span>, <span class="st">&quot;3.6&quot;</span>,  <span class="st">&quot;na&quot;</span>,    </span>
-<span id="cb34-4"><a href="replace-values-by-nasa-specfic-value.html#cb34-4" aria-hidden="true" tabindex="-1"></a>  <span class="st">&quot;Mr.B&quot;</span>,   <span class="st">&quot;b&quot;</span>,     <span class="st">&quot;1&quot;</span>,   <span class="st">&quot;.&quot;</span>,  <span class="st">&quot;2.1&quot;</span>,</span>
-<span id="cb34-5"><a href="replace-values-by-nasa-specfic-value.html#cb34-5" aria-hidden="true" tabindex="-1"></a> <span class="st">&quot;Ms. C&quot;</span>,  <span class="st">&quot;NR&quot;</span>,    <span class="st">&quot;NR&quot;</span>,  <span class="st">&quot;10&quot;</span>,   <span class="st">&quot;3.4&quot;</span>,</span>
-<span id="cb34-6"><a href="replace-values-by-nasa-specfic-value.html#cb34-6" aria-hidden="true" tabindex="-1"></a>  <span class="st">&quot;Ms. D&quot;</span>,  <span class="st">&quot;NR&quot;</span>,    <span class="st">&quot;NR&quot;</span>,  <span class="st">&quot;NR&quot;</span>,   <span class="st">&quot;1&quot;</span>)</span></code></pre></div>
-<div class="sourceCode" id="cb35"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb35-1"><a href="replace-values-by-nasa-specfic-value.html#cb35-1" aria-hidden="true" tabindex="-1"></a>data_example</span></code></pre></div>
+<div class="sourceCode" id="cb35"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb35-1"><a href="replace-values-by-nasa-specfic-value.html#cb35-1" tabindex="-1"></a>data_example<span class="ot">&lt;-</span> <span class="fu">tribble</span>(</span>
+<span id="cb35-2"><a href="replace-values-by-nasa-specfic-value.html#cb35-2" tabindex="-1"></a>   <span class="sc">~</span>name,    <span class="sc">~</span>x,     <span class="sc">~</span>y,   <span class="sc">~</span>z,   <span class="sc">~</span>t,</span>
+<span id="cb35-3"><a href="replace-values-by-nasa-specfic-value.html#cb35-3" tabindex="-1"></a>  <span class="st">&quot;Mr.A&quot;</span>,   <span class="st">&quot;a&quot;</span>,     <span class="st">&quot;2&quot;</span>, <span class="st">&quot;3.6&quot;</span>,  <span class="st">&quot;na&quot;</span>,    </span>
+<span id="cb35-4"><a href="replace-values-by-nasa-specfic-value.html#cb35-4" tabindex="-1"></a>  <span class="st">&quot;Mr.B&quot;</span>,   <span class="st">&quot;b&quot;</span>,     <span class="st">&quot;1&quot;</span>,   <span class="st">&quot;.&quot;</span>,  <span class="st">&quot;2.1&quot;</span>,</span>
+<span id="cb35-5"><a href="replace-values-by-nasa-specfic-value.html#cb35-5" tabindex="-1"></a> <span class="st">&quot;Ms. C&quot;</span>,  <span class="st">&quot;NR&quot;</span>,    <span class="st">&quot;NR&quot;</span>,  <span class="st">&quot;10&quot;</span>,   <span class="st">&quot;3.4&quot;</span>,</span>
+<span id="cb35-6"><a href="replace-values-by-nasa-specfic-value.html#cb35-6" tabindex="-1"></a>  <span class="st">&quot;Ms. D&quot;</span>,  <span class="st">&quot;NR&quot;</span>,    <span class="st">&quot;NR&quot;</span>,  <span class="st">&quot;NR&quot;</span>,   <span class="st">&quot;1&quot;</span>)</span></code></pre></div>
+<div class="sourceCode" id="cb36"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb36-1"><a href="replace-values-by-nasa-specfic-value.html#cb36-1" tabindex="-1"></a>data_example</span></code></pre></div>
 <pre><code>## # A tibble: 4 × 5
 ##   name  x     y     z     t    
 ##   &lt;chr&gt; &lt;chr&gt; &lt;chr&gt; &lt;chr&gt; &lt;chr&gt;
@@ -270,10 +307,10 @@ code span.wa { color: #60a0b0; font-weight: bold; font-style: italic; } /* Warni
 <h2><span class="header-section-number">6.2</span> replace_with_na(): replace specific value(s) at in specific columns by NAs.<a href="replace-values-by-nasa-specfic-value.html#replace_with_na-replace-specific-values-at-in-specific-columns-by-nas." class="anchor-section" aria-label="Anchor link to header"></a></h2>
 <p>replace_with_na replaces a list of values in a list of columns by Na, where each column has different values that we want to replace.</p>
 <p>We may need to use this in case a value should be converted to NA in a column but not in another column. For example, we want to convert NR to NA in column x, but do not want to do so with column z (with column z, we only want to convert “.” to NAs but keep NR as it is).</p>
-<div class="sourceCode" id="cb37"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb37-1"><a href="replace-values-by-nasa-specfic-value.html#cb37-1" aria-hidden="true" tabindex="-1"></a>data_example <span class="sc">%&gt;%</span> </span>
-<span id="cb37-2"><a href="replace-values-by-nasa-specfic-value.html#cb37-2" aria-hidden="true" tabindex="-1"></a>  naniar<span class="sc">::</span><span class="fu">replace_with_na</span>(<span class="at">replace =</span> <span class="fu">list</span>(<span class="at">x =</span> <span class="fu">c</span>(<span class="st">&quot;NR&quot;</span>), </span>
-<span id="cb37-3"><a href="replace-values-by-nasa-specfic-value.html#cb37-3" aria-hidden="true" tabindex="-1"></a>                                 <span class="at">y =</span> <span class="fu">c</span>(<span class="st">&quot;NR&quot;</span>), </span>
-<span id="cb37-4"><a href="replace-values-by-nasa-specfic-value.html#cb37-4" aria-hidden="true" tabindex="-1"></a>                                 <span class="at">z =</span> <span class="fu">c</span>(<span class="st">&quot;.&quot;</span>)))</span></code></pre></div>
+<div class="sourceCode" id="cb38"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb38-1"><a href="replace-values-by-nasa-specfic-value.html#cb38-1" tabindex="-1"></a>data_example <span class="sc">%&gt;%</span> </span>
+<span id="cb38-2"><a href="replace-values-by-nasa-specfic-value.html#cb38-2" tabindex="-1"></a>  naniar<span class="sc">::</span><span class="fu">replace_with_na</span>(<span class="at">replace =</span> <span class="fu">list</span>(<span class="at">x =</span> <span class="fu">c</span>(<span class="st">&quot;NR&quot;</span>), </span>
+<span id="cb38-3"><a href="replace-values-by-nasa-specfic-value.html#cb38-3" tabindex="-1"></a>                                 <span class="at">y =</span> <span class="fu">c</span>(<span class="st">&quot;NR&quot;</span>), </span>
+<span id="cb38-4"><a href="replace-values-by-nasa-specfic-value.html#cb38-4" tabindex="-1"></a>                                 <span class="at">z =</span> <span class="fu">c</span>(<span class="st">&quot;.&quot;</span>)))</span></code></pre></div>
 <pre><code>## # A tibble: 4 × 5
 ##   name  x     y     z     t    
 ##   &lt;chr&gt; &lt;chr&gt; &lt;chr&gt; &lt;chr&gt; &lt;chr&gt;
@@ -285,7 +322,7 @@ code span.wa { color: #60a0b0; font-weight: bold; font-style: italic; } /* Warni
 <div id="replace_with_na_all-replaces-some-values-by-na-for-all-columns." class="section level2 hasAnchor" number="6.3">
 <h2><span class="header-section-number">6.3</span> replace_with_na_all() Replaces some values by NA for all columns.<a href="replace-values-by-nasa-specfic-value.html#replace_with_na_all-replaces-some-values-by-na-for-all-columns." class="anchor-section" aria-label="Anchor link to header"></a></h2>
 <p>Here, we want to replace a value “NR” by NAs.</p>
-<div class="sourceCode" id="cb39"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb39-1"><a href="replace-values-by-nasa-specfic-value.html#cb39-1" aria-hidden="true" tabindex="-1"></a>data_example <span class="sc">%&gt;%</span> <span class="fu">replace_with_na_all</span>(., <span class="at">condition =</span> <span class="sc">~</span>.x <span class="sc">==</span> <span class="st">&quot;NR&quot;</span>)</span></code></pre></div>
+<div class="sourceCode" id="cb40"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb40-1"><a href="replace-values-by-nasa-specfic-value.html#cb40-1" tabindex="-1"></a>data_example <span class="sc">%&gt;%</span> <span class="fu">replace_with_na_all</span>(., <span class="at">condition =</span> <span class="sc">~</span>.x <span class="sc">==</span> <span class="st">&quot;NR&quot;</span>)</span></code></pre></div>
 <pre><code>## # A tibble: 4 × 5
 ##   name  x     y     z     t    
 ##   &lt;chr&gt; &lt;chr&gt; &lt;chr&gt; &lt;chr&gt; &lt;chr&gt;
@@ -294,7 +331,7 @@ code span.wa { color: #60a0b0; font-weight: bold; font-style: italic; } /* Warni
 ## 3 Ms. C &lt;NA&gt;  &lt;NA&gt;  10    3.4  
 ## 4 Ms. D &lt;NA&gt;  &lt;NA&gt;  &lt;NA&gt;  1</code></pre>
 <p>In case we want to replace many more values by NA, we can use <span class="math inline">\(%in%\)</span> as below</p>
-<div class="sourceCode" id="cb41"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb41-1"><a href="replace-values-by-nasa-specfic-value.html#cb41-1" aria-hidden="true" tabindex="-1"></a>data_example <span class="sc">%&gt;%</span> <span class="fu">replace_with_na_all</span>(., <span class="at">condition =</span> <span class="sc">~</span>.x <span class="sc">%in%</span> <span class="fu">c</span>(<span class="st">&quot;NR&quot;</span>, <span class="st">&quot;.&quot;</span>))</span></code></pre></div>
+<div class="sourceCode" id="cb42"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb42-1"><a href="replace-values-by-nasa-specfic-value.html#cb42-1" tabindex="-1"></a>data_example <span class="sc">%&gt;%</span> <span class="fu">replace_with_na_all</span>(., <span class="at">condition =</span> <span class="sc">~</span>.x <span class="sc">%in%</span> <span class="fu">c</span>(<span class="st">&quot;NR&quot;</span>, <span class="st">&quot;.&quot;</span>))</span></code></pre></div>
 <pre><code>## # A tibble: 4 × 5
 ##   name  x     y     z     t    
 ##   &lt;chr&gt; &lt;chr&gt; &lt;chr&gt; &lt;chr&gt; &lt;chr&gt;
@@ -306,8 +343,8 @@ code span.wa { color: #60a0b0; font-weight: bold; font-style: italic; } /* Warni
 <div id="replace_with_na_at-replaces-some-chosen-values-in-a-chosen-set-of-columns-by-nas." class="section level2 hasAnchor" number="6.4">
 <h2><span class="header-section-number">6.4</span> replace_with_na_at(): replaces some chosen values in a chosen set of columns by NAs.<a href="replace-values-by-nasa-specfic-value.html#replace_with_na_at-replaces-some-chosen-values-in-a-chosen-set-of-columns-by-nas." class="anchor-section" aria-label="Anchor link to header"></a></h2>
 <p>Replace “NR” and “.” at columns x and y with NAs:</p>
-<div class="sourceCode" id="cb43"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb43-1"><a href="replace-values-by-nasa-specfic-value.html#cb43-1" aria-hidden="true" tabindex="-1"></a>data_example <span class="sc">%&gt;%</span> <span class="fu">replace_with_na_at</span>(<span class="at">.var=</span><span class="fu">c</span>(<span class="st">&quot;x&quot;</span>, <span class="st">&quot;y&quot;</span>), </span>
-<span id="cb43-2"><a href="replace-values-by-nasa-specfic-value.html#cb43-2" aria-hidden="true" tabindex="-1"></a>                                    <span class="at">condition =</span> <span class="sc">~</span>.x <span class="sc">%in%</span> <span class="fu">c</span>(<span class="st">&quot;NR&quot;</span>, <span class="st">&quot;.&quot;</span>))</span></code></pre></div>
+<div class="sourceCode" id="cb44"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb44-1"><a href="replace-values-by-nasa-specfic-value.html#cb44-1" tabindex="-1"></a>data_example <span class="sc">%&gt;%</span> <span class="fu">replace_with_na_at</span>(<span class="at">.var=</span><span class="fu">c</span>(<span class="st">&quot;x&quot;</span>, <span class="st">&quot;y&quot;</span>), </span>
+<span id="cb44-2"><a href="replace-values-by-nasa-specfic-value.html#cb44-2" tabindex="-1"></a>                                    <span class="at">condition =</span> <span class="sc">~</span>.x <span class="sc">%in%</span> <span class="fu">c</span>(<span class="st">&quot;NR&quot;</span>, <span class="st">&quot;.&quot;</span>))</span></code></pre></div>
 <pre><code>## # A tibble: 4 × 5
 ##   name  x     y     z     t    
 ##   &lt;chr&gt; &lt;chr&gt; &lt;chr&gt; &lt;chr&gt; &lt;chr&gt;
@@ -318,8 +355,8 @@ code span.wa { color: #60a0b0; font-weight: bold; font-style: italic; } /* Warni
 </div>
 <div id="replace_with_na_if-replaces-some-values-on-some-columns-with-conditions-is.numeric-is.character-by-na." class="section level2 hasAnchor" number="6.5">
 <h2><span class="header-section-number">6.5</span> replace_with_na_if(): Replaces some values on some columns with conditions (is.numeric, is.character) by NA.<a href="replace-values-by-nasa-specfic-value.html#replace_with_na_if-replaces-some-values-on-some-columns-with-conditions-is.numeric-is.character-by-na." class="anchor-section" aria-label="Anchor link to header"></a></h2>
-<div class="sourceCode" id="cb45"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb45-1"><a href="replace-values-by-nasa-specfic-value.html#cb45-1" aria-hidden="true" tabindex="-1"></a>data_example <span class="sc">%&gt;%</span> <span class="fu">replace_with_na_if</span>(is_character, </span>
-<span id="cb45-2"><a href="replace-values-by-nasa-specfic-value.html#cb45-2" aria-hidden="true" tabindex="-1"></a>                                    <span class="at">condition =</span> <span class="sc">~</span>.x <span class="sc">%in%</span> <span class="fu">c</span>(<span class="st">&quot;NR&quot;</span>, <span class="st">&quot;.&quot;</span>))</span></code></pre></div>
+<div class="sourceCode" id="cb46"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb46-1"><a href="replace-values-by-nasa-specfic-value.html#cb46-1" tabindex="-1"></a>data_example <span class="sc">%&gt;%</span> <span class="fu">replace_with_na_if</span>(is_character, </span>
+<span id="cb46-2"><a href="replace-values-by-nasa-specfic-value.html#cb46-2" tabindex="-1"></a>                                    <span class="at">condition =</span> <span class="sc">~</span>.x <span class="sc">%in%</span> <span class="fu">c</span>(<span class="st">&quot;NR&quot;</span>, <span class="st">&quot;.&quot;</span>))</span></code></pre></div>
 <pre><code>## # A tibble: 4 × 5
 ##   name  x     y     z     t    
 ##   &lt;chr&gt; &lt;chr&gt; &lt;chr&gt; &lt;chr&gt; &lt;chr&gt;
@@ -330,8 +367,8 @@ code span.wa { color: #60a0b0; font-weight: bold; font-style: italic; } /* Warni
 <p>&lt;&lt;&lt;&lt;&lt;&lt;&lt; HEAD
 ## A helpfull observation using mutate_at and replace</p>
 <p>Besides of replace values by Na. We also can replace specific values by a value in some selected columns. One example can be</p>
-<div class="sourceCode" id="cb47"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb47-1"><a href="replace-values-by-nasa-specfic-value.html#cb47-1" aria-hidden="true" tabindex="-1"></a>data_example <span class="sc">%&gt;%</span>  <span class="fu">mutate_at</span>(<span class="fu">c</span>(<span class="st">&quot;name&quot;</span>),</span>
-<span id="cb47-2"><a href="replace-values-by-nasa-specfic-value.html#cb47-2" aria-hidden="true" tabindex="-1"></a>            <span class="sc">~</span><span class="fu">replace</span>(., .<span class="sc">%in%</span> <span class="fu">c</span>(<span class="st">&quot;Mr.A&quot;</span>, <span class="st">&quot;Mr.B&quot;</span>), <span class="st">&quot;The AB&quot;</span>))</span></code></pre></div>
+<div class="sourceCode" id="cb48"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb48-1"><a href="replace-values-by-nasa-specfic-value.html#cb48-1" tabindex="-1"></a>data_example <span class="sc">%&gt;%</span>  <span class="fu">mutate_at</span>(<span class="fu">c</span>(<span class="st">&quot;name&quot;</span>),</span>
+<span id="cb48-2"><a href="replace-values-by-nasa-specfic-value.html#cb48-2" tabindex="-1"></a>            <span class="sc">~</span><span class="fu">replace</span>(., .<span class="sc">%in%</span> <span class="fu">c</span>(<span class="st">&quot;Mr.A&quot;</span>, <span class="st">&quot;Mr.B&quot;</span>), <span class="st">&quot;The AB&quot;</span>))</span></code></pre></div>
 <pre><code>## # A tibble: 4 × 5
 ##   name   x     y     z     t    
 ##   &lt;chr&gt;  &lt;chr&gt; &lt;chr&gt; &lt;chr&gt; &lt;chr&gt;
@@ -383,7 +420,7 @@ gitbook.start({
 "size": 2
 },
 "edit": {
-"link": "https://github.com/USERNAME/REPO/edit/BRANCH/05_Replace_Values_by_NAs.Rmd",
+"link": "https://github.com/USERNAME/REPO/edit/BRANCH/005_Replace_Values_by_NAs.Rmd",
 "text": "Edit"
 },
 "history": {
